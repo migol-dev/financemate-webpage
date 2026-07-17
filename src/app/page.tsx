@@ -76,7 +76,7 @@ export default async function Home() {
 
   const release: ReleaseInfo = {
     version: CURRENT_VERSION,
-    url: `${REPO_URL}/releases/latest/download/v1.17.7/financemate.apk`,
+    url: `${REPO_URL}/releases/latest/download/financemate.apk`,
     publishedAt: new Date().toISOString(),
   };
 

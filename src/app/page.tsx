@@ -10,7 +10,7 @@ import { Footer } from "@/components/footer";
 import { createClient } from "@/lib/supabase/server";
 import type { GalleryImage, Review, ReleaseInfo } from "@/lib/types";
 
-const REPO_URL = process.env.NEXT_PUBLIC_GITHUB_REPO_URL ?? "https://github.com/migol-dev/finance-mate";
+const REPO_URL = process.env.NEXT_PUBLIC_GITHUB_REPO_URL ?? "https://github.com/migol-dev/finance-pal";
 const CURRENT_VERSION = process.env.NEXT_PUBLIC_APP_VERSION ?? "1.17.8";
 
 // Fallback screenshots (used only if the admin hasn't populated the
@@ -76,7 +76,7 @@ export default async function Home() {
 
   const release: ReleaseInfo = {
     version: CURRENT_VERSION,
-    url: `${REPO_URL}/releases/latest/download/finance-mate.apk`,
+    url: `${REPO_URL}/releases/latest/download/v1.17.7/financemate.apk`,
     publishedAt: new Date().toISOString(),
   };
 

@@ -1,0 +1,9 @@
+# AI Agents ignore file
+node_modules/
+.next/
+.git/
+.env
+.env.local
+package-lock.json
+public/
+tsconfig.tsbuildinfo

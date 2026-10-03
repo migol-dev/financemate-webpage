@@ -1,7 +1,8 @@
 import { Navbar } from "@/components/navbar";
 import { Hero } from "@/components/hero";
-import { Features } from "@/components/features";
+import { PlatformsSection } from "@/components/platforms-section";
 import { Gallery } from "@/components/gallery";
+import { Features } from "@/components/features";
 import { DownloadSection } from "@/components/download-section";
 import { ReviewsSection } from "@/components/reviews-section";
 import { SuggestionsSection } from "@/components/suggestions-section";
@@ -11,10 +12,8 @@ import { createClient } from "@/lib/supabase/server";
 import type { GalleryImage, Review, ReleaseInfo } from "@/lib/types";
 
 const REPO_URL = process.env.NEXT_PUBLIC_GITHUB_REPO_URL ?? "https://github.com/migol-dev/finance-pal";
-const CURRENT_VERSION = process.env.NEXT_PUBLIC_APP_VERSION ?? "1.17.8";
+const CURRENT_VERSION = process.env.NEXT_PUBLIC_APP_VERSION ?? "1.20";
 
-// Fallback screenshots (used only if the admin hasn't populated the
-// gallery in Supabase yet) — replace via the admin panel at /admin/gallery.
 const FALLBACK_GALLERY: GalleryImage[] = [
   {
     id: "fallback-1",
@@ -85,12 +84,13 @@ export default async function Home() {
       <Navbar />
       <main>
         <Hero version={release.version} githubUrl={REPO_URL} />
-        <Features />
+        <PlatformsSection />
         <Gallery images={gallery} />
-        <DownloadSection release={release} />
+        <Features />
         <ReviewsSection initialReviews={reviews} />
         <SuggestionsSection />
         <GithubSection repoUrl={REPO_URL} />
+        <DownloadSection release={release} />
       </main>
       <Footer repoUrl={REPO_URL} />
     </>

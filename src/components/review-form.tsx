@@ -1,11 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { Star, Loader2, CheckCircle2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { useDownloadTracking } from "@/hooks/use-download-tracking";
 
 export function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
@@ -45,83 +41,119 @@ export function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
 
   if (status === "done") {
     return (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="flex flex-col items-center gap-3 rounded-2xl border border-emerald-500/30 bg-emerald-500/5 p-8 text-center"
-      >
-        <CheckCircle2 className="h-9 w-9 text-emerald-500" />
-        <p className="font-medium">¡Gracias por tu reseña!</p>
-        <p className="text-sm text-muted-foreground">
-          La revisaremos y aparecerá pronto en la lista.
-        </p>
-        <Button variant="outline" size="sm" onClick={() => setStatus("idle")}>
+      <div className="flex flex-col items-center gap-3 rounded-2xl border border-emerald-500/30 bg-emerald-500/5 p-8 text-center">
+        <CheckCircle2 className="h-9 w-9 text-emerald-400" />
+        <p className="font-semibold text-white">¡Gracias por tu reseña!</p>
+        <p className="text-sm text-slate-400">La revisaremos y aparecerá pronto en la lista.</p>
+        <button
+          className="mt-2 px-4 py-2 rounded-xl text-sm font-semibold text-slate-300 bg-slate-800 border border-slate-700 hover:bg-slate-700 transition-all"
+          onClick={() => setStatus("idle")}
+        >
           Escribir otra
-        </Button>
-      </motion.div>
+        </button>
+      </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-5">
       {!hasDownloaded && (
-        <p className="rounded-xl bg-amber-500/10 px-4 py-2.5 text-xs text-amber-600 dark:text-amber-400">
-          Aún no detectamos un intento de descarga desde este navegador — tu
-          reseña se marcará como de un visitante que no ha probado la app.
+        <p className="rounded-xl bg-amber-500/10 border border-amber-500/20 px-4 py-2.5 text-xs text-amber-400">
+          Aún no detectamos un intento de descarga desde este navegador — tu reseña se marcará como
+          visitante.
         </p>
       )}
 
+      {/* Star rating */}
+      <div>
+        <label className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-2 font-semibold">
+          Calificación General *
+        </label>
+        <div className="flex items-center gap-1.5">
+          {[1, 2, 3, 4, 5].map((n) => (
+            <button
+              type="button"
+              key={n}
+              onClick={() => setRating(n)}
+              aria-label={`${n} estrellas`}
+              className="p-0.5 hover:scale-110 transition-transform"
+            >
+              <Star
+                className={`h-6 w-6 transition-colors ${
+                  n <= rating ? "fill-amber-400 text-amber-400" : "text-slate-600"
+                }`}
+              />
+            </button>
+          ))}
+          <span className="text-xs font-mono text-cyan-300 ml-2">{rating} de 5 estrellas</span>
+        </div>
+      </div>
+
       <div className="grid gap-4 sm:grid-cols-2">
-        <Input
-          placeholder="Tu nombre"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          minLength={2}
-          maxLength={60}
-          required
-        />
-        <Input
-          type="email"
-          placeholder="Tu correo electrónico"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+        <div>
+          <label className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-1.5 font-semibold">
+            Nombre o Alias *
+          </label>
+          <input
+            className="fp-input"
+            placeholder="Ej. Andrea G."
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            minLength={2}
+            maxLength={60}
+            required
+          />
+        </div>
+        <div>
+          <label className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-1.5 font-semibold">
+            Correo Electrónico (Privado) *
+          </label>
+          <input
+            type="email"
+            className="fp-input"
+            placeholder="tucorreo@ejemplo.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
       </div>
 
-      <div className="flex items-center gap-1">
-        {[1, 2, 3, 4, 5].map((n) => (
-          <button
-            type="button"
-            key={n}
-            onClick={() => setRating(n)}
-            aria-label={`${n} estrellas`}
-            className="p-0.5"
-          >
-            <Star
-              className={`h-6 w-6 transition-colors ${
-                n <= rating ? "fill-amber-400 text-amber-400" : "text-muted-foreground"
-              }`}
-            />
-          </button>
-        ))}
+      <div>
+        <label className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-1.5 font-semibold">
+          Tu Testimonio o Reseña *
+        </label>
+        <textarea
+          className="fp-input resize-none"
+          rows={3}
+          placeholder="Cuéntanos qué módulo te ha sido más útil (balance, metas, deudas, privacidad offline)..."
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          minLength={5}
+          maxLength={800}
+          required
+        />
+        <p className="text-[11px] text-slate-400 mt-1.5 flex items-center gap-1.5">
+          <span className="text-cyan-400 font-bold">🔒</span>
+          Tu correo solo se usa para verificación antifraude, nunca se muestra públicamente.
+        </p>
       </div>
 
-      <Textarea
-        placeholder="Cuéntanos qué te parece Finance Mate..."
-        value={comment}
-        onChange={(e) => setComment(e.target.value)}
-        minLength={5}
-        maxLength={800}
-        required
-      />
+      {status === "error" && (
+        <p className="text-sm text-rose-400">{errorMsg}</p>
+      )}
 
-      {status === "error" && <p className="text-sm text-destructive">{errorMsg}</p>}
-
-      <Button type="submit" disabled={status === "loading"} className="w-full sm:w-auto">
+      <button
+        type="submit"
+        disabled={status === "loading"}
+        className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-xl font-bold text-sm text-slate-950 bg-gradient-to-r from-cyan-400 via-sky-400 to-cyan-300 hover:brightness-110 shadow-lg shadow-cyan-500/25 active:scale-95 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+      >
         {status === "loading" && <Loader2 className="h-4 w-4 animate-spin" />}
-        Enviar reseña
-      </Button>
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
+        </svg>
+        Publicar Reseña en la Comunidad
+      </button>
     </form>
   );
 }

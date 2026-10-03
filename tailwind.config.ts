@@ -11,8 +11,9 @@ const config: Config = {
     },
     extend: {
       fontFamily: {
-        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
-        display: ["var(--font-sora)", "system-ui", "sans-serif"],
+        sans: ["var(--font-inter)", "Inter", "system-ui", "sans-serif"],
+        display: ['"Plus Jakarta Sans"', "system-ui", "sans-serif"],
+        mono: ['"JetBrains Mono"', "ui-monospace", "monospace"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -44,28 +45,44 @@ const config: Config = {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
         },
+        // Electric Horizon Fintech palette
+        surface: {
+          DEFAULT: "#0d1322",
+          lowest: "#080e1d",
+          low: "#151b2b",
+          container: "#191f2f",
+          card: "#111827",
+          elevated: "#1e293b",
+        },
         brand: {
           50: "#eef7ff",
           100: "#d9edff",
           200: "#bce0ff",
           300: "#8ecdff",
           400: "#59b0ff",
-          500: "#2f90ff",
-          600: "#1a6ff5",
-          700: "#1558e0",
-          800: "#1747b5",
-          900: "#193f8f",
-          950: "#0b1b3d",
+          500: "#0ea5e9",
+          600: "#0284c7",
+          700: "#0369a1",
+          800: "#075985",
+          900: "#0c4a6e",
+          950: "#082f49",
         },
+        "cyan-glow": "#22d3ee",
+        "cyan-light": "#38bdf8",
+        "status-positive": "#10b981",
+        "status-negative": "#f43f5e",
+        "status-warning": "#f59e0b",
       },
       borderRadius: {
         lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        md: "calc(var(--radius) - 4px)",
+        sm: "calc(var(--radius) - 8px)",
       },
       backgroundImage: {
         "grid-glow":
-          "radial-gradient(circle at 50% 0%, hsla(217,91%,60%,0.18), transparent 60%)",
+          "radial-gradient(ellipse at 50% 0%, rgba(14,165,233,0.18), transparent 60%)",
+        "hero-gradient":
+          "linear-gradient(135deg, #0284c7 0%, #0ea5e9 50%, #38bdf8 100%)",
       },
       keyframes: {
         "fade-up": {
@@ -79,6 +96,9 @@ const config: Config = {
         float: {
           "0%,100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-10px)" },
+        },
+        ping: {
+          "75%,100%": { transform: "scale(2)", opacity: "0" },
         },
       },
       animation: {

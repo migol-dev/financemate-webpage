@@ -1,13 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { Bug, Lightbulb, Loader2, CheckCircle2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Card } from "@/components/ui/card";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Loader2, CheckCircle2 } from "lucide-react";
 import type { ReportType } from "@/lib/types";
 
 function ReportForm({ type }: { type: ReportType }) {
@@ -39,101 +33,161 @@ function ReportForm({ type }: { type: ReportType }) {
 
   if (status === "done") {
     return (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="flex flex-col items-center gap-3 rounded-2xl border border-emerald-500/30 bg-emerald-500/5 p-8 text-center"
-      >
-        <CheckCircle2 className="h-9 w-9 text-emerald-500" />
-        <p className="font-medium">
+      <div className="flex flex-col items-center gap-3 rounded-2xl border border-emerald-500/30 bg-emerald-500/5 p-8 text-center">
+        <CheckCircle2 className="h-9 w-9 text-emerald-400" />
+        <p className="font-semibold text-white">
           {type === "bug" ? "¡Reporte enviado!" : "¡Sugerencia enviada!"}
         </p>
-        <p className="text-sm text-muted-foreground">Gracias por ayudar a mejorar Finance Mate.</p>
-        <Button variant="outline" size="sm" onClick={() => setStatus("idle")}>
+        <p className="text-sm text-slate-400">Gracias por ayudar a mejorar Finance Pal.</p>
+        <button
+          className="mt-2 px-4 py-2 rounded-xl text-sm font-semibold text-slate-300 bg-slate-800 border border-slate-700 hover:bg-slate-700 transition-all"
+          onClick={() => setStatus("idle")}
+        >
           Enviar otro
-        </Button>
-      </motion.div>
+        </button>
+      </div>
     );
   }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="grid gap-4 sm:grid-cols-2">
-        <Input
-          placeholder="Tu nombre (opcional)"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <Input
-          type="email"
-          placeholder="Tu correo (opcional, para dar seguimiento)"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+        <div>
+          <label className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-1.5 font-semibold">
+            Nombre o Usuario GitHub
+          </label>
+          <input
+            className="fp-input"
+            placeholder="Ej. Marco Dev"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+        <div>
+          <label className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-1.5 font-semibold">
+            Versión de Finance Pal
+          </label>
+          <select
+            className="fp-input"
+            style={{ appearance: "none" }}
+          >
+            <option value="v1.20">v1.20 (Versión actual estable)</option>
+            <option value="v1.19">v1.19 (Anterior)</option>
+            <option value="pwa-web">PWA / Web App Vercel</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <label className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-1.5 font-semibold">
+          {type === "bug" ? "Resumen del Error *" : "Título de tu Idea *"}
+        </label>
+        <input
+          className="fp-input"
+          placeholder={type === "bug" ? "Ej. La app se cierra al abrir Metas" : "Ej. Añadir widgets para pantalla de inicio"}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          minLength={3}
+          maxLength={120}
+          required
         />
       </div>
-      <Input
-        placeholder={type === "bug" ? "Resumen del error" : "Título de tu idea"}
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        minLength={3}
-        maxLength={120}
-        required
-      />
-      <Textarea
-        placeholder={
-          type === "bug"
-            ? "Describe qué pasó, qué esperabas y cómo reproducirlo..."
-            : "Cuéntanos tu idea a detalle..."
-        }
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        minLength={5}
-        maxLength={2000}
-        required
-      />
+      <div>
+        <label className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-1.5 font-semibold">
+          Detalle Descriptivo *
+        </label>
+        <textarea
+          className="fp-input resize-none"
+          rows={4}
+          placeholder={
+            type === "bug"
+              ? "Describe qué pasó, qué esperabas y cómo reproducirlo..."
+              : "Cuéntanos tu idea a detalle, caso de uso o comportamiento esperado..."
+          }
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          minLength={5}
+          maxLength={2000}
+          required
+        />
+      </div>
       {status === "error" && (
-        <p className="text-sm text-destructive">
+        <p className="text-sm text-rose-400">
           No se pudo enviar. Intenta de nuevo en unos momentos.
         </p>
       )}
-      <Button type="submit" disabled={status === "loading"}>
+      <button
+        type="submit"
+        disabled={status === "loading"}
+        className="inline-flex items-center justify-center gap-2.5 px-7 py-3 rounded-xl font-bold text-sm text-slate-950 bg-gradient-to-r from-cyan-400 via-sky-400 to-cyan-300 hover:brightness-110 shadow-lg shadow-cyan-500/25 active:scale-95 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+      >
         {status === "loading" && <Loader2 className="h-4 w-4 animate-spin" />}
-        {type === "bug" ? "Reportar error" : "Enviar sugerencia"}
-      </Button>
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M14 5l7 7m0 0l-7 7m7-7H3" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
+        </svg>
+        {type === "bug" ? "Enviar al Desarrollador" : "Enviar Sugerencia"}
+      </button>
     </form>
   );
 }
 
 export function SuggestionsSection() {
+  const [tab, setTab] = useState<ReportType>("suggestion");
+
   return (
-    <section id="soporte" className="container py-20 sm:py-28">
-      <Card className="mx-auto max-w-2xl p-6 sm:p-10">
-        <div className="text-center">
-          <h2 className="font-display text-3xl font-bold tracking-tight">
-            ¿Encontraste un error o tienes una idea?
+    <section id="soporte" className="py-20 border-t border-white/10 bg-slate-900/50 relative">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-2xl mx-auto mb-10">
+          <span className="inline-block text-xs font-mono uppercase tracking-widest text-cyan-400 mb-2 font-bold">
+            Canal Abierto con el Desarrollador
+          </span>
+          <h2 className="font-display font-bold text-3xl sm:text-4xl text-white tracking-tight">
+            Buzón de Ideas y Reportes
           </h2>
-          <p className="mt-3 text-muted-foreground">
-            Tu retroalimentación llega directo al equipo de Finance Mate.
+          <p className="text-slate-300 mt-2 text-sm sm:text-base">
+            ¿Encontraste un detalle en v1.20 o tienes una idea para v1.30? Cada mensaje se revisa
+            semanalmente.
           </p>
         </div>
 
-        <Tabs defaultValue="bug" className="mt-8 flex flex-col items-center">
-          <TabsList>
-            <TabsTrigger value="bug" className="gap-1.5">
-              <Bug className="h-4 w-4" /> Reportar error
-            </TabsTrigger>
-            <TabsTrigger value="suggestion" className="gap-1.5">
-              <Lightbulb className="h-4 w-4" /> Sugerencia
-            </TabsTrigger>
-          </TabsList>
-          <TabsContent value="bug" className="w-full">
-            <ReportForm type="bug" />
-          </TabsContent>
-          <TabsContent value="suggestion" className="w-full">
-            <ReportForm type="suggestion" />
-          </TabsContent>
-        </Tabs>
-      </Card>
+        <div className="rounded-3xl glass-panel p-6 sm:p-10 border border-slate-700/80 shadow-2xl">
+          {/* Tabs */}
+          <div
+            className="flex items-center gap-2 p-1.5 rounded-2xl bg-slate-950/80 border border-slate-800 mb-8 max-w-md mx-auto"
+          >
+            <button
+              type="button"
+              onClick={() => setTab("suggestion")}
+              className={`flex-1 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center justify-center gap-2 ${
+                tab === "suggestion"
+                  ? "bg-gradient-to-r from-cyan-400 to-sky-400 text-slate-950 shadow-md"
+                  : "text-slate-300 hover:text-white hover:bg-slate-800/80"
+              }`}
+            >
+              <span>💡</span>
+              <span>Sugerir Funcionalidad</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setTab("bug")}
+              className={`flex-1 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center justify-center gap-2 ${
+                tab === "bug"
+                  ? "bg-gradient-to-r from-cyan-400 to-sky-400 text-slate-950 shadow-md"
+                  : "text-slate-300 hover:text-white hover:bg-slate-800/80"
+              }`}
+            >
+              <span>🐞</span>
+              <span>Reportar un Error</span>
+            </button>
+          </div>
+
+          <div className="flex items-center justify-center gap-1.5 text-xs text-slate-400 mb-6">
+            <span className="text-emerald-400 font-bold">✓</span>
+            <span>Se procesa directamente por el equipo de desarrollo de código libre.</span>
+          </div>
+
+          <ReportForm key={tab} type={tab} />
+        </div>
+      </div>
     </section>
   );
 }

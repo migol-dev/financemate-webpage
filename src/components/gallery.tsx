@@ -78,7 +78,7 @@ function Screen0() {
           <div className="flex items-center gap-2.5">
             <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-cyan-400 to-sky-500 flex items-center justify-center text-slate-950 font-bold text-sm shadow-md shadow-cyan-500/20">FP</div>
             <div>
-              <div className="text-[11px] text-slate-400">Finance Pal v1.20</div>
+              <div className="text-[11px] text-slate-400">Finance Pal v1.20.2</div>
               <div className="text-[13px] font-bold text-white flex items-center gap-1.5">Balance General <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" /></div>
             </div>
           </div>

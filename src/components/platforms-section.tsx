@@ -60,7 +60,7 @@ export function PlatformsSection() {
                 href="#descarga"
                 className="inline-flex items-center gap-2 text-sm font-bold text-emerald-400 hover:text-emerald-300 transition-colors"
               >
-                <span>Ir a descarga de APK v1.20</span>
+                <span>Ir a descarga de APK v1.20.2</span>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path d="M17 8l4 4m0 0l-4 4m4-4H3" strokeLinecap="round" strokeWidth="2" />
                 </svg>

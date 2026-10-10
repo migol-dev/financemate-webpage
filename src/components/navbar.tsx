@@ -14,7 +14,8 @@ const LINKS = [
   { href: "#descarga", label: "Descarga APK" },
 ];
 
-const GITHUB_URL = "https://github.com/migol-dev/finance-pal";
+const GITHUB_URL =
+  process.env.NEXT_PUBLIC_GITHUB_REPO_URL ?? "https://github.com/migol-dev/finance-pal";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -33,7 +34,7 @@ export function Navbar() {
           </div>
           <div className="flex items-center gap-2">
             <span className="font-display font-bold text-xl tracking-tight text-white">Finance Pal</span>
-            <span className="px-2 py-0.5 text-xs font-semibold rounded-full bg-cyan-950 text-cyan-300 border border-cyan-500/40">v1.20</span>
+            <span className="px-2 py-0.5 text-xs font-semibold rounded-full bg-cyan-950 text-cyan-300 border border-cyan-500/40">v1.20.2</span>
           </div>
         </Link>
 

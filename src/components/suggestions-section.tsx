@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Loader2, CheckCircle2 } from "lucide-react";
 import type { ReportType } from "@/lib/types";
 
@@ -71,8 +72,8 @@ function ReportForm({ type }: { type: ReportType }) {
             className="fp-input"
             style={{ appearance: "none" }}
           >
-            <option value="v1.20">v1.20 (Versión actual estable)</option>
-            <option value="v1.19">v1.19 (Anterior)</option>
+            <option value="v1.20.2">v1.20.2 (Versión actual estable)</option>
+            <option value="v1.20.1">v1.20.1 (Anterior)</option>
             <option value="pwa-web">PWA / Web App Vercel</option>
           </select>
         </div>
@@ -126,6 +127,22 @@ function ReportForm({ type }: { type: ReportType }) {
         </svg>
         {type === "bug" ? "Enviar al Desarrollador" : "Enviar Sugerencia"}
       </button>
+
+      <p className="text-[11px] text-slate-400 mt-2 flex items-start gap-1.5 leading-relaxed">
+        <span className="text-cyan-400 font-bold shrink-0">🔒</span>
+        <span>
+          Al enviar este formulario, aceptas que los datos proporcionados se utilicen para dar seguimiento técnico a tu reporte conforme a nuestra{" "}
+          <Link
+            href="/privacidad"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-cyan-400 underline underline-offset-2 hover:text-cyan-300 transition font-medium"
+          >
+            Política de Privacidad
+          </Link>
+          . No compartimos tu información con terceros ni la usamos con fines comerciales.
+        </span>
+      </p>
     </form>
   );
 }
@@ -144,7 +161,7 @@ export function SuggestionsSection() {
             Buzón de Ideas y Reportes
           </h2>
           <p className="text-slate-300 mt-2 text-sm sm:text-base">
-            ¿Encontraste un detalle en v1.20 o tienes una idea para v1.30? Cada mensaje se revisa
+            ¿Encontraste un detalle en v1.20.2 o tienes una idea para futuras versiones? Cada mensaje se revisa
             semanalmente.
           </p>
         </div>

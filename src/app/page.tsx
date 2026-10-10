@@ -12,7 +12,7 @@ import { createClient } from "@/lib/supabase/server";
 import type { GalleryImage, Review, ReleaseInfo } from "@/lib/types";
 
 const REPO_URL = process.env.NEXT_PUBLIC_GITHUB_REPO_URL ?? "https://github.com/migol-dev/finance-pal";
-const CURRENT_VERSION = process.env.NEXT_PUBLIC_APP_VERSION ?? "1.20";
+const CURRENT_VERSION = process.env.NEXT_PUBLIC_APP_VERSION ?? "1.20.2";
 
 const FALLBACK_GALLERY: GalleryImage[] = [
   {
@@ -90,7 +90,7 @@ export default async function Home() {
         <ReviewsSection initialReviews={reviews} />
         <SuggestionsSection />
         <GithubSection repoUrl={REPO_URL} />
-        <DownloadSection release={release} />
+        <DownloadSection release={release} repoUrl={REPO_URL} />
       </main>
       <Footer repoUrl={REPO_URL} />
     </>

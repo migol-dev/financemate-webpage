@@ -35,9 +35,21 @@ export function ReviewsSection({ initialReviews }: { initialReviews: Review[] })
   }
 
   useEffect(() => {
-    if (initialReviews.length === 0) refresh();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    let ignore = false;
+    if (initialReviews.length === 0) {
+      fetch("/api/reviews", { cache: "no-store" })
+        .then((res) => (res.ok ? res.json() : null))
+        .then((data) => {
+          if (!ignore && data?.reviews) {
+            setReviews(data.reviews);
+          }
+        })
+        .catch(() => {});
+    }
+    return () => {
+      ignore = true;
+    };
+  }, [initialReviews.length]);
 
   return (
     <section
@@ -86,7 +98,7 @@ export function ReviewsSection({ initialReviews }: { initialReviews: Review[] })
                       </span>
                     )}
                   </div>
-                  <p className="text-slate-300 text-sm leading-relaxed mb-6">"{r.comment}"</p>
+                  <p className="text-slate-300 text-sm leading-relaxed mb-6">&ldquo;{r.comment}&rdquo;</p>
                 </div>
                 <div className="flex items-center justify-between pt-4 border-t border-slate-800">
                   <div className="flex items-center gap-3">

@@ -9,9 +9,11 @@ import { Sun, Moon } from "lucide-react";
  *  but a click lets the user override it explicitly for this browser. */
 export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
-  const [mounted, setMounted] = React.useState(false);
-
-  React.useEffect(() => setMounted(true), []);
+  const mounted = React.useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
 
   if (!mounted) {
     return <div className="h-10 w-10 rounded-full border border-border" aria-hidden />;

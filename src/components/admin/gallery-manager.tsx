@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import {
   DndContext,
@@ -55,6 +55,11 @@ function SortableRow({ img, onDelete }: { img: GalleryImage; onDelete: (id: stri
 
 export function GalleryManager({ initial }: { initial: GalleryImage[] }) {
   const [images, setImages] = useState(initial);
+  const [prevInitial, setPrevInitial] = useState(initial);
+  if (initial !== prevInitial) {
+    setPrevInitial(initial);
+    setImages(initial);
+  }
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [file, setFile] = useState<File | null>(null);
@@ -113,9 +118,6 @@ export function GalleryManager({ initial }: { initial: GalleryImage[] }) {
     });
   }
 
-  useEffect(() => {
-    setImages(initial);
-  }, [initial]);
 
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_1.3fr]">

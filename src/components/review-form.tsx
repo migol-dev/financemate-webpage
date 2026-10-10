@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Star, Loader2, CheckCircle2 } from "lucide-react";
 import { useDownloadTracking } from "@/hooks/use-download-tracking";
 
@@ -10,18 +11,23 @@ export function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
   const [email, setEmail] = useState("");
   const [rating, setRating] = useState(5);
   const [comment, setComment] = useState("");
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (!acceptedTerms) {
+      setErrorMsg("Debes aceptar los Términos de Servicio y la Política de Privacidad.");
+      return;
+    }
     setStatus("loading");
     setErrorMsg("");
     try {
       const res = await fetch("/api/reviews", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, rating, comment, hasDownloaded }),
+        body: JSON.stringify({ name, email, rating, comment, hasDownloaded, acceptedTerms }),
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
@@ -32,6 +38,7 @@ export function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
       setEmail("");
       setComment("");
       setRating(5);
+      setAcceptedTerms(false);
       onSubmitted?.();
     } catch (err) {
       setStatus("error");
@@ -139,14 +146,58 @@ export function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
         </p>
       </div>
 
+      <div className="flex items-start gap-3 rounded-xl bg-slate-950/60 p-3.5 border border-slate-800">
+        <input
+          id="accepted-terms-checkbox"
+          type="checkbox"
+          checked={acceptedTerms}
+          onChange={(e) => {
+            setAcceptedTerms(e.target.checked);
+            if (e.target.checked && errorMsg) {
+              setErrorMsg("");
+            }
+          }}
+          className="mt-0.5 h-4 w-4 rounded border-slate-700 bg-slate-900 text-cyan-400 focus:ring-cyan-400/40 focus:ring-offset-0 focus:ring-2 cursor-pointer accent-cyan-400 shrink-0"
+        />
+        <div className="text-xs text-slate-300 leading-relaxed select-none">
+          <label htmlFor="accepted-terms-checkbox" className="cursor-pointer">
+            He leído y acepto los{" "}
+          </label>
+          <Link
+            href="/terminos"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="text-cyan-400 underline underline-offset-2 hover:text-cyan-300 transition font-medium"
+          >
+            Términos de Servicio
+          </Link>
+          <label htmlFor="accepted-terms-checkbox" className="cursor-pointer">
+            {" "}y la{" "}
+          </label>
+          <Link
+            href="/privacidad"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="text-cyan-400 underline underline-offset-2 hover:text-cyan-300 transition font-medium"
+          >
+            Política de Privacidad
+          </Link>
+          <label htmlFor="accepted-terms-checkbox" className="cursor-pointer">
+            . Entiendo que Finance Pal es un software libre de finanzas personales y no una entidad financiera ni bancaria.
+          </label>
+        </div>
+      </div>
+
       {status === "error" && (
         <p className="text-sm text-rose-400">{errorMsg}</p>
       )}
 
       <button
         type="submit"
-        disabled={status === "loading"}
-        className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-xl font-bold text-sm text-slate-950 bg-gradient-to-r from-cyan-400 via-sky-400 to-cyan-300 hover:brightness-110 shadow-lg shadow-cyan-500/25 active:scale-95 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+        disabled={status === "loading" || !acceptedTerms}
+        className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-xl font-bold text-sm text-slate-950 bg-gradient-to-r from-cyan-400 via-sky-400 to-cyan-300 hover:brightness-110 shadow-lg shadow-cyan-500/25 active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:brightness-100"
       >
         {status === "loading" && <Loader2 className="h-4 w-4 animate-spin" />}
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

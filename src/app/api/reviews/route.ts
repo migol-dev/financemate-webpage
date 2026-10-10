@@ -8,6 +8,7 @@ const reviewSchema = z.object({
   rating: z.number().int().min(1).max(5),
   comment: z.string().min(5).max(800),
   hasDownloaded: z.boolean().optional().default(false),
+  acceptedTerms: z.literal(true),
 });
 
 export async function GET() {

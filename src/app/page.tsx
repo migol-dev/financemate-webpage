@@ -11,8 +11,16 @@ import { Footer } from "@/components/footer";
 import { createClient } from "@/lib/supabase/server";
 import type { GalleryImage, Review, ReleaseInfo } from "@/lib/types";
 
-const REPO_URL = process.env.NEXT_PUBLIC_GITHUB_REPO_URL ?? "https://github.com/migol-dev/finance-pal";
-const CURRENT_VERSION = process.env.NEXT_PUBLIC_APP_VERSION ?? "1.20.2";
+const CANONICAL_REPO_URL = "https://github.com/migol-dev/finance-pal";
+const REPO_URL =
+  process.env.NEXT_PUBLIC_GITHUB_REPO_URL &&
+  !process.env.NEXT_PUBLIC_GITHUB_REPO_URL.includes("financemate-webpage") &&
+  !process.env.NEXT_PUBLIC_GITHUB_REPO_URL.includes("finance-mate")
+    ? process.env.NEXT_PUBLIC_GITHUB_REPO_URL
+    : CANONICAL_REPO_URL;
+
+// Versión canónica de la app (protegida contra variables de entorno obsoletas en Vercel o caché)
+const CURRENT_VERSION = "1.20.2";
 
 const FALLBACK_GALLERY: GalleryImage[] = [
   {

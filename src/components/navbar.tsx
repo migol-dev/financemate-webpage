@@ -15,7 +15,11 @@ const LINKS = [
 ];
 
 const GITHUB_URL =
-  process.env.NEXT_PUBLIC_GITHUB_REPO_URL ?? "https://github.com/migol-dev/finance-pal";
+  process.env.NEXT_PUBLIC_GITHUB_REPO_URL &&
+  !process.env.NEXT_PUBLIC_GITHUB_REPO_URL.includes("financemate-webpage") &&
+  !process.env.NEXT_PUBLIC_GITHUB_REPO_URL.includes("finance-mate")
+    ? process.env.NEXT_PUBLIC_GITHUB_REPO_URL
+    : "https://github.com/migol-dev/finance-pal";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);

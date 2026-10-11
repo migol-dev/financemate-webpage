@@ -24,7 +24,7 @@ export function Footer({ repoUrl }: { repoUrl: string }) {
                   Finance Pal
                 </span>
                 <span className="ml-2 text-[11px] font-mono text-cyan-400 bg-cyan-950/80 px-2 py-0.5 rounded-full border border-cyan-500/20">
-                  v1.20.2
+                  v1.21.0
                 </span>
               </div>
             </div>

@@ -20,7 +20,7 @@ const REPO_URL =
     : CANONICAL_REPO_URL;
 
 // Versión canónica de la app (protegida contra variables de entorno obsoletas en Vercel o caché)
-const CURRENT_VERSION = "1.20.2";
+const CURRENT_VERSION = "1.21.0";
 
 const FALLBACK_GALLERY: GalleryImage[] = [
   {

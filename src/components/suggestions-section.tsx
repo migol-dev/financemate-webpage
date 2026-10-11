@@ -72,8 +72,8 @@ function ReportForm({ type }: { type: ReportType }) {
             className="fp-input"
             style={{ appearance: "none" }}
           >
-            <option value="v1.20.2">v1.20.2 (Versión actual estable)</option>
-            <option value="v1.20.1">v1.20.1 (Anterior)</option>
+            <option value="v1.21.0">v1.21.0 (Versión actual estable)</option>
+            <option value="v1.20.2">v1.20.2 (Anterior)</option>
             <option value="pwa-web">PWA / Web App Vercel</option>
           </select>
         </div>
@@ -161,7 +161,7 @@ export function SuggestionsSection() {
             Buzón de Ideas y Reportes
           </h2>
           <p className="text-slate-300 mt-2 text-sm sm:text-base">
-            ¿Encontraste un detalle en v1.20.2 o tienes una idea para futuras versiones? Cada mensaje se revisa
+            ¿Encontraste un detalle en v1.21.0 o tienes una idea para futuras versiones? Cada mensaje se revisa
             semanalmente.
           </p>
         </div>

@@ -12,12 +12,12 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Finance Pal v1.20.2 | Gestor Financiero Personal, Privado y Multiplataforma",
+  title: "Finance Pal v1.21.0 | Gestor Financiero Personal, Privado y Multiplataforma",
   description:
     "Finance Pal es el ecosistema financiero libre y offline-first. Gestiona flujo de caja, metas con ritmo predictivo, préstamos y sincronización cifrada — 100% privado, sin servidores de por medio.",
   metadataBase: new URL("https://financepal-web.vercel.app"),
   openGraph: {
-    title: "Finance Pal v1.20.2",
+    title: "Finance Pal v1.21.0",
     description:
       "Controla tus ingresos, gastos, metas y deudas desde una sola app, con tus datos siempre en tu dispositivo. Local-First · AES-GCM · Código abierto MIT.",
     type: "website",

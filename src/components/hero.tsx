@@ -8,26 +8,29 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
         {/* Release pill */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/90 border border-cyan-500/30 text-xs sm:text-sm font-medium text-slate-200 mb-6 backdrop-blur">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/90 border border-cyan-500/30 text-xs sm:text-sm font-medium text-slate-200 mb-6 backdrop-blur shadow-sm shadow-cyan-500/10">
           <span className="flex h-2 w-2 rounded-full bg-cyan-400 animate-ping" />
-          <span className="text-cyan-300 font-semibold">Finance Pal v{version} Oficial</span>
+          <span className="text-cyan-300 font-semibold font-mono">v{version} Oficial</span>
           <span className="text-slate-500">·</span>
-          <span className="text-slate-300">Local-First · Cifrado AES-GCM · Sync Opcional</span>
+          <span className="text-amber-300 font-serif italic text-sm">Warm Editorial Wealth</span>
+          <span className="text-slate-500">·</span>
+          <span className="text-slate-300 font-mono text-xs">WebCrypto AES-256</span>
         </div>
 
         {/* Main Title */}
-        <h1 className="font-display font-extrabold text-4xl sm:text-6xl lg:text-7xl text-white tracking-tight leading-[1.1] max-w-4xl mx-auto mb-6">
-          Tus finanzas, bajo soberanía total en{" "}
+        <h1 className="font-display font-extrabold text-4xl sm:text-6xl lg:text-7xl text-white tracking-[-0.035em] leading-[1.08] max-w-4xl mx-auto mb-6">
+          Tus finanzas, bajo{" "}
+          <span className="font-serif italic font-normal text-amber-200">soberanía total</span> en{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-cyan-300 to-emerald-400">
             tu dispositivo.
           </span>
         </h1>
 
         {/* Subtitle */}
-        <p className="text-slate-300 text-base sm:text-xl max-w-3xl mx-auto leading-relaxed mb-6">
-          Un ecosistema financiero libre y offline-first. Gestiona flujo de caja, desglose en
-          efectivo, metas con ritmo predictivo, préstamos con abonos y sincronización opcional
-          cifrada en Supabase.
+        <p className="text-slate-300 text-base sm:text-xl max-w-3xl mx-auto leading-relaxed mb-6 font-sans">
+          Un ecosistema financiero libre y offline-first. Diseño Warm Editorial Wealth, metas
+          jerárquicas con Drag &amp; Drop, 15 categorías universales, resumen macroeconómico y
+          sincronización opcional cifrada en Supabase.
         </p>
 
         {/* Platform badges */}
@@ -50,7 +53,7 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
           <a
             href="#descarga"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl text-base font-bold text-slate-950 bg-gradient-to-r from-cyan-400 via-sky-400 to-cyan-300 hover:brightness-110 shadow-xl shadow-cyan-500/25 transition-all"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl text-base font-bold text-slate-950 bg-gradient-to-r from-cyan-400 via-sky-400 to-cyan-300 hover:brightness-110 active:scale-[0.98] transition-all shadow-xl shadow-cyan-500/25 cursor-pointer"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" />
@@ -61,7 +64,7 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
             href="https://financepal-web.vercel.app"
             rel="noopener noreferrer"
             target="_blank"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-2xl text-base font-semibold text-slate-200 bg-slate-900/80 hover:bg-slate-800 border border-slate-700 hover:border-cyan-500/40 transition-all"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-2xl text-base font-semibold text-slate-200 bg-slate-900/80 hover:bg-slate-800 border border-slate-700 hover:border-cyan-500/40 active:scale-[0.98] transition-all cursor-pointer"
           >
             <svg className="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
@@ -73,9 +76,9 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
 
         {/* Trust badges */}
         <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs sm:text-sm text-slate-400">
-          <span className="flex items-center gap-1.5"><strong className="text-emerald-400">✓</strong> AES-256-GCM + PBKDF2</span>
-          <span className="flex items-center gap-1.5"><strong className="text-emerald-400">✓</strong> 100% Local-First (SQLite)</span>
-          <span className="flex items-center gap-1.5"><strong className="text-emerald-400">✓</strong> Cero Telemetría / Rastreos</span>
+          <span className="flex items-center gap-1.5"><strong className="text-emerald-400">✓</strong> WebCrypto AES-256-GCM (PBKDF2)</span>
+          <span className="flex items-center gap-1.5"><strong className="text-emerald-400">✓</strong> 100% Local-First (SQLite &amp; IndexedDB)</span>
+          <span className="flex items-center gap-1.5"><strong className="text-emerald-400">✓</strong> Zero-Flash Boot &amp; 120 FPS</span>
           <span className="flex items-center gap-1.5"><strong className="text-emerald-400">✓</strong> Código Abierto Licencia MIT</span>
         </div>
       </div>

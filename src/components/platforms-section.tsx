@@ -37,8 +37,8 @@ export function PlatformsSection() {
               </div>
               <p className="text-sm text-slate-300 leading-relaxed">
                 Instala la aplicación nativa construida con Capacitor o añádela a tu pantalla de
-                inicio como PWA. Cuenta con base de datos SQLite ultrarrápida, notificaciones de
-                conceptos fijos y funcionamiento 100% offline sin gasto de batería en segundo plano.
+                inicio como PWA. Cuenta con base de datos SQLite ultrarrápida, arranque Zero-Flash,
+                metas con Drag &amp; Drop y funcionamiento 100% offline sin gasto de batería en segundo plano.
               </p>
               <ul className="text-xs text-slate-300 space-y-2 pt-1">
                 <li className="flex items-center gap-2">
@@ -60,7 +60,7 @@ export function PlatformsSection() {
                 href="#descarga"
                 className="inline-flex items-center gap-2 text-sm font-bold text-emerald-400 hover:text-emerald-300 transition-colors"
               >
-                <span>Ir a descarga de APK v1.21.0</span>
+                <span>Ir a descarga de APK v2.0.0</span>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path d="M17 8l4 4m0 0l-4 4m4-4H3" strokeLinecap="round" strokeWidth="2" />
                 </svg>

@@ -1,4 +1,5 @@
 import { Navbar } from "@/components/navbar";
+import { ReleaseAnnouncement } from "@/components/release-announcement";
 import { Hero } from "@/components/hero";
 import { PlatformsSection } from "@/components/platforms-section";
 import { Gallery } from "@/components/gallery";
@@ -20,7 +21,7 @@ const REPO_URL =
     : CANONICAL_REPO_URL;
 
 // Versión canónica de la app (protegida contra variables de entorno obsoletas en Vercel o caché)
-const CURRENT_VERSION = "1.21.0";
+const CURRENT_VERSION = "2.0.0";
 
 const FALLBACK_GALLERY: GalleryImage[] = [
   {
@@ -83,12 +84,13 @@ export default async function Home() {
 
   const release: ReleaseInfo = {
     version: CURRENT_VERSION,
-    url: `${REPO_URL}/releases/latest/download/financemate.apk`,
+    url: `${REPO_URL}/releases/download/v${CURRENT_VERSION}/financemate.apk`,
     publishedAt: new Date().toISOString(),
   };
 
   return (
     <>
+      <ReleaseAnnouncement />
       <Navbar />
       <main>
         <Hero version={release.version} githubUrl={REPO_URL} />

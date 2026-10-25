@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sparkles } from "lucide-react";
+import { openReleaseModal } from "@/components/release-announcement";
 
 const LINKS = [
   { href: "#plataformas", label: "Plataformas" },
@@ -38,7 +39,7 @@ export function Navbar() {
           </div>
           <div className="flex items-center gap-2">
             <span className="font-display font-bold text-xl tracking-tight text-white">Finance Pal</span>
-            <span className="px-2 py-0.5 text-xs font-semibold rounded-full bg-cyan-950 text-cyan-300 border border-cyan-500/40">v1.21.0</span>
+            <span className="px-2 py-0.5 text-xs font-semibold rounded-full bg-cyan-950 text-cyan-300 border border-cyan-500/40">v2.0.0</span>
           </div>
         </Link>
 
@@ -57,6 +58,15 @@ export function Navbar() {
 
         {/* Right CTAs */}
         <div className="hidden sm:flex items-center gap-3 shrink-0">
+          <button
+            type="button"
+            onClick={() => openReleaseModal()}
+            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold text-amber-300 bg-amber-950/60 border border-amber-500/30 hover:bg-amber-900/50 hover:border-amber-400/50 active:scale-[0.98] transition-all cursor-pointer shadow-sm shadow-amber-500/10"
+            title="Ver novedades de la versión 2.0.0"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+            <span>Novedades v2.0</span>
+          </button>
           <a
             className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white bg-slate-800/80 border border-slate-700 hover:border-slate-600 transition-all"
             href={GITHUB_URL}
@@ -92,6 +102,22 @@ export function Navbar() {
       {/* Mobile Drawer */}
       {open && (
         <div className="md:hidden border-t border-slate-800 bg-[#0d1322] px-5 py-4 space-y-3">
+          <button
+            type="button"
+            onClick={() => {
+              setOpen(false);
+              openReleaseModal();
+            }}
+            className="w-full flex items-center justify-between text-left py-2 px-3 rounded-xl bg-amber-950/50 border border-amber-500/30 text-amber-300 font-semibold text-sm active:scale-[0.98] transition-all"
+          >
+            <span className="flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-amber-400" />
+              <span>Novedades v2.0.0</span>
+            </span>
+            <span className="text-[10px] font-mono uppercase bg-amber-400/20 px-2 py-0.5 rounded text-amber-200">
+              Nuevo
+            </span>
+          </button>
           {LINKS.map((l) => (
             <a
               key={l.href}

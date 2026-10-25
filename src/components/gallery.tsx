@@ -27,8 +27,8 @@ const SLIDE_INFO = [
   },
   {
     badge: "Slide 4 de 5 · Planificación",
-    title: "Metas de Ahorro en Carpetas Temáticas",
-    desc: 'Agrupación visual por carpetas ("Biker", "Viajes") con proyección predictiva del ritmo de ahorro semanal necesario para cumplir tu fecha objetivo.',
+    title: "Metas de Ahorro con Carpetas & Drag/Drop",
+    desc: 'Agrupación visual jerárquica con reordenamiento intuitivo por arrastre y cálculo predictivo del ritmo de ahorro semanal necesario para cumplir tu fecha objetivo.',
   },
   {
     badge: "Slide 5 de 5 · Automatización",
@@ -78,7 +78,7 @@ function Screen0() {
           <div className="flex items-center gap-2.5">
             <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-cyan-400 to-sky-500 flex items-center justify-center text-slate-950 font-bold text-sm shadow-md shadow-cyan-500/20">FP</div>
             <div>
-              <div className="text-[11px] text-slate-400">Finance Pal v1.21.0</div>
+              <div className="text-[11px] text-slate-400">Finance Pal v2.0.0</div>
               <div className="text-[13px] font-bold text-white flex items-center gap-1.5">Balance General <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" /></div>
             </div>
           </div>
@@ -207,7 +207,7 @@ function Screen3() {
         </div>
         <div className="p-2.5 rounded-xl bg-sky-500 text-white flex items-center justify-between text-[11px] font-semibold">
           <div className="flex items-center gap-2"><span>📁</span><span>Carpeta: IMPREVISTOS</span></div>
-          <span className="text-[9px] bg-white/20 px-2 py-0.5 rounded-full">1 Meta</span>
+          <span className="text-[9px] bg-white/20 px-2 py-0.5 rounded-full font-mono">1 Meta · ⠿ Drag</span>
         </div>
         <div className="p-3.5 rounded-2xl bg-gradient-to-br from-sky-500 to-blue-600 text-white space-y-2.5">
           <div className="flex items-center justify-between">

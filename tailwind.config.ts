@@ -11,9 +11,10 @@ const config: Config = {
     },
     extend: {
       fontFamily: {
-        sans: ["var(--font-inter)", "Inter", "system-ui", "sans-serif"],
+        sans: ["var(--font-plus-jakarta)", '"Plus Jakarta Sans"', "system-ui", "sans-serif"],
         display: ["var(--font-plus-jakarta)", '"Plus Jakarta Sans"', "system-ui", "sans-serif"],
-        mono: ['"JetBrains Mono"', "ui-monospace", "monospace"],
+        mono: ["var(--font-mono)", '"JetBrains Mono"', "ui-monospace", "monospace"],
+        serif: ["var(--font-serif)", '"Instrument Serif"', "Georgia", "serif"],
       },
       colors: {
         border: "hsl(var(--border))",

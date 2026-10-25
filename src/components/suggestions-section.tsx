@@ -7,6 +7,7 @@ import type { ReportType } from "@/lib/types";
 
 function ReportForm({ type }: { type: ReportType }) {
   const [name, setName] = useState("");
+  const [version, setVersion] = useState("v2.0.0");
   const [email, setEmail] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -16,10 +17,13 @@ function ReportForm({ type }: { type: ReportType }) {
     e.preventDefault();
     setStatus("loading");
     try {
+      const fullDescription = version
+        ? `[Versión reportada: ${version}]\n\n${description}`
+        : description;
       const res = await fetch("/api/reports", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type, name, email, title, description }),
+        body: JSON.stringify({ type, name, email, title, description: fullDescription }),
       });
       if (!res.ok) throw new Error();
       setStatus("done");
@@ -71,9 +75,12 @@ function ReportForm({ type }: { type: ReportType }) {
           <select
             className="fp-input"
             style={{ appearance: "none" }}
+            value={version}
+            onChange={(e) => setVersion(e.target.value)}
           >
-            <option value="v1.21.0">v1.21.0 (Versión actual estable)</option>
-            <option value="v1.20.2">v1.20.2 (Anterior)</option>
+            <option value="v2.0.0">v2.0.0 (Versión actual estable)</option>
+            <option value="v1.21.0">v1.21.0 (Anterior)</option>
+            <option value="v1.20.2">v1.20.2</option>
             <option value="pwa-web">PWA / Web App Vercel</option>
           </select>
         </div>
@@ -161,7 +168,7 @@ export function SuggestionsSection() {
             Buzón de Ideas y Reportes
           </h2>
           <p className="text-slate-300 mt-2 text-sm sm:text-base">
-            ¿Encontraste un detalle en v1.21.0 o tienes una idea para futuras versiones? Cada mensaje se revisa
+            ¿Encontraste un detalle en v2.0.0 o tienes una idea para futuras versiones? Cada mensaje se revisa
             semanalmente.
           </p>
         </div>

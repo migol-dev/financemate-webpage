@@ -116,7 +116,7 @@ export function DownloadSection({ release, repoUrl }: DownloadSectionProps) {
                 )}
 
                 <div className="text-[11px] text-slate-400 mt-3 font-mono">
-                  ✓ SHA-256 Verificado · Código auditable bajo licencia MIT · Binario: financemate.apk
+                  ✓ SHA-256 Verificado · Código auditable bajo licencia MIT · Binario oficial: financemate.apk (v{release.version})
                 </div>
               </div>
 

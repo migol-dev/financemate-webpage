@@ -5,7 +5,11 @@ const rawSiteUrl =
     : process.env.VERCEL_PROJECT_PRODUCTION_URL &&
         !process.env.VERCEL_PROJECT_PRODUCTION_URL.includes("financepal-web.vercel.app")
       ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-      : "https://financemate-webpage.vercel.app";
+      : "https://your-financepal.vercel.app";
+
+export const GOOGLE_VERIFICATION_CODE =
+  process.env.GOOGLE_SITE_VERIFICATION ||
+  "bDHE0LjTmE_iFFeCSV5k1Zi_R7ciIJ25S4CW4ooZVWg";
 
 export const SITE_URL = rawSiteUrl.replace(/\/$/, "");
 export const APP_URL = "https://financepal-web.vercel.app";

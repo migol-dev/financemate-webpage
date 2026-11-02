@@ -10,6 +10,7 @@ import {
   DEFAULT_DESCRIPTION,
   KEYWORDS,
   AUTHOR,
+  GOOGLE_VERIFICATION_CODE,
 } from "@/lib/seo";
 import { JsonLd, buildGlobalGraphSchema } from "@/components/seo/json-ld";
 
@@ -61,9 +62,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    ...(process.env.GOOGLE_SITE_VERIFICATION
-      ? { google: process.env.GOOGLE_SITE_VERIFICATION }
-      : {}),
+    google: GOOGLE_VERIFICATION_CODE,
     ...(process.env.BING_SITE_VERIFICATION
       ? { other: { "msvalidate.01": process.env.BING_SITE_VERIFICATION } }
       : {}),

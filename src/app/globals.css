@@ -3,25 +3,148 @@
 @tailwind utilities;
 
 @layer base {
+  /* ──────────────────────────────────────────────────────────────────────────
+     MODO CLARO — Warm Alabaster (#FAF8F5)
+     ────────────────────────────────────────────────────────────────────────── */
   :root {
-    --background: 222 47% 6%;
-    --foreground: 210 40% 97%;
-    --card: 222 44% 8%;
-    --card-foreground: 210 40% 97%;
-    --primary: 199 89% 60%;
-    --primary-foreground: 222 47% 6%;
-    --secondary: 222 35% 14%;
-    --secondary-foreground: 210 40% 97%;
-    --muted: 222 35% 12%;
-    --muted-foreground: 215 20% 55%;
-    --accent: 199 89% 55%;
-    --accent-foreground: 222 47% 6%;
-    --destructive: 352 82% 60%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 222 30% 16%;
-    --input: 222 30% 12%;
-    --ring: 199 89% 60%;
+    --background: 40 33% 97%;          /* #FAF8F5 Warm Alabaster */
+    --foreground: 60 2% 10%;           /* #191918 Espresso Ink */
+    --card: 0 0% 100%;                 /* #FFFFFF Crisp Paper */
+    --card-foreground: 60 2% 10%;      /* #191918 */
+    --secondary: 39 24% 93%;           /* #F2EFE9 Oat Pill */
+    --secondary-foreground: 60 2% 10%;
+    --muted: 39 24% 93%;               /* #F2EFE9 */
+    --muted-foreground: 38 6% 25.5%;   /* #45423D Stone (WCAG AAA 8.5:1) */
+    --primary: 159 59% 30%;            /* #1F7A5A Esmeralda Editorial */
+    --primary-foreground: 40 33% 97%;
+    --accent: 159 59% 30%;
+    --accent-foreground: 40 33% 97%;
+    --destructive: 14 54% 53%;         /* #C86446 Terracota */
+    --destructive-foreground: 40 33% 97%;
+    --border: 40 18% 87%;              /* #E4E0D8 Hairline Rule */
+    --input: 40 18% 87%;
+    --ring: 159 59% 30%;
     --radius: 1rem;
+
+    /* Señalización Financiera Universal */
+    --semantic-income: 159 59% 30%;    /* #1F7A5A Esmeralda Intencional */
+    --semantic-expense: 14 54% 53%;    /* #C86446 Terracota */
+    --semantic-invest: 210 76% 51%;    /* #2080E5 Cobalto de Precisión */
+    --semantic-warning: 30 89% 45%;    /* #D9730D Ámbar Tostado */
+
+    /* Sombras físicas sutiles (Shadow as Border) */
+    --shadow-border:
+      0px 0px 0px 1px oklch(0 0 0 / 0.06),
+      0px 1px 2px -1px oklch(0 0 0 / 0.06),
+      0px 2px 4px 0px oklch(0 0 0 / 0.04);
+    --shadow-border-hover:
+      0px 0px 0px 1px oklch(0 0 0 / 0.11),
+      0px 4px 12px -2px oklch(0 0 0 / 0.07),
+      0px 2px 4px 0px oklch(0 0 0 / 0.05);
+  }
+
+  /* ──────────────────────────────────────────────────────────────────────────
+     MODO OSCURO — Obsidian Carbon (#0C0C0B)
+     ────────────────────────────────────────────────────────────────────────── */
+  .dark {
+    --background: 60 4% 5%;            /* #0C0C0B Obsidian Carbon */
+    --foreground: 60 5% 93%;           /* #EDEDED Soft Chalk */
+    --card: 60 3% 8%;                  /* #141413 Carbon Surface Level 1 */
+    --card-foreground: 60 5% 93%;
+    --secondary: 60 3% 13%;            /* #1C1C1A Graphite Pill Level 2 */
+    --secondary-foreground: 60 5% 93%;
+    --muted: 60 3% 13%;                /* #1C1C1A */
+    --muted-foreground: 40 6% 67.3%;   /* #B0ADA7 Warm Sand (WCAG AAA 7.8:1) */
+    --primary: 158 64% 52%;            /* #34D399 Esmeralda Editorial Oscuro */
+    --primary-foreground: 60 4% 5%;
+    --accent: 158 64% 52%;
+    --accent-foreground: 60 4% 5%;
+    --destructive: 350 89% 60%;        /* #F43F5E Coral Vivo */
+    --destructive-foreground: 60 5% 98%;
+    --border: 60 3% 16%;               /* #2A2A28 Wire Separator */
+    --input: 60 3% 16%;
+    --ring: 158 64% 52%;
+
+    --semantic-income: 158 64% 52%;    /* #10B981 Esmeralda */
+    --semantic-expense: 14 68% 62%;    /* Terracota / Coral */
+    --semantic-invest: 210 85% 60%;    /* Cobalto */
+    --semantic-warning: 38 92% 55%;    /* #F59E0B Ámbar */
+
+    --shadow-border: 0 0 0 1px oklch(1 0 0 / 0.08);
+    --shadow-border-hover: 0 0 0 1px oklch(1 0 0 / 0.15);
+  }
+
+  /* ──────────────────────────────────────────────────────────────────────────
+     LOS 5 ACENTOS EDITORIALES V2 PERSONALIZABLES
+     ────────────────────────────────────────────────────────────────────────── */
+  :root[data-accent="emerald"] {
+    --primary: 159 59% 30%;
+    --accent: 159 59% 30%;
+    --ring: 159 59% 30%;
+    --primary-foreground: 40 33% 97%;
+  }
+  .dark[data-accent="emerald"],
+  .dark [data-accent="emerald"] {
+    --primary: 158 64% 52%;
+    --accent: 158 64% 52%;
+    --ring: 158 64% 52%;
+    --primary-foreground: 60 4% 5%;
+  }
+
+  :root[data-accent="terracotta"] {
+    --primary: 14 54% 46%;
+    --accent: 14 54% 46%;
+    --ring: 14 54% 46%;
+    --primary-foreground: 40 33% 97%;
+  }
+  .dark[data-accent="terracotta"],
+  .dark [data-accent="terracotta"] {
+    --primary: 16 70% 62%;
+    --accent: 16 70% 62%;
+    --ring: 16 70% 62%;
+    --primary-foreground: 60 4% 5%;
+  }
+
+  :root[data-accent="cobalt"] {
+    --primary: 210 76% 42%;
+    --accent: 210 76% 42%;
+    --ring: 210 76% 42%;
+    --primary-foreground: 40 33% 97%;
+  }
+  .dark[data-accent="cobalt"],
+  .dark [data-accent="cobalt"] {
+    --primary: 210 86% 64%;
+    --accent: 210 86% 64%;
+    --ring: 210 86% 64%;
+    --primary-foreground: 60 4% 5%;
+  }
+
+  :root[data-accent="rose"] {
+    --primary: 347 48% 44%;
+    --accent: 347 48% 44%;
+    --ring: 347 48% 44%;
+    --primary-foreground: 40 33% 97%;
+  }
+  .dark[data-accent="rose"],
+  .dark [data-accent="rose"] {
+    --primary: 347 68% 66%;
+    --accent: 347 68% 66%;
+    --ring: 347 68% 66%;
+    --primary-foreground: 60 4% 5%;
+  }
+
+  :root[data-accent="amethyst"] {
+    --primary: 255 45% 47%;
+    --accent: 255 45% 47%;
+    --ring: 255 45% 47%;
+    --primary-foreground: 40 33% 97%;
+  }
+  .dark[data-accent="amethyst"],
+  .dark [data-accent="amethyst"] {
+    --primary: 255 68% 72%;
+    --accent: 255 68% 72%;
+    --ring: 255 68% 72%;
+    --primary-foreground: 60 4% 5%;
   }
 
   * {
@@ -33,88 +156,152 @@
   }
 
   body {
-    @apply bg-[#080e1d] text-slate-100 antialiased;
+    @apply bg-background text-foreground antialiased selection:bg-primary/20 selection:text-foreground;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     overflow-x: hidden;
   }
 }
 
 @layer utilities {
-  /* Glass panels */
+  /* Tipografía de impacto & Números tabulares estrictos */
+  .font-display-v2 {
+    font-family: var(--font-fraunces), "Fraunces", Georgia, serif;
+    letter-spacing: -0.035em;
+    line-height: 1.05;
+  }
+  .font-mono-tabular {
+    font-family: var(--font-mono), "JetBrains Mono", ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Micro-Física Táctil (.tactile-press & .btn-editorial) */
+  .tactile-press {
+    transition-property: transform, background-color, border-color, color, box-shadow;
+    transition-duration: 150ms;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .tactile-press:active:not(:disabled) {
+    transform: scale(0.96);
+  }
+
+  .spring-bar {
+    transition-property: width, transform;
+    transition-duration: 550ms;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Resaltado interactivo de texto al pasar el cursor (Editorial Highlighter) */
+  .editorial-highlight {
+    position: relative;
+    display: inline;
+    background-image: linear-gradient(
+      120deg,
+      hsl(var(--primary) / 0.16) 0%,
+      hsl(var(--semantic-warning) / 0.18) 100%
+    );
+    background-repeat: no-repeat;
+    background-size: 100% 0.32em;
+    background-position: 0 88%;
+    transition-property: background-size, color;
+    transition-duration: 240ms;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    border-radius: 2px;
+    padding-inline: 0.08em;
+  }
+  .editorial-highlight:hover {
+    background-size: 100% 100%;
+    color: hsl(var(--foreground));
+  }
+
+  /* Resaltado sutil de bloques y párrafos al pasar el cursor */
+  .editorial-text-hover {
+    transition-property: color, transform, background-color;
+    transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .editorial-text-hover:hover {
+    color: hsl(var(--foreground));
+  }
+
+  /* Superficies Editoriales (reemplaza el antiguo glass-panel neón) */
+  .editorial-surface {
+    background-color: hsl(var(--card));
+    box-shadow: var(--shadow-border);
+    transition-property: box-shadow, border-color, background-color, transform;
+    transition-duration: 180ms;
+    transition-timing-function: ease-out;
+  }
+  .editorial-surface:hover {
+    box-shadow: var(--shadow-border-hover);
+  }
+
   .glass-panel {
-    background: rgba(17, 24, 39, 0.75);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background-color: hsl(var(--card) / 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-color: hsl(var(--border));
   }
   .glass-panel-glow {
-    background: rgba(17, 24, 39, 0.85);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(56, 189, 248, 0.25);
-    box-shadow: 0 0 30px -8px rgba(14, 165, 233, 0.25);
-  }
-  .neon-hover {
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  }
-  .neon-hover:hover {
-    border-color: rgba(34, 211, 238, 0.45) !important;
-    box-shadow: 0 8px 25px -8px rgba(14, 165, 233, 0.3);
+    background-color: hsl(var(--card));
+    border-color: hsl(var(--border));
+    box-shadow: var(--shadow-border);
   }
 
-  /* Gradient text */
-  .text-gradient {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, #38bdf8 0%, #22d3ee 50%, #34d399 100%);
-  }
-
-  /* Electric hero gradient */
-  .hero-gradient {
-    background: linear-gradient(135deg, #0284c7 0%, #0ea5e9 50%, #38bdf8 100%);
-  }
-
-  /* Glow effects */
-  .glow-cyan {
-    box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.1), 0 16px 36px -8px rgba(14, 165, 233, 0.4);
-  }
-  .glow-card {
-    box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.08), 0 20px 60px -20px rgba(14, 165, 233, 0.35);
-  }
-
-  /* Ambient bg blobs */
-  .bg-grid-glow {
-    background: radial-gradient(ellipse at 50% 0%, rgba(14, 165, 233, 0.18) 0%, transparent 60%);
-  }
-
-  /* Input focus ring */
+  /* Controles de formulario con 16px en móvil para evitar zoom en iOS Safari */
   .fp-input {
-    @apply w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder-slate-500 text-sm outline-none transition-all;
+    @apply w-full px-4 py-3 rounded-xl bg-muted/60 border border-input text-foreground placeholder:text-muted-foreground text-base sm:text-sm outline-none;
+    transition-property: border-color, background-color, box-shadow;
+    transition-duration: 150ms;
+    transition-timing-function: ease-out;
   }
-  .fp-input:focus {
-    border-color: #38bdf8;
-    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+  .fp-input:focus-visible {
+    border-color: hsl(var(--primary));
+    background-color: hsl(var(--card));
+    box-shadow: 0 0 0 2px hsl(var(--primary) / 0.22);
   }
 
-  /* Primary CTA button */
+  /* Botones Editoriales con micro-interacción y alineación óptica */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full font-bold text-sm text-slate-950 transition-all;
-    background: linear-gradient(135deg, #38bdf8, #0ea5e9, #38bdf8);
-    box-shadow: 0 4px 14px rgba(14, 165, 233, 0.35);
+    @apply inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-semibold text-sm bg-primary text-primary-foreground tactile-press cursor-pointer;
+    box-shadow: var(--shadow-border);
   }
-  .btn-primary:hover {
-    filter: brightness(1.1);
-    box-shadow: 0 6px 20px rgba(14, 165, 233, 0.5);
+  .btn-primary:hover:not(:disabled) {
+    filter: brightness(1.06);
+    box-shadow: var(--shadow-border-hover);
   }
 
-  /* Ghost button */
   .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full font-semibold text-sm text-slate-200 transition-all;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    @apply inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-medium text-sm text-foreground bg-muted/70 border border-border tactile-press cursor-pointer;
   }
-  .btn-ghost:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(56, 189, 248, 0.3);
+  .btn-ghost:hover:not(:disabled) {
+    @apply bg-muted border-primary/40;
+  }
+}
+
+/* Deformación orgánica sutil del lienzo editorial */
+@keyframes editorial-morph-slow {
+  0%, 100% {
+    border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%;
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+  }
+  33% {
+    border-radius: 58% 42% 38% 62% / 53% 61% 39% 47%;
+    transform: translate3d(2%, -3%, 0) rotate(4deg) scale(1.04, 0.96);
+  }
+  66% {
+    border-radius: 37% 63% 54% 46% / 62% 35% 65% 38%;
+    transform: translate3d(-2%, 2%, 0) rotate(-3deg) scale(0.97, 1.03);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .editorial-blob-morph {
+    animation: editorial-morph-slow 22s ease-in-out infinite;
+    will-change: transform, border-radius;
+  }
+  .editorial-blob-morph-reverse {
+    animation: editorial-morph-slow 28s ease-in-out infinite reverse;
+    will-change: transform, border-radius;
   }
 }
 

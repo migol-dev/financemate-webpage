@@ -1,111 +1,153 @@
 "use client";
 
+import { Lock, Database, ShieldCheck, ArrowUpRight, GitBranch, Tag, Star } from "lucide-react";
+import { EditorialHighlight, ScrollReveal } from "@/components/editorial-motion";
+
+const SECURITY_LAYERS = [
+  {
+    code: "CAPA 01 · CIFRADO EN CLIENTE",
+    icon: Lock,
+    accentClass: "text-editorial-emerald",
+    title: "WebCrypto AES-GCM 256 + PBKDF2",
+    desc: "Derivación de llaves locales mediante 100,000 iteraciones PBKDF2-SHA256. Tus balances y conceptos se cifran con vector IV único antes de tocar el disco.",
+    spec: "Llave derivada en memoria local · 0 bytes en texto plano",
+  },
+  {
+    code: "CAPA 02 · SOBERANÍA DE ALMACENAMIENTO",
+    icon: Database,
+    accentClass: "text-editorial-cobalt",
+    title: "100% Local-First (SQLite & IndexedDB)",
+    desc: "La base de datos reside físicamente en tu dispositivo. La aplicación opera de por vida sin conexión a internet ni dependencia de servidores externos.",
+    spec: "Latencia de lectura < 1 ms · Autonomía perpetua",
+  },
+  {
+    code: "CAPA 03 · NUBE OPCIONAL DE CONOCIMIENTO CERO",
+    icon: ShieldCheck,
+    accentClass: "text-editorial-amber",
+    title: "Sincronización Opcional Supabase (RLS)",
+    desc: "Si decides vincular múltiples dispositivos, cada registro viaja cifrado de extremo a extremo y aislado mediante políticas Row Level Security por UID.",
+    spec: "100% opcional · Cero perfilamiento crediticio",
+  },
+];
+
 export function GithubSection({ repoUrl }: { repoUrl: string }) {
   return (
-    <section id="seguridad" className="py-20 border-t border-white/10 bg-slate-950/60">
+    <section id="seguridad" className="py-24 border-b border-border relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Security */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-500/30 text-xs font-semibold text-cyan-400 uppercase tracking-wider mb-3">
-            <svg className="w-3.5 h-3.5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
-            </svg>
-            Arquitectura Criptográfica
-          </div>
-          <h2 className="font-display font-bold text-3xl sm:text-5xl text-white tracking-tight">
-            Cifrado y Privacidad de Grado Militar
-          </h2>
-          <p className="text-slate-300 mt-3 text-base sm:text-lg">
-            Tus datos nunca se venden ni se procesan en la nube para generar perfiles crediticios.
-            Soberanía total garantizada por código.
-          </p>
-        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+          {/* Columna Izquierda: Manifiesto Criptográfico y Código Abierto (5 Columnas) */}
+          <ScrollReveal className="lg:col-span-5 space-y-6">
+            <div className="space-y-3">
+              <span className="inline-block text-xs font-mono uppercase tracking-widest text-primary font-semibold">
+                06 / ARQUITECTURA CRIPTOGRÁFICA
+              </span>
+              <h2 className="font-display-v2 font-bold text-3xl sm:text-4xl lg:text-5xl text-foreground text-balance">
+                Privacidad verificable{" "}
+                <EditorialHighlight className="italic font-semibold text-primary">
+                  por código
+                </EditorialHighlight>
+                , no por promesas.
+              </h2>
+              <p className="text-muted-foreground editorial-text-hover text-sm sm:text-base leading-relaxed max-w-[58ch] text-pretty">
+                Tus estados financieros jamás se venden ni se analizan en servidores externos. La
+                seguridad de FinancePal es{" "}
+                <EditorialHighlight>públicamente auditable bajo licencia MIT</EditorialHighlight>.
+              </p>
+            </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
-          {[
-            {
-              color: "cyan",
-              iconPath: "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z",
-              title: "AES-GCM 256 + PBKDF2",
-              desc: "Derivación de claves locales mediante 100,000 iteraciones PBKDF2. Los datos sensibles se encriptan antes de tocar el almacenamiento.",
-              badge: "✓ Llave derivada en el cliente",
-            },
-            {
-              color: "emerald",
-              iconPath: "M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4",
-              title: "100% Local-First (SQLite)",
-              desc: "La base de datos SQLite y memoria segura residen en tu terminal. La app arranca al instante sin requerir internet de por vida.",
-              badge: "✓ Cero latencia de red",
-            },
-            {
-              color: "sky",
-              iconPath: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
-              title: "Sync Opcional Supabase (RLS)",
-              desc: "Si decides activar la nube, cada fila queda aislada por tu UID con Row Level Security y cola offline Zustand con reintentos.",
-              badge: "✓ 100% Gratuito y Opcional",
-            },
-          ].map((item) => (
-            <div key={item.title} className="p-7 rounded-3xl glass-panel border border-white/10">
-              <div className={`w-10 h-10 rounded-2xl bg-${item.color}-500/10 flex items-center justify-center text-${item.color}-400 mb-4`}>
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path d={item.iconPath} strokeLinecap="round" strokeWidth="2" />
-                </svg>
+            {/* Ficha de Auditoría GitHub */}
+            <div className="rounded-2xl bg-card border border-border p-6 editorial-surface space-y-5">
+              <div className="flex items-center justify-between">
+                <div>
+                  <span className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground block">
+                    Repositorio Oficial
+                  </span>
+                  <h3 className="font-display font-bold text-xl text-foreground">
+                    Código Abierto y Transparente
+                  </h3>
+                </div>
+                <span className="px-2.5 py-1 rounded-lg bg-muted border border-border text-xs font-mono text-primary font-semibold">
+                  MIT
+                </span>
               </div>
-              <h3 className="font-display font-bold text-lg text-white mb-2">{item.title}</h3>
-              <p className="text-sm text-slate-300 leading-relaxed">{item.desc}</p>
-              <div className={`mt-4 pt-4 border-t border-slate-800 text-xs font-mono text-${item.color}-400`}>
-                {item.badge}
+
+              <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                Inspecciona la implementación de WebCrypto, sigue las versiones estables y verifica
+                los binarios compilados directamente en GitHub.
+              </p>
+
+              <div className="flex flex-wrap gap-2.5">
+                <a
+                  href={repoUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-primary ps-5 pe-4 py-2.5 text-xs group"
+                >
+                  <span>Inspeccionar repositorio</span>
+                  <ArrowUpRight
+                    className="w-3.5 h-3.5 transition-transform duration-150 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    strokeWidth={2}
+                  />
+                </a>
+                <a
+                  href={`${repoUrl}/releases`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-ghost px-4 py-2.5 text-xs"
+                >
+                  <Tag className="w-3.5 h-3.5 text-primary" strokeWidth={1.75} />
+                  <span>Consultar versiones</span>
+                </a>
+                <a
+                  href={`${repoUrl}/branches`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-ghost px-4 py-2.5 text-xs"
+                >
+                  <GitBranch className="w-3.5 h-3.5 text-muted-foreground" strokeWidth={1.75} />
+                  <span>Ver ramas activas</span>
+                </a>
+              </div>
+
+              <div className="pt-3 border-t border-border flex items-center gap-2 text-xs text-muted-foreground font-mono">
+                <Star className="w-3.5 h-3.5 text-editorial-amber fill-current" />
+                <span>Otorga una estrella en GitHub para respaldar el desarrollo libre</span>
               </div>
             </div>
-          ))}
-        </div>
+          </ScrollReveal>
 
-        {/* GitHub section */}
-        <div className="max-w-3xl mx-auto rounded-3xl glass-panel border border-white/10 p-8 sm:p-12 text-center">
-          <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-800 border border-slate-700">
-            <svg className="h-7 w-7 text-slate-200 fill-current" viewBox="0 0 24 24">
-              <path clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" fillRule="evenodd" />
-            </svg>
-          </div>
-          <h2 className="font-display text-3xl font-bold tracking-tight text-white">
-            Código abierto y transparente
-          </h2>
-          <p className="mx-auto mt-4 max-w-lg text-slate-300">
-            Revisa el código fuente, sigue las versiones beta y consulta el historial completo de
-            cambios de Finance Pal en GitHub. Licencia MIT — sin restricciones.
-          </p>
-
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <a
-              href={repoUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-slate-950 bg-gradient-to-r from-cyan-400 via-sky-400 to-cyan-300 hover:brightness-110 shadow-md shadow-cyan-500/25 transition-all"
-            >
-              Ver repositorio
-            </a>
-            <a
-              href={`${repoUrl}/releases`}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-slate-300 hover:text-white bg-slate-800/80 border border-slate-700 hover:border-cyan-500/40 transition-all"
-            >
-              Versiones y betas
-            </a>
-            <a
-              href={`${repoUrl}/branches`}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-slate-300 hover:text-white bg-slate-800/80 border border-slate-700 hover:border-cyan-500/40 transition-all"
-            >
-              Ramas activas
-            </a>
-          </div>
-
-          <div className="mt-8 flex items-center justify-center gap-1.5 text-sm text-slate-400">
-            <span className="text-amber-400">★</span>
-            Dale una estrella si te resulta útil
-          </div>
+          {/* Columna Derecha: Capas Criptográficas De-Boxed con Filetes de 1px (7 Columnas) */}
+          <ScrollReveal delay={0.1} className="lg:col-span-7">
+            <div className="divide-y divide-border border-y border-border">
+              {SECURITY_LAYERS.map((layer) => {
+                const Icon = layer.icon;
+                return (
+                  <article
+                    key={layer.code}
+                    className="py-7 sm:py-8 flex flex-col sm:flex-row items-start gap-5 group"
+                  >
+                    <div className="w-11 h-11 rounded-xl bg-muted border border-border flex items-center justify-center shrink-0 transition-transform duration-200 ease-out group-hover:scale-105">
+                      <Icon className={`w-5 h-5 ${layer.accentClass}`} strokeWidth={1.75} />
+                    </div>
+                    <div className="space-y-2 flex-1">
+                      <span className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground block">
+                        {layer.code}
+                      </span>
+                      <h3 className="font-display font-bold text-xl text-foreground tracking-tight">
+                        <EditorialHighlight>{layer.title}</EditorialHighlight>
+                      </h3>
+                      <p className="text-sm text-muted-foreground editorial-text-hover leading-relaxed max-w-[62ch]">
+                        {layer.desc}
+                      </p>
+                      <div className="pt-2 text-xs font-mono-tabular text-primary font-medium">
+                        ✓ {layer.spec}
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

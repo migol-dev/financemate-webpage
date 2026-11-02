@@ -312,21 +312,18 @@ export function ReleaseAnnouncement() {
         <aside
           role="region"
           aria-label="Anuncio de nueva versión"
-          className="relative z-40 bg-gradient-to-r from-[#0d1527] via-[#091b33] to-[#0d1527] border-b border-cyan-500/30 text-white shadow-lg overflow-hidden transition-all duration-300"
+          className="relative z-40 bg-card border-b border-border text-foreground overflow-hidden"
         >
-          {/* Subtle top specular glow */}
-          <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent" />
-
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm">
             <div className="flex items-center gap-2.5 flex-wrap justify-center sm:justify-start">
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold bg-amber-400/15 text-amber-300 border border-amber-400/30 shadow-sm shadow-amber-400/10">
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold bg-muted text-primary border border-border">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary" />
                 <span>v2.0.0 Oficial</span>
               </span>
-              <p className="text-slate-200 text-center sm:text-left leading-tight font-sans">
-                <span className="font-semibold text-white">¡Finance Pal v2.0.0 ya disponible!</span>{" "}
-                <span className="hidden md:inline text-slate-300">
-                  Warm Editorial Wealth, Metas con Drag &amp; Drop, 15 Categorías y Cifrado WebCrypto AES-256.
+              <p className="text-foreground text-center sm:text-left leading-tight font-sans">
+                <span className="font-semibold">Edición FinancePal v2.0.0 disponible:</span>{" "}
+                <span className="hidden md:inline text-muted-foreground">
+                  Estética Warm Editorial Wealth, metas jerárquicas Drag &amp; Drop, 15 categorías y cifrado WebCrypto AES-256.
                 </span>
               </p>
             </div>
@@ -335,16 +332,16 @@ export function ReleaseAnnouncement() {
               <button
                 type="button"
                 onClick={() => setIsOpen(true)}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-semibold text-xs text-slate-950 bg-gradient-to-r from-cyan-400 to-sky-300 hover:brightness-110 active:scale-[0.98] transition-all shadow-md shadow-cyan-500/20 cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-semibold text-xs text-primary-foreground bg-primary hover:brightness-105 tactile-press cursor-pointer"
               >
                 <Sparkles className="w-3.5 h-3.5" strokeWidth={2} />
-                <span>Ver Novedades</span>
+                <span>Explorar novedades</span>
               </button>
               <button
                 type="button"
                 onClick={handleDismissBanner}
                 aria-label="Cerrar anuncio de lanzamiento"
-                className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 active:scale-[0.98] transition-all cursor-pointer"
+                className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted tactile-press cursor-pointer"
               >
                 <X className="w-4 h-4" strokeWidth={2} />
               </button>
@@ -356,22 +353,19 @@ export function ReleaseAnnouncement() {
       {/* ── Interactive Release Modal (Radix Dialog) ────────────────── */}
       <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
         <Dialog.Portal>
-          <Dialog.Overlay className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md transition-opacity duration-300 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
-          <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-[95vw] max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl bg-[#0b1222] border border-cyan-500/30 text-slate-100 shadow-2xl p-6 sm:p-8 outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0">
-            {/* Top specular highlight */}
-            <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent" />
-
+          <Dialog.Overlay className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm transition-opacity duration-300 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
+          <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-[95vw] max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl bg-card border border-border text-foreground shadow-2xl p-6 sm:p-8 outline-none overscroll-contain data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0">
             {/* Header */}
-            <div className="flex items-start justify-between gap-4 pb-6 border-b border-white/10">
+            <div className="flex items-start justify-between gap-4 pb-6 border-b border-border">
               <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-500/30 text-xs font-mono font-semibold uppercase tracking-wider mb-2">
-                  <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Lanzamiento Mayor v2.0.0</span>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted text-primary border border-border text-xs font-mono font-semibold uppercase tracking-wider mb-2">
+                  <Sparkles className="w-3.5 h-3.5 text-editorial-amber" />
+                  <span>Dossier de Lanzamiento v2.0.0</span>
                 </div>
-                <Dialog.Title className="font-display font-extrabold text-2xl sm:text-3xl text-white tracking-[-0.03em]">
-                  Novedades de <span className="font-serif italic font-normal text-amber-300">Finance Pal</span> v2.0.0
+                <Dialog.Title className="font-display-v2 font-bold text-2xl sm:text-3xl text-foreground">
+                  Arquitectura <span className="italic font-semibold text-primary">FinancePal</span> v2.0.0
                 </Dialog.Title>
-                <Dialog.Description className="text-slate-300 text-xs sm:text-sm mt-1 max-w-xl font-sans">
+                <Dialog.Description className="text-muted-foreground text-xs sm:text-sm mt-1 max-w-xl font-sans">
                   Una evolución generacional en estética financiera, organización patrimonial local-first
                   y criptografía en tu propio dispositivo.
                 </Dialog.Description>
@@ -381,7 +375,7 @@ export function ReleaseAnnouncement() {
                 <button
                   type="button"
                   aria-label="Cerrar modal de novedades"
-                  className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/80 active:scale-[0.98] transition-all cursor-pointer"
+                  className="p-2.5 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted tactile-press cursor-pointer"
                 >
                   <X className="w-5 h-5" strokeWidth={2} />
                 </button>
@@ -399,10 +393,10 @@ export function ReleaseAnnouncement() {
                       key={item.id}
                       type="button"
                       onClick={() => setActiveTab(item.id)}
-                      className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer active:scale-[0.98] ${
+                      className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap tactile-press cursor-pointer ${
                         isActive
-                          ? "bg-gradient-to-r from-cyan-400 via-sky-400 to-cyan-300 text-slate-950 font-bold shadow-md shadow-cyan-500/25"
-                          : "bg-slate-900/80 text-slate-300 hover:text-white hover:bg-slate-800 border border-slate-800"
+                          ? "bg-primary text-primary-foreground font-bold shadow-sm"
+                          : "bg-muted text-muted-foreground hover:text-foreground border border-border"
                       }`}
                     >
                       <Icon className="w-3.5 h-3.5 shrink-0" strokeWidth={isActive ? 2.2 : 1.75} />
@@ -419,28 +413,26 @@ export function ReleaseAnnouncement() {
               <div className="lg:col-span-7 flex flex-col justify-between space-y-4">
                 <div className="space-y-3">
                   <div className="flex items-center gap-2">
-                    <span
-                      className={`text-[10px] font-mono px-2.5 py-0.5 rounded-full border uppercase tracking-wider font-semibold ${selectedFeature.badgeColor}`}
-                    >
+                    <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full border border-border bg-muted text-primary uppercase tracking-wider font-semibold">
                       {selectedFeature.badge}
                     </span>
-                    <span className="text-xs text-slate-400 font-mono">Pilar v2.0.0</span>
+                    <span className="text-xs text-muted-foreground font-mono">Pilar v2.0.0</span>
                   </div>
 
-                  <h3 className="font-display font-bold text-xl sm:text-2xl text-white tracking-tight">
+                  <h3 className="font-display font-bold text-xl sm:text-2xl text-foreground tracking-tight">
                     {selectedFeature.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-cyan-300/90 font-medium font-sans">
+                  <p className="text-xs sm:text-sm text-primary font-medium font-sans">
                     {selectedFeature.subtitle}
                   </p>
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
+                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed font-sans">
                     {selectedFeature.description}
                   </p>
 
-                  <ul className="space-y-2 pt-2 text-xs text-slate-300 font-sans">
+                  <ul className="space-y-2 pt-2 text-xs text-foreground/90 font-sans">
                     {selectedFeature.bullets.map((bullet, idx) => (
                       <li key={idx} className="flex items-start gap-2.5">
-                        <span className="w-4 h-4 rounded-full bg-emerald-950 border border-emerald-800 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                        <span className="w-4 h-4 rounded-full bg-muted border border-border text-primary flex items-center justify-center shrink-0 mt-0.5">
                           <Check className="w-2.5 h-2.5" strokeWidth={3} />
                         </span>
                         <span>{bullet}</span>
@@ -449,30 +441,30 @@ export function ReleaseAnnouncement() {
                   </ul>
                 </div>
 
-                <div className="pt-4 border-t border-white/10 flex items-center justify-between">
+                <div className="pt-4 border-t border-border flex items-center justify-between">
                   <div>
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 block">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground block">
                       {selectedFeature.metricLabel}
                     </span>
-                    <span className="font-mono text-lg font-extrabold text-cyan-300 tabular-nums">
+                    <span className="font-mono text-lg font-extrabold text-primary tabular-nums">
                       {selectedFeature.metricValue}
                     </span>
                   </div>
-                  <span className="text-xs text-slate-400 flex items-center gap-1 font-mono">
-                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                  <span className="text-xs text-muted-foreground flex items-center gap-1 font-mono">
+                    <ShieldCheck className="w-3.5 h-3.5 text-primary" />
                     <span>Verificado v2.0.0</span>
                   </span>
                 </div>
               </div>
 
               {/* Right interactive visual stage */}
-              <div className="lg:col-span-5 rounded-2xl bg-slate-950/90 border border-slate-800 p-5 flex flex-col justify-between">
+              <div className="lg:col-span-5 rounded-2xl bg-[#141413] text-[#EDEDED] border border-border p-5 flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 block">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-[#B0ADA7] block">
                       Vista Técnica Interactiva
                     </span>
-                    <span className="text-[10px] font-mono text-cyan-400 bg-cyan-950 px-2 py-0.5 rounded border border-cyan-800">
+                    <span className="text-[10px] font-mono text-[#34D399] bg-[#1C1C1A] px-2 py-0.5 rounded border border-white/10">
                       Live
                     </span>
                   </div>
@@ -757,7 +749,7 @@ export function ReleaseAnnouncement() {
                     href="https://financepal-web.vercel.app"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs text-cyan-400 hover:text-cyan-300 transition-colors font-sans"
+                    className="inline-flex items-center gap-1.5 text-xs text-[#34D399] hover:underline underline-offset-4 transition-colors font-sans"
                   >
                     <span>Probar este módulo en vivo en la Web App</span>
                     <ExternalLink className="w-3 h-3" />
@@ -767,9 +759,9 @@ export function ReleaseAnnouncement() {
             </div>
 
             {/* Footer CTAs */}
-            <div className="mt-6 pt-5 border-t border-white/10 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-              <div className="text-xs text-slate-400 font-mono">
-                Actualización pública: tag <span className="text-white font-bold">v2.0.0</span>
+            <div className="mt-6 pt-5 border-t border-border flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+              <div className="text-xs text-muted-foreground font-mono">
+                Actualización pública: tag <span className="text-foreground font-bold">v2.0.0</span>
               </div>
 
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
@@ -777,16 +769,16 @@ export function ReleaseAnnouncement() {
                   href="https://financepal-web.vercel.app"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-200 bg-slate-800 hover:bg-slate-700 active:scale-[0.98] transition-all border border-slate-700 cursor-pointer"
+                  className="btn-ghost px-4 py-2.5 text-xs sm:text-sm"
                 >
-                  <ExternalLink className="w-4 h-4 text-cyan-400" />
+                  <ExternalLink className="w-4 h-4 text-primary" />
                   <span>Abrir Web App</span>
                 </a>
                 <a
                   href="https://github.com/migol-dev/finance-pal/releases/download/v2.0.0/financemate.apk"
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-slate-950 bg-gradient-to-r from-cyan-400 via-sky-400 to-cyan-300 hover:brightness-110 active:scale-[0.98] transition-all shadow-md shadow-cyan-500/25 cursor-pointer"
+                  className="btn-primary px-5 py-2.5 text-xs sm:text-sm"
                 >
                   <Download className="w-4 h-4" />
                   <span>Descargar APK v2.0.0</span>

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Star, Loader2, CheckCircle2 } from "lucide-react";
+import { Star, Loader2, CheckCircle2, Lock, Send } from "lucide-react";
 import { useDownloadTracking } from "@/hooks/use-download-tracking";
 
 export function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
@@ -18,7 +18,10 @@ export function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!acceptedTerms) {
-      setErrorMsg("Debes aceptar los Términos de Servicio y la Política de Privacidad.");
+      setStatus("error");
+      setErrorMsg(
+        "Marca la casilla de aceptación de Términos de Servicio y Política de Privacidad para publicar tu reseña."
+      );
       return;
     }
     setStatus("loading");
@@ -48,15 +51,18 @@ export function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
 
   if (status === "done") {
     return (
-      <div className="flex flex-col items-center gap-3 rounded-2xl border border-emerald-500/30 bg-emerald-500/5 p-8 text-center">
-        <CheckCircle2 className="h-9 w-9 text-emerald-400" />
-        <p className="font-semibold text-white">¡Gracias por tu reseña!</p>
-        <p className="text-sm text-slate-400">La revisaremos y aparecerá pronto en la lista.</p>
+      <div className="flex flex-col items-center gap-3 rounded-2xl border border-border bg-muted/60 p-8 text-center">
+        <CheckCircle2 className="h-9 w-9 text-primary" />
+        <p className="font-display font-bold text-lg text-foreground">Reseña registrada</p>
+        <p className="text-sm text-muted-foreground max-w-md">
+          Gracias por compartir tu experiencia. Se publicará tras la verificación antifraude.
+        </p>
         <button
-          className="mt-2 px-4 py-2 rounded-xl text-sm font-semibold text-slate-300 bg-slate-800 border border-slate-700 hover:bg-slate-700 transition-all"
+          type="button"
+          className="mt-2 px-4 py-2.5 rounded-xl text-xs font-semibold text-foreground bg-card border border-border hover:bg-muted tactile-press cursor-pointer"
           onClick={() => setStatus("idle")}
         >
-          Escribir otra
+          Redactar otra reseña
         </button>
       </div>
     );
@@ -65,7 +71,7 @@ export function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       {!hasDownloaded && (
-        <p className="rounded-xl bg-amber-500/10 border border-amber-500/20 px-4 py-2.5 text-xs text-amber-400">
+        <p className="rounded-xl bg-muted border border-border px-4 py-2.5 text-xs text-muted-foreground">
           Aún no detectamos un intento de descarga desde este navegador — tu reseña se marcará como
           visitante.
         </p>
@@ -73,35 +79,55 @@ export function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
 
       {/* Star rating */}
       <div>
-        <label className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-2 font-semibold">
+        <span
+          id="rating-group-label"
+          className="block text-xs font-mono uppercase tracking-wider text-foreground mb-2 font-semibold"
+        >
           Calificación General *
-        </label>
-        <div className="flex items-center gap-1.5">
+        </span>
+        <div
+          role="radiogroup"
+          aria-labelledby="rating-group-label"
+          className="flex items-center gap-1"
+        >
           {[1, 2, 3, 4, 5].map((n) => (
             <button
               type="button"
               key={n}
+              role="radio"
+              aria-checked={rating === n}
               onClick={() => setRating(n)}
               aria-label={`${n} estrellas`}
-              className="p-0.5 hover:scale-110 transition-transform"
+              className="h-11 w-11 inline-flex items-center justify-center rounded-xl hover:bg-muted tactile-press cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <Star
                 className={`h-6 w-6 transition-colors ${
-                  n <= rating ? "fill-amber-400 text-amber-400" : "text-slate-600"
+                  n <= rating
+                    ? "fill-current text-editorial-amber"
+                    : "text-muted-foreground/40"
                 }`}
               />
             </button>
           ))}
-          <span className="text-xs font-mono text-cyan-300 ml-2">{rating} de 5 estrellas</span>
+          <span className="text-xs font-mono-tabular text-primary font-semibold ms-2">
+            {rating} / 5 estrellas
+          </span>
         </div>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
-          <label className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-1.5 font-semibold">
+          <label
+            htmlFor="review-author-name"
+            className="block text-xs font-mono uppercase tracking-wider text-foreground mb-1.5 font-semibold"
+          >
             Nombre o Alias *
           </label>
           <input
+            id="review-author-name"
+            name="name"
+            type="text"
+            autoComplete="name"
             className="fp-input"
             placeholder="Ej. Andrea G."
             value={name}
@@ -112,11 +138,18 @@ export function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
           />
         </div>
         <div>
-          <label className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-1.5 font-semibold">
+          <label
+            htmlFor="review-author-email"
+            className="block text-xs font-mono uppercase tracking-wider text-foreground mb-1.5 font-semibold"
+          >
             Correo Electrónico (Privado) *
           </label>
           <input
+            id="review-author-email"
+            name="email"
             type="email"
+            inputMode="email"
+            autoComplete="email"
             className="fp-input"
             placeholder="tucorreo@ejemplo.com"
             value={email}
@@ -127,10 +160,15 @@ export function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
       </div>
 
       <div>
-        <label className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-1.5 font-semibold">
+        <label
+          htmlFor="review-comment"
+          className="block text-xs font-mono uppercase tracking-wider text-foreground mb-1.5 font-semibold"
+        >
           Tu Testimonio o Reseña *
         </label>
         <textarea
+          id="review-comment"
+          name="comment"
           className="fp-input resize-none"
           rows={3}
           placeholder="Cuéntanos qué módulo te ha sido más útil (balance, metas, deudas, privacidad offline)..."
@@ -140,13 +178,13 @@ export function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
           maxLength={800}
           required
         />
-        <p className="text-[11px] text-slate-400 mt-1.5 flex items-center gap-1.5">
-          <span className="text-cyan-400 font-bold">🔒</span>
-          Tu correo solo se usa para verificación antifraude, nunca se muestra públicamente.
+        <p className="text-[11px] text-muted-foreground mt-1.5 flex items-center gap-1.5">
+          <Lock className="w-3.5 h-3.5 text-primary shrink-0" strokeWidth={2} />
+          <span>Tu correo solo se usa para verificación antifraude; jamás se muestra públicamente.</span>
         </p>
       </div>
 
-      <div className="flex items-start gap-3 rounded-xl bg-slate-950/60 p-3.5 border border-slate-800">
+      <div className="flex items-start gap-3 rounded-xl bg-muted/60 p-3.5 border border-border">
         <input
           id="accepted-terms-checkbox"
           type="checkbox"
@@ -157,9 +195,9 @@ export function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
               setErrorMsg("");
             }
           }}
-          className="mt-0.5 h-4 w-4 rounded border-slate-700 bg-slate-900 text-cyan-400 focus:ring-cyan-400/40 focus:ring-offset-0 focus:ring-2 cursor-pointer accent-cyan-400 shrink-0"
+          className="mt-0.5 h-4 w-4 rounded border-border bg-card text-primary focus-visible:ring-2 focus-visible:ring-ring cursor-pointer accent-[hsl(var(--primary))] shrink-0"
         />
-        <div className="text-xs text-slate-300 leading-relaxed select-none">
+        <div className="text-xs text-muted-foreground leading-relaxed select-none">
           <label htmlFor="accepted-terms-checkbox" className="cursor-pointer">
             He leído y acepto los{" "}
           </label>
@@ -168,7 +206,7 @@ export function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
-            className="text-cyan-400 underline underline-offset-2 hover:text-cyan-300 transition font-medium"
+            className="text-foreground underline underline-offset-2 hover:text-primary transition-colors font-medium"
           >
             Términos de Servicio
           </Link>
@@ -180,7 +218,7 @@ export function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
-            className="text-cyan-400 underline underline-offset-2 hover:text-cyan-300 transition font-medium"
+            className="text-foreground underline underline-offset-2 hover:text-primary transition-colors font-medium"
           >
             Política de Privacidad
           </Link>
@@ -190,20 +228,26 @@ export function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
         </div>
       </div>
 
-      {status === "error" && (
-        <p className="text-sm text-rose-400">{errorMsg}</p>
+      {errorMsg && (
+        <p role="alert" className="text-xs font-medium text-editorial-terracotta">
+          {errorMsg}
+        </p>
       )}
 
       <button
         type="submit"
-        disabled={status === "loading" || !acceptedTerms}
-        className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-xl font-bold text-sm text-slate-950 bg-gradient-to-r from-cyan-400 via-sky-400 to-cyan-300 hover:brightness-110 shadow-lg shadow-cyan-500/25 active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:brightness-100"
+        disabled={status === "loading"}
+        className="w-full sm:w-auto btn-primary ps-6 pe-5 disabled:opacity-50 disabled:cursor-not-allowed group"
       >
-        {status === "loading" && <Loader2 className="h-4 w-4 animate-spin" />}
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
-        </svg>
-        Publicar Reseña en la Comunidad
+        {status === "loading" ? (
+          <Loader2 className="h-4 w-4 animate-spin" />
+        ) : (
+          <Send
+            className="w-4 h-4 transition-transform duration-150 ease-out group-hover:translate-x-0.5"
+            strokeWidth={2}
+          />
+        )}
+        <span>Publicar reseña en la comunidad</span>
       </button>
     </form>
   );

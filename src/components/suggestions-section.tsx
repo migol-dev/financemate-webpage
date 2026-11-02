@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Loader2, CheckCircle2 } from "lucide-react";
+import { Loader2, CheckCircle2, Lightbulb, Bug, ArrowRight, Lock, Check } from "lucide-react";
 import type { ReportType } from "@/lib/types";
+import { EditorialHighlight, ScrollReveal } from "@/components/editorial-motion";
 
 function ReportForm({ type }: { type: ReportType }) {
   const [name, setName] = useState("");
@@ -38,17 +39,20 @@ function ReportForm({ type }: { type: ReportType }) {
 
   if (status === "done") {
     return (
-      <div className="flex flex-col items-center gap-3 rounded-2xl border border-emerald-500/30 bg-emerald-500/5 p-8 text-center">
-        <CheckCircle2 className="h-9 w-9 text-emerald-400" />
-        <p className="font-semibold text-white">
-          {type === "bug" ? "¡Reporte enviado!" : "¡Sugerencia enviada!"}
+      <div className="flex flex-col items-center gap-3 rounded-2xl border border-border bg-muted/60 p-8 text-center">
+        <CheckCircle2 className="h-9 w-9 text-primary" />
+        <p className="font-display font-bold text-lg text-foreground">
+          {type === "bug" ? "Reporte técnico registrado" : "Propuesta registrada"}
         </p>
-        <p className="text-sm text-slate-400">Gracias por ayudar a mejorar Finance Pal.</p>
+        <p className="text-sm text-muted-foreground">
+          Gracias por contribuir a la evolución de FinancePal.
+        </p>
         <button
-          className="mt-2 px-4 py-2 rounded-xl text-sm font-semibold text-slate-300 bg-slate-800 border border-slate-700 hover:bg-slate-700 transition-all"
+          type="button"
+          className="mt-2 px-4 py-2.5 rounded-xl text-xs font-semibold text-foreground bg-card border border-border hover:bg-muted tactile-press cursor-pointer"
           onClick={() => setStatus("idle")}
         >
-          Enviar otro
+          Registrar otro mensaje
         </button>
       </div>
     );
@@ -58,10 +62,17 @@ function ReportForm({ type }: { type: ReportType }) {
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
-          <label className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-1.5 font-semibold">
+          <label
+            htmlFor="report-author-name"
+            className="block text-xs font-mono uppercase tracking-wider text-foreground mb-1.5 font-semibold"
+          >
             Nombre o Usuario GitHub
           </label>
           <input
+            id="report-author-name"
+            name="name"
+            type="text"
+            autoComplete="name"
             className="fp-input"
             placeholder="Ej. Marco Dev"
             value={name}
@@ -69,12 +80,16 @@ function ReportForm({ type }: { type: ReportType }) {
           />
         </div>
         <div>
-          <label className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-1.5 font-semibold">
+          <label
+            htmlFor="report-app-version"
+            className="block text-xs font-mono uppercase tracking-wider text-foreground mb-1.5 font-semibold"
+          >
             Versión de Finance Pal
           </label>
           <select
+            id="report-app-version"
+            name="version"
             className="fp-input"
-            style={{ appearance: "none" }}
             value={version}
             onChange={(e) => setVersion(e.target.value)}
           >
@@ -86,12 +101,22 @@ function ReportForm({ type }: { type: ReportType }) {
         </div>
       </div>
       <div>
-        <label className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-1.5 font-semibold">
+        <label
+          htmlFor="report-title"
+          className="block text-xs font-mono uppercase tracking-wider text-foreground mb-1.5 font-semibold"
+        >
           {type === "bug" ? "Resumen del Error *" : "Título de tu Idea *"}
         </label>
         <input
+          id="report-title"
+          name="title"
+          type="text"
           className="fp-input"
-          placeholder={type === "bug" ? "Ej. La app se cierra al abrir Metas" : "Ej. Añadir widgets para pantalla de inicio"}
+          placeholder={
+            type === "bug"
+              ? "Ej. La app se cierra al abrir Metas"
+              : "Ej. Añadir widgets para pantalla de inicio"
+          }
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           minLength={3}
@@ -100,10 +125,15 @@ function ReportForm({ type }: { type: ReportType }) {
         />
       </div>
       <div>
-        <label className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-1.5 font-semibold">
+        <label
+          htmlFor="report-description"
+          className="block text-xs font-mono uppercase tracking-wider text-foreground mb-1.5 font-semibold"
+        >
           Detalle Descriptivo *
         </label>
         <textarea
+          id="report-description"
+          name="description"
           className="fp-input resize-none"
           rows={4}
           placeholder={
@@ -119,31 +149,32 @@ function ReportForm({ type }: { type: ReportType }) {
         />
       </div>
       {status === "error" && (
-        <p className="text-sm text-rose-400">
-          No se pudo enviar. Intenta de nuevo en unos momentos.
+        <p role="alert" className="text-xs font-medium text-editorial-terracotta">
+          No se pudo registrar el mensaje. Verifica tu conexión e inténtalo de nuevo.
         </p>
       )}
       <button
         type="submit"
         disabled={status === "loading"}
-        className="inline-flex items-center justify-center gap-2.5 px-7 py-3 rounded-xl font-bold text-sm text-slate-950 bg-gradient-to-r from-cyan-400 via-sky-400 to-cyan-300 hover:brightness-110 shadow-lg shadow-cyan-500/25 active:scale-95 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+        className="btn-primary ps-6 pe-5 disabled:opacity-60 disabled:cursor-not-allowed group"
       >
         {status === "loading" && <Loader2 className="h-4 w-4 animate-spin" />}
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path d="M14 5l7 7m0 0l-7 7m7-7H3" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
-        </svg>
-        {type === "bug" ? "Enviar al Desarrollador" : "Enviar Sugerencia"}
+        <span>{type === "bug" ? "Enviar reporte técnico" : "Enviar propuesta de mejora"}</span>
+        <ArrowRight
+          className="w-4 h-4 transition-transform duration-150 ease-out group-hover:translate-x-0.5"
+          strokeWidth={2}
+        />
       </button>
 
-      <p className="text-[11px] text-slate-400 mt-2 flex items-start gap-1.5 leading-relaxed">
-        <span className="text-cyan-400 font-bold shrink-0">🔒</span>
+      <p className="text-[11px] text-muted-foreground mt-2 flex items-start gap-1.5 leading-relaxed">
+        <Lock className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" strokeWidth={2} />
         <span>
           Al enviar este formulario, aceptas que los datos proporcionados se utilicen para dar seguimiento técnico a tu reporte conforme a nuestra{" "}
           <Link
             href="/privacidad"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-cyan-400 underline underline-offset-2 hover:text-cyan-300 transition font-medium"
+            className="text-foreground underline underline-offset-2 hover:text-primary transition-colors font-medium"
           >
             Política de Privacidad
           </Link>
@@ -158,58 +189,86 @@ export function SuggestionsSection() {
   const [tab, setTab] = useState<ReportType>("suggestion");
 
   return (
-    <section id="soporte" className="py-20 border-t border-white/10 bg-slate-900/50 relative">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-10">
-          <span className="inline-block text-xs font-mono uppercase tracking-widest text-cyan-400 mb-2 font-bold">
-            Canal Abierto con el Desarrollador
-          </span>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-white tracking-tight">
-            Buzón de Ideas y Reportes
-          </h2>
-          <p className="text-slate-300 mt-2 text-sm sm:text-base">
-            ¿Encontraste un detalle en v2.0.0 o tienes una idea para futuras versiones? Cada mensaje se revisa
-            semanalmente.
-          </p>
-        </div>
+    <section id="soporte" className="py-24 border-b border-border relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+          {/* Columna de Contexto (5 Columnas) */}
+          <ScrollReveal className="lg:col-span-5 space-y-5">
+            <span className="inline-block text-xs font-mono uppercase tracking-widest text-primary font-semibold">
+              05 / CANAL DE INGENIERÍA ABIERTO
+            </span>
+            <h2 className="font-display-v2 font-bold text-3xl sm:text-4xl lg:text-5xl text-foreground text-balance">
+              Buzón de{" "}
+              <EditorialHighlight className="italic font-semibold text-primary">
+                mejora continua
+              </EditorialHighlight>{" "}
+              y auditoría.
+            </h2>
+            <p className="text-muted-foreground editorial-text-hover text-sm sm:text-base leading-relaxed max-w-[58ch] text-pretty">
+              ¿Detectaste una anomalía en la versión v2.0.0 o propones un nuevo indicador
+              patrimonial? Cada entrada es revisada directamente por el autor del proyecto.
+            </p>
 
-        <div className="rounded-3xl glass-panel p-6 sm:p-10 border border-slate-700/80 shadow-2xl">
-          {/* Tabs */}
-          <div
-            className="flex items-center gap-2 p-1.5 rounded-2xl bg-slate-950/80 border border-slate-800 mb-8 max-w-md mx-auto"
-          >
-            <button
-              type="button"
-              onClick={() => setTab("suggestion")}
-              className={`flex-1 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center justify-center gap-2 ${
-                tab === "suggestion"
-                  ? "bg-gradient-to-r from-cyan-400 to-sky-400 text-slate-950 shadow-md"
-                  : "text-slate-300 hover:text-white hover:bg-slate-800/80"
-              }`}
-            >
-              <span>💡</span>
-              <span>Sugerir Funcionalidad</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => setTab("bug")}
-              className={`flex-1 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center justify-center gap-2 ${
-                tab === "bug"
-                  ? "bg-gradient-to-r from-cyan-400 to-sky-400 text-slate-950 shadow-md"
-                  : "text-slate-300 hover:text-white hover:bg-slate-800/80"
-              }`}
-            >
-              <span>🐞</span>
-              <span>Reportar un Error</span>
-            </button>
-          </div>
+            <div className="pt-4 border-t border-border divide-y divide-border text-xs font-mono">
+              <div className="py-3 flex items-center gap-2 text-foreground">
+                <Check className="w-3.5 h-3.5 text-primary shrink-0" strokeWidth={2.2} />
+                <span>Revisión semanal de propuestas por migol-dev</span>
+              </div>
+              <div className="py-3 flex items-center gap-2 text-foreground">
+                <Check className="w-3.5 h-3.5 text-primary shrink-0" strokeWidth={2.2} />
+                <span>Seguimiento transparente en el roadmap de GitHub</span>
+              </div>
+            </div>
+          </ScrollReveal>
 
-          <div className="flex items-center justify-center gap-1.5 text-xs text-slate-400 mb-6">
-            <span className="text-emerald-400 font-bold">✓</span>
-            <span>Se procesa directamente por el equipo de desarrollo de código libre.</span>
-          </div>
+          {/* Columna de Formulario (7 Columnas) */}
+          <ScrollReveal delay={0.1} className="lg:col-span-7">
+            <div className="rounded-2xl bg-card p-6 sm:p-10 border border-border editorial-surface">
+              {/* Tabs con radios concéntricos: contenedor rounded-xl, botones rounded-lg */}
+              <div
+                role="tablist"
+                aria-label="Tipo de envío"
+                className="flex items-center gap-1.5 p-1.5 rounded-xl bg-muted border border-border mb-8"
+              >
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={tab === "suggestion"}
+                  onClick={() => setTab("suggestion")}
+                  className={`flex-1 py-2.5 px-3 rounded-lg text-xs sm:text-sm font-semibold tactile-press cursor-pointer flex items-center justify-center gap-2 ${
+                    tab === "suggestion"
+                      ? "bg-card text-foreground border border-border shadow-sm"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  <Lightbulb
+                    className={`w-4 h-4 ${tab === "suggestion" ? "text-editorial-amber" : ""}`}
+                    strokeWidth={tab === "suggestion" ? 2 : 1.75}
+                  />
+                  <span>Proponer funcionalidad</span>
+                </button>
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={tab === "bug"}
+                  onClick={() => setTab("bug")}
+                  className={`flex-1 py-2.5 px-3 rounded-lg text-xs sm:text-sm font-semibold tactile-press cursor-pointer flex items-center justify-center gap-2 ${
+                    tab === "bug"
+                      ? "bg-card text-foreground border border-border shadow-sm"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  <Bug
+                    className={`w-4 h-4 ${tab === "bug" ? "text-editorial-terracotta" : ""}`}
+                    strokeWidth={tab === "bug" ? 2 : 1.75}
+                  />
+                  <span>Reportar anomalía</span>
+                </button>
+              </div>
 
-          <ReportForm key={tab} type={tab} />
+              <ReportForm key={tab} type={tab} />
+            </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

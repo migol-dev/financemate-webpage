@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { GalleryImage } from "@/lib/types";
+import { EditorialHighlight, ScrollParallaxStage, ScrollReveal } from "@/components/editorial-motion";
 
 // ──────────────────────────────────────────────
 // 5 virtual phone screens for the 3D carousel
@@ -11,26 +12,31 @@ import type { GalleryImage } from "@/lib/types";
 // ──────────────────────────────────────────────
 const SLIDE_INFO = [
   {
+    shortLabel: "01 · Balance",
     badge: "Slide 1 de 5 · Módulo Principal",
     title: "Panel de Control & Balance General",
     desc: "Muestra el balance acumulado neto, la división clara entre Efectivo en mano vs Cuentas bancarias, tasa de ahorro mensual y switch para modo privado.",
   },
   {
+    shortLabel: "02 · Bitácora",
     badge: "Slide 2 de 5 · Transacciones",
     title: "Movimientos, Filtros y Recibos",
     desc: "Bitácora completa con búsqueda en vivo, 4 tipos de operación (Ingreso, Gasto, Ahorro, Traspaso) y adjuntos fotográficos de comprobantes de pago.",
   },
   {
+    shortLabel: "03 · Préstamos",
     badge: "Slide 3 de 5 · Préstamos",
     title: "Control 'Quién Me Debe' y Abonos",
     desc: "Seguimiento riguroso de préstamos por persona: Total Prestado, Cobrado y Pendiente con registro de abonos parciales y liquidación progresiva.",
   },
   {
+    shortLabel: "04 · Metas v2",
     badge: "Slide 4 de 5 · Planificación",
     title: "Metas de Ahorro con Carpetas & Drag/Drop",
     desc: 'Agrupación visual jerárquica con reordenamiento intuitivo por arrastre y cálculo predictivo del ritmo de ahorro semanal necesario para cumplir tu fecha objetivo.',
   },
   {
+    shortLabel: "05 · Vencimientos",
     badge: "Slide 5 de 5 · Automatización",
     title: "Conceptos Fijos & Cuenta Regresiva",
     desc: "Alertas automáticas de próximos vencimientos (en 3d, en 4d, en 8d) para evitar cortes de servicio sin duplicar registros contables.",
@@ -38,17 +44,20 @@ const SLIDE_INFO = [
 ];
 
 // ──────────────────────────────────────────────
-// Phone frames (inline SVG/JSX mock screens)
+// Phone frames (Warm Editorial Wealth — Obsidian Carbon v2.0)
 // ──────────────────────────────────────────────
 function PhoneFrame({ children }: { children: React.ReactNode }) {
   return (
-    <div className="rounded-[48px] p-2.5 bg-gradient-to-b from-slate-600 via-slate-800 to-slate-950 border border-slate-600 shadow-2xl">
-      <div className="rounded-[40px] overflow-hidden bg-[#090e1a] border border-slate-900 h-[620px] flex flex-col justify-between text-left select-none" style={{ WebkitFontSmoothing: "antialiased" }}>
+    <div className="rounded-[44px] p-2.5 bg-[#1C1C1A] border border-[#2E2E2B] shadow-2xl">
+      <div
+        className="rounded-[34px] overflow-hidden bg-[#0C0C0B] border border-white/10 h-[620px] flex flex-col justify-between text-left select-none text-[#EDEDED]"
+        style={{ WebkitFontSmoothing: "antialiased" }}
+      >
         {/* Status bar */}
-        <div className="h-7 px-5 pt-2 flex items-center justify-between text-[11px] font-mono text-slate-400 shrink-0 bg-[#090e1a]">
-          <span className="font-semibold text-slate-200">09:41</span>
-          <div className="w-12 h-3.5 bg-black rounded-full" />
-          <span className="text-emerald-400 font-bold">100%</span>
+        <div className="h-7 px-5 pt-2 flex items-center justify-between text-[11px] font-mono-tabular text-[#B0ADA7] shrink-0 bg-[#0C0C0B]">
+          <span className="font-semibold text-[#EDEDED]">09:41</span>
+          <div className="w-12 h-3.5 bg-black rounded-full border border-white/5" />
+          <span className="text-[#10B981] font-bold">100%</span>
         </div>
         {children}
       </div>
@@ -59,9 +68,9 @@ function PhoneFrame({ children }: { children: React.ReactNode }) {
 function BottomBar({ active }: { active: number }) {
   const tabs = ["Inicio", "Movs", "Deudas", "Metas", "Pagos"];
   return (
-    <div className="h-12 px-4 bg-slate-950 border-t border-slate-800 flex items-center justify-around text-slate-400 shrink-0 text-[10px]">
+    <div className="h-12 px-4 bg-[#141413] border-t border-white/10 flex items-center justify-around text-[#B0ADA7] shrink-0 text-[10px] font-mono">
       {tabs.map((t, i) => (
-        <span key={t} className={i === active ? "text-cyan-400 font-bold" : ""}>
+        <span key={t} className={i === active ? "text-[#34D399] font-bold" : ""}>
           {i === active ? `● ${t}` : t}
         </span>
       ))}
@@ -69,49 +78,91 @@ function BottomBar({ active }: { active: number }) {
   );
 }
 
-// Screen 0 — Dashboard
+// Screen 0 — Dashboard (Warm Editorial Wealth)
 function Screen0() {
   return (
     <PhoneFrame>
       <div className="flex-1 p-4 space-y-3.5 overflow-hidden">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between pb-2 border-b border-white/10">
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-cyan-400 to-sky-500 flex items-center justify-center text-slate-950 font-bold text-sm shadow-md shadow-cyan-500/20">FP</div>
+            <div className="w-8 h-8 rounded-xl bg-[#1F7A5A] border border-emerald-400/30 flex items-center justify-center text-[#FAF8F5] font-serif font-bold text-xs">
+              FP
+            </div>
             <div>
-              <div className="text-[11px] text-slate-400">Finance Pal v2.0.0</div>
-              <div className="text-[13px] font-bold text-white flex items-center gap-1.5">Balance General <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" /></div>
+              <div className="text-[10px] font-mono text-[#B0ADA7]">CUADERNO V2.0</div>
+              <div className="text-[13px] font-serif font-bold text-[#EDEDED] flex items-center gap-1.5">
+                Patrimonio Neto <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />
+              </div>
             </div>
           </div>
-          <div className="p-1.5 rounded-lg bg-slate-800 text-cyan-300">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0zM2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+          <span className="px-2 py-0.5 rounded bg-[#1C1C1A] border border-white/10 text-[10px] font-mono text-[#B0ADA7]">
+            NOV 2026
+          </span>
+        </div>
+
+        {/* Balance De-Boxed con tipografía Fraunces y cifras tabulares */}
+        <div className="p-4 rounded-2xl bg-[#141413] border border-white/10">
+          <span className="text-[10px] font-mono uppercase tracking-wider text-[#B0ADA7]">
+            Balance Disponible
+          </span>
+          <div className="font-serif text-3xl font-bold tracking-tight mt-0.5 font-mono-tabular text-[#EDEDED]">
+            $9,520.00
+          </div>
+          <div className="grid grid-cols-3 gap-1.5 mt-3 pt-2.5 border-t border-white/10 text-[10px] font-mono-tabular">
+            <div>
+              <span className="text-[#B0ADA7] block">↗ Ingresos</span>
+              <span className="font-bold text-[#10B981]">$12,000</span>
+            </div>
+            <div>
+              <span className="text-[#B0ADA7] block">↘ Egresos</span>
+              <span className="font-bold text-[#E07A5F]">$2,480</span>
+            </div>
+            <div>
+              <span className="text-[#B0ADA7] block">◈ Reserva</span>
+              <span className="font-bold text-[#60A5FA]">$500</span>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-2 mt-2.5 pt-2.5 border-t border-white/10 text-[10px] font-mono-tabular">
+            <div className="bg-[#1C1C1A] rounded-lg p-2 border border-white/5">
+              <span className="text-[#B0ADA7] block">Efectivo Físico</span>
+              <span className="font-bold text-[#EDEDED]">$1,520</span>
+            </div>
+            <div className="bg-[#1C1C1A] rounded-lg p-2 border border-white/5">
+              <span className="text-[#B0ADA7] block">Cuentas Banco</span>
+              <span className="font-bold text-[#EDEDED]">$8,000</span>
+            </div>
           </div>
         </div>
-        <div className="p-4 rounded-2xl bg-gradient-to-br from-sky-500 via-cyan-500 to-blue-600 text-white shadow-lg shadow-sky-500/20">
-          <span className="text-[10px] uppercase font-bold tracking-wider text-sky-100">Neto Acumulado</span>
-          <div className="text-3xl font-extrabold tracking-tight mt-0.5">$9,520</div>
-          <div className="grid grid-cols-3 gap-1.5 mt-2.5 pt-2.5 border-t border-white/20 text-[10px]">
-            <div><span className="text-sky-100 block">↗ Ingresos</span><span className="font-bold">$12,000</span></div>
-            <div><span className="text-sky-100 block">↘ Gastos</span><span className="font-bold">$2,480</span></div>
-            <div><span className="text-sky-100 block">🐖 Ahorro</span><span className="font-bold">$500</span></div>
+
+        <div className="p-3 rounded-xl bg-[#141413] border border-white/10">
+          <div className="flex justify-between text-[11px] mb-1.5 font-mono-tabular">
+            <span className="text-[#B0ADA7]">Tasa de Retención</span>
+            <span className="text-[#34D399] font-bold">79.3%</span>
           </div>
-          <div className="grid grid-cols-2 gap-2 mt-2.5 pt-2.5 border-t border-white/20 text-[10px]">
-            <div className="bg-white/10 rounded-lg p-2"><span className="text-sky-100 block">Efectivo Físico</span><span className="font-bold">$1,520</span></div>
-            <div className="bg-white/10 rounded-lg p-2"><span className="text-sky-100 block">Cuentas Digitales</span><span className="font-bold">$8,000</span></div>
+          <div className="w-full bg-[#1C1C1A] h-1.5 rounded-full overflow-hidden">
+            <div className="bg-[#10B981] h-full w-[79%] rounded-full" />
           </div>
         </div>
-        <div className="p-3 rounded-xl bg-slate-900 border border-slate-800">
-          <div className="flex justify-between text-[11px] mb-1.5"><span className="text-slate-400">Tasa de Ahorro</span><span className="text-cyan-400 font-bold font-mono">4.1%</span></div>
-          <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden"><div className="bg-cyan-400 h-full w-[4%] rounded-full" /></div>
-        </div>
-        <div className="space-y-2">
-          <div className="flex justify-between items-center text-[11px] px-0.5"><span className="font-bold text-slate-300">Movimientos Recientes</span><span className="text-cyan-400">Ver todo →</span></div>
-          <div className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between text-[12px]">
-            <div className="flex items-center gap-2.5"><span>☕</span><div><div className="font-semibold text-white">Café de la mañana</div><div className="text-[9px] text-slate-400">Efectivo en mano</div></div></div>
-            <span className="text-rose-400 font-bold font-mono">-$45</span>
+
+        {/* De-Boxed Ledger list with 1px hairlines */}
+        <div className="divide-y divide-white/10 border-t border-white/10">
+          <div className="py-2 flex justify-between items-center text-[10px] font-mono text-[#B0ADA7]">
+            <span>BITÁCORA RECIENTE</span>
+            <span className="text-[#34D399]">AUDITAR →</span>
           </div>
-          <div className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between text-[12px]">
-            <div className="flex items-center gap-2.5"><span>💰</span><div><div className="font-semibold text-white">Quincena</div><div className="text-[9px] text-slate-400">Nómina · Transferencia</div></div></div>
-            <span className="text-emerald-400 font-bold font-mono">+$6,000</span>
+          <div className="py-2.5 flex items-center justify-between text-[12px]">
+            <div>
+              <div className="font-semibold text-[#EDEDED]">Café de especialidad</div>
+              <div className="text-[10px] text-[#B0ADA7]">Alimentación · Efectivo</div>
+            </div>
+            <span className="text-[#E07A5F] font-bold font-mono-tabular">-$45.00</span>
+          </div>
+          <div className="py-2.5 flex items-center justify-between text-[12px]">
+            <div>
+              <div className="font-semibold text-[#EDEDED]">Honorarios Quincena</div>
+              <div className="text-[10px] text-[#B0ADA7]">Ingreso · Transferencia</div>
+            </div>
+            <span className="text-[#10B981] font-bold font-mono-tabular">+$6,000.00</span>
           </div>
         </div>
       </div>
@@ -125,34 +176,48 @@ function Screen1() {
   return (
     <PhoneFrame>
       <div className="flex-1 p-4 space-y-3.5 overflow-hidden">
-        <div className="flex items-center justify-between">
-          <div><h4 className="font-bold text-sm text-white">Movimientos</h4><span className="text-[10px] text-slate-400">Septiembre 2026</span></div>
-          <span className="px-2.5 py-1 rounded-lg bg-cyan-400 text-slate-950 font-bold text-[10px]">+ Nuevo</span>
+        <div className="flex items-center justify-between pb-2 border-b border-white/10">
+          <div>
+            <h4 className="font-serif font-bold text-sm text-[#EDEDED]">Bitácora Contable</h4>
+            <span className="text-[10px] font-mono text-[#B0ADA7]">15 Rubros Universales</span>
+          </div>
+          <span className="px-2.5 py-1 rounded-lg bg-[#1F7A5A] text-[#FAF8F5] font-semibold text-[10px]">
+            + Registrar
+          </span>
         </div>
-        <div className="px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 text-[11px] text-slate-400 flex items-center gap-2">
-          <svg className="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" strokeWidth="2" /></svg>
-          <span>Buscar concepto o recibo...</span>
+        <div className="px-3 py-2 rounded-xl bg-[#141413] border border-white/10 text-[11px] text-[#B0ADA7] flex items-center gap-2">
+          <span>Filtrar por concepto, categoría o recibo...</span>
         </div>
-        <div className="flex items-center gap-1.5 text-[10px]">
-          <span className="px-2.5 py-1 rounded-lg bg-cyan-400 text-slate-950 font-bold">Todos</span>
-          <span className="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300">Gastos</span>
-          <span className="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300">Ingresos</span>
+        <div className="flex items-center gap-1.5 text-[10px] font-mono">
+          <span className="px-2.5 py-1 rounded-lg bg-[#34D399] text-[#0C0C0B] font-bold">Todos</span>
+          <span className="px-2.5 py-1 rounded-lg bg-[#1C1C1A] text-[#B0ADA7]">Egresos</span>
+          <span className="px-2.5 py-1 rounded-lg bg-[#1C1C1A] text-[#B0ADA7]">Ingresos</span>
         </div>
-        <div className="space-y-2.5 pt-1 text-[12px]">
-          <span className="text-[10px] font-mono text-slate-400 block">28 Septiembre 2026</span>
+        <div className="divide-y divide-white/10 pt-1 text-[12px]">
           {[
-            { icon: "🛒", name: "Supermercado", sub: "Despensa del mes", amount: "-$850", amountColor: "text-rose-400", extra: "Ticket 📎" },
-            { icon: "⚡", name: "Recibo de Luz", sub: "Servicios del hogar", amount: "-$350", amountColor: "text-rose-400", extra: "PDF" },
-            { icon: "⛽", name: "Gasolina", sub: "Transporte", amount: "-$500", amountColor: "text-rose-400", extra: "" },
+            { name: "Despensa Mensual", sub: "Alimentación · Tarjeta", amount: "-$850.00", extra: "Recibo" },
+            { name: "Suministro Eléctrico", sub: "Servicios · Domiciliado", amount: "-$350.00", extra: "PDF" },
+            { name: "Combustible", sub: "Transporte · Efectivo", amount: "-$500.00", extra: "" },
+            { name: "Rendimiento Cetes", sub: "Inversión · Cobalto", amount: "+$1,120.00", positive: true, extra: "2FA" },
           ].map((item) => (
-            <div key={item.name} className="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
-              <div className="flex items-center gap-2.5">
-                <span className="p-1.5 rounded-lg bg-slate-800 text-sm">{item.icon}</span>
-                <div><div className="font-semibold text-white">{item.name}</div><div className="text-[9px] text-slate-400">{item.sub}</div></div>
+            <div key={item.name} className="py-3 flex items-center justify-between">
+              <div>
+                <div className="font-semibold text-[#EDEDED]">{item.name}</div>
+                <div className="text-[10px] text-[#B0ADA7]">{item.sub}</div>
               </div>
               <div className="text-right">
-                <div className={`font-bold font-mono ${item.amountColor}`}>{item.amount}</div>
-                {item.extra && <span className="text-[8px] text-cyan-400 bg-cyan-950 px-1.5 py-0.5 rounded border border-cyan-800">{item.extra}</span>}
+                <div
+                  className={`font-bold font-mono-tabular ${
+                    item.positive ? "text-[#10B981]" : "text-[#E07A5F]"
+                  }`}
+                >
+                  {item.amount}
+                </div>
+                {item.extra && (
+                  <span className="text-[9px] font-mono text-[#B0ADA7] bg-[#1C1C1A] px-1.5 py-0.5 rounded border border-white/10">
+                    {item.extra}
+                  </span>
+                )}
               </div>
             </div>
           ))}
@@ -168,26 +233,57 @@ function Screen2() {
   return (
     <PhoneFrame>
       <div className="flex-1 p-4 space-y-3.5 overflow-hidden">
-        <div className="flex items-center justify-between">
-          <div><h4 className="font-bold text-sm text-white">Me Deben</h4><span className="text-[10px] text-slate-400">Préstamos y Cobros</span></div>
-          <span className="px-2.5 py-1 rounded-lg bg-cyan-400 text-slate-950 font-bold text-[10px]">+ Nuevo</span>
-        </div>
-        <div className="grid grid-cols-3 gap-1.5 text-center">
-          <div className="p-2 rounded-xl bg-sky-500/20 border border-sky-500/30"><span className="text-[9px] text-sky-300 block">TOTAL</span><span className="text-[12px] font-bold text-white">$1,500</span></div>
-          <div className="p-2 rounded-xl bg-emerald-500/20 border border-emerald-500/30"><span className="text-[9px] text-emerald-300 block">COBRADO</span><span className="text-[12px] font-bold text-white">$500</span></div>
-          <div className="p-2 rounded-xl bg-indigo-500/20 border border-indigo-500/30"><span className="text-[9px] text-indigo-300 block">PENDIENTE</span><span className="text-[12px] font-bold text-white">$1,000</span></div>
-        </div>
-        <div className="p-3.5 rounded-2xl bg-slate-900 border border-slate-800 space-y-2.5">
-          <div className="flex items-center justify-between">
-            <div><span className="text-[12px] font-bold text-white block">Carlos López</span><span className="text-[9px] text-slate-400">Préstamo personal</span></div>
-            <span className="text-[9px] text-cyan-400 bg-cyan-950 px-2 py-0.5 rounded border border-cyan-800/40">Activo</span>
+        <div className="flex items-center justify-between pb-2 border-b border-white/10">
+          <div>
+            <h4 className="font-serif font-bold text-sm text-[#EDEDED]">Cuentas por Cobrar</h4>
+            <span className="text-[10px] font-mono text-[#B0ADA7]">Préstamos y Abonos</span>
           </div>
-          <div className="flex justify-between items-baseline text-xs"><span className="text-slate-400 text-[10px]">Saldo Restante:</span><span className="text-base font-bold text-cyan-300 font-mono">$1,000</span></div>
-          <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden"><div className="bg-gradient-to-r from-cyan-400 to-emerald-400 h-full w-[33%] rounded-full" /></div>
-          <div className="flex justify-between text-[9px] text-slate-400"><span>Pagado: $500</span><span>Total: $1,500</span></div>
+          <span className="px-2.5 py-1 rounded-lg bg-[#1F7A5A] text-[#FAF8F5] font-semibold text-[10px]">
+            + Deudor
+          </span>
+        </div>
+        <div className="grid grid-cols-3 gap-1.5 text-center font-mono-tabular">
+          <div className="p-2 rounded-xl bg-[#141413] border border-white/10">
+            <span className="text-[9px] text-[#B0ADA7] block">PRESTADO</span>
+            <span className="text-[12px] font-bold text-[#EDEDED]">$1,500</span>
+          </div>
+          <div className="p-2 rounded-xl bg-[#141413] border border-white/10">
+            <span className="text-[9px] text-[#10B981] block">COBRADO</span>
+            <span className="text-[12px] font-bold text-[#10B981]">$500</span>
+          </div>
+          <div className="p-2 rounded-xl bg-[#141413] border border-white/10">
+            <span className="text-[9px] text-[#F59E0B] block">PENDIENTE</span>
+            <span className="text-[12px] font-bold text-[#F59E0B]">$1,000</span>
+          </div>
+        </div>
+        <div className="p-3.5 rounded-2xl bg-[#141413] border border-white/10 space-y-2.5">
+          <div className="flex items-center justify-between">
+            <div>
+              <span className="text-[12px] font-bold text-[#EDEDED] block">Carlos López</span>
+              <span className="text-[9px] text-[#B0ADA7]">Préstamo personal documentado</span>
+            </div>
+            <span className="text-[9px] font-mono text-[#34D399] bg-[#1C1C1A] px-2 py-0.5 rounded border border-white/10">
+              En curso
+            </span>
+          </div>
+          <div className="flex justify-between items-baseline text-xs">
+            <span className="text-[#B0ADA7] text-[10px]">Saldo Restante:</span>
+            <span className="text-base font-bold text-[#EDEDED] font-mono-tabular">$1,000.00</span>
+          </div>
+          <div className="w-full bg-[#1C1C1A] h-1.5 rounded-full overflow-hidden">
+            <div className="bg-[#10B981] h-full w-[33%] rounded-full" />
+          </div>
+          <div className="flex justify-between text-[9px] font-mono-tabular text-[#B0ADA7]">
+            <span>Abonado: $500</span>
+            <span>Total: $1,500</span>
+          </div>
           <div className="grid grid-cols-2 gap-2 pt-1">
-            <button className="py-1.5 rounded-lg bg-cyan-400 text-slate-950 font-bold text-[10px]">Abonar</button>
-            <button className="py-1.5 rounded-lg bg-slate-800 text-slate-300 text-[10px]">Historial</button>
+            <span className="py-1.5 text-center rounded-lg bg-[#34D399] text-[#0C0C0B] font-bold text-[10px]">
+              Registrar abono
+            </span>
+            <span className="py-1.5 text-center rounded-lg bg-[#1C1C1A] text-[#EDEDED] text-[10px] border border-white/10">
+              Ver bitácora
+            </span>
           </div>
         </div>
       </div>
@@ -201,29 +297,55 @@ function Screen3() {
   return (
     <PhoneFrame>
       <div className="flex-1 p-4 space-y-3.5 overflow-hidden">
-        <div className="flex items-center justify-between">
-          <div><h4 className="font-bold text-sm text-white">Metas de Ahorro</h4><span className="text-[10px] text-slate-400">Carpetas temáticas</span></div>
-          <span className="px-2.5 py-1 rounded-lg bg-cyan-400 text-slate-950 font-bold text-[10px]">+ Carpeta</span>
+        <div className="flex items-center justify-between pb-2 border-b border-white/10">
+          <div>
+            <h4 className="font-serif font-bold text-sm text-[#EDEDED]">Metas Patrimoniales</h4>
+            <span className="text-[10px] font-mono text-[#B0ADA7]">Carpetas Drag &amp; Drop</span>
+          </div>
+          <span className="px-2.5 py-1 rounded-lg bg-[#1F7A5A] text-[#FAF8F5] font-semibold text-[10px]">
+            + Carpeta
+          </span>
         </div>
-        <div className="p-2.5 rounded-xl bg-sky-500 text-white flex items-center justify-between text-[11px] font-semibold">
-          <div className="flex items-center gap-2"><span>📁</span><span>Carpeta: IMPREVISTOS</span></div>
-          <span className="text-[9px] bg-white/20 px-2 py-0.5 rounded-full font-mono">1 Meta · ⠿ Drag</span>
+        <div className="p-2.5 rounded-xl bg-[#1C1C1A] border border-white/10 text-[#EDEDED] flex items-center justify-between text-[11px] font-semibold">
+          <span>Carpeta: RESERVA &amp; LIQUIDEZ</span>
+          <span className="text-[9px] bg-[#0C0C0B] px-2 py-0.5 rounded font-mono text-[#34D399]">
+            ⠿ Drag
+          </span>
         </div>
-        <div className="p-3.5 rounded-2xl bg-gradient-to-br from-sky-500 to-blue-600 text-white space-y-2.5">
+        <div className="p-3.5 rounded-2xl bg-[#141413] border border-white/10 space-y-2.5">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2"><span className="text-lg">🚑</span><div><h5 className="text-[12px] font-bold text-white">Fondo de Emergencia</h5><span className="text-[9px] text-sky-100">Ahorro general</span></div></div>
-            <span className="text-[9px] bg-white/20 px-2 py-0.5 rounded-full font-bold">En ritmo</span>
+            <div>
+              <h5 className="text-[12px] font-bold text-[#EDEDED]">Fondo de Emergencia</h5>
+              <span className="text-[9px] text-[#B0ADA7]">6 meses de gastos fijos</span>
+            </div>
+            <span className="text-[9px] font-mono text-[#10B981] bg-[#1C1C1A] px-2 py-0.5 rounded border border-white/10">
+              En ritmo
+            </span>
           </div>
-          <div className="flex justify-between items-baseline pt-1">
-            <div><span className="text-[9px] text-sky-100 block">Acumulado</span><span className="text-lg font-extrabold">$2,500</span></div>
-            <div className="text-right"><span className="text-[9px] text-sky-100 block">Objetivo</span><span className="text-[12px] font-mono font-bold">$10,000</span></div>
+          <div className="flex justify-between items-baseline pt-1 font-mono-tabular">
+            <div>
+              <span className="text-[9px] text-[#B0ADA7] block">Acumulado</span>
+              <span className="text-lg font-serif font-bold text-[#EDEDED]">$2,500</span>
+            </div>
+            <div className="text-right">
+              <span className="text-[9px] text-[#B0ADA7] block">Objetivo</span>
+              <span className="text-[12px] font-bold text-[#34D399]">$10,000</span>
+            </div>
           </div>
-          <div className="w-full bg-black/20 h-2 rounded-full overflow-hidden"><div className="bg-cyan-300 h-full w-[25%] rounded-full" /></div>
-          <div className="flex justify-between text-[9px] text-sky-100"><span>Restante: $7,500</span><span>Ritmo: $250/sem</span></div>
+          <div className="w-full bg-[#1C1C1A] h-1.5 rounded-full overflow-hidden">
+            <div className="bg-[#10B981] h-full w-[25%] rounded-full" />
+          </div>
+          <div className="flex justify-between text-[9px] font-mono-tabular text-[#B0ADA7]">
+            <span>Restante: $7,500</span>
+            <span>Cuota: $250/sem</span>
+          </div>
         </div>
-        <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between text-[12px]">
-          <div className="flex items-center gap-2.5"><span>✈️</span><div><div className="font-semibold text-white text-[11px]">Vacaciones Familia</div><div className="text-[9px] text-slate-400">Meta: $5,000</div></div></div>
-          <span className="text-[10px] font-mono text-cyan-400">10%</span>
+        <div className="p-3 rounded-xl bg-[#141413] border border-white/10 flex items-center justify-between text-[12px]">
+          <div>
+            <div className="font-semibold text-[#EDEDED] text-[11px]">Portafolio Inversión</div>
+            <div className="text-[9px] text-[#B0ADA7] font-mono-tabular">Meta: $50,000</div>
+          </div>
+          <span className="text-[10px] font-mono-tabular font-bold text-[#60A5FA]">64%</span>
         </div>
       </div>
       <BottomBar active={3} />
@@ -236,24 +358,33 @@ function Screen4() {
   return (
     <PhoneFrame>
       <div className="flex-1 p-4 space-y-3.5 overflow-hidden">
-        <div className="flex items-center justify-between">
-          <div><h4 className="font-bold text-sm text-white">Próximos Pagos</h4><span className="text-[10px] text-slate-400">Conceptos Fijos</span></div>
-          <span className="text-[9px] font-mono text-cyan-400">Octubre</span>
+        <div className="flex items-center justify-between pb-2 border-b border-white/10">
+          <div>
+            <h4 className="font-serif font-bold text-sm text-[#EDEDED]">Calendario de Pasivos</h4>
+            <span className="text-[10px] font-mono text-[#B0ADA7]">Alertas de Vencimiento</span>
+          </div>
+          <span className="text-[10px] font-mono text-[#F59E0B]">Noviembre</span>
         </div>
-        <div className="space-y-2.5 pt-1 text-[12px]">
+        <div className="divide-y divide-white/10 pt-1 text-[12px]">
           {[
-            { icon: "▶️", iconBg: "bg-black text-red-500", name: "Suscripción Cine", sub: "Día 5 de cada mes", amount: "$150", countdown: "en 3d", countdownColor: "text-amber-400" },
-            { icon: "🌐", iconBg: "bg-cyan-950 text-cyan-300", name: "Internet Casa", sub: "Día 6 de cada mes", amount: "$450", countdown: "en 4d", countdownColor: "text-amber-400" },
-            { icon: "🏠", iconBg: "bg-slate-800 text-sky-400", name: "Renta Departamento", sub: "Día 10 de cada mes", amount: "$4,500", countdown: "en 8d", countdownColor: "text-sky-400" },
+            { name: "Suscripción Editorial", sub: "Día 5 de cada mes", amount: "$150.00", countdown: "en 3d", warn: true },
+            { name: "Fibra Óptica Simétrica", sub: "Día 6 de cada mes", amount: "$450.00", countdown: "en 4d", warn: true },
+            { name: "Arrendamiento Estudio", sub: "Día 10 de cada mes", amount: "$4,500.00", countdown: "en 8d", warn: false },
           ].map((item) => (
-            <div key={item.name} className="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
-              <div className="flex items-center gap-2.5">
-                <div className={`w-7 h-7 rounded-lg flex items-center justify-center text-[10px] font-bold ${item.iconBg}`}>{item.icon}</div>
-                <div><div className="font-semibold text-white text-[11px]">{item.name}</div><div className="text-[9px] text-slate-400">{item.sub}</div></div>
+            <div key={item.name} className="py-3 flex items-center justify-between">
+              <div>
+                <div className="font-semibold text-[#EDEDED] text-[11px]">{item.name}</div>
+                <div className="text-[9px] text-[#B0ADA7]">{item.sub}</div>
               </div>
-              <div className="text-right">
-                <div className="text-white font-mono font-bold text-[12px]">{item.amount}</div>
-                <span className={`text-[9px] font-semibold ${item.countdownColor}`}>{item.countdown}</span>
+              <div className="text-right font-mono-tabular">
+                <div className="text-[#EDEDED] font-bold text-[12px]">{item.amount}</div>
+                <span
+                  className={`text-[9px] font-semibold ${
+                    item.warn ? "text-[#F59E0B]" : "text-[#34D399]"
+                  }`}
+                >
+                  {item.countdown}
+                </span>
               </div>
             </div>
           ))}
@@ -289,44 +420,100 @@ export function Gallery({ images }: { images: GalleryImage[] }) {
   const info = SLIDE_INFO[current];
 
   return (
-    <section id="galeria" className="py-24 bg-gradient-to-b from-slate-950 via-[#0a1224] to-slate-950 border-b border-white/10 relative overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-cyan-500/10 blur-[140px] pointer-events-none rounded-full" />
-
+    <section
+      id="galeria"
+      className="py-24 border-b border-border relative overflow-hidden"
+      onKeyDown={(e) => {
+        if (e.key === "ArrowLeft") prev();
+        if (e.key === "ArrowRight") next();
+      }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-2xl mx-auto mb-8">
-          <span className="inline-block text-xs uppercase font-extrabold tracking-widest text-cyan-400 mb-2">
-            Galería Tridimensional Interactiva
-          </span>
-          <h2 className="font-display font-bold text-3xl sm:text-5xl text-white tracking-tight">
-            Así se ve y se siente Finance Pal
-          </h2>
-        </div>
-
-        {/* Info card */}
-        <div className="max-w-2xl mx-auto mb-8 text-center p-5 rounded-2xl glass-panel-glow border border-cyan-500/30 transition-all duration-300">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-800/50 text-xs font-mono mb-2">
-            {info.badge}
+        {/* Cabecera Editorial de 12 Columnas */}
+        <ScrollReveal className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end mb-10 pb-8 border-b border-border">
+          <div className="lg:col-span-7 space-y-3">
+            <span className="inline-block text-xs font-mono uppercase tracking-widest text-primary font-semibold">
+              02 / INSPECCIÓN TÁCTIL TRIDIMENSIONAL
+            </span>
+            <h2 className="font-display-v2 font-bold text-3xl sm:text-5xl text-foreground text-balance">
+              Arquitectura{" "}
+              <EditorialHighlight className="italic font-semibold text-primary">
+                Obsidian Carbon
+              </EditorialHighlight>{" "}
+              en cada módulo.
+            </h2>
           </div>
-          <h3 className="font-display font-bold text-xl sm:text-2xl text-white">{info.title}</h3>
-          <p className="text-slate-300 text-xs sm:text-sm mt-1.5 leading-relaxed">{info.desc}</p>
+          <div className="lg:col-span-5">
+            <p className="text-sm sm:text-base text-muted-foreground editorial-text-hover leading-relaxed text-pretty">
+              Explora las 5 láminas operativas de la aplicación. Más del{" "}
+              <EditorialHighlight>60% de los datos descansan sobre el lienzo</EditorialHighlight>{" "}
+              con separadores de 1px y tipografía numérica tabular sin saltos de maquetación.
+            </p>
+          </div>
+        </ScrollReveal>
+
+        {/* Selector de Láminas (5 Módulos) + Ficha Técnica Activa */}
+        <div className="max-w-3xl mx-auto mb-8 space-y-4">
+          <div
+            role="tablist"
+            aria-label="Módulos de la galería"
+            className="flex flex-wrap items-center justify-center gap-1.5 p-1.5 rounded-2xl bg-muted border border-border"
+          >
+            {SLIDE_INFO.map((slide, idx) => {
+              const active = idx === current;
+              return (
+                <button
+                  key={slide.shortLabel}
+                  type="button"
+                  role="tab"
+                  aria-selected={active}
+                  onClick={() => setCurrent(idx)}
+                  className={`px-3.5 py-2 rounded-xl text-xs font-mono tactile-press cursor-pointer ${
+                    active
+                      ? "bg-card text-foreground font-semibold border border-border shadow-sm"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {slide.shortLabel}
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="text-center p-5 rounded-2xl bg-card border border-border editorial-surface">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted text-primary border border-border text-xs font-mono mb-2">
+              {info.badge}
+            </div>
+            <h3 className="font-display font-bold text-xl sm:text-2xl text-foreground">
+              {info.title}
+            </h3>
+            <p className="text-muted-foreground editorial-text-hover text-xs sm:text-sm mt-1.5 max-w-[60ch] mx-auto leading-relaxed">
+              {info.desc}
+            </p>
+          </div>
         </div>
 
         {/* Carousel */}
-        <div className="relative w-full max-w-5xl mx-auto h-[700px] sm:h-[740px] carousel-stage flex items-center justify-center">
+        <ScrollParallaxStage
+          intensity={14}
+          className="relative w-full max-w-5xl mx-auto h-[680px] sm:h-[720px] carousel-stage flex items-center justify-center"
+        >
           {/* Arrows */}
           <button
+            type="button"
             aria-label="Pantalla anterior"
-            className="absolute left-2 sm:left-6 z-40 p-3 sm:p-4 rounded-2xl glass-panel hover:bg-slate-800 text-white border border-slate-700 shadow-xl hover:scale-105 active:scale-95 transition-all"
+            className="absolute left-2 sm:left-6 z-40 h-12 w-12 flex items-center justify-center rounded-2xl bg-card hover:bg-muted text-foreground border border-border editorial-surface tactile-press cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             onClick={prev}
           >
-            <ChevronLeft className="w-6 h-6 text-cyan-400" />
+            <ChevronLeft className="w-5 h-5 text-primary" strokeWidth={2} />
           </button>
           <button
+            type="button"
             aria-label="Siguiente pantalla"
-            className="absolute right-2 sm:right-6 z-40 p-3 sm:p-4 rounded-2xl glass-panel hover:bg-slate-800 text-white border border-slate-700 shadow-xl hover:scale-105 active:scale-95 transition-all"
+            className="absolute right-2 sm:right-6 z-40 h-12 w-12 flex items-center justify-center rounded-2xl bg-card hover:bg-muted text-foreground border border-border editorial-surface tactile-press cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             onClick={next}
           >
-            <ChevronRight className="w-6 h-6 text-cyan-400" />
+            <ChevronRight className="w-5 h-5 text-primary" strokeWidth={2} />
           </button>
 
           {/* Phones */}
@@ -339,17 +526,18 @@ export function Gallery({ images }: { images: GalleryImage[] }) {
               <Screen />
             </div>
           ))}
-        </div>
+        </ScrollParallaxStage>
 
         {/* Dot indicators */}
-        <div className="flex items-center justify-center gap-2.5 mt-8">
+        <div className="flex items-center justify-center gap-2.5 mt-6">
           {Array.from({ length: total }).map((_, i) => (
             <button
               key={i}
+              type="button"
               aria-label={`Ir a slide ${i + 1}`}
               onClick={() => setCurrent(i)}
-              className={`transition-all duration-300 rounded-full ${
-                i === current ? "w-8 h-2 bg-cyan-400" : "w-2.5 h-2 bg-slate-700"
+              className={`transition-[width,background-color] duration-300 rounded-full cursor-pointer ${
+                i === current ? "w-8 h-2 bg-primary" : "w-2.5 h-2 bg-border hover:bg-muted-foreground"
               }`}
             />
           ))}
@@ -357,9 +545,9 @@ export function Gallery({ images }: { images: GalleryImage[] }) {
 
         {/* Real gallery thumbnails (if loaded from Supabase) */}
         {images.length > 0 && (
-          <div className="mt-12 text-center">
-            <p className="text-xs font-mono text-slate-400 uppercase tracking-widest mb-4">
-              Capturas de pantalla reales
+          <div className="mt-12 pt-8 border-t border-border text-center">
+            <p className="text-xs font-mono text-muted-foreground uppercase tracking-widest mb-4">
+              Archivo de capturas verificadas
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               {images.map((img) => (
@@ -368,7 +556,8 @@ export function Gallery({ images }: { images: GalleryImage[] }) {
                   href={img.image_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative h-20 w-20 overflow-hidden rounded-xl border-2 border-slate-700 hover:border-cyan-500/60 opacity-70 hover:opacity-100 transition-all"
+                  aria-label={`Ver captura: ${img.title}`}
+                  className="relative h-20 w-20 overflow-hidden rounded-xl outline outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10 opacity-80 hover:opacity-100 tactile-press"
                 >
                   <Image src={img.image_url} alt={img.title} fill sizes="80px" className="object-cover" />
                 </a>
@@ -380,4 +569,3 @@ export function Gallery({ images }: { images: GalleryImage[] }) {
     </section>
   );
 }
-

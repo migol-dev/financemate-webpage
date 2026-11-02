@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Star, BadgeCheck } from "lucide-react";
+import { Star, BadgeCheck, MessageSquareQuote } from "lucide-react";
 import { ReviewForm } from "@/components/review-form";
 import type { Review } from "@/lib/types";
+import { EditorialHighlight, ScrollReveal } from "@/components/editorial-motion";
 
 function initials(name: string) {
   return name
@@ -12,15 +13,6 @@ function initials(name: string) {
     .map((p) => p[0]?.toUpperCase())
     .join("");
 }
-
-const AVATAR_GRADIENTS = [
-  "from-cyan-400 to-sky-500",
-  "from-emerald-400 to-teal-400",
-  "from-sky-400 to-indigo-500",
-  "from-violet-400 to-purple-500",
-  "from-rose-400 to-pink-500",
-  "from-amber-400 to-orange-500",
-];
 
 export function ReviewsSection({ initialReviews }: { initialReviews: Review[] }) {
   const [reviews, setReviews] = useState(initialReviews);
@@ -54,100 +46,137 @@ export function ReviewsSection({ initialReviews }: { initialReviews: Review[] })
   return (
     <section
       id="resenas"
-      className="py-24 border-t border-white/10 bg-slate-950/80 relative overflow-hidden"
+      className="py-24 border-b border-border relative overflow-hidden"
     >
-      <div className="absolute top-1/3 right-10 w-96 h-96 bg-cyan-500/10 blur-[140px] pointer-events-none rounded-full" />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-950/80 border border-cyan-500/30 text-xs font-semibold text-cyan-400 uppercase tracking-wider mb-3">
-            ⭐ Experiencias Reales
-          </span>
-          <h2 className="font-display font-bold text-3xl sm:text-5xl text-white tracking-tight">
-            Lo que dice la comunidad
-          </h2>
-          <p className="text-slate-300 mt-3 text-base sm:text-lg leading-relaxed">
-            Usuarios reales que recuperaron el control de su dinero sin suscripciones ocultas ni
-            ventas de información personal.
-          </p>
+        {/* Composición Asimétrica de 12 Columnas: 5 Cols Bitácora de Comunidad / 7 Cols Formulario Activo */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+          {/* Columna Izquierda: Contexto y Reseñas De-Boxed (5 Columnas) */}
+          <ScrollReveal className="lg:col-span-5 space-y-6">
+            <div className="space-y-3">
+              <span className="inline-block text-xs font-mono uppercase tracking-widest text-primary font-semibold">
+                04 / BITÁCORA DE LA COMUNIDAD
+              </span>
+              <h2 className="font-display-v2 font-bold text-3xl sm:text-4xl lg:text-5xl text-foreground text-balance">
+                Voces que eligieron{" "}
+                <EditorialHighlight className="italic font-semibold text-primary">
+                  soberanía financiera
+                </EditorialHighlight>
+                .
+              </h2>
+              <p className="text-muted-foreground editorial-text-hover text-sm sm:text-base leading-relaxed max-w-[58ch] text-pretty">
+                Personas reales que administran su patrimonio sin suscripciones forzosas ni venta de
+                hábitos de consumo a terceros.
+              </p>
+            </div>
+
+            {/* Lista De-Boxed con separadores de 1px */}
+            {reviews.length > 0 ? (
+              <div className="divide-y divide-border border-y border-border">
+                {reviews.slice(0, 4).map((r) => (
+                  <article key={r.id} className="py-5 space-y-3 group">
+                    <div className="flex items-center justify-between">
+                      <div
+                        className="flex items-center gap-1 text-editorial-amber"
+                        aria-label={`Calificación: ${r.rating} de 5 estrellas`}
+                      >
+                        {Array.from({ length: 5 }).map((_, idx) => (
+                          <Star
+                            key={idx}
+                            className={`h-3.5 w-3.5 ${
+                              idx < r.rating
+                                ? "fill-current text-editorial-amber"
+                                : "text-border"
+                            }`}
+                          />
+                        ))}
+                      </div>
+                      {r.has_downloaded && (
+                        <span className="text-[11px] font-mono text-primary bg-muted px-2.5 py-0.5 rounded-full border border-border flex items-center gap-1">
+                          <BadgeCheck className="h-3 w-3" /> APK Verificado
+                        </span>
+                      )}
+                    </div>
+
+                    <p className="text-foreground/90 editorial-text-hover text-sm leading-relaxed font-sans">
+                      &ldquo;{r.comment}&rdquo;
+                    </p>
+
+                    <div className="flex items-center justify-between pt-1">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded-full bg-muted border border-border flex items-center justify-center text-foreground font-mono font-bold text-xs">
+                          {initials(r.name)}
+                        </div>
+                        <div>
+                          <h3 className="text-xs font-semibold text-foreground">{r.name}</h3>
+                          <span className="text-[11px] text-muted-foreground block">
+                            {r.has_downloaded ? "Instalación APK verificada" : "Lector de la web"}
+                          </span>
+                        </div>
+                      </div>
+                      <time className="text-[11px] text-muted-foreground font-mono-tabular">
+                        {new Date(r.created_at).toLocaleDateString("es-MX", {
+                          day: "2-digit",
+                          month: "short",
+                        })}
+                      </time>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            ) : (
+              <div className="p-6 rounded-2xl bg-muted/50 border border-border space-y-2">
+                <div className="flex items-center gap-2 text-foreground font-semibold text-sm">
+                  <MessageSquareQuote className="w-4 h-4 text-primary" strokeWidth={1.75} />
+                  <span>Aún no hay reseñas publicadas en esta vista</span>
+                </div>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Las reseñas ayudan a otros usuarios a evaluar la privacidad y estabilidad de
+                  FinancePal. Utiliza el formulario contiguo para inaugurar el archivo.
+                </p>
+              </div>
+            )}
+          </ScrollReveal>
+
+          {/* Columna Derecha: Etapa de Interacción Activa (7 Columnas) */}
+          <ScrollReveal delay={0.1} className="lg:col-span-7">
+            <div className="rounded-2xl bg-card p-6 sm:p-10 border border-border editorial-surface">
+              <div className="mb-8 pb-5 border-b border-border">
+                <span className="text-xs font-mono uppercase tracking-widest text-primary font-semibold mb-1.5 block">
+                  Registro Público Moderado
+                </span>
+                <h3 className="font-display font-bold text-2xl sm:text-3xl text-foreground tracking-tight">
+                  Publica tu testimonio sobre FinancePal
+                </h3>
+                <p className="text-muted-foreground text-sm mt-1.5 max-w-[60ch]">
+                  Comparte qué módulo (balance, metas jerárquicas o bóveda offline) te ha resultado
+                  más valioso en tu organización diaria.
+                </p>
+              </div>
+              <ReviewForm onSubmitted={refresh} />
+            </div>
+          </ScrollReveal>
         </div>
 
-        {/* Reviews grid */}
-        {reviews.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-            {reviews.slice(0, 6).map((r, i) => (
+        {/* Reseñas adicionales si existen más de 4 */}
+        {reviews.length > 4 && (
+          <div className="mt-12 pt-8 border-t border-border grid grid-cols-1 md:grid-cols-2 gap-6">
+            {reviews.slice(4, 6).map((r) => (
               <article
                 key={r.id}
-                className="p-6 rounded-3xl glass-panel neon-hover border border-white/[0.06] flex flex-col justify-between transition-all duration-300"
+                className="p-6 rounded-2xl bg-card border border-border editorial-surface flex flex-col justify-between gap-4"
               >
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-1 text-amber-400 text-sm">
-                      {Array.from({ length: 5 }).map((_, idx) => (
-                        <Star
-                          key={idx}
-                          className={`h-3.5 w-3.5 ${
-                            idx < r.rating ? "fill-amber-400 text-amber-400" : "text-slate-700"
-                          }`}
-                        />
-                      ))}
-                    </div>
-                    {r.has_downloaded && (
-                      <span className="text-[11px] font-mono text-cyan-400 bg-cyan-950/80 px-2.5 py-0.5 rounded-full border border-cyan-800/60 flex items-center gap-1">
-                        <BadgeCheck className="h-3 w-3" /> APK
-                      </span>
-                    )}
-                  </div>
-                  <p className="text-slate-300 text-sm leading-relaxed mb-6">&ldquo;{r.comment}&rdquo;</p>
-                </div>
-                <div className="flex items-center justify-between pt-4 border-t border-slate-800">
-                  <div className="flex items-center gap-3">
-                    <div
-                      className={`w-9 h-9 rounded-full bg-gradient-to-tr ${AVATAR_GRADIENTS[i % AVATAR_GRADIENTS.length]} flex items-center justify-center text-slate-950 font-bold text-xs shadow-md`}
-                    >
-                      {initials(r.name)}
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-semibold text-white">{r.name}</h4>
-                      <span className="text-[11px] text-slate-400">
-                        {r.has_downloaded ? "Usuario verificado APK" : "Visitante"}
-                      </span>
-                    </div>
-                  </div>
-                  <span className="text-xs text-slate-400 font-mono">
-                    {new Date(r.created_at).toLocaleDateString("es-MX", {
-                      day: "2-digit",
-                      month: "short",
-                    })}
+                <p className="text-foreground/90 text-sm leading-relaxed">&ldquo;{r.comment}&rdquo;</p>
+                <div className="flex items-center justify-between pt-3 border-t border-border text-xs">
+                  <span className="font-semibold text-foreground">{r.name}</span>
+                  <span className="font-mono-tabular text-muted-foreground">
+                    {r.rating} / 5 ★
                   </span>
                 </div>
               </article>
             ))}
           </div>
         )}
-
-        {reviews.length === 0 && (
-          <p className="text-center text-slate-400 text-sm mb-16">
-            Sé el primero en dejar una reseña de Finance Pal.
-          </p>
-        )}
-
-        {/* Review form */}
-        <div className="max-w-3xl mx-auto rounded-3xl glass-panel-glow p-8 sm:p-10 border border-cyan-500/30">
-          <div className="text-center max-w-xl mx-auto mb-8">
-            <span className="text-xs font-mono uppercase tracking-widest text-cyan-400 font-bold mb-1.5 block">
-              Tu Voz Cuenta
-            </span>
-            <h3 className="font-display font-bold text-2xl sm:text-3xl text-white">
-              Deja tu reseña de Finance Pal
-            </h3>
-            <p className="text-slate-300 text-sm mt-1.5">
-              Comparte cómo te ayuda a controlar tu dinero y ayuda a que más personas disfruten
-              del software libre y privado.
-            </p>
-          </div>
-          <ReviewForm onSubmitted={refresh} />
-        </div>
       </div>
     </section>
   );

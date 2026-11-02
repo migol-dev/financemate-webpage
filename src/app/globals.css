@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600..800;1,9..144,600..800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,6 +9,10 @@
      MODO CLARO — Warm Alabaster (#FAF8F5)
      ────────────────────────────────────────────────────────────────────────── */
   :root {
+    --font-plus-jakarta: "Plus Jakarta Sans";
+    --font-fraunces: "Fraunces";
+    --font-mono: "JetBrains Mono";
+    --font-serif: "Instrument Serif";
     --background: 40 33% 97%;          /* #FAF8F5 Warm Alabaster */
     --foreground: 60 2% 10%;           /* #191918 Espresso Ink */
     --card: 0 0% 100%;                 /* #FFFFFF Crisp Paper */

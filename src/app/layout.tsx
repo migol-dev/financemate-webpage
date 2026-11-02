@@ -1,41 +1,8 @@
 import type { Metadata } from "next";
-import {
-  Inter,
-  Plus_Jakarta_Sans,
-  JetBrains_Mono,
-  Instrument_Serif,
-  Fraunces,
-} from "next/font/google";
 import "./globals.css";
 import { CookieBanner } from "@/components/cookie-banner";
 import { ThemeProvider } from "@/components/theme-provider";
 import { EditorialCanvasBg } from "@/components/editorial-canvas-bg";
-
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const plusJakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-plus-jakarta",
-  display: "swap",
-});
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-  display: "swap",
-});
-const instrumentSerif = Instrument_Serif({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-serif",
-  display: "swap",
-});
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  weight: ["600", "700", "800"],
-  style: ["normal", "italic"],
-  variable: "--font-fraunces",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "Finance Pal v2.0.0 | Gestor Financiero Personal, Privado y Multiplataforma",
@@ -68,9 +35,7 @@ export const viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" suppressHydrationWarning>
-      <body
-        className={`${inter.variable} ${plusJakarta.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable} ${fraunces.variable} font-sans antialiased`}
-      >
+      <body className="font-sans antialiased">
         <ThemeProvider>
           <EditorialCanvasBg />
           {children}

@@ -138,7 +138,7 @@ export function PlatformsSection() {
                   </div>
 
                   <p className="text-sm text-muted-foreground editorial-text-hover leading-relaxed max-w-[65ch]">
-                    Ejecuta FinancePal directamente desde tu navegador de escritorio para sesiones
+                    Ejecuta Finance Pal directamente desde tu navegador de escritorio para sesiones
                     de auditoría anual, conciliación de presupuestos en 4 columnas macro y{" "}
                     <EditorialHighlight>exportación inmediata a CSV o JSON</EditorialHighlight>.
                   </p>

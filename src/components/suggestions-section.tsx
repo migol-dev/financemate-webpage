@@ -45,7 +45,7 @@ function ReportForm({ type }: { type: ReportType }) {
           {type === "bug" ? "Reporte técnico registrado" : "Propuesta registrada"}
         </p>
         <p className="text-sm text-muted-foreground">
-          Gracias por contribuir a la evolución de FinancePal.
+          Gracias por contribuir a la evolución de Finance Pal.
         </p>
         <button
           type="button"

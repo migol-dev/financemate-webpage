@@ -3,9 +3,18 @@ import Link from "next/link";
 import { LegalShell } from "@/components/legal/legal-shell";
 
 export const metadata: Metadata = {
-  title: "Términos y Condiciones de Uso | Finance Pal",
+  title: "Términos y Condiciones de Uso",
   description:
     "Términos y condiciones legales que regulan el uso de la web oficial, PWA y aplicación móvil de Finance Pal.",
+  alternates: {
+    canonical: "/terminos",
+  },
+  openGraph: {
+    title: "Términos y Condiciones de Uso | Finance Pal",
+    description:
+      "Términos y condiciones legales que regulan el uso de la web oficial, PWA y aplicación móvil de Finance Pal.",
+    url: "/terminos",
+  },
 };
 
 export default function TerminosPage() {

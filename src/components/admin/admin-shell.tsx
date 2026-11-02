@@ -21,7 +21,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
     <div className="min-h-screen bg-secondary/20">
       <div className="flex">
         <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-border bg-background p-5 sm:flex">
-          <p className="mb-6 font-display text-lg font-semibold">Finance Mate Admin</p>
+          <p className="mb-6 font-display text-lg font-semibold">Finance Pal Admin</p>
           <nav className="flex flex-1 flex-col gap-1">
             {LINKS.map((l) => {
               const active = pathname === l.href;
@@ -59,7 +59,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
 
         <div className="flex-1">
           <header className="flex items-center justify-between border-b border-border bg-background px-5 py-4 sm:hidden">
-            <p className="font-display font-semibold">Finance Mate Admin</p>
+            <p className="font-display font-semibold">Finance Pal Admin</p>
             <ThemeToggle />
           </header>
           <main className="p-5 sm:p-8">{children}</main>

@@ -3,9 +3,18 @@ import Link from "next/link";
 import { LegalShell } from "@/components/legal/legal-shell";
 
 export const metadata: Metadata = {
-  title: "Política de Privacidad Integral | Finance Pal",
+  title: "Política de Privacidad Integral",
   description:
     "Conoce cómo se tratan y protegen tus datos en Finance Pal bajo principios Local-First, privacidad por diseño y leyes internacionales.",
+  alternates: {
+    canonical: "/privacidad",
+  },
+  openGraph: {
+    title: "Política de Privacidad Integral | Finance Pal",
+    description:
+      "Conoce cómo se tratan y protegen tus datos en Finance Pal bajo principios Local-First, privacidad por diseño y leyes internacionales.",
+    url: "/privacidad",
+  },
 };
 
 export default function PrivacidadPage() {

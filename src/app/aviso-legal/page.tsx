@@ -3,9 +3,18 @@ import Link from "next/link";
 import { LegalShell } from "@/components/legal/legal-shell";
 
 export const metadata: Metadata = {
-  title: "Aviso Legal y Deslinde Financiero | Finance Pal",
+  title: "Aviso Legal y Deslinde Financiero",
   description:
     "Aviso legal obligatorio y deslinde taxativo de responsabilidad financiera, bancaria y fiscal de Finance Pal.",
+  alternates: {
+    canonical: "/aviso-legal",
+  },
+  openGraph: {
+    title: "Aviso Legal y Deslinde Financiero | Finance Pal",
+    description:
+      "Aviso legal obligatorio y deslinde taxativo de responsabilidad financiera, bancaria y fiscal de Finance Pal.",
+    url: "/aviso-legal",
+  },
 };
 
 export default function AvisoLegalPage() {

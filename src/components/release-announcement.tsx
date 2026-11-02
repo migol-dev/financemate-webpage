@@ -321,7 +321,7 @@ export function ReleaseAnnouncement() {
                 <span>v2.0.0 Oficial</span>
               </span>
               <p className="text-foreground text-center sm:text-left leading-tight font-sans">
-                <span className="font-semibold">Edición FinancePal v2.0.0 disponible:</span>{" "}
+                <span className="font-semibold">Edición Finance Pal v2.0.0 disponible:</span>{" "}
                 <span className="hidden md:inline text-muted-foreground">
                   Estética Warm Editorial Wealth, metas jerárquicas Drag &amp; Drop, 15 categorías y cifrado WebCrypto AES-256.
                 </span>
@@ -363,7 +363,7 @@ export function ReleaseAnnouncement() {
                   <span>Dossier de Lanzamiento v2.0.0</span>
                 </div>
                 <Dialog.Title className="font-display-v2 font-bold text-2xl sm:text-3xl text-foreground">
-                  Arquitectura <span className="italic font-semibold text-primary">FinancePal</span> v2.0.0
+                  Arquitectura <span className="italic font-semibold text-primary">Finance Pal</span> v2.0.0
                 </Dialog.Title>
                 <Dialog.Description className="text-muted-foreground text-xs sm:text-sm mt-1 max-w-xl font-sans">
                   Una evolución generacional en estética financiera, organización patrimonial local-first

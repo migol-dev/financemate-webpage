@@ -31,7 +31,7 @@ export function DownloadSection({ release, repoUrl }: DownloadSectionProps) {
                   ¿Prefieres auditar tus finanzas sin instalar nada?
                 </h3>
                 <p className="text-muted-foreground editorial-text-hover text-sm max-w-[60ch]">
-                  La edición web de FinancePal corre directamente en tu navegador con{" "}
+                  La edición web de Finance Pal corre directamente en tu navegador con{" "}
                   <EditorialHighlight>almacenamiento local IndexedDB</EditorialHighlight> y
                   sincronización cifrada opcional.
                 </p>
@@ -67,7 +67,7 @@ export function DownloadSection({ release, repoUrl }: DownloadSectionProps) {
                     07 / DISTRIBUCIÓN OFICIAL ANDROID
                   </div>
                   <h2 className="font-display-v2 font-bold text-3xl sm:text-5xl text-foreground text-balance">
-                    Instala FinancePal{" "}
+                    Instala Finance Pal{" "}
                     <EditorialHighlight className="italic font-semibold text-primary">
                       v{release.version}
                     </EditorialHighlight>{" "}

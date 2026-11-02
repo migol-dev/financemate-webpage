@@ -25,7 +25,12 @@ export function Footer({ repoUrl }: { repoUrl: string }) {
             <div className="pt-1 flex flex-col gap-1.5 text-[11px] text-muted-foreground font-mono">
               <p className="flex items-center gap-1.5">
                 <span>Desarrollado de forma independiente por</span>
-                <span className="text-foreground font-semibold">migol-dev</span>
+                <Link
+                  href="/autor/migol-dev"
+                  className="text-foreground font-semibold hover:text-primary underline underline-offset-4 transition-colors"
+                >
+                  migol-dev
+                </Link>
               </p>
               <a
                 href="mailto:business.migol.gg@gmail.com"
@@ -44,12 +49,28 @@ export function Footer({ repoUrl }: { repoUrl: string }) {
             </h4>
             <ul className="space-y-2.5">
               <li>
-                <a
-                  href="#descarga"
+                <Link
+                  href="/descargar"
                   className="hover:text-foreground transition-colors inline-flex items-center gap-1"
                 >
-                  Descargar APK (Android)
-                </a>
+                  Descargar APK (Android) y PWA
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/funciones"
+                  className="hover:text-foreground transition-colors inline-flex items-center gap-1"
+                >
+                  Funciones y Módulos
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/blog"
+                  className="hover:text-foreground transition-colors inline-flex items-center gap-1"
+                >
+                  Guías de Finanzas Personales
+                </Link>
               </li>
               <li>
                 <a
@@ -74,19 +95,9 @@ export function Footer({ repoUrl }: { repoUrl: string }) {
                 </a>
               </li>
               <li>
-                <a href="#resenas" className="hover:text-foreground transition-colors">
-                  Reseñas de la Comunidad
-                </a>
-              </li>
-              <li>
-                <a href="#soporte" className="hover:text-foreground transition-colors">
-                  Buzón de Ideas y Reportes
-                </a>
-              </li>
-              <li>
-                <a href="#seguridad" className="hover:text-foreground transition-colors">
-                  Arquitectura y Seguridad
-                </a>
+                <Link href="/autor/migol-dev" className="hover:text-foreground transition-colors">
+                  Sobre el Autor (migol-dev)
+                </Link>
               </li>
             </ul>
           </div>

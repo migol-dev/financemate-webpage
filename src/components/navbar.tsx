@@ -9,12 +9,12 @@ import { BrandLogo } from "@/components/brand-logo";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 const LINKS = [
-  { href: "#plataformas", label: "Plataformas" },
-  { href: "#galeria", label: "Cuaderno 3D" },
-  { href: "#caracteristicas", label: "Arquitectura" },
-  { href: "#resenas", label: "Comunidad" },
-  { href: "#soporte", label: "Buzón" },
-  { href: "#seguridad", label: "Seguridad" },
+  { href: "/#plataformas", label: "Plataformas" },
+  { href: "/funciones", label: "Funciones" },
+  { href: "/blog", label: "Guías y Blog" },
+  { href: "/#galeria", label: "Cuaderno 3D" },
+  { href: "/#resenas", label: "Comunidad" },
+  { href: "/descargar", label: "Descargar" },
 ];
 
 const GITHUB_URL =
@@ -32,7 +32,7 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 py-3 flex items-center justify-between gap-4">
         {/* Brand Monogram */}
         <Link
-          href="#top"
+          href="/"
           className="shrink-0 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           <BrandLogo versionText="v2.0" />
@@ -44,7 +44,7 @@ export function Navbar() {
           className="hidden lg:flex items-center gap-1 text-sm font-medium text-muted-foreground"
         >
           {LINKS.map((l) => (
-            <a
+            <Link
               key={l.href}
               href={l.href}
               className="relative px-3 py-2 rounded-lg hover:text-foreground hover:bg-muted/70 transition-[color,background-color] duration-150 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring group"
@@ -54,7 +54,7 @@ export function Navbar() {
                 aria-hidden="true"
                 className="absolute bottom-1.5 left-3 right-3 h-[1.5px] bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-200 ease-out origin-left"
               />
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -88,17 +88,17 @@ export function Navbar() {
             />
           </a>
 
-          <a
+          <Link
             className="inline-flex items-center gap-2 ps-4 pe-3.5 h-10 rounded-xl text-xs sm:text-sm font-semibold text-primary-foreground bg-primary hover:brightness-105 tactile-press focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring group"
             style={{ boxShadow: "var(--shadow-border)" }}
-            href="#descarga"
+            href="/descargar"
           >
             <span>Descargar APK</span>
             <Download
               className="w-4 h-4 transition-transform duration-150 ease-out group-hover:translate-y-0.5"
               strokeWidth={2}
             />
-          </a>
+          </Link>
         </div>
 
         {/* Mobile toggle */}

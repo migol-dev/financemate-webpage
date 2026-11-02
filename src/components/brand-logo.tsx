@@ -81,7 +81,7 @@ export function BrandLogo({
             textSize
           )}
         >
-          Finance<span className="italic font-semibold text-primary">Pal</span>
+          Finance <span className="italic font-semibold text-primary">Pal</span>
         </span>
         {showVersion && (
           <span className="px-2 py-0.5 text-[11px] font-mono font-medium tabular-nums rounded-full border border-border bg-muted/70 text-muted-foreground leading-none">

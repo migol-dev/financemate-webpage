@@ -3,9 +3,18 @@ import Link from "next/link";
 import { LegalShell } from "@/components/legal/legal-shell";
 
 export const metadata: Metadata = {
-  title: "Política de Cookies y Almacenamiento Local | Finance Pal",
+  title: "Política de Cookies y Almacenamiento Local",
   description:
     "Transparencia total sobre el uso de cookies técnicas y almacenamiento local (localStorage e IndexedDB) en Finance Pal.",
+  alternates: {
+    canonical: "/cookies",
+  },
+  openGraph: {
+    title: "Política de Cookies y Almacenamiento Local | Finance Pal",
+    description:
+      "Transparencia total sobre el uso de cookies técnicas y almacenamiento local (localStorage e IndexedDB) en Finance Pal.",
+    url: "/cookies",
+  },
 };
 
 export default function CookiesPage() {

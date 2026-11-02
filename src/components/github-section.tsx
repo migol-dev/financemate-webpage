@@ -50,7 +50,7 @@ export function GithubSection({ repoUrl }: { repoUrl: string }) {
               </h2>
               <p className="text-muted-foreground editorial-text-hover text-sm sm:text-base leading-relaxed max-w-[58ch] text-pretty">
                 Tus estados financieros jamás se venden ni se analizan en servidores externos. La
-                seguridad de FinancePal es{" "}
+                seguridad de Finance Pal es{" "}
                 <EditorialHighlight>públicamente auditable bajo licencia MIT</EditorialHighlight>.
               </p>
             </div>

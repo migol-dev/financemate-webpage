@@ -132,7 +132,7 @@ export function ReviewsSection({ initialReviews }: { initialReviews: Review[] })
                 </div>
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   Las reseñas ayudan a otros usuarios a evaluar la privacidad y estabilidad de
-                  FinancePal. Utiliza el formulario contiguo para inaugurar el archivo.
+                  Finance Pal. Utiliza el formulario contiguo para inaugurar el archivo.
                 </p>
               </div>
             )}
@@ -146,7 +146,7 @@ export function ReviewsSection({ initialReviews }: { initialReviews: Review[] })
                   Registro Público Moderado
                 </span>
                 <h3 className="font-display font-bold text-2xl sm:text-3xl text-foreground tracking-tight">
-                  Publica tu testimonio sobre FinancePal
+                  Publica tu testimonio sobre Finance Pal
                 </h3>
                 <p className="text-muted-foreground text-sm mt-1.5 max-w-[60ch]">
                   Comparte qué módulo (balance, metas jerárquicas o bóveda offline) te ha resultado

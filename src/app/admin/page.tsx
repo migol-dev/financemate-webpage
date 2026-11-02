@@ -27,7 +27,7 @@ export default async function AdminDashboard() {
     <AdminShell>
       <h1 className="font-display text-2xl font-semibold">Resumen</h1>
       <p className="mt-1 text-sm text-muted-foreground">
-        Estado general de Finance Mate en este momento.
+        Estado general de Finance Pal en este momento.
       </p>
 
       <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">

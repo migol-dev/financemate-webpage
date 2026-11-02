@@ -77,19 +77,16 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
               <span>Cero servidores intermediarios</span>
             </motion.div>
 
-            <motion.h1
-              variants={{
-                hidden: { opacity: 0, y: 14, filter: "blur(4px)" },
-                visible: { opacity: 1, y: 0, filter: "blur(0px)" },
-              }}
-              className="font-display-v2 font-bold text-4xl sm:text-6xl lg:text-[4.15rem] text-foreground tracking-[-0.035em] leading-[1.04] text-balance"
-            >
+            <h1 className="font-display-v2 font-bold text-4xl sm:text-6xl lg:text-[4.15rem] text-foreground tracking-[-0.035em] leading-[1.04] text-balance">
+              <span className="block text-xs sm:text-sm font-mono font-semibold uppercase tracking-[0.14em] text-primary mb-3">
+                Finance Pal · App de Finanzas Personales Gratis y Privada
+              </span>
               Claridad patrimonial y{" "}
               <EditorialHighlight className="italic font-semibold text-primary">
                 soberanía total
               </EditorialHighlight>{" "}
               en tu propio dispositivo.
-            </motion.h1>
+            </h1>
 
             <motion.p
               variants={{
@@ -98,7 +95,7 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
               }}
               className="text-muted-foreground editorial-text-hover text-base sm:text-lg max-w-[60ch] leading-relaxed text-pretty font-sans"
             >
-              La relación con tu dinero exige serenidad intelectual, no ruido visual. FinancePal{" "}
+              La relación con tu dinero exige serenidad intelectual, no ruido visual. Finance Pal{" "}
               combina la disciplina de un{" "}
               <EditorialHighlight>cuaderno financiero de alta dirección</EditorialHighlight> con{" "}
               almacenamiento <EditorialHighlight>100% Local-First</EditorialHighlight>, metas

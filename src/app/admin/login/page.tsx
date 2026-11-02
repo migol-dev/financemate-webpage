@@ -19,7 +19,7 @@ function LoginCard() {
       <h1 className="font-display text-xl font-semibold">Panel de administración</h1>
       <p className="mt-2 text-sm text-muted-foreground">
         Inicia sesión con la cuenta de GitHub autorizada para gestionar
-        Finance Mate.
+        Finance Pal.
       </p>
 
       {error && (

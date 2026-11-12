@@ -10,6 +10,9 @@ const config: Config = {
       screens: { "2xl": "1280px" },
     },
     extend: {
+      screens: {
+        xs: "380px",
+      },
       fontFamily: {
         sans: ["var(--font-plus-jakarta)", '"Plus Jakarta Sans"', "system-ui", "sans-serif"],
         display: ["var(--font-fraunces)", '"Fraunces"', '"Plus Jakarta Sans"', "Georgia", "serif"],

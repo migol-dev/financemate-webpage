@@ -124,7 +124,7 @@ export default function DescargarPage() {
                   <span>Licencia MIT</span>
                 </div>
 
-                <h1 className="font-display-v2 font-bold text-4xl sm:text-5xl lg:text-6xl text-foreground text-balance">
+                <h1 className="font-display-v2 font-bold text-fluid-h1 text-foreground text-balance">
                   Descarga{" "}
                   <span className="italic font-semibold text-primary">
                     Finance Pal
@@ -167,27 +167,27 @@ export default function DescargarPage() {
                   Ficha técnica de la versión
                 </p>
                 <div className="divide-y divide-border border-y border-border text-sm">
-                  <div className="py-3.5 flex justify-between gap-4">
+                  <div className="py-3.5 flex flex-col min-[400px]:flex-row min-[400px]:items-baseline justify-between gap-1 min-[400px]:gap-4">
                     <span className="text-muted-foreground">Versión estable</span>
-                    <span className="font-mono-tabular font-bold text-foreground">
+                    <span className="font-mono-tabular font-bold text-foreground break-words">
                       v{APP_VERSION} (Warm Editorial Wealth)
                     </span>
                   </div>
-                  <div className="py-3.5 flex justify-between gap-4">
+                  <div className="py-3.5 flex flex-col min-[400px]:flex-row min-[400px]:items-baseline justify-between gap-1 min-[400px]:gap-4">
                     <span className="text-muted-foreground">Requisitos Android</span>
-                    <span className="font-mono-tabular font-semibold text-foreground">
+                    <span className="font-mono-tabular font-semibold text-foreground break-words">
                       Android 8.0+ (Oreo o superior)
                     </span>
                   </div>
-                  <div className="py-3.5 flex justify-between gap-4">
+                  <div className="py-3.5 flex flex-col min-[400px]:flex-row min-[400px]:items-baseline justify-between gap-1 min-[400px]:gap-4">
                     <span className="text-muted-foreground">Cifrado de respaldos</span>
-                    <span className="font-mono-tabular font-semibold text-primary">
+                    <span className="font-mono-tabular font-semibold text-primary break-words">
                       WebCrypto AES-GCM 256
                     </span>
                   </div>
-                  <div className="py-3.5 flex justify-between gap-4">
+                  <div className="py-3.5 flex flex-col min-[400px]:flex-row min-[400px]:items-baseline justify-between gap-1 min-[400px]:gap-4">
                     <span className="text-muted-foreground">Licencia y Costo</span>
-                    <span className="font-mono-tabular font-semibold text-foreground">
+                    <span className="font-mono-tabular font-semibold text-foreground break-words">
                       MIT Open Source · $0 Gratis
                     </span>
                   </div>
@@ -218,7 +218,7 @@ export default function DescargarPage() {
                     OPCIÓN A · ANDROID NATIVO
                   </span>
                 </div>
-                <h2 className="font-display-v2 font-bold text-2xl sm:text-3xl text-foreground">
+                <h2 className="font-display-v2 font-bold text-fluid-h2 text-foreground">
                   Cómo instalar el APK en Android en 3 pasos
                 </h2>
                 <div className="divide-y divide-border border-y border-border">
@@ -248,7 +248,7 @@ export default function DescargarPage() {
                     OPCIÓN B · WEB APP / PWA MULTIPLATAFORMA
                   </span>
                 </div>
-                <h2 className="font-display-v2 font-bold text-2xl sm:text-3xl text-foreground">
+                <h2 className="font-display-v2 font-bold text-fluid-h2 text-foreground">
                   Cómo usar Finance Pal en iPhone, iPad, PC o Mac
                 </h2>
                 <div className="divide-y divide-border border-y border-border">
@@ -282,7 +282,7 @@ export default function DescargarPage() {
                   <ShieldCheck className="w-4 h-4" strokeWidth={1.75} />
                   <span>Garantía de Integridad y Privacidad</span>
                 </div>
-                <h2 className="font-display-v2 font-bold text-2xl sm:text-3xl text-foreground">
+                <h2 className="font-display-v2 font-bold text-fluid-h2 text-foreground">
                   ¿Por qué distribuimos el APK directamente desde GitHub?
                 </h2>
                 <p className="text-sm sm:text-base text-muted-foreground leading-relaxed max-w-[65ch]">

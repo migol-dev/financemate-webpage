@@ -156,7 +156,7 @@ function ReportForm({ type }: { type: ReportType }) {
       <button
         type="submit"
         disabled={status === "loading"}
-        className="btn-primary ps-6 pe-5 disabled:opacity-60 disabled:cursor-not-allowed group"
+        className="w-full sm:w-auto btn-primary ps-6 pe-5 justify-center disabled:opacity-60 disabled:cursor-not-allowed group"
       >
         {status === "loading" && <Loader2 className="h-4 w-4 animate-spin" />}
         <span>{type === "bug" ? "Enviar reporte técnico" : "Enviar propuesta de mejora"}</span>
@@ -189,7 +189,7 @@ export function SuggestionsSection() {
   const [tab, setTab] = useState<ReportType>("suggestion");
 
   return (
-    <section id="soporte" className="py-24 border-b border-border relative">
+    <section id="soporte" className="py-12 sm:py-16 lg:py-24 border-b border-border relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
           {/* Columna de Contexto (5 Columnas) */}
@@ -197,7 +197,7 @@ export function SuggestionsSection() {
             <span className="inline-block text-xs font-mono uppercase tracking-widest text-primary font-semibold">
               05 / CANAL DE INGENIERÍA ABIERTO
             </span>
-            <h2 className="font-display-v2 font-bold text-3xl sm:text-4xl lg:text-5xl text-foreground text-balance">
+            <h2 className="font-display-v2 font-bold text-fluid-h2 text-foreground text-balance">
               Buzón de{" "}
               <EditorialHighlight className="italic font-semibold text-primary">
                 mejora continua
@@ -228,14 +228,14 @@ export function SuggestionsSection() {
               <div
                 role="tablist"
                 aria-label="Tipo de envío"
-                className="flex items-center gap-1.5 p-1.5 rounded-xl bg-muted border border-border mb-8"
+                className="grid grid-cols-1 min-[400px]:grid-cols-2 gap-1.5 p-1.5 rounded-xl bg-muted border border-border mb-8"
               >
                 <button
                   type="button"
                   role="tab"
                   aria-selected={tab === "suggestion"}
                   onClick={() => setTab("suggestion")}
-                  className={`flex-1 py-2.5 px-3 rounded-lg text-xs sm:text-sm font-semibold tactile-press cursor-pointer flex items-center justify-center gap-2 ${
+                  className={`py-2.5 px-3 rounded-lg text-xs sm:text-sm font-semibold tactile-press cursor-pointer flex items-center justify-center gap-2 ${
                     tab === "suggestion"
                       ? "bg-card text-foreground border border-border shadow-sm"
                       : "text-muted-foreground hover:text-foreground"
@@ -252,7 +252,7 @@ export function SuggestionsSection() {
                   role="tab"
                   aria-selected={tab === "bug"}
                   onClick={() => setTab("bug")}
-                  className={`flex-1 py-2.5 px-3 rounded-lg text-xs sm:text-sm font-semibold tactile-press cursor-pointer flex items-center justify-center gap-2 ${
+                  className={`py-2.5 px-3 rounded-lg text-xs sm:text-sm font-semibold tactile-press cursor-pointer flex items-center justify-center gap-2 ${
                     tab === "bug"
                       ? "bg-card text-foreground border border-border shadow-sm"
                       : "text-muted-foreground hover:text-foreground"

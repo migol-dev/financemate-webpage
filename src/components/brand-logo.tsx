@@ -23,12 +23,21 @@ export function BrandLogo({
   showVersion = true,
   versionText = "v2.0",
 }: BrandLogoProps) {
-  const iconSize = size === "sm" ? "w-8 h-8" : size === "lg" ? "w-11 h-11" : "w-9 h-9";
+  const iconSize =
+    size === "sm"
+      ? "w-7 h-7 sm:w-8 sm:h-8"
+      : size === "lg"
+      ? "w-10 h-10 sm:w-11 sm:h-11"
+      : "w-8 h-8 sm:w-9 sm:h-9";
   const textSize =
-    size === "sm" ? "text-lg" : size === "lg" ? "text-2xl" : "text-xl";
+    size === "sm"
+      ? "text-base sm:text-lg"
+      : size === "lg"
+      ? "text-xl sm:text-2xl"
+      : "text-base min-[380px]:text-lg sm:text-xl";
 
   return (
-    <div className={cn("inline-flex items-center gap-2.5 select-none group", className)}>
+    <div className={cn("inline-flex items-center gap-2 sm:gap-2.5 select-none group min-w-0", className)}>
       {/* Escudo Geométrico Esmeralda + Sendero Ascendente + Corona en Oro Cálido */}
       <div
         className={cn(
@@ -41,7 +50,7 @@ export function BrandLogo({
           viewBox="0 0 36 36"
           fill="none"
           aria-hidden="true"
-          className="w-full h-full p-1.5"
+          className="w-full h-full p-1 sm:p-1.5"
         >
           {/* Escudo geométrico interior */}
           <path
@@ -74,17 +83,17 @@ export function BrandLogo({
       </div>
 
       {/* Palabra de marca en Fraunces Editorial + Pastilla de alambre 1px */}
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
         <span
           className={cn(
-            "font-display font-bold tracking-[-0.035em] text-foreground leading-none",
+            "font-display font-bold tracking-[-0.035em] text-foreground leading-none truncate",
             textSize
           )}
         >
           Finance <span className="italic font-semibold text-primary">Pal</span>
         </span>
         {showVersion && (
-          <span className="px-2 py-0.5 text-[11px] font-mono font-medium tabular-nums rounded-full border border-border bg-muted/70 text-muted-foreground leading-none">
+          <span className="hidden min-[380px]:inline-flex px-1.5 sm:px-2 py-0.5 text-[10px] sm:text-[11px] font-mono font-medium tabular-nums rounded-full border border-border bg-muted/70 text-muted-foreground leading-none shrink-0">
             {versionText}
           </span>
         )}

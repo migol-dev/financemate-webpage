@@ -7,7 +7,7 @@ export function FaqSection() {
     <section
       id="preguntas-frecuentes"
       aria-labelledby="faq-heading"
-      className="py-20 sm:py-28 border-t border-border"
+      className="py-12 sm:py-16 lg:py-24 border-t border-border"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
@@ -21,7 +21,7 @@ export function FaqSection() {
 
             <h2
               id="faq-heading"
-              className="font-display-v2 font-bold text-3xl sm:text-4xl lg:text-5xl text-foreground text-balance"
+              className="font-display-v2 font-bold text-fluid-h2 text-foreground text-balance"
             >
               Respuestas claras sobre{" "}
               <span className="italic font-semibold text-primary">Finance Pal</span>.
@@ -90,7 +90,7 @@ export function FaqSection() {
                     <Plus className="w-4 h-4" strokeWidth={1.75} />
                   </span>
                 </summary>
-                <div className="pt-3 pr-10 text-sm sm:text-base text-muted-foreground leading-relaxed max-w-[65ch]">
+                <div className="pt-3 pr-2 sm:pr-10 text-sm sm:text-base text-muted-foreground leading-relaxed max-w-[65ch]">
                   <p>{item.answer}</p>
                 </div>
               </details>

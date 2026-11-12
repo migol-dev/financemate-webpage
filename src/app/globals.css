@@ -169,6 +169,32 @@
 }
 
 @layer utilities {
+  /* Fluid Typography for Mobile-First Readability */
+  .text-fluid-hero {
+    font-size: clamp(2rem, 1.35rem + 3.2vw, 4.25rem);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+  }
+  .text-fluid-h1 {
+    font-size: clamp(1.75rem, 1.25rem + 2.5vw, 3.25rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+  .text-fluid-h2 {
+    font-size: clamp(1.35rem, 1.05rem + 1.5vw, 2.25rem);
+    line-height: 1.18;
+    letter-spacing: -0.025em;
+  }
+
+  /* No Scrollbar Utility */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
   /* Tipografía de impacto & Números tabulares estrictos */
   .font-display-v2 {
     font-family: var(--font-fraunces), "Fraunces", Georgia, serif;
@@ -362,12 +388,45 @@
     transform: translateX(-50%) translateZ(0px);
   }
   .carousel-phone.prev {
-    transform: translateX(calc(-50% - 160px)) translateZ(-80px) rotateY(25deg) scale(0.68);
+    transform: translateX(calc(-50% - 140px)) translateZ(-80px) rotateY(22deg) scale(0.78);
     opacity: 0.4;
   }
   .carousel-phone.next {
-    transform: translateX(calc(-50% + 160px)) translateZ(-80px) rotateY(-25deg) scale(0.68);
+    transform: translateX(calc(-50% + 140px)) translateZ(-80px) rotateY(-22deg) scale(0.78);
     opacity: 0.4;
+  }
+}
+
+@media (max-width: 640px) {
+  .carousel-phone.prev {
+    transform: translateX(calc(-50% - 95px)) translateZ(-80px) rotateY(18deg) scale(0.76);
+    opacity: 0.35;
+  }
+  .carousel-phone.next {
+    transform: translateX(calc(-50% + 95px)) translateZ(-80px) rotateY(-18deg) scale(0.76);
+    opacity: 0.35;
+  }
+}
+
+@media (max-width: 420px) {
+  .carousel-phone.prev {
+    transform: translateX(calc(-50% - 75px)) translateZ(-80px) rotateY(16deg) scale(0.74);
+    opacity: 0.3;
+  }
+  .carousel-phone.next {
+    transform: translateX(calc(-50% + 75px)) translateZ(-80px) rotateY(-16deg) scale(0.74);
+    opacity: 0.3;
+  }
+}
+
+@media (max-width: 380px) {
+  .carousel-phone.prev {
+    transform: translateX(calc(-50% - 60px)) translateZ(-80px) rotateY(14deg) scale(0.72);
+    opacity: 0.25;
+  }
+  .carousel-phone.next {
+    transform: translateX(calc(-50% + 60px)) translateZ(-80px) rotateY(-14deg) scale(0.72);
+    opacity: 0.25;
   }
 }
 

@@ -55,7 +55,7 @@ export default function FuncionesIndexPage() {
                   <span>Edición v{APP_VERSION}</span>
                 </div>
 
-                <h1 className="font-display-v2 font-bold text-4xl sm:text-5xl lg:text-6xl text-foreground text-balance">
+                <h1 className="font-display-v2 font-bold text-fluid-h1 text-foreground text-balance">
                   Cinco módulos de precisión para tu{" "}
                   <span className="italic font-semibold text-primary">
                     soberanía financiera
@@ -71,10 +71,10 @@ export default function FuncionesIndexPage() {
                   respuesta instantánea tanto en Android como en el navegador.
                 </p>
 
-                <div className="flex flex-wrap items-center gap-3">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                   <a
                     href={APK_DOWNLOAD_URL}
-                    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-xs sm:text-sm font-semibold text-primary-foreground bg-primary hover:brightness-105 tactile-press"
+                    className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-xs sm:text-sm font-semibold text-primary-foreground bg-primary hover:brightness-105 tactile-press"
                   >
                     <span>Descargar APK v{APP_VERSION}</span>
                     <Download className="w-4 h-4" strokeWidth={1.75} />
@@ -83,7 +83,7 @@ export default function FuncionesIndexPage() {
                     href={APP_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-3 rounded-xl text-xs sm:text-sm font-semibold text-foreground bg-card border border-border hover:border-foreground/30 tactile-press"
+                    className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-xs sm:text-sm font-semibold text-foreground bg-card border border-border hover:border-foreground/30 tactile-press"
                   >
                     <span>Abrir Web App PWA</span>
                     <ExternalLink className="w-3.5 h-3.5" strokeWidth={1.75} />
@@ -115,7 +115,7 @@ export default function FuncionesIndexPage() {
 
                   {/* Narrativa del Módulo (6 Columnas) */}
                   <div className="lg:col-span-6 space-y-4">
-                    <h2 className="font-display-v2 font-bold text-2xl sm:text-3xl text-foreground group-hover:text-primary transition-colors">
+                    <h2 className="font-display-v2 font-bold text-fluid-h2 text-foreground group-hover:text-primary transition-colors">
                       <Link href={`/funciones/${feature.slug}`} className="focus-visible:outline-none">
                         {feature.title}
                       </Link>
@@ -123,13 +123,13 @@ export default function FuncionesIndexPage() {
                     <p className="text-muted-foreground text-sm sm:text-base leading-relaxed max-w-[62ch]">
                       {feature.heroSubtitle}
                     </p>
-                    <div className="pt-2 flex flex-wrap gap-6">
+                    <div className="pt-2 flex flex-wrap gap-4 sm:gap-6">
                       {feature.keyMetrics.map((m) => (
-                        <div key={m.label} className="space-y-0.5">
-                          <span className="block font-mono-tabular font-bold text-lg text-foreground">
+                        <div key={m.label} className="space-y-0.5 min-w-0">
+                          <span className="block font-mono-tabular font-bold text-base sm:text-lg text-foreground break-words">
                             {m.value}
                           </span>
-                          <span className="block text-[11px] font-mono text-muted-foreground">
+                          <span className="block text-[11px] font-mono text-muted-foreground break-words">
                             {m.label}
                           </span>
                         </div>
@@ -141,7 +141,7 @@ export default function FuncionesIndexPage() {
                   <div className="lg:col-span-3 flex lg:justify-end">
                     <Link
                       href={`/funciones/${feature.slug}`}
-                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-muted/70 group-hover:bg-primary group-hover:text-primary-foreground border border-border text-xs sm:text-sm font-semibold text-foreground transition-colors"
+                      className="inline-flex items-center justify-center w-full sm:w-auto gap-2 px-4 py-2.5 rounded-xl bg-muted/70 group-hover:bg-primary group-hover:text-primary-foreground border border-border text-xs sm:text-sm font-semibold text-foreground transition-colors"
                     >
                       <span>Explorar módulo</span>
                       <ArrowUpRight className="w-4 h-4" strokeWidth={1.75} />

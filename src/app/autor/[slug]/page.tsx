@@ -87,7 +87,7 @@ export default async function AuthorProfilePage({
                   <span>Código Abierto MIT</span>
                 </div>
 
-                <h1 className="font-display-v2 font-bold text-4xl sm:text-5xl text-foreground">
+                <h1 className="font-display-v2 font-bold text-fluid-h1 text-foreground">
                   {AUTHOR.name}
                 </h1>
 
@@ -105,12 +105,12 @@ export default async function AuthorProfilePage({
                   persistencia en el propio dispositivo y código auditable públicamente.
                 </p>
 
-                <div className="pt-2 flex flex-wrap gap-3">
+                <div className="pt-2 flex flex-col sm:flex-row flex-wrap gap-3">
                   <a
                     href={AUTHOR.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-primary text-primary-foreground text-xs sm:text-sm font-semibold hover:brightness-105"
+                    className="inline-flex items-center justify-center w-full sm:w-auto gap-2 px-4 py-2.5 rounded-xl bg-primary text-primary-foreground text-xs sm:text-sm font-semibold hover:brightness-105"
                   >
                     <Code2 className="w-4 h-4" strokeWidth={1.75} />
                     <span>GitHub (@{AUTHOR.alias})</span>
@@ -120,7 +120,7 @@ export default async function AuthorProfilePage({
                     href={REPO_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-card border border-border text-xs sm:text-sm font-semibold text-foreground hover:border-foreground/30"
+                    className="inline-flex items-center justify-center w-full sm:w-auto gap-2 px-4 py-2.5 rounded-xl bg-card border border-border text-xs sm:text-sm font-semibold text-foreground hover:border-foreground/30"
                   >
                     <ShieldCheck className="w-4 h-4 text-primary" strokeWidth={1.75} />
                     <span>Repositorio de Finance Pal</span>
@@ -128,9 +128,9 @@ export default async function AuthorProfilePage({
                   </a>
                   <a
                     href={`mailto:${AUTHOR.email}`}
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-muted border border-border text-xs sm:text-sm font-mono text-foreground hover:text-primary"
+                    className="inline-flex items-center justify-center w-full sm:w-auto gap-2 px-4 py-2.5 rounded-xl bg-muted border border-border text-xs sm:text-sm font-mono text-foreground hover:text-primary break-all"
                   >
-                    <Mail className="w-4 h-4" strokeWidth={1.75} />
+                    <Mail className="w-4 h-4 shrink-0" strokeWidth={1.75} />
                     <span>{AUTHOR.email}</span>
                   </a>
                 </div>
@@ -177,7 +177,7 @@ export default async function AuthorProfilePage({
         {/* Guías Publicadas por el Autor */}
         <section className="py-16 sm:py-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-            <h2 className="font-display-v2 font-bold text-2xl sm:text-3xl text-foreground">
+            <h2 className="font-display-v2 font-bold text-fluid-h2 text-foreground">
               Guías de finanzas personales escritas por {AUTHOR.name}
             </h2>
             <div className="divide-y divide-border border-y border-border">

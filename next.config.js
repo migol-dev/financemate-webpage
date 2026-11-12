@@ -10,6 +10,20 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
     contentDispositionType: "inline",
   },
+  async redirects() {
+    return [
+      {
+        source: "/funciones/presupuesto-y-metas",
+        destination: "/funciones/presupuesto-personal",
+        permanent: true,
+      },
+      {
+        source: "/funciones/prestamos-y-deudas",
+        destination: "/funciones/control-de-deudas",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

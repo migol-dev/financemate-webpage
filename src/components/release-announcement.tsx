@@ -18,6 +18,8 @@ import {
   Sun,
   Moon,
   Plus,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import * as Dialog from "@radix-ui/react-dialog";
 
@@ -216,6 +218,46 @@ export function ReleaseAnnouncement() {
   const [cryptoOutput, setCryptoOutput] = useState<string | null>(null);
   const [isEncrypting, setIsEncrypting] = useState(false);
 
+  // ── Tabs horizontal scrolling controls ────────────────────────────────
+  const tabsRef = React.useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const checkTabsScroll = useCallback(() => {
+    const el = tabsRef.current;
+    if (!el) return;
+    const { scrollLeft, scrollWidth, clientWidth } = el;
+    setCanScrollLeft(scrollLeft > 6);
+    setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 6);
+  }, []);
+
+  useEffect(() => {
+    const el = tabsRef.current;
+    if (!el || !isOpen) return;
+
+    // Chequear al abrir y en microtarea cuando el DOM se estabilice
+    checkTabsScroll();
+    const timeout = setTimeout(checkTabsScroll, 100);
+
+    const handleScroll = () => checkTabsScroll();
+    el.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
+
+    return () => {
+      clearTimeout(timeout);
+      el.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, [checkTabsScroll, isOpen]);
+
+  const handleScrollTabs = (direction: "left" | "right") => {
+    const el = tabsRef.current;
+    if (!el) return;
+    const offset = direction === "left" ? -220 : 220;
+    el.scrollBy({ left: offset, behavior: "smooth" });
+    setTimeout(checkTabsScroll, 250);
+  };
+
   useEffect(() => {
     try {
       const dismissed = localStorage.getItem(DISMISS_STORAGE_KEY);
@@ -314,34 +356,35 @@ export function ReleaseAnnouncement() {
           aria-label="Anuncio de nueva versión"
           className="relative z-40 bg-card border-b border-border text-foreground overflow-hidden"
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm">
-            <div className="flex items-center gap-2.5 flex-wrap justify-center sm:justify-start">
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold bg-muted text-primary border border-border">
+          <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2 sm:py-2.5 flex items-center justify-between gap-2 sm:gap-3 text-xs sm:text-sm">
+            <div className="flex items-center gap-2 min-w-0 flex-1">
+              <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] sm:text-[11px] font-mono font-bold bg-muted text-primary border border-border shrink-0">
                 <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-                <span>v2.0.0 Oficial</span>
+                <span>v2.0<span className="hidden sm:inline">.0 Oficial</span></span>
               </span>
-              <p className="text-foreground text-center sm:text-left leading-tight font-sans">
-                <span className="font-semibold">Edición Finance Pal v2.0.0 disponible:</span>{" "}
+              <p className="text-foreground text-left text-xs sm:text-sm truncate leading-tight font-sans">
+                <span className="font-semibold">Finance Pal v2.0 disponible</span>
                 <span className="hidden md:inline text-muted-foreground">
-                  Estética Warm Editorial Wealth, metas jerárquicas Drag &amp; Drop, 15 categorías y cifrado WebCrypto AES-256.
+                  : Estética Warm Editorial Wealth, metas jerárquicas Drag &amp; Drop, 15 categorías y cifrado WebCrypto AES-256.
                 </span>
               </p>
             </div>
 
-            <div className="flex items-center gap-2 shrink-0">
+            <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
               <button
                 type="button"
                 onClick={() => setIsOpen(true)}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-semibold text-xs text-primary-foreground bg-primary hover:brightness-105 tactile-press cursor-pointer"
+                className="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg font-semibold text-[11px] sm:text-xs text-primary-foreground bg-primary hover:brightness-105 tactile-press cursor-pointer whitespace-nowrap"
               >
-                <Sparkles className="w-3.5 h-3.5" strokeWidth={2} />
-                <span>Explorar novedades</span>
+                <Sparkles className="w-3.5 h-3.5 shrink-0" strokeWidth={2} />
+                <span className="hidden min-[400px]:inline">Explorar novedades</span>
+                <span className="min-[400px]:hidden">Novedades</span>
               </button>
               <button
                 type="button"
                 onClick={handleDismissBanner}
                 aria-label="Cerrar anuncio de lanzamiento"
-                className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted tactile-press cursor-pointer"
+                className="p-1 sm:p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted tactile-press cursor-pointer shrink-0"
               >
                 <X className="w-4 h-4" strokeWidth={2} />
               </button>
@@ -354,7 +397,7 @@ export function ReleaseAnnouncement() {
       <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
         <Dialog.Portal>
           <Dialog.Overlay className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm transition-opacity duration-300 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
-          <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-[95vw] max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl bg-card border border-border text-foreground shadow-2xl p-6 sm:p-8 outline-none overscroll-contain data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0">
+          <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-[calc(100vw-1.25rem)] sm:w-[95vw] max-w-4xl max-h-[88dvh] overflow-y-auto rounded-2xl bg-card border border-border text-foreground shadow-2xl p-4 sm:p-6 md:p-8 outline-none overscroll-contain data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0">
             {/* Header */}
             <div className="flex items-start justify-between gap-4 pb-6 border-b border-border">
               <div>
@@ -375,35 +418,76 @@ export function ReleaseAnnouncement() {
                 <button
                   type="button"
                   aria-label="Cerrar modal de novedades"
-                  className="p-2.5 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted tactile-press cursor-pointer"
+                  className="p-2 sm:p-2.5 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted tactile-press cursor-pointer shrink-0"
                 >
                   <X className="w-5 h-5" strokeWidth={2} />
                 </button>
               </Dialog.Close>
             </div>
 
-            {/* Navigation Tabs (7 Pillars) */}
-            <div className="py-5">
-              <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-thin">
-                {RELEASE_FEATURES.map((item) => {
-                  const Icon = item.icon;
-                  const isActive = activeTab === item.id;
-                  return (
-                    <button
-                      key={item.id}
-                      type="button"
-                      onClick={() => setActiveTab(item.id)}
-                      className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap tactile-press cursor-pointer ${
-                        isActive
-                          ? "bg-primary text-primary-foreground font-bold shadow-sm"
-                          : "bg-muted text-muted-foreground hover:text-foreground border border-border"
-                      }`}
-                    >
-                      <Icon className="w-3.5 h-3.5 shrink-0" strokeWidth={isActive ? 2.2 : 1.75} />
-                      <span>{item.shortTitle}</span>
-                    </button>
-                  );
-                })}
+            {/* Navigation Tabs (7 Pillars) con flechas de desplazamiento suave */}
+            <div className="py-3 sm:py-4">
+              <div className="relative flex items-center gap-1.5 sm:gap-2">
+                {/* Botón flecha izquierda */}
+                <button
+                  type="button"
+                  onClick={() => handleScrollTabs("left")}
+                  disabled={!canScrollLeft}
+                  aria-label="Ver características anteriores"
+                  title="Anterior"
+                  className={`p-1.5 sm:p-2 rounded-xl border border-border bg-card text-foreground hover:bg-muted tactile-press cursor-pointer shrink-0 transition-all ${
+                    canScrollLeft
+                      ? "opacity-100 hover:border-foreground/30 shadow-xs"
+                      : "opacity-25 pointer-events-none cursor-not-allowed"
+                  }`}
+                >
+                  <ChevronLeft className="w-4 h-4" strokeWidth={2} />
+                </button>
+
+                {/* Contenedor de pestañas con scroll suave y snap */}
+                <div
+                  ref={tabsRef}
+                  className="flex-1 flex items-center gap-2 overflow-x-auto py-1 scroll-smooth snap-x snap-mandatory no-scrollbar"
+                  style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+                >
+                  {RELEASE_FEATURES.map((item) => {
+                    const Icon = item.icon;
+                    const isActive = activeTab === item.id;
+                    return (
+                      <button
+                        key={item.id}
+                        type="button"
+                        onClick={() => {
+                          setActiveTab(item.id);
+                        }}
+                        className={`inline-flex items-center gap-2 px-3 sm:px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap shrink-0 snap-start tactile-press cursor-pointer transition-all ${
+                          isActive
+                            ? "bg-primary text-primary-foreground font-bold shadow-sm"
+                            : "bg-muted/80 text-muted-foreground hover:text-foreground hover:bg-muted border border-border"
+                        }`}
+                      >
+                        <Icon className="w-3.5 h-3.5 shrink-0" strokeWidth={isActive ? 2.2 : 1.75} />
+                        <span>{item.shortTitle}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Botón flecha derecha */}
+                <button
+                  type="button"
+                  onClick={() => handleScrollTabs("right")}
+                  disabled={!canScrollRight}
+                  aria-label="Ver características siguientes"
+                  title="Siguiente"
+                  className={`p-1.5 sm:p-2 rounded-xl border border-border bg-card text-foreground hover:bg-muted tactile-press cursor-pointer shrink-0 transition-all ${
+                    canScrollRight
+                      ? "opacity-100 hover:border-foreground/30 shadow-xs"
+                      : "opacity-25 pointer-events-none cursor-not-allowed"
+                  }`}
+                >
+                  <ChevronRight className="w-4 h-4" strokeWidth={2} />
+                </button>
               </div>
             </div>
 
@@ -524,7 +608,7 @@ export function ReleaseAnnouncement() {
                   {selectedFeature.previewType === "goals" && (
                     <div className="space-y-2.5">
                       {/* Folder switcher */}
-                      <div className="flex items-center gap-1 text-[11px] font-mono">
+                      <div className="flex flex-wrap items-center gap-1 text-[11px] font-mono">
                         {(["Biker 2026", "Viajes", "Emergencias"] as const).map((folder) => (
                           <button
                             key={folder}
@@ -598,11 +682,11 @@ export function ReleaseAnnouncement() {
                           placeholder="Nueva categoría (máx 20)"
                           value={newCatName}
                           onChange={(e) => setNewCatName(e.target.value)}
-                          className="flex-1 px-2.5 py-1 text-[11px] rounded-lg bg-slate-900 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"
+                          className="flex-1 min-w-0 px-2.5 py-1 text-[11px] rounded-lg bg-slate-900 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"
                         />
                         <button
                           type="submit"
-                          className="px-2.5 py-1 rounded-lg bg-cyan-400 text-slate-950 font-bold text-[11px] flex items-center gap-1 active:scale-[0.98] cursor-pointer"
+                          className="px-2.5 py-1 rounded-lg bg-cyan-400 text-slate-950 font-bold text-[11px] flex items-center gap-1 active:scale-[0.98] cursor-pointer shrink-0"
                         >
                           <Plus className="w-3 h-3" />
                           <span>Crear</span>
@@ -645,7 +729,7 @@ export function ReleaseAnnouncement() {
                   {selectedFeature.previewType === "macro" && (
                     <div className="space-y-2 text-xs">
                       {/* 4 Columns selector */}
-                      <div className="grid grid-cols-4 gap-1 text-center font-mono text-[10px]">
+                      <div className="grid grid-cols-2 min-[420px]:grid-cols-4 gap-1 text-center font-mono text-[10px]">
                         {[
                           { id: "general", label: "GENERAL", val: "57%" },
                           { id: "categories", label: "RUBROS", val: "15" },
@@ -707,13 +791,13 @@ export function ReleaseAnnouncement() {
                           value={cryptoPlaintext}
                           onChange={(e) => setCryptoPlaintext(e.target.value)}
                           placeholder="Dato a cifrar"
-                          className="flex-1 px-2.5 py-1 text-[11px] rounded-lg bg-slate-900 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400"
+                          className="flex-1 min-w-0 px-2.5 py-1 text-[11px] rounded-lg bg-slate-900 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400"
                         />
                         <button
                           type="button"
                           onClick={handleRunEncryption}
                           disabled={isEncrypting}
-                          className="px-2.5 py-1 rounded-lg bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-bold text-[11px] flex items-center gap-1 active:scale-[0.98] transition-all cursor-pointer disabled:opacity-50"
+                          className="px-2.5 py-1 rounded-lg bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-bold text-[11px] flex items-center gap-1 active:scale-[0.98] transition-all cursor-pointer disabled:opacity-50 shrink-0"
                         >
                           <Lock className="w-3 h-3" />
                           <span>Cifrar</span>

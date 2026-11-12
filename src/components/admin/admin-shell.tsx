@@ -58,11 +58,50 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
         </aside>
 
         <div className="flex-1">
-          <header className="flex items-center justify-between border-b border-border bg-background px-5 py-4 sm:hidden">
-            <p className="font-display font-semibold">Finance Pal Admin</p>
+          <header className="flex items-center justify-between border-b border-border bg-background px-4 py-3 sm:hidden">
+            <p className="font-display font-semibold text-sm">Finance Pal Admin</p>
             <ThemeToggle />
           </header>
-          <main className="p-5 sm:p-8">{children}</main>
+          {/* Barra de navegación móvil para administradores en pantallas <640px */}
+          <nav
+            aria-label="Navegación móvil de administración"
+            className="flex items-center gap-1.5 overflow-x-auto no-scrollbar border-b border-border bg-background/95 backdrop-blur px-3 py-2 sm:hidden"
+          >
+            {LINKS.map((l) => {
+              const active = pathname === l.href;
+              return (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  className={cn(
+                    "inline-flex shrink-0 items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium transition-colors",
+                    active
+                      ? "bg-primary text-primary-foreground font-semibold"
+                      : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+                  )}
+                >
+                  <l.icon className="h-3.5 w-3.5" />
+                  <span>{l.label}</span>
+                </Link>
+              );
+            })}
+            <Link
+              href="/"
+              target="_blank"
+              className="inline-flex shrink-0 items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium text-muted-foreground hover:bg-secondary hover:text-foreground"
+            >
+              <ExternalLink className="h-3.5 w-3.5" />
+              <span>Ver sitio</span>
+            </Link>
+            <button
+              onClick={() => signOut({ callbackUrl: "/" })}
+              className="inline-flex shrink-0 items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium text-destructive hover:bg-destructive/10"
+            >
+              <LogOut className="h-3.5 w-3.5" />
+              <span>Salir</span>
+            </button>
+          </nav>
+          <main className="p-4 sm:p-8">{children}</main>
         </div>
       </div>
     </div>

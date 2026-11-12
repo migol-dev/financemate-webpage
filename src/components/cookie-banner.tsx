@@ -38,46 +38,46 @@ export function CookieBanner() {
     <aside
       role="region"
       aria-label="Aviso de cookies y almacenamiento local"
-      className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:max-w-md z-50 animate-in fade-in slide-in-from-bottom-5 duration-300 print:hidden"
+      className="fixed bottom-3 left-3 right-3 sm:bottom-4 sm:left-auto sm:right-6 sm:max-w-md z-50 animate-in fade-in slide-in-from-bottom-5 duration-300 print:hidden"
     >
-      <div className="p-4 sm:p-5 rounded-2xl bg-card/95 border border-border editorial-surface backdrop-blur-xl text-foreground text-xs sm:text-sm">
-        <div className="flex items-start gap-3">
-          <div className="p-2 rounded-xl bg-muted text-primary border border-border shrink-0 mt-0.5">
-            <Cookie className="w-5 h-5" strokeWidth={1.75} />
+      <div className="p-3.5 sm:p-5 rounded-2xl bg-card/95 border border-border editorial-surface backdrop-blur-xl text-foreground text-xs sm:text-sm shadow-xl">
+        <div className="flex items-start gap-2.5 sm:gap-3">
+          <div className="p-1.5 sm:p-2 rounded-xl bg-muted text-primary border border-border shrink-0 mt-0.5">
+            <Cookie className="w-4 h-4 sm:w-5 sm:h-5" strokeWidth={1.75} />
           </div>
-          <div className="flex-1 space-y-2">
+          <div className="flex-1 space-y-1.5 sm:space-y-2 min-w-0">
             <div className="flex items-center justify-between gap-2">
-              <h4 className="font-display font-bold text-foreground text-xs sm:text-sm">
+              <h4 className="font-display font-bold text-foreground text-xs sm:text-sm truncate">
                 Privacidad y Almacenamiento Local
               </h4>
               <button
                 type="button"
                 onClick={handleAccept}
-                className="text-muted-foreground hover:text-foreground p-1.5 rounded-lg hover:bg-muted tactile-press"
+                className="text-muted-foreground hover:text-foreground p-1 sm:p-1.5 rounded-lg hover:bg-muted tactile-press shrink-0"
                 aria-label="Cerrar aviso"
               >
-                <X className="w-4 h-4" />
+                <X className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </button>
             </div>
-            <p className="text-muted-foreground text-xs leading-relaxed">
-              Utilizamos almacenamiento local (<code className="text-primary font-mono text-[11px]">localStorage</code>)
-              exclusivamente para fines técnicos y conteo anónimo de descargas.{" "}
-              <strong className="text-foreground">Cero cookies de rastreo publicitario.</strong>
+            <p className="text-muted-foreground text-[11px] sm:text-xs leading-relaxed">
+              Almacenamiento local (<code className="text-primary font-mono text-[10px] sm:text-[11px]">localStorage</code>)
+              exclusivo para funciones técnicas y conteo anónimo.{" "}
+              <strong className="text-foreground">Cero rastreo publicitario.</strong>
             </p>
-            <div className="flex items-center gap-3 pt-1">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 pt-0.5">
               <button
                 type="button"
                 onClick={handleAccept}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl font-semibold text-xs text-primary-foreground bg-primary hover:brightness-105 tactile-press cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl font-semibold text-xs text-primary-foreground bg-primary hover:brightness-105 tactile-press cursor-pointer"
               >
                 <Check className="w-3.5 h-3.5" />
                 <span>Aceptar aviso</span>
               </button>
               <Link
                 href="/cookies"
-                className="text-xs text-foreground hover:text-primary underline underline-offset-2 transition-colors font-medium"
+                className="text-[11px] sm:text-xs text-foreground hover:text-primary underline underline-offset-2 transition-colors font-medium break-words"
               >
-                Consultar política de cookies
+                Política de cookies
               </Link>
             </div>
           </div>

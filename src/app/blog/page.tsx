@@ -60,7 +60,7 @@ export default function BlogIndexPage() {
                   <span>Educación Financiera Abierta</span>
                 </div>
 
-                <h1 className="font-display-v2 font-bold text-4xl sm:text-5xl lg:text-6xl text-foreground text-balance">
+                <h1 className="font-display-v2 font-bold text-fluid-h1 text-foreground text-balance">
                   Guías prácticas de{" "}
                   <span className="italic font-semibold text-primary">
                     finanzas personales
@@ -118,7 +118,7 @@ export default function BlogIndexPage() {
 
                   {/* Título y Resumen (7 Columnas) */}
                   <div className="lg:col-span-7 space-y-3">
-                    <h2 className="font-display-v2 font-bold text-2xl sm:text-3xl text-foreground group-hover:text-primary transition-colors text-balance">
+                    <h2 className="font-display-v2 font-bold text-fluid-h2 text-foreground group-hover:text-primary transition-colors text-balance">
                       <Link href={`/blog/${post.slug}`}>
                         {post.title}
                       </Link>
@@ -142,7 +142,7 @@ export default function BlogIndexPage() {
                   <div className="lg:col-span-2 flex lg:justify-end">
                     <Link
                       href={`/blog/${post.slug}`}
-                      className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-muted/70 group-hover:bg-primary group-hover:text-primary-foreground border border-border text-xs font-semibold text-foreground transition-colors"
+                      className="inline-flex items-center justify-center w-full sm:w-auto gap-1.5 px-4 py-2.5 rounded-xl bg-muted/70 group-hover:bg-primary group-hover:text-primary-foreground border border-border text-xs font-semibold text-foreground transition-colors"
                     >
                       <span>Leer guía</span>
                       <ArrowUpRight className="w-4 h-4" strokeWidth={1.75} />
@@ -162,7 +162,7 @@ export default function BlogIndexPage() {
                 <Layers className="w-3.5 h-3.5" strokeWidth={1.75} />
                 <span>DE LA TEORÍA A LA PRÁCTICA</span>
               </span>
-              <h2 className="font-display-v2 font-bold text-2xl sm:text-3xl text-foreground">
+              <h2 className="font-display-v2 font-bold text-fluid-h2 text-foreground">
                 Aplica estas guías con los módulos gratuitos de Finance Pal
               </h2>
             </div>

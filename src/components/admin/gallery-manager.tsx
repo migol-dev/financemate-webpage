@@ -28,23 +28,23 @@ function SortableRow({ img, onDelete }: { img: GalleryImage; onDelete: (id: stri
     <div
       ref={setNodeRef}
       style={{ transform: CSS.Transform.toString(transform), transition }}
-      className={`flex items-center gap-4 rounded-2xl border border-border bg-card p-3 ${
+      className={`flex items-center gap-2 sm:gap-4 rounded-2xl border border-border bg-card p-2 sm:p-3 ${
         isDragging ? "opacity-60" : ""
       }`}
     >
-      <button {...attributes} {...listeners} className="cursor-grab text-muted-foreground">
-        <GripVertical className="h-5 w-5" />
+      <button {...attributes} {...listeners} className="cursor-grab text-muted-foreground p-1 shrink-0">
+        <GripVertical className="h-4 w-4 sm:h-5 sm:w-5" />
       </button>
-      <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl bg-secondary">
+      <div className="relative h-12 w-12 sm:h-16 sm:w-16 shrink-0 overflow-hidden rounded-xl bg-secondary">
         <Image src={img.image_url} alt={img.title} fill className="object-cover" />
       </div>
       <div className="min-w-0 flex-1">
-        <p className="truncate font-medium">{img.title}</p>
-        <p className="truncate text-xs text-muted-foreground">{img.description}</p>
+        <p className="truncate text-xs sm:text-sm font-medium">{img.title}</p>
+        <p className="truncate text-[11px] sm:text-xs text-muted-foreground">{img.description}</p>
       </div>
       <button
         onClick={() => onDelete(img.id)}
-        className="rounded-lg p-2 text-destructive hover:bg-destructive/10"
+        className="rounded-lg p-1.5 sm:p-2 text-destructive hover:bg-destructive/10 shrink-0"
         aria-label="Eliminar"
       >
         <Trash2 className="h-4 w-4" />
@@ -121,7 +121,7 @@ export function GalleryManager({ initial }: { initial: GalleryImage[] }) {
 
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_1.3fr]">
-      <Card className="h-fit p-6">
+      <Card className="h-fit p-4 sm:p-6">
         <h2 className="font-display font-semibold">Añadir imagen</h2>
         <form onSubmit={handleUpload} className="mt-4 space-y-3">
           <Input

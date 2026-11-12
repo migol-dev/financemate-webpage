@@ -88,7 +88,7 @@ export function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
         <div
           role="radiogroup"
           aria-labelledby="rating-group-label"
-          className="flex items-center gap-1"
+          className="flex flex-wrap items-center gap-1"
         >
           {[1, 2, 3, 4, 5].map((n) => (
             <button
@@ -98,7 +98,7 @@ export function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
               aria-checked={rating === n}
               onClick={() => setRating(n)}
               aria-label={`${n} estrellas`}
-              className="h-11 w-11 inline-flex items-center justify-center rounded-xl hover:bg-muted tactile-press cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="h-11 w-11 inline-flex items-center justify-center rounded-xl hover:bg-muted tactile-press cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring shrink-0"
             >
               <Star
                 className={`h-6 w-6 transition-colors ${
@@ -109,7 +109,7 @@ export function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
               />
             </button>
           ))}
-          <span className="text-xs font-mono-tabular text-primary font-semibold ms-2">
+          <span className="text-xs font-mono-tabular text-primary font-semibold ms-2 py-1">
             {rating} / 5 estrellas
           </span>
         </div>
@@ -237,7 +237,7 @@ export function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
       <button
         type="submit"
         disabled={status === "loading"}
-        className="w-full sm:w-auto btn-primary ps-6 pe-5 disabled:opacity-50 disabled:cursor-not-allowed group"
+        className="w-full sm:w-auto btn-primary ps-6 pe-5 justify-center disabled:opacity-50 disabled:cursor-not-allowed group"
       >
         {status === "loading" ? (
           <Loader2 className="h-4 w-4 animate-spin" />

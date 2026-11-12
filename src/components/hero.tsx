@@ -25,35 +25,6 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
   return (
     <section id="top" className="relative pt-8 pb-16 lg:pt-14 lg:pb-24 border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Cabezal Editorial Superior (Estilo Cuaderno Financiero de Alta Dirección) */}
-        <div className="flex flex-wrap items-center justify-between gap-3 pb-5 mb-8 lg:mb-12 border-b border-border text-xs font-mono text-muted-foreground">
-          <div className="flex items-center gap-2.5">
-            <span className="inline-block w-2 h-2 rounded-full bg-primary" />
-            <span className="uppercase tracking-widest font-semibold text-foreground">
-              Cuaderno Patrimonial · Edición v{version}
-            </span>
-            <span className="hidden sm:inline text-border">|</span>
-            <span className="hidden sm:inline italic font-serif text-sm text-foreground/90">
-              Warm Editorial Wealth
-            </span>
-          </div>
-          <div className="flex items-center gap-4 tabular-nums">
-            <span>AES-GCM 256-BIT</span>
-            <span className="text-border">·</span>
-            <span>WCAG AAA 8.5:1</span>
-            <span className="hidden md:inline text-border">·</span>
-            <a
-              href={githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden md:inline-flex items-center gap-1 text-foreground hover:text-primary transition-colors underline underline-offset-4"
-            >
-              <span>Licencia MIT</span>
-              <ArrowUpRight className="w-3.5 h-3.5" strokeWidth={1.75} />
-            </a>
-          </div>
-        </div>
-
         {/* Composición Asimétrica de 12 Columnas (7 Columnas Manifiesto / 5 Columnas Escenario Interactivo) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
           {/* Columna Editorial Principal (7 Columnas — De-Boxed sobre el lienzo) */}
@@ -77,7 +48,7 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
               <span>Cero servidores intermediarios</span>
             </motion.div>
 
-            <h1 className="font-display-v2 font-bold text-4xl sm:text-6xl lg:text-[4.15rem] text-foreground tracking-[-0.035em] leading-[1.04] text-balance">
+            <h1 className="font-display-v2 font-bold text-fluid-hero text-foreground tracking-[-0.035em] leading-[1.04] text-balance">
               <span className="block text-xs sm:text-sm font-mono font-semibold uppercase tracking-[0.14em] text-primary mb-3">
                 Finance Pal · App de Finanzas Personales Gratis y Privada
               </span>
@@ -155,7 +126,7 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
                 hidden: { opacity: 0, y: 12, filter: "blur(4px)" },
                 visible: { opacity: 1, y: 0, filter: "blur(0px)" },
               }}
-              className="pt-6 mt-4 border-t border-border grid grid-cols-2 sm:grid-cols-4 gap-6"
+              className="pt-6 mt-4 border-t border-border grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6"
             >
               {[
                 { label: "Criptografía Local", value: "AES-256", sub: "PBKDF2 100k rondas" },
@@ -164,13 +135,13 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
                 { label: "Contraste Óptico", value: "8.5 : 1", sub: "Certificado WCAG AAA" },
               ].map((stat) => (
                 <div key={stat.label} className="space-y-1 group cursor-default">
-                  <span className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground block">
+                  <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-muted-foreground block truncate">
                     {stat.label}
                   </span>
-                  <div className="font-mono-tabular font-bold text-xl sm:text-2xl text-foreground group-hover:text-primary transition-colors duration-200">
+                  <div className="font-mono-tabular font-bold text-lg sm:text-2xl text-foreground group-hover:text-primary transition-colors duration-200">
                     {stat.value}
                   </div>
-                  <span className="text-xs text-muted-foreground block">{stat.sub}</span>
+                  <span className="text-[11px] sm:text-xs text-muted-foreground block truncate">{stat.sub}</span>
                 </div>
               ))}
             </motion.div>
@@ -178,14 +149,14 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
 
           {/* Columna de Escenario Interactivo (5 Columnas — Cuaderno de Auditoría en Vivo) */}
           <ScrollParallaxStage intensity={16} className="lg:col-span-5">
-            <div className="rounded-2xl bg-card border border-border border-t-white/15 p-5 sm:p-6 editorial-surface space-y-5">
+            <div className="rounded-2xl bg-card border border-border border-t-white/15 p-4 sm:p-6 editorial-surface space-y-4 sm:space-y-5">
               {/* Cabecera del inspector */}
               <div className="flex items-center justify-between gap-2 pb-4 border-b border-border">
-                <div>
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-primary font-semibold block">
+                <div className="min-w-0 flex-1">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-primary font-semibold block truncate">
                     Inspector Patrimonial Interactivo
                   </span>
-                  <h2 className="font-display font-bold text-lg text-foreground tracking-tight">
+                  <h2 className="font-display font-bold text-base sm:text-lg text-foreground tracking-tight truncate">
                     Hoja de Balance Mensual
                   </h2>
                 </div>
@@ -194,7 +165,7 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
                   onClick={() => setPrivacyMask((p) => !p)}
                   aria-label={privacyMask ? "Mostrar importes" : "Ocultar importes (Modo Privado)"}
                   title="Probar modo de privacidad instantáneo"
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-muted border border-border text-xs font-mono text-muted-foreground hover:text-foreground tactile-press cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-muted border border-border text-xs font-mono text-muted-foreground hover:text-foreground tactile-press cursor-pointer shrink-0"
                 >
                   {privacyMask ? (
                     <EyeOff className="w-3.5 h-3.5 text-editorial-amber" strokeWidth={1.75} />
@@ -209,7 +180,7 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
               <div
                 role="tablist"
                 aria-label="Vistas del cuaderno interactivo"
-                className="grid grid-cols-3 gap-1 p-1 rounded-xl bg-muted border border-border text-xs font-medium"
+                className="grid grid-cols-3 gap-1 p-1 rounded-xl bg-muted border border-border text-[11px] sm:text-xs font-medium"
               >
                 {[
                   { id: "patrimonio", label: "Balance", icon: Sparkles },
@@ -225,14 +196,14 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
                       role="tab"
                       aria-selected={active}
                       onClick={() => setLedgerMode(tab.id as LedgerMode)}
-                      className={`inline-flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-lg tactile-press cursor-pointer ${
+                      className={`inline-flex items-center justify-center gap-1 sm:gap-1.5 py-1.5 sm:py-2 px-1 sm:px-2.5 rounded-lg tactile-press cursor-pointer min-w-0 ${
                         active
                           ? "bg-card text-foreground font-semibold shadow-sm border border-border"
                           : "text-muted-foreground hover:text-foreground"
                       }`}
                     >
-                      <Icon className="w-3.5 h-3.5" strokeWidth={active ? 2 : 1.5} />
-                      <span>{tab.label}</span>
+                      <Icon className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" strokeWidth={active ? 2 : 1.5} />
+                      <span className="truncate">{tab.label}</span>
                     </button>
                   );
                 })}
@@ -241,46 +212,46 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
               {/* Contenido del escenario según pestaña */}
               {ledgerMode === "patrimonio" && (
                 <div className="space-y-4">
-                  <div className="pb-4 border-b border-border flex items-baseline justify-between">
-                    <div>
-                      <span className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground block">
+                  <div className="pb-4 border-b border-border flex flex-wrap items-baseline justify-between gap-2">
+                    <div className="min-w-0">
+                      <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-muted-foreground block truncate">
                         Patrimonio Neto Consolidado
                       </span>
-                      <div className="font-display font-bold text-3xl sm:text-4xl text-foreground font-mono-tabular tracking-tight mt-1">
+                      <div className="font-display font-bold text-2xl sm:text-4xl text-foreground font-mono-tabular tracking-tight mt-1 truncate">
                         {privacyMask ? "••••••••" : "$124,590.00"}
                       </div>
                     </div>
-                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-muted text-editorial-emerald text-xs font-mono-tabular font-semibold border border-border">
+                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-muted text-editorial-emerald text-xs font-mono-tabular font-semibold border border-border shrink-0">
                       ↑ +14.2%
                     </span>
                   </div>
 
                   {/* Matriz Semántica Financiera con líneas de 1px */}
                   <div className="divide-y divide-border text-xs">
-                    <div className="py-2.5 flex items-center justify-between editorial-text-hover">
-                      <div className="flex items-center gap-2.5">
-                        <span className="w-2 h-2 rounded-full bg-editorial-emerald" />
-                        <span className="font-medium text-foreground">Ingresos y Liquidez</span>
+                    <div className="py-2.5 flex items-center justify-between gap-2 editorial-text-hover">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <span className="w-2 h-2 rounded-full bg-editorial-emerald shrink-0" />
+                        <span className="font-medium text-foreground truncate">Ingresos y Liquidez</span>
                       </div>
-                      <span className="font-mono-tabular font-semibold text-editorial-emerald">
+                      <span className="font-mono-tabular font-semibold text-editorial-emerald shrink-0 text-right">
                         {privacyMask ? "••••••" : "+$48,200.00"}
                       </span>
                     </div>
-                    <div className="py-2.5 flex items-center justify-between editorial-text-hover">
-                      <div className="flex items-center gap-2.5">
-                        <span className="w-2 h-2 rounded-full bg-editorial-terracotta" />
-                        <span className="font-medium text-foreground">Egresos Operativos (15 rubros)</span>
+                    <div className="py-2.5 flex items-center justify-between gap-2 editorial-text-hover">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <span className="w-2 h-2 rounded-full bg-editorial-terracotta shrink-0" />
+                        <span className="font-medium text-foreground truncate">Egresos Operativos (15 rubros)</span>
                       </div>
-                      <span className="font-mono-tabular font-semibold text-editorial-terracotta">
+                      <span className="font-mono-tabular font-semibold text-editorial-terracotta shrink-0 text-right">
                         {privacyMask ? "••••••" : "-$16,410.00"}
                       </span>
                     </div>
-                    <div className="py-2.5 flex items-center justify-between editorial-text-hover">
-                      <div className="flex items-center gap-2.5">
-                        <span className="w-2 h-2 rounded-full bg-editorial-cobalt" />
-                        <span className="font-medium text-foreground">Inversión &amp; Reserva Activa</span>
+                    <div className="py-2.5 flex items-center justify-between gap-2 editorial-text-hover">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <span className="w-2 h-2 rounded-full bg-editorial-cobalt shrink-0" />
+                        <span className="font-medium text-foreground truncate">Inversión &amp; Reserva Activa</span>
                       </div>
-                      <span className="font-mono-tabular font-semibold text-editorial-cobalt">
+                      <span className="font-mono-tabular font-semibold text-editorial-cobalt shrink-0 text-right">
                         {privacyMask ? "••••••" : "$92,800.00"}
                       </span>
                     </div>
@@ -302,8 +273,8 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
               {ledgerMode === "metas" && (
                 <div className="space-y-3 text-xs">
                   <div className="flex items-center justify-between text-[11px] font-mono text-muted-foreground pb-1 border-b border-border">
-                    <span>CARPETA: PATRIMONIO &amp; LIQUIDEZ</span>
-                    <span className="text-primary font-semibold">Drag &amp; Drop ⠿</span>
+                    <span className="truncate">CARPETA: PATRIMONIO &amp; LIQUIDEZ</span>
+                    <span className="text-primary font-semibold shrink-0">Drag &amp; Drop ⠿</span>
                   </div>
                   {[
                     {
@@ -325,9 +296,9 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
                       key={goal.name}
                       className="p-3.5 rounded-xl bg-muted/60 border border-border space-y-2"
                     >
-                      <div className="flex items-center justify-between">
-                        <span className="font-semibold text-foreground">{goal.name}</span>
-                        <span className="font-mono-tabular text-primary font-bold">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="font-semibold text-foreground truncate">{goal.name}</span>
+                        <span className="font-mono-tabular text-primary font-bold shrink-0">
                           {goal.pct}%
                         </span>
                       </div>
@@ -337,11 +308,11 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
                           style={{ width: `${goal.pct}%` }}
                         />
                       </div>
-                      <div className="flex justify-between text-[11px] font-mono-tabular text-muted-foreground">
-                        <span>
+                      <div className="flex justify-between gap-2 text-[11px] font-mono-tabular text-muted-foreground">
+                        <span className="truncate">
                           {privacyMask ? "••••" : goal.saved} / {privacyMask ? "••••" : goal.target}
                         </span>
-                        <span>Ritmo: {goal.pace}</span>
+                        <span className="shrink-0">Ritmo: {goal.pace}</span>
                       </div>
                     </div>
                   ))}
@@ -351,12 +322,12 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
               {ledgerMode === "cifrado" && (
                 <div className="space-y-3 text-xs font-mono">
                   <div className="p-3.5 rounded-xl bg-muted/60 border border-border space-y-2">
-                    <div className="flex items-center justify-between text-foreground font-semibold">
-                      <span className="inline-flex items-center gap-1.5">
-                        <Lock className="w-3.5 h-3.5 text-primary" strokeWidth={2} />
-                        <span>Bóveda Local WebCrypto</span>
+                    <div className="flex items-center justify-between gap-2 text-foreground font-semibold">
+                      <span className="inline-flex items-center gap-1.5 truncate">
+                        <Lock className="w-3.5 h-3.5 text-primary shrink-0" strokeWidth={2} />
+                        <span className="truncate">Bóveda Local WebCrypto</span>
                       </span>
-                      <span className="text-[10px] px-2 py-0.5 rounded bg-card border border-border text-primary">
+                      <span className="text-[10px] px-2 py-0.5 rounded bg-card border border-border text-primary shrink-0">
                         VERIFICADO
                       </span>
                     </div>
@@ -365,15 +336,15 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
                       de escribirse en SQLite o IndexedDB.
                     </p>
                     <div className="pt-2 border-t border-border space-y-1 text-[11px] tabular-nums">
-                      <div className="flex justify-between">
+                      <div className="flex justify-between gap-2">
                         <span className="text-muted-foreground">Algoritmo:</span>
                         <span className="text-foreground">AES-GCM 256-bit</span>
                       </div>
-                      <div className="flex justify-between">
+                      <div className="flex justify-between gap-2">
                         <span className="text-muted-foreground">Derivación KDF:</span>
                         <span className="text-foreground">PBKDF2 · 100,000 iter.</span>
                       </div>
-                      <div className="flex justify-between">
+                      <div className="flex justify-between gap-2">
                         <span className="text-muted-foreground">2FA Local:</span>
                         <span className="text-editorial-emerald font-semibold">TOTP Activo</span>
                       </div>

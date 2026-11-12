@@ -32,7 +32,7 @@ const SECURITY_LAYERS = [
 
 export function GithubSection({ repoUrl }: { repoUrl: string }) {
   return (
-    <section id="seguridad" className="py-24 border-b border-border relative">
+    <section id="seguridad" className="py-12 sm:py-16 lg:py-24 border-b border-border relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
           {/* Columna Izquierda: Manifiesto Criptográfico y Código Abierto (5 Columnas) */}
@@ -41,7 +41,7 @@ export function GithubSection({ repoUrl }: { repoUrl: string }) {
               <span className="inline-block text-xs font-mono uppercase tracking-widest text-primary font-semibold">
                 06 / ARQUITECTURA CRIPTOGRÁFICA
               </span>
-              <h2 className="font-display-v2 font-bold text-3xl sm:text-4xl lg:text-5xl text-foreground text-balance">
+              <h2 className="font-display-v2 font-bold text-fluid-h2 text-foreground text-balance">
                 Privacidad verificable{" "}
                 <EditorialHighlight className="italic font-semibold text-primary">
                   por código
@@ -76,12 +76,12 @@ export function GithubSection({ repoUrl }: { repoUrl: string }) {
                 los binarios compilados directamente en GitHub.
               </p>
 
-              <div className="flex flex-wrap gap-2.5">
+              <div className="flex flex-col min-[420px]:flex-row flex-wrap gap-2.5">
                 <a
                   href={repoUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="btn-primary ps-5 pe-4 py-2.5 text-xs group"
+                  className="btn-primary ps-5 pe-4 py-2.5 text-xs justify-center group"
                 >
                   <span>Inspeccionar repositorio</span>
                   <ArrowUpRight
@@ -93,7 +93,7 @@ export function GithubSection({ repoUrl }: { repoUrl: string }) {
                   href={`${repoUrl}/releases`}
                   target="_blank"
                   rel="noreferrer"
-                  className="btn-ghost px-4 py-2.5 text-xs"
+                  className="btn-ghost px-4 py-2.5 text-xs justify-center"
                 >
                   <Tag className="w-3.5 h-3.5 text-primary" strokeWidth={1.75} />
                   <span>Consultar versiones</span>
@@ -102,7 +102,7 @@ export function GithubSection({ repoUrl }: { repoUrl: string }) {
                   href={`${repoUrl}/branches`}
                   target="_blank"
                   rel="noreferrer"
-                  className="btn-ghost px-4 py-2.5 text-xs"
+                  className="btn-ghost px-4 py-2.5 text-xs justify-center"
                 >
                   <GitBranch className="w-3.5 h-3.5 text-muted-foreground" strokeWidth={1.75} />
                   <span>Ver ramas activas</span>

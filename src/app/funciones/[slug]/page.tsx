@@ -139,7 +139,7 @@ export default async function FeatureDetailPage({
                   <span>Finance Pal v{APP_VERSION}</span>
                 </div>
 
-                <h1 className="font-display-v2 font-bold text-3xl sm:text-5xl lg:text-[3.5rem] text-foreground text-balance leading-[1.05]">
+                <h1 className="font-display-v2 font-bold text-fluid-h1 text-foreground text-balance leading-[1.05]">
                   {feature.title}
                 </h1>
 
@@ -147,10 +147,10 @@ export default async function FeatureDetailPage({
                   {feature.heroSubtitle}
                 </p>
 
-                <div className="pt-2 flex flex-wrap items-center gap-3.5">
+                <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">
                   <a
                     href={APK_DOWNLOAD_URL}
-                    className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl text-sm font-semibold text-primary-foreground bg-primary hover:brightness-105 tactile-press"
+                    className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl text-sm font-semibold text-primary-foreground bg-primary hover:brightness-105 tactile-press"
                   >
                     <span>Descargar APK Gratis (v{APP_VERSION})</span>
                     <Download className="w-4 h-4" strokeWidth={1.75} />
@@ -159,7 +159,7 @@ export default async function FeatureDetailPage({
                     href={APP_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl text-sm font-semibold text-foreground bg-card border border-border hover:border-foreground/30 tactile-press"
+                    className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl text-sm font-semibold text-foreground bg-card border border-border hover:border-foreground/30 tactile-press"
                   >
                     <span>Abrir en el navegador (PWA)</span>
                     <ExternalLink className="w-4 h-4" strokeWidth={1.75} />
@@ -176,17 +176,17 @@ export default async function FeatureDetailPage({
                   {feature.keyMetrics.map((metric) => (
                     <div
                       key={metric.label}
-                      className="py-4 flex items-baseline justify-between gap-4"
+                      className="py-4 flex flex-col min-[380px]:flex-row min-[380px]:items-baseline justify-between gap-1 min-[380px]:gap-4"
                     >
-                      <div>
-                        <span className="block text-sm font-semibold text-foreground">
+                      <div className="min-w-0">
+                        <span className="block text-sm font-semibold text-foreground break-words">
                           {metric.label}
                         </span>
-                        <span className="block text-xs text-muted-foreground">
+                        <span className="block text-xs text-muted-foreground break-words">
                           {metric.detail}
                         </span>
                       </div>
-                      <span className="font-mono-tabular font-bold text-2xl sm:text-3xl text-primary shrink-0">
+                      <span className="font-mono-tabular font-bold text-xl sm:text-2xl lg:text-3xl text-primary shrink-0">
                         {metric.value}
                       </span>
                     </div>
@@ -205,7 +205,7 @@ export default async function FeatureDetailPage({
                 <span className="text-xs font-mono font-bold uppercase tracking-wider text-primary">
                   01 / FUNDAMENTO PATRIMONIAL
                 </span>
-                <h2 className="font-display-v2 font-bold text-2xl sm:text-3xl text-foreground text-balance">
+                <h2 className="font-display-v2 font-bold text-fluid-h2 text-foreground text-balance">
                   {feature.problemStatement.heading}
                 </h2>
               </div>
@@ -226,7 +226,7 @@ export default async function FeatureDetailPage({
               <span className="text-xs font-mono font-bold uppercase tracking-wider text-primary">
                 02 / FLUJO DE OPERACIÓN
               </span>
-              <h2 className="font-display-v2 font-bold text-3xl sm:text-4xl text-foreground">
+              <h2 className="font-display-v2 font-bold text-fluid-h2 text-foreground">
                 Cómo funciona paso a paso en Finance Pal
               </h2>
             </div>
@@ -267,7 +267,7 @@ export default async function FeatureDetailPage({
                   <span className="text-xs font-mono font-bold uppercase tracking-wider text-primary">
                     03 / VENTAJAS DE ARQUITECTURA
                   </span>
-                  <h2 className="font-display-v2 font-bold text-2xl sm:text-3xl text-foreground">
+                  <h2 className="font-display-v2 font-bold text-fluid-h2 text-foreground">
                     Diseñado para durar años sin comprometer tu privacidad
                   </h2>
                 </div>
@@ -345,7 +345,7 @@ export default async function FeatureDetailPage({
                 <span className="text-xs font-mono font-bold uppercase tracking-wider text-primary">
                   04 / DUDAS FRECUENTES
                 </span>
-                <h2 className="font-display-v2 font-bold text-2xl sm:text-3xl text-foreground">
+                <h2 className="font-display-v2 font-bold text-fluid-h2 text-foreground">
                   Preguntas sobre {feature.shortTitle}
                 </h2>
               </div>

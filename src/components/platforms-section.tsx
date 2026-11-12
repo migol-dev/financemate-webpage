@@ -7,7 +7,7 @@ export function PlatformsSection() {
   return (
     <section
       id="plataformas"
-      className="py-20 lg:py-28 border-b border-border relative"
+      className="py-12 sm:py-16 lg:py-24 border-b border-border relative"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Composición Asimétrica de 12 Columnas: 5 Cols Índice Editorial / 7 Cols Superficies */}
@@ -17,7 +17,7 @@ export function PlatformsSection() {
             <span className="inline-block text-xs font-mono uppercase tracking-widest text-primary font-semibold">
               01 / SUPERFICIES DE EJECUCIÓN
             </span>
-            <h2 className="font-display-v2 font-bold text-3xl sm:text-4xl lg:text-5xl text-foreground text-balance">
+            <h2 className="font-display-v2 font-bold text-fluid-h2 text-foreground text-balance">
               Diseñado para operar donde{" "}
               <EditorialHighlight className="italic font-semibold text-primary">
                 tú decidas auditar
@@ -96,7 +96,7 @@ export function PlatformsSection() {
                   </ul>
                 </div>
 
-                <div className="pt-4 border-t border-border flex items-center justify-between">
+                <div className="pt-4 border-t border-border flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <span className="text-xs font-mono-tabular text-muted-foreground">
                     Binario verificado · financemate.apk
                   </span>
@@ -160,7 +160,7 @@ export function PlatformsSection() {
                   </ul>
                 </div>
 
-                <div className="pt-4 border-t border-border flex items-center justify-between">
+                <div className="pt-4 border-t border-border flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <span className="text-xs font-mono-tabular text-muted-foreground">
                     Compatible con Chrome, Firefox, Safari y Brave
                   </span>

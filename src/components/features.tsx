@@ -92,7 +92,7 @@ const FEATURES: FeatureItem[] = [
 
 export function Features() {
   return (
-    <section id="caracteristicas" className="py-24 border-b border-border relative overflow-hidden">
+    <section id="caracteristicas" className="py-12 sm:py-16 lg:py-24 border-b border-border relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Cabecera Asimétrica de 12 Columnas */}
         <ScrollReveal className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end mb-14">
@@ -100,7 +100,7 @@ export function Features() {
             <span className="inline-block text-xs font-mono font-semibold text-primary uppercase tracking-widest">
               03 / ARQUITECTURA DE OCHO PILARES
             </span>
-            <h2 className="font-display-v2 font-bold text-3xl sm:text-5xl text-foreground text-balance">
+            <h2 className="font-display-v2 font-bold text-fluid-h2 text-foreground text-balance">
               Diseñado para cada{" "}
               <EditorialHighlight className="italic font-semibold text-primary">
                 dimensión patrimonial

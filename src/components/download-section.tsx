@@ -19,7 +19,7 @@ export function DownloadSection({ release, repoUrl }: DownloadSectionProps) {
   return (
     <>
       {/* Web App banner */}
-      <section className="py-14 border-b border-border bg-muted/30" id="web-demo">
+      <section className="py-10 sm:py-12 lg:py-14 border-b border-border bg-muted/30" id="web-demo">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <div className="p-6 sm:p-8 rounded-2xl bg-card border border-border editorial-surface flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
@@ -36,12 +36,12 @@ export function DownloadSection({ release, repoUrl }: DownloadSectionProps) {
                   sincronización cifrada opcional.
                 </p>
               </div>
-              <div className="shrink-0">
+              <div className="shrink-0 w-full md:w-auto">
                 <a
                   href="https://financepal-web.vercel.app"
                   rel="noopener noreferrer"
                   target="_blank"
-                  className="btn-ghost ps-5 pe-4 group"
+                  className="btn-ghost ps-5 pe-4 group w-full md:w-auto justify-center"
                 >
                   <span className="font-mono text-xs sm:text-sm">financepal-web.vercel.app</span>
                   <ArrowUpRight
@@ -56,7 +56,7 @@ export function DownloadSection({ release, repoUrl }: DownloadSectionProps) {
       </section>
 
       {/* Download APK section */}
-      <section id="descarga" className="py-24 relative overflow-hidden">
+      <section id="descarga" className="py-12 sm:py-16 lg:py-24 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <ScrollReveal>
             <div className="rounded-2xl bg-card border border-border p-6 sm:p-12 editorial-surface">
@@ -66,7 +66,7 @@ export function DownloadSection({ release, repoUrl }: DownloadSectionProps) {
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted text-primary border border-border text-xs font-mono font-semibold uppercase tracking-wider">
                     07 / DISTRIBUCIÓN OFICIAL ANDROID
                   </div>
-                  <h2 className="font-display-v2 font-bold text-3xl sm:text-5xl text-foreground text-balance">
+                  <h2 className="font-display-v2 font-bold text-fluid-h2 text-foreground text-balance">
                     Instala Finance Pal{" "}
                     <EditorialHighlight className="italic font-semibold text-primary">
                       v{release.version}
@@ -79,7 +79,7 @@ export function DownloadSection({ release, repoUrl }: DownloadSectionProps) {
                   </p>
 
                   {/* Specs grid */}
-                  <div className="grid grid-cols-3 gap-3 text-xs font-mono-tabular">
+                  <div className="grid grid-cols-1 min-[420px]:grid-cols-3 gap-2.5 sm:gap-3 text-xs font-mono-tabular">
                     {[
                       { label: "Edición", value: `v${release.version}` },
                       { label: "Plataforma", value: "Android 8.0+" },
@@ -87,7 +87,7 @@ export function DownloadSection({ release, repoUrl }: DownloadSectionProps) {
                     ].map((item) => (
                       <div
                         key={item.label}
-                        className="p-3 rounded-xl bg-muted/60 border border-border"
+                        className="p-3 rounded-xl bg-muted/60 border border-border flex min-[420px]:block items-center justify-between min-[420px]:items-start"
                       >
                         <span className="text-muted-foreground block text-[10px] uppercase">
                           {item.label}
@@ -104,7 +104,7 @@ export function DownloadSection({ release, repoUrl }: DownloadSectionProps) {
                       target="_blank"
                       rel="noreferrer"
                       onClick={() => logDownload(release.version)}
-                      className="btn-primary ps-6 pe-5 group"
+                      className="btn-primary ps-6 pe-5 group w-full sm:w-auto justify-center"
                     >
                       <span>Descargar APK directo (v{release.version})</span>
                       <Download
@@ -116,7 +116,7 @@ export function DownloadSection({ release, repoUrl }: DownloadSectionProps) {
                       href={releasesPageUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="btn-ghost px-5"
+                      className="btn-ghost px-5 w-full sm:w-auto justify-center"
                     >
                       <Tag className="w-4 h-4 text-primary" strokeWidth={1.75} />
                       <span>Ver notas de versión en GitHub</span>

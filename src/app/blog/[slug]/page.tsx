@@ -153,7 +153,7 @@ function renderMarkdownBlocks(markdown: string): React.ReactNode[] {
         <h2
           key={`h2-${i}`}
           id={id}
-          className="scroll-mt-24 pt-8 pb-2 font-display-v2 font-bold text-2xl sm:text-3xl text-foreground border-t border-border first:border-t-0 first:pt-0"
+          className="scroll-mt-24 pt-8 pb-2 font-display-v2 font-bold text-fluid-h2 text-foreground border-t border-border first:border-t-0 first:pt-0"
         >
           {renderInline(rawText)}
         </h2>
@@ -236,7 +236,7 @@ function renderMarkdownBlocks(markdown: string): React.ReactNode[] {
             key={`table-${i}`}
             className="my-6 overflow-x-auto border border-border rounded-xl"
           >
-            <table className="w-full text-left border-collapse text-xs sm:text-sm font-mono-tabular">
+            <table className="min-w-[480px] w-full text-left border-collapse text-xs sm:text-sm font-mono-tabular">
               <thead>
                 <tr className="bg-muted/80 border-b border-border text-foreground font-semibold">
                   {headers.map((h, idx) => (
@@ -393,7 +393,7 @@ export default async function BlogPostPage({
                 </span>
               </div>
 
-              <h1 className="font-display-v2 font-bold text-3xl sm:text-5xl lg:text-[3.35rem] text-foreground text-balance leading-[1.06]">
+              <h1 className="font-display-v2 font-bold text-fluid-h1 text-foreground text-balance leading-[1.06]">
                 {post.title}
               </h1>
 
@@ -436,7 +436,7 @@ export default async function BlogPostPage({
                 {post.toc.length > 0 && (
                   <nav
                     aria-label="Tabla de contenidos"
-                    className="space-y-3 pb-6 border-b border-border"
+                    className="hidden lg:block space-y-3 pb-6 border-b border-border"
                   >
                     <p className="text-xs font-mono font-bold uppercase tracking-wider text-foreground">
                       Índice de la guía
@@ -511,6 +511,29 @@ export default async function BlogPostPage({
 
               {/* Columna de Lectura Editorial (8 Columnas — Medida 65ch) */}
               <article className="lg:col-span-8 space-y-6 text-base sm:text-lg max-w-[65ch] order-1 lg:order-2">
+                {post.toc.length > 0 && (
+                  <details className="lg:hidden rounded-xl bg-muted/60 border border-border p-4">
+                    <summary className="font-mono text-xs font-bold uppercase tracking-wider text-foreground cursor-pointer select-none">
+                      Índice de la guía ({post.toc.length} secciones)
+                    </summary>
+                    <ul className="mt-3 space-y-2 text-xs sm:text-sm border-t border-border pt-3">
+                      {post.toc.map((item) => (
+                        <li
+                          key={item.id}
+                          className={item.level === 3 ? "pl-3" : ""}
+                        >
+                          <a
+                            href={`#${item.id}`}
+                            className="text-muted-foreground hover:text-primary transition-colors block py-0.5 leading-snug"
+                          >
+                            {item.text}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                )}
+
                 {renderMarkdownBlocks(post.content)}
 
                 {/* Aviso YMYL (Estándar de Transparencia Financiera) */}
@@ -573,7 +596,7 @@ export default async function BlogPostPage({
         {/* Otras Guías Relacionadas */}
         <section className="py-14 sm:py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-            <h2 className="font-display-v2 font-bold text-2xl sm:text-3xl text-foreground">
+            <h2 className="font-display-v2 font-bold text-fluid-h2 text-foreground">
               Continúa aprendiendo sobre finanzas personales
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 border-y border-border divide-y md:divide-y-0 md:divide-x divide-border">

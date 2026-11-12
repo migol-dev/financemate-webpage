@@ -46,7 +46,7 @@ export function ReviewsSection({ initialReviews }: { initialReviews: Review[] })
   return (
     <section
       id="resenas"
-      className="py-24 border-b border-border relative overflow-hidden"
+      className="py-12 sm:py-16 lg:py-24 border-b border-border relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Composición Asimétrica de 12 Columnas: 5 Cols Bitácora de Comunidad / 7 Cols Formulario Activo */}
@@ -57,7 +57,7 @@ export function ReviewsSection({ initialReviews }: { initialReviews: Review[] })
               <span className="inline-block text-xs font-mono uppercase tracking-widest text-primary font-semibold">
                 04 / BITÁCORA DE LA COMUNIDAD
               </span>
-              <h2 className="font-display-v2 font-bold text-3xl sm:text-4xl lg:text-5xl text-foreground text-balance">
+              <h2 className="font-display-v2 font-bold text-fluid-h2 text-foreground text-balance">
                 Voces que eligieron{" "}
                 <EditorialHighlight className="italic font-semibold text-primary">
                   soberanía financiera

@@ -35,17 +35,17 @@ export function ReviewsManager({ initial }: { initial: Review[] }) {
   return (
     <div className="space-y-3">
       {reviews.map((r) => (
-        <Card key={r.id} className="p-5">
-          <div className="flex flex-wrap items-start justify-between gap-3">
-            <div>
-              <div className="flex items-center gap-2">
-                <p className="font-medium">{r.name}</p>
-                {r.has_downloaded && <BadgeCheck className="h-4 w-4 text-brand-500" />}
+        <Card key={r.id} className="p-4 sm:p-5">
+          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+            <div className="min-w-0">
+              <div className="flex flex-wrap items-center gap-2">
+                <p className="font-medium break-words">{r.name}</p>
+                {r.has_downloaded && <BadgeCheck className="h-4 w-4 text-brand-500 shrink-0" />}
                 <Badge variant={r.approved ? "success" : "secondary"}>
                   {r.approved ? "Publicada" : "Oculta"}
                 </Badge>
               </div>
-              <p className="text-xs text-muted-foreground">{r.email}</p>
+              <p className="text-xs text-muted-foreground break-all">{r.email}</p>
               <div className="mt-1 flex">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star
@@ -55,7 +55,7 @@ export function ReviewsManager({ initial }: { initial: Review[] }) {
                 ))}
               </div>
             </div>
-            <div className="flex gap-2">
+            <div className="flex items-center gap-2 shrink-0">
               <Button size="sm" variant="outline" onClick={() => toggleApproved(r)}>
                 {r.approved ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}
                 {r.approved ? "Ocultar" : "Publicar"}
@@ -65,7 +65,7 @@ export function ReviewsManager({ initial }: { initial: Review[] }) {
               </Button>
             </div>
           </div>
-          <p className="mt-3 text-sm text-muted-foreground">{r.comment}</p>
+          <p className="mt-3 text-sm text-muted-foreground break-words">{r.comment}</p>
         </Card>
       ))}
     </div>

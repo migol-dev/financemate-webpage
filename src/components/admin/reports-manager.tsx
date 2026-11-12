@@ -41,33 +41,34 @@ export function ReportsManager({ initial }: { initial: Report[] }) {
   return (
     <div className="space-y-3">
       {reports.map((r) => (
-        <Card key={r.id} className="p-5">
-          <div className="flex flex-wrap items-start justify-between gap-3">
-            <div>
-              <div className="flex items-center gap-2">
+        <Card key={r.id} className="p-4 sm:p-5">
+          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+            <div className="min-w-0">
+              <div className="flex flex-wrap items-center gap-2">
                 {r.type === "bug" ? (
-                  <Bug className="h-4 w-4 text-rose-500" />
+                  <Bug className="h-4 w-4 text-rose-500 shrink-0" />
                 ) : (
-                  <Lightbulb className="h-4 w-4 text-amber-500" />
+                  <Lightbulb className="h-4 w-4 text-amber-500 shrink-0" />
                 )}
-                <p className="font-medium">{r.title}</p>
+                <p className="font-medium break-words">{r.title}</p>
                 <Badge variant={r.status === "resolved" ? "success" : "secondary"}>
                   {STATUS_LABEL[r.status]}
                 </Badge>
               </div>
               {(r.name || r.email) && (
-                <p className="text-xs text-muted-foreground">
+                <p className="text-xs text-muted-foreground break-all">
                   {r.name} {r.email ? `· ${r.email}` : ""}
                 </p>
               )}
             </div>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap items-center gap-1.5 shrink-0">
               {(["open", "in_review", "resolved"] as const).map((s) => (
                 <Button
                   key={s}
                   size="sm"
                   variant={r.status === s ? "default" : "outline"}
                   onClick={() => setStatus(r.id, s)}
+                  className="text-xs"
                 >
                   {STATUS_LABEL[s]}
                 </Button>
@@ -77,7 +78,7 @@ export function ReportsManager({ initial }: { initial: Report[] }) {
               </Button>
             </div>
           </div>
-          <p className="mt-3 text-sm text-muted-foreground">{r.description}</p>
+          <p className="mt-3 text-sm text-muted-foreground break-words">{r.description}</p>
         </Card>
       ))}
     </div>

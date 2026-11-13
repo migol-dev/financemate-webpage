@@ -421,6 +421,11 @@ html[data-perf="lite"] .fp-reveal {
   }
 }
 
+/* Previene CLS en retorno cuando el anuncio fue cerrado previamente */
+html[data-banner-dismissed="true"] .fp-release-banner {
+  display: none !important;
+}
+
 /* 3D Cylindrical Carousel */
 .carousel-stage {
   perspective: 1800px;

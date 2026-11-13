@@ -72,44 +72,35 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
     () => false
   );
 
-  if (!mounted) {
-    return (
-      <div
-        className={`h-9 w-9 rounded-xl border border-border/80 bg-card/60 ${className}`}
-        aria-hidden="true"
-      />
-    );
-  }
-
-  const isDark = resolvedTheme === "dark";
+  const isDark = mounted && resolvedTheme === "dark";
 
   return (
     <button
       type="button"
       aria-label={
-        isDark
-          ? "Cambiar a modo claro (Warm Alabaster)"
-          : "Cambiar a modo oscuro (Obsidian Carbon)"
+        mounted
+          ? isDark
+            ? "Cambiar a modo claro (Warm Alabaster)"
+            : "Cambiar a modo oscuro (Obsidian Carbon)"
+          : "Alternar modo claro u oscuro"
       }
       title={
-        isDark
-          ? "Modo actual: Oscuro — Cambiar a modo claro"
-          : "Modo actual: Claro — Cambiar a modo oscuro"
+        mounted
+          ? isDark
+            ? "Modo actual: Oscuro — Cambiar a modo claro"
+            : "Modo actual: Claro — Cambiar a modo oscuro"
+          : "Alternar modo claro u oscuro"
       }
-      onClick={() => setTheme(isDark ? "light" : "dark")}
+      onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
       className={`relative inline-flex h-9 w-9 items-center justify-center rounded-xl border border-border/80 bg-card/70 hover:bg-muted text-foreground tactile-press cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring shrink-0 ${className}`}
     >
-      <span className="relative inline-flex h-4 w-4 items-center justify-center">
+      <span className="relative inline-flex h-4 w-4 items-center justify-center" aria-hidden="true">
         <Sun
-          className={`h-4 w-4 text-editorial-amber absolute transition-all duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-            isDark ? "opacity-100 scale-100 rotate-0" : "opacity-0 scale-50 -rotate-45"
-          }`}
+          className="h-4 w-4 text-editorial-amber absolute transition-all duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-0 scale-50 -rotate-45 dark:opacity-100 dark:scale-100 dark:rotate-0"
           strokeWidth={1.75}
         />
         <Moon
-          className={`h-4 w-4 text-foreground/80 absolute transition-all duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-            isDark ? "opacity-0 scale-50 rotate-45" : "opacity-100 scale-100 rotate-0"
-          }`}
+          className="h-4 w-4 text-foreground/80 absolute transition-all duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] opacity-100 scale-100 rotate-0 dark:opacity-0 dark:scale-50 dark:rotate-45"
           strokeWidth={1.75}
         />
       </span>

@@ -1,84 +1,117 @@
 "use client";
 
-import React, { useRef } from "react";
-import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "framer-motion";
+import React, { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 
 /**
- * Revelación editorial al hacer scroll (Split & Stagger / Blur-to-Crisp)
- * Respeta prefers-reduced-motion.
+ * Instancia única compartida de IntersectionObserver para toda la página.
+ * Evita crear decenas de observadores y resortes JS por cada bloque animado.
+ */
+let sharedObserver: IntersectionObserver | null = null;
+
+function getSharedObserver(): IntersectionObserver | null {
+  if (typeof window === "undefined" || !("IntersectionObserver" in window)) {
+    return null;
+  }
+  if (!sharedObserver) {
+    sharedObserver = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            sharedObserver?.unobserve(entry.target);
+          }
+        }
+      },
+      {
+        rootMargin: "60px 0px -24px 0px",
+        threshold: 0.01,
+      }
+    );
+  }
+  return sharedObserver;
+}
+
+/**
+ * Revelación editorial al hacer scroll con CSS compositado en GPU (opacity + translate3d).
+ * Preserva el movimiento elegante sin animar filter: blur().
  */
 export function ScrollReveal({
   children,
   className,
   delay = 0,
-  yOffset = 18,
+  yOffset = 14,
 }: {
   children: React.ReactNode;
   className?: string;
   delay?: number;
   yOffset?: number;
 }) {
-  const prefersReducedMotion = useReducedMotion();
+  const ref = useRef<HTMLDivElement>(null);
 
-  if (prefersReducedMotion) {
-    return <div className={className}>{children}</div>;
-  }
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches) {
+      el.classList.add("is-visible");
+      return;
+    }
+
+    const observer = getSharedObserver();
+    if (!observer) {
+      el.classList.add("is-visible");
+      return;
+    }
+
+    observer.observe(el);
+    return () => {
+      observer.unobserve(el);
+    };
+  }, []);
+
+  const clampedOffset = Math.min(Math.max(yOffset, 6), 20);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: yOffset, filter: "blur(4px)" }}
-      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{
-        type: "spring",
-        duration: 0.65,
-        bounce: 0,
-        delay,
-      }}
-      className={className}
+    <div
+      ref={ref}
+      className={cn("fp-reveal", className)}
+      style={
+        {
+          "--fp-reveal-y": `${clampedOffset}px`,
+          ...(delay > 0 ? { transitionDelay: `${delay}s` } : {}),
+        } as React.CSSProperties
+      }
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
 
 /**
- * Contenedor con efecto de paralaje y deformación sutil vinculada al scroll.
+ * Escenario con paralaje CSS nativo vía Scroll-Driven Animation en tier "full".
+ * Cero listeners JavaScript; en dispositivos "lite" permanece estático y fluido.
  */
 export function ScrollParallaxStage({
   children,
   className,
-  intensity = 22,
+  intensity = 16,
 }: {
   children: React.ReactNode;
   className?: string;
   intensity?: number;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const prefersReducedMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-
-  const smooth = useSpring(scrollYProgress, {
-    stiffness: 110,
-    damping: 26,
-    restDelta: 0.001,
-  });
-
-  const y = useTransform(smooth, [0, 0.5, 1], [intensity, 0, -intensity]);
-  const scale = useTransform(smooth, [0, 0.5, 1], [0.985, 1, 0.99]);
-
   return (
-    <motion.div
-      ref={ref}
-      style={prefersReducedMotion ? undefined : { y, scale }}
-      className={className}
+    <div
+      className={cn("fp-parallax-stage", className)}
+      style={
+        {
+          "--fp-parallax-y": `${intensity}px`,
+        } as React.CSSProperties
+      }
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
 

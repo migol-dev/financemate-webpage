@@ -361,6 +361,43 @@
   }
 }
 
+/* Revelación de secciones vía IntersectionObserver único + GPU CSS */
+.fp-reveal {
+  opacity: 0;
+  transform: translate3d(0, var(--fp-reveal-y, 14px), 0);
+  transition: opacity 0.48s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.48s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html[data-perf="lite"] .fp-reveal {
+  transform: translate3d(0, 8px, 0);
+  transition-duration: 0.34s;
+}
+
+.fp-reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@keyframes fp-parallax-y {
+  from {
+    transform: translate3d(0, var(--fp-parallax-y, 14px), 0);
+  }
+  to {
+    transform: translate3d(0, calc(var(--fp-parallax-y, 14px) * -0.6), 0);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    html:not([data-perf="lite"]) .fp-parallax-stage {
+      animation: fp-parallax-y linear both;
+      animation-timeline: view();
+      animation-range: entry 0% exit 100%;
+    }
+  }
+}
+
 /* 3D Cylindrical Carousel */
 .carousel-stage {
   perspective: 1800px;
@@ -463,6 +500,11 @@
     scroll-behavior: auto !important;
   }
   .carousel-phone {
+    transition: none !important;
+  }
+  .fp-reveal {
+    opacity: 1 !important;
+    transform: none !important;
     transition: none !important;
   }
 }

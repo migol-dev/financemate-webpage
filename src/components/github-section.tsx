@@ -30,7 +30,7 @@ const SECURITY_LAYERS = [
 
 export function GithubSection({ repoUrl }: { repoUrl: string }) {
   return (
-    <section id="seguridad" className="py-12 sm:py-16 lg:py-24 border-b border-border relative">
+    <section id="seguridad" className="fp-cv-section py-12 sm:py-16 lg:py-24 border-b border-border relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
           {/* Columna Izquierda: Manifiesto Criptográfico y Código Abierto (5 Columnas) */}

@@ -16,7 +16,7 @@ export function DownloadSection({ release, repoUrl }: DownloadSectionProps) {
   return (
     <>
       {/* Web App banner */}
-      <section className="py-10 sm:py-12 lg:py-14 border-b border-border bg-muted/30" id="web-demo">
+      <section className="fp-cv-section py-10 sm:py-12 lg:py-14 border-b border-border bg-muted/30" id="web-demo">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <div className="p-6 sm:p-8 rounded-2xl bg-card border border-border editorial-surface flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
@@ -53,7 +53,7 @@ export function DownloadSection({ release, repoUrl }: DownloadSectionProps) {
       </section>
 
       {/* Download APK section */}
-      <section id="descarga" className="py-12 sm:py-16 lg:py-24 relative overflow-hidden">
+      <section id="descarga" className="fp-cv-section py-12 sm:py-16 lg:py-24 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <ScrollReveal>
             <div className="rounded-2xl bg-card border border-border p-6 sm:p-12 editorial-surface">

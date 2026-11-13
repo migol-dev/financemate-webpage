@@ -6,7 +6,7 @@ export function Footer({ repoUrl }: { repoUrl: string }) {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border bg-card/60 text-muted-foreground text-xs">
+    <footer className="fp-cv-section border-t border-border bg-card/60 text-muted-foreground text-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
         {/* Main Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 lg:gap-12 pb-10 sm:pb-12 border-b border-border">

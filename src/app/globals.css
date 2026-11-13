@@ -438,6 +438,12 @@ html[data-perf="lite"] .fp-dialog-overlay {
   background-color: rgba(0, 0, 0, 0.82);
 }
 
+/* Defer layout/paint de secciones below-the-fold hasta acercarse al viewport */
+.fp-cv-section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 750px;
+}
+
 /* 3D Cylindrical Carousel */
 .carousel-stage {
   perspective: 1800px;

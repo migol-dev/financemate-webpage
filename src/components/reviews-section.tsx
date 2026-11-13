@@ -27,8 +27,14 @@ export function ReviewsSection({ initialReviews }: { initialReviews: Review[] })
   }
 
   useEffect(() => {
+    if (initialReviews.length > 0) return;
+
     let ignore = false;
-    if (initialReviews.length === 0) {
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
+    let idleId: number | null = null;
+
+    const loadReviews = () => {
+      if (ignore) return;
       fetch("/api/reviews", { cache: "no-store" })
         .then((res) => (res.ok ? res.json() : null))
         .then((data) => {
@@ -37,16 +43,29 @@ export function ReviewsSection({ initialReviews }: { initialReviews: Review[] })
           }
         })
         .catch(() => {});
+    };
+
+    if (typeof window !== "undefined" && typeof window.requestIdleCallback === "function") {
+      idleId = window.requestIdleCallback(loadReviews, { timeout: 2000 });
+    } else {
+      timeoutId = setTimeout(loadReviews, 1500);
     }
+
     return () => {
       ignore = true;
+      if (idleId !== null && typeof window.cancelIdleCallback === "function") {
+        window.cancelIdleCallback(idleId);
+      }
+      if (timeoutId !== null) {
+        clearTimeout(timeoutId);
+      }
     };
   }, [initialReviews.length]);
 
   return (
     <section
       id="resenas"
-      className="py-12 sm:py-16 lg:py-24 border-b border-border relative overflow-hidden"
+      className="fp-cv-section py-12 sm:py-16 lg:py-24 border-b border-border relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Composición Asimétrica de 12 Columnas: 5 Cols Bitácora de Comunidad / 7 Cols Formulario Activo */}

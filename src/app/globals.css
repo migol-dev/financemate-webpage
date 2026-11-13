@@ -442,34 +442,62 @@ html[data-banner-dismissed="true"] .fp-release-banner {
   -moz-osx-font-smoothing: auto;
   transition: transform 0.6s cubic-bezier(0.25, 1, 0.35, 1),
               opacity 0.6s cubic-bezier(0.25, 1, 0.35, 1);
+}
+.carousel-phone.active,
+.carousel-phone.prev,
+.carousel-phone.next {
   will-change: transform, opacity;
 }
 .carousel-phone.active {
   transform: translateX(-50%) translateZ(0px);
   z-index: 30;
   opacity: 1;
-  filter: none;
   pointer-events: auto;
 }
 .carousel-phone.prev {
   transform: translateX(calc(-50% - 320px)) translateZ(-80px) rotateY(22deg) scale(0.82);
   z-index: 10;
-  opacity: 0.55;
-  filter: brightness(0.7);
+  opacity: 0.48;
   cursor: pointer;
 }
 .carousel-phone.next {
   transform: translateX(calc(-50% + 320px)) translateZ(-80px) rotateY(-22deg) scale(0.82);
   z-index: 10;
-  opacity: 0.55;
-  filter: brightness(0.7);
+  opacity: 0.48;
   cursor: pointer;
 }
 .carousel-phone.hidden-phone {
   transform: translateX(-50%) translateZ(-250px) scale(0.5);
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
   z-index: 0;
+}
+
+/* Tier ligero (2.5D glide sin perspectiva 3D pesada ni rasterización de ángulo) */
+html[data-perf="lite"] .carousel-stage {
+  perspective: none;
+}
+html[data-perf="lite"] .carousel-phone {
+  transform-style: flat;
+  transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+}
+html[data-perf="lite"] .carousel-phone.active {
+  transform: translate3d(-50%, 0, 0) scale(1);
+}
+html[data-perf="lite"] .carousel-phone.prev {
+  transform: translate3d(calc(-50% - 300px), 0, 0) scale(0.84);
+  opacity: 0.48;
+}
+html[data-perf="lite"] .carousel-phone.next {
+  transform: translate3d(calc(-50% + 300px), 0, 0) scale(0.84);
+  opacity: 0.48;
+}
+html[data-perf="lite"] .carousel-phone.hidden-phone {
+  transform: translate3d(-50%, 0, 0) scale(0.72);
+  opacity: 0;
+  visibility: hidden;
 }
 
 @media (max-width: 768px) {
@@ -484,6 +512,17 @@ html[data-banner-dismissed="true"] .fp-release-banner {
     transform: translateX(calc(-50% + 140px)) translateZ(-80px) rotateY(-22deg) scale(0.78);
     opacity: 0.4;
   }
+  html[data-perf="lite"] .carousel-phone.active {
+    transform: translate3d(-50%, 0, 0) scale(1);
+  }
+  html[data-perf="lite"] .carousel-phone.prev {
+    transform: translate3d(calc(-50% - 130px), 0, 0) scale(0.8);
+    opacity: 0.4;
+  }
+  html[data-perf="lite"] .carousel-phone.next {
+    transform: translate3d(calc(-50% + 130px), 0, 0) scale(0.8);
+    opacity: 0.4;
+  }
 }
 
 @media (max-width: 640px) {
@@ -493,6 +532,14 @@ html[data-banner-dismissed="true"] .fp-release-banner {
   }
   .carousel-phone.next {
     transform: translateX(calc(-50% + 95px)) translateZ(-80px) rotateY(-18deg) scale(0.76);
+    opacity: 0.35;
+  }
+  html[data-perf="lite"] .carousel-phone.prev {
+    transform: translate3d(calc(-50% - 90px), 0, 0) scale(0.78);
+    opacity: 0.35;
+  }
+  html[data-perf="lite"] .carousel-phone.next {
+    transform: translate3d(calc(-50% + 90px), 0, 0) scale(0.78);
     opacity: 0.35;
   }
 }
@@ -506,6 +553,14 @@ html[data-banner-dismissed="true"] .fp-release-banner {
     transform: translateX(calc(-50% + 75px)) translateZ(-80px) rotateY(-16deg) scale(0.74);
     opacity: 0.3;
   }
+  html[data-perf="lite"] .carousel-phone.prev {
+    transform: translate3d(calc(-50% - 72px), 0, 0) scale(0.75);
+    opacity: 0.3;
+  }
+  html[data-perf="lite"] .carousel-phone.next {
+    transform: translate3d(calc(-50% + 72px), 0, 0) scale(0.75);
+    opacity: 0.3;
+  }
 }
 
 @media (max-width: 380px) {
@@ -515,6 +570,14 @@ html[data-banner-dismissed="true"] .fp-release-banner {
   }
   .carousel-phone.next {
     transform: translateX(calc(-50% + 60px)) translateZ(-80px) rotateY(-14deg) scale(0.72);
+    opacity: 0.25;
+  }
+  html[data-perf="lite"] .carousel-phone.prev {
+    transform: translate3d(calc(-50% - 58px), 0, 0) scale(0.73);
+    opacity: 0.25;
+  }
+  html[data-perf="lite"] .carousel-phone.next {
+    transform: translate3d(calc(-50% + 58px), 0, 0) scale(0.73);
     opacity: 0.25;
   }
 }

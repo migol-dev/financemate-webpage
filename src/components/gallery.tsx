@@ -539,14 +539,16 @@ export function Gallery({ images }: { images: GalleryImage[] }) {
               <ChevronRight className="w-5 h-5 text-primary" strokeWidth={2} />
             </button>
 
-            {/* Phones */}
+            {/* Phones (solo monta contenido de activo y adyacentes) */}
             {SCREENS.map((Screen, idx) => (
               <div
                 key={idx}
                 className={getClass(idx)}
                 onClick={() => setCurrent(idx)}
               >
-                <Screen />
+                {idx === current || idx === prevIdx || idx === nextIdx ? (
+                  <Screen />
+                ) : null}
               </div>
             ))}
           </ScrollParallaxStage>

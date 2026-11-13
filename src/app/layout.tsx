@@ -4,6 +4,7 @@ import "./globals.css";
 import { CookieBanner } from "@/components/cookie-banner";
 import { ThemeProvider } from "@/components/theme-provider";
 import { EditorialCanvasBg } from "@/components/editorial-canvas-bg";
+import { PERF_TIER_INIT_SCRIPT } from "@/lib/perf-tier-script";
 import {
   SITE_URL,
   BRAND,
@@ -110,6 +111,9 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${plusJakarta.variable} ${fraunces.variable} ${jetbrainsMono.variable}`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: PERF_TIER_INIT_SCRIPT }} />
+      </head>
       <body className="font-sans antialiased">
         <JsonLd data={buildGlobalGraphSchema()} />
         <ThemeProvider>

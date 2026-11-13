@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Plus_Jakarta_Sans, Fraunces, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { CookieBanner } from "@/components/cookie-banner";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -13,6 +14,28 @@ import {
   GOOGLE_VERIFICATION_CODE,
 } from "@/lib/seo";
 import { JsonLd, buildGlobalGraphSchema } from "@/components/seo/json-ld";
+
+const plusJakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-plus-jakarta",
+  display: "swap",
+});
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-fraunces",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-mono",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -82,18 +105,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es" suppressHydrationWarning>
-      <head>
-        <link
-          rel="preconnect"
-          href="https://fonts.googleapis.com"
-        />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-      </head>
+    <html
+      lang="es"
+      suppressHydrationWarning
+      className={`${plusJakarta.variable} ${fraunces.variable} ${jetbrainsMono.variable}`}
+    >
       <body className="font-sans antialiased">
         <JsonLd data={buildGlobalGraphSchema()} />
         <ThemeProvider>

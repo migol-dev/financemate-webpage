@@ -14,10 +14,10 @@ const config: Config = {
         xs: "380px",
       },
       fontFamily: {
-        sans: ["var(--font-plus-jakarta)", '"Plus Jakarta Sans"', "system-ui", "sans-serif"],
-        display: ["var(--font-fraunces)", '"Fraunces"', '"Plus Jakarta Sans"', "Georgia", "serif"],
-        mono: ["var(--font-mono)", '"JetBrains Mono"', "ui-monospace", "monospace"],
-        serif: ["var(--font-fraunces)", '"Fraunces"', '"Instrument Serif"', "Georgia", "serif"],
+        sans: ["var(--font-plus-jakarta)", "system-ui", "sans-serif"],
+        display: ["var(--font-fraunces)", "var(--font-plus-jakarta)", "Georgia", "serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
+        serif: ["var(--font-fraunces)", "Georgia", "serif"],
       },
       colors: {
         border: "hsl(var(--border))",

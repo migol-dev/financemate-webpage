@@ -117,7 +117,7 @@ export function Features() {
 
         {/* Architectural 1px Hairline Grid (Anti-Carditis) */}
         <ScrollReveal delay={0.08}>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-t border-l border-border rounded-2xl overflow-hidden bg-card/75 backdrop-blur-sm">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-t border-l border-border rounded-2xl overflow-hidden bg-card/95">
             {FEATURES.map((item) => {
               const Icon = item.icon;
               return (

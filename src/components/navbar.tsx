@@ -102,7 +102,7 @@ export function Navbar() {
         {/* Desktop Nav: Dock Pill elegante de una sola línea */}
         <nav
           aria-label="Navegación principal"
-          className="hidden lg:flex items-center gap-0.5 p-1 rounded-full border border-border/80 bg-muted/40 backdrop-blur-md"
+          className="hidden lg:flex items-center gap-0.5 p-1 rounded-full border border-border/80 bg-muted/55"
         >
           {LINKS.map((l) => (
             <Link
@@ -188,7 +188,7 @@ export function Navbar() {
 
       {/* Mobile Drawer */}
       {open && (
-        <div className="lg:hidden border-t border-border bg-card/95 backdrop-blur-xl px-4 sm:px-6 py-4 space-y-3.5 max-h-[calc(100dvh-4.5rem)] overflow-y-auto overscroll-contain shadow-2xl">
+        <div className="lg:hidden border-t border-border glass-panel px-4 sm:px-6 py-4 space-y-3.5 max-h-[calc(100dvh-4.5rem)] overflow-y-auto overscroll-contain shadow-2xl">
           {/* Release announcement button */}
           <button
             type="button"

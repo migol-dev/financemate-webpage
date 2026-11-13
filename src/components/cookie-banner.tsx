@@ -40,7 +40,7 @@ export function CookieBanner() {
       aria-label="Aviso de cookies y almacenamiento local"
       className="fixed bottom-3 left-3 right-3 sm:bottom-4 sm:left-auto sm:right-6 sm:max-w-md z-50 animate-in fade-in slide-in-from-bottom-5 duration-300 print:hidden"
     >
-      <div className="p-3.5 sm:p-5 rounded-2xl bg-card/95 border border-border editorial-surface backdrop-blur-xl text-foreground text-xs sm:text-sm shadow-xl">
+      <div className="p-3.5 sm:p-5 rounded-2xl glass-panel border editorial-surface text-foreground text-xs sm:text-sm shadow-xl">
         <div className="flex items-start gap-2.5 sm:gap-3">
           <div className="p-1.5 sm:p-2 rounded-xl bg-muted text-primary border border-border shrink-0 mt-0.5">
             <Cookie className="w-4 h-4 sm:w-5 sm:h-5" strokeWidth={1.75} />

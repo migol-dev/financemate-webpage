@@ -426,6 +426,18 @@ html[data-banner-dismissed="true"] .fp-release-banner {
   display: none !important;
 }
 
+/* Superficies glass sin sampling de fondo en tier ligero */
+html[data-perf="lite"] .glass-panel {
+  background-color: hsl(var(--card) / 0.96);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+html[data-perf="lite"] .fp-dialog-overlay {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background-color: rgba(0, 0, 0, 0.82);
+}
+
 /* 3D Cylindrical Carousel */
 .carousel-stage {
   perspective: 1800px;

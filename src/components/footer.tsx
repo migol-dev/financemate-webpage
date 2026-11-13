@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { Shield, FileText, Cookie, AlertTriangle, ExternalLink, Mail } from "lucide-react";
 import { BrandLogo } from "@/components/brand-logo";

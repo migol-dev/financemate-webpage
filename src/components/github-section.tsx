@@ -1,5 +1,3 @@
-"use client";
-
 import { Lock, Database, ShieldCheck, ArrowUpRight, GitBranch, Tag, Star } from "lucide-react";
 import { EditorialHighlight, ScrollReveal } from "@/components/editorial-motion";
 

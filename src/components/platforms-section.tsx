@@ -1,5 +1,3 @@
-"use client";
-
 import { ArrowDownRight, ArrowUpRight, Smartphone, Monitor, Check } from "lucide-react";
 import { EditorialHighlight, ScrollReveal } from "@/components/editorial-motion";
 

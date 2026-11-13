@@ -304,30 +304,60 @@
   }
 }
 
-/* Deformación orgánica sutil del lienzo editorial */
-@keyframes editorial-morph-slow {
+/* Deformación orgánica sutil del lienzo editorial (solo transform GPU, cero repintado) */
+@keyframes editorial-drift-slow {
   0%, 100% {
-    border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%;
     transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
   }
-  33% {
-    border-radius: 58% 42% 38% 62% / 53% 61% 39% 47%;
-    transform: translate3d(2%, -3%, 0) rotate(4deg) scale(1.04, 0.96);
+  50% {
+    transform: translate3d(2%, -2.5%, 0) rotate(4deg) scale(1.04);
   }
-  66% {
-    border-radius: 37% 63% 54% 46% / 62% 35% 65% 38%;
-    transform: translate3d(-2%, 2%, 0) rotate(-3deg) scale(0.97, 1.03);
+}
+
+@keyframes fp-scroll-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes fp-contour-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -10%, 0);
+  }
+}
+
+.fp-reading-progress {
+  transform: scaleX(0);
+}
+
+@supports (animation-timeline: scroll()) {
+  html:not([data-perf="lite"]) .fp-reading-progress {
+    animation: fp-scroll-progress linear both;
+    animation-timeline: scroll(root);
   }
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .editorial-blob-morph {
-    animation: editorial-morph-slow 22s ease-in-out infinite;
-    will-change: transform, border-radius;
+  html:not([data-perf="lite"]) .editorial-blob-morph {
+    animation: editorial-drift-slow 24s ease-in-out infinite;
   }
-  .editorial-blob-morph-reverse {
-    animation: editorial-morph-slow 28s ease-in-out infinite reverse;
-    will-change: transform, border-radius;
+  html:not([data-perf="lite"]) .editorial-blob-morph-reverse {
+    animation: editorial-drift-slow 30s ease-in-out infinite reverse;
+  }
+}
+
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    html:not([data-perf="lite"]) .fp-contour-stage {
+      animation: fp-contour-drift linear both;
+      animation-timeline: scroll(root);
+    }
   }
 }
 

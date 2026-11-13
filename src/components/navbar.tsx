@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X, Sparkles, Download, ArrowUpRight } from "lucide-react";
 import { openReleaseModal } from "@/components/release-announcement";
 import { BrandLogo } from "@/components/brand-logo";
@@ -169,17 +168,20 @@ export function Navbar() {
             aria-expanded={open}
             aria-label={open ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
           >
-            <AnimatePresence mode="popLayout" initial={false}>
-              <motion.span
-                key={open ? "close" : "menu"}
-                initial={{ opacity: 0, scale: 0.25, filter: "blur(4px)" }}
-                animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-                exit={{ opacity: 0, scale: 0.25, filter: "blur(4px)" }}
-                transition={{ type: "spring", duration: 0.25, bounce: 0 }}
-              >
-                {open ? <X className="w-5 h-5" strokeWidth={2} /> : <Menu className="w-5 h-5" strokeWidth={2} />}
-              </motion.span>
-            </AnimatePresence>
+            <span className="relative inline-flex w-5 h-5 items-center justify-center">
+              <Menu
+                className={`w-5 h-5 absolute transition-all duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                  open ? "opacity-0 scale-50 rotate-45" : "opacity-100 scale-100 rotate-0"
+                }`}
+                strokeWidth={2}
+              />
+              <X
+                className={`w-5 h-5 absolute transition-all duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                  open ? "opacity-100 scale-100 rotate-0" : "opacity-0 scale-50 -rotate-45"
+                }`}
+                strokeWidth={2}
+              />
+            </span>
           </button>
         </div>
       </div>

@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
 import {
   Download,
   ArrowUpRight,
@@ -27,26 +26,13 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Composición Asimétrica de 12 Columnas (7 Columnas Manifiesto / 5 Columnas Escenario Interactivo) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
-          {/* Columna Editorial Principal (7 Columnas — De-Boxed sobre el lienzo) */}
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={{
-              visible: { transition: { staggerChildren: 0.09 } },
-            }}
-            className="lg:col-span-7 space-y-6 text-left"
-          >
-            <motion.div
-              variants={{
-                hidden: { opacity: 0, y: 12, filter: "blur(4px)" },
-                visible: { opacity: 1, y: 0, filter: "blur(0px)" },
-              }}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted border border-border text-xs font-mono text-muted-foreground"
-            >
+          {/* Columna Editorial Principal (7 Columnas — De-Boxed sobre el lienzo, pintado inmediato LCP) */}
+          <div className="lg:col-span-7 space-y-6 text-left">
+            <div className="fp-hero-enter inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted border border-border text-xs font-mono text-muted-foreground">
               <span className="text-primary font-semibold">00 / MANIFIESTO</span>
               <span>·</span>
               <span>Cero servidores intermediarios</span>
-            </motion.div>
+            </div>
 
             <h1 className="font-display-v2 font-bold text-fluid-hero text-foreground tracking-[-0.035em] leading-[1.04] text-balance">
               <span className="block text-xs sm:text-sm font-mono font-semibold uppercase tracking-[0.14em] text-primary mb-3">
@@ -59,29 +45,17 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
               en tu propio dispositivo.
             </h1>
 
-            <motion.p
-              variants={{
-                hidden: { opacity: 0, y: 14, filter: "blur(4px)" },
-                visible: { opacity: 1, y: 0, filter: "blur(0px)" },
-              }}
-              className="text-muted-foreground editorial-text-hover text-base sm:text-lg max-w-[60ch] leading-relaxed text-pretty font-sans"
-            >
+            <p className="text-muted-foreground editorial-text-hover text-base sm:text-lg max-w-[60ch] leading-relaxed text-pretty font-sans">
               La relación con tu dinero exige serenidad intelectual, no ruido visual. Finance Pal{" "}
               combina la disciplina de un{" "}
               <EditorialHighlight>cuaderno financiero de alta dirección</EditorialHighlight> con{" "}
               almacenamiento <EditorialHighlight>100% Local-First</EditorialHighlight>, metas
               jerárquicas Drag &amp; Drop y criptografía{" "}
               <EditorialHighlight>WebCrypto AES-GCM de 256 bits</EditorialHighlight>.
-            </motion.p>
+            </p>
 
             {/* Botones de Acción con Micro-Física Táctil y Alineación Óptica */}
-            <motion.div
-              variants={{
-                hidden: { opacity: 0, y: 14, filter: "blur(4px)" },
-                visible: { opacity: 1, y: 0, filter: "blur(0px)" },
-              }}
-              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2"
-            >
+            <div className="fp-hero-enter-delay-1 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2">
               <a
                 href="#descarga"
                 className="inline-flex items-center justify-center gap-2.5 ps-6 pe-5 py-3.5 rounded-xl text-sm sm:text-base font-semibold text-primary-foreground bg-primary hover:brightness-105 tactile-press focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring group"
@@ -118,16 +92,10 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
                 <Sparkles className="w-4 h-4 text-editorial-amber" strokeWidth={1.75} />
                 <span>Explorar dossier v2.0</span>
               </button>
-            </motion.div>
+            </div>
 
             {/* Telemetría De-Boxed sobre el lienzo con líneas divisorias de 1px */}
-            <motion.div
-              variants={{
-                hidden: { opacity: 0, y: 12, filter: "blur(4px)" },
-                visible: { opacity: 1, y: 0, filter: "blur(0px)" },
-              }}
-              className="pt-6 mt-4 border-t border-border grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6"
-            >
+            <div className="fp-hero-enter-delay-2 pt-6 mt-4 border-t border-border grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6">
               {[
                 { label: "Criptografía Local", value: "AES-256", sub: "PBKDF2 100k rondas" },
                 { label: "Motores de Base", value: "SQLite + IDB", sub: "100% Offline-First" },
@@ -144,8 +112,8 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
                   <span className="text-[11px] sm:text-xs text-muted-foreground block truncate">{stat.sub}</span>
                 </div>
               ))}
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
           {/* Columna de Escenario Interactivo (5 Columnas — Cuaderno de Auditoría en Vivo) */}
           <ScrollParallaxStage intensity={16} className="lg:col-span-5">

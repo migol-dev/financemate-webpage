@@ -379,6 +379,29 @@ html[data-perf="lite"] .fp-reveal {
   transform: translate3d(0, 0, 0);
 }
 
+@keyframes fp-hero-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-perf="lite"]) .fp-hero-enter {
+    animation: fp-hero-rise 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  html:not([data-perf="lite"]) .fp-hero-enter-delay-1 {
+    animation: fp-hero-rise 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
+  }
+  html:not([data-perf="lite"]) .fp-hero-enter-delay-2 {
+    animation: fp-hero-rise 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both;
+  }
+}
+
 @keyframes fp-parallax-y {
   from {
     transform: translate3d(0, var(--fp-parallax-y, 14px), 0);

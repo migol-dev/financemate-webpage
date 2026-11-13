@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { useTheme } from "next-themes";
-import { AnimatePresence, motion } from "framer-motion";
 import { Sun, Moon } from "lucide-react";
 
 export type EditorialAccentId = "emerald";
@@ -100,22 +99,20 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
       onClick={() => setTheme(isDark ? "light" : "dark")}
       className={`relative inline-flex h-9 w-9 items-center justify-center rounded-xl border border-border/80 bg-card/70 hover:bg-muted text-foreground tactile-press cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring shrink-0 ${className}`}
     >
-      <AnimatePresence mode="popLayout" initial={false}>
-        <motion.span
-          key={isDark ? "dark" : "light"}
-          initial={{ opacity: 0, scale: 0.4, rotate: -20, filter: "blur(2px)" }}
-          animate={{ opacity: 1, scale: 1, rotate: 0, filter: "blur(0px)" }}
-          exit={{ opacity: 0, scale: 0.4, rotate: 20, filter: "blur(2px)" }}
-          transition={{ type: "spring", duration: 0.25, bounce: 0 }}
-          className="inline-flex items-center justify-center"
-        >
-          {isDark ? (
-            <Sun className="h-4 w-4 text-editorial-amber" strokeWidth={1.75} />
-          ) : (
-            <Moon className="h-4 w-4 text-foreground/80" strokeWidth={1.75} />
-          )}
-        </motion.span>
-      </AnimatePresence>
+      <span className="relative inline-flex h-4 w-4 items-center justify-center">
+        <Sun
+          className={`h-4 w-4 text-editorial-amber absolute transition-all duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+            isDark ? "opacity-100 scale-100 rotate-0" : "opacity-0 scale-50 -rotate-45"
+          }`}
+          strokeWidth={1.75}
+        />
+        <Moon
+          className={`h-4 w-4 text-foreground/80 absolute transition-all duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+            isDark ? "opacity-0 scale-50 rotate-45" : "opacity-100 scale-100 rotate-0"
+          }`}
+          strokeWidth={1.75}
+        />
+      </span>
     </button>
   );
 }

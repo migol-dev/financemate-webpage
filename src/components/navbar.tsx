@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Menu, X, Sparkles, Download, ArrowUpRight } from "lucide-react";
-import { openReleaseModal } from "@/components/release-announcement";
+import { openReleaseModal, prefetchReleaseModal } from "@/components/release-announcement";
 import { BrandLogo } from "@/components/brand-logo";
 import { ThemeToggle } from "@/components/theme-toggle";
 
@@ -25,41 +25,63 @@ const GITHUB_URL =
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
+  const hiddenRef = useRef(false);
 
-  // Smart Sticky Navbar: ocultar al hacer scroll hacia abajo, mostrar al subir
+  // Smart Sticky Navbar: throttle con requestAnimationFrame y cambio de estado único
   useEffect(() => {
     let lastScrollY = window.scrollY;
+    let ticking = false;
+    let rafId = 0;
 
-    const handleScroll = () => {
+    const updateHidden = (next: boolean) => {
+      if (next !== hiddenRef.current) {
+        hiddenRef.current = next;
+        setHidden(next);
+      }
+    };
+
+    const update = () => {
+      ticking = false;
       const currentScrollY = window.scrollY;
 
       // Si el drawer móvil está abierto, nunca ocultar
       if (open) {
-        setHidden(false);
+        updateHidden(false);
         return;
       }
 
       // Cerca del tope (primeros 80px), siempre visible
       if (currentScrollY <= 80) {
-        setHidden(false);
+        updateHidden(false);
         lastScrollY = currentScrollY;
         return;
       }
 
       // Scroll descendente (más de 8px) -> ocultar suavemente
       if (currentScrollY > lastScrollY + 8) {
-        setHidden(true);
+        updateHidden(true);
       }
       // Scroll ascendente (más de 8px) -> mostrar inmediatamente
       else if (currentScrollY < lastScrollY - 8) {
-        setHidden(false);
+        updateHidden(false);
       }
 
       lastScrollY = currentScrollY;
     };
 
+    const handleScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      rafId = window.requestAnimationFrame(update);
+    };
+
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (rafId) {
+        window.cancelAnimationFrame(rafId);
+      }
+    };
   }, [open]);
 
   // Bloqueo de scroll cuando el drawer móvil está abierto
@@ -87,7 +109,7 @@ export function Navbar() {
   return (
     <header
       className={`sticky top-0 z-50 glass-panel border-b border-border transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-        hidden ? "-translate-y-full" : "translate-y-0"
+        hidden && !open ? "-translate-y-full" : "translate-y-0"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 py-3 flex items-center justify-between gap-3 sm:gap-4">
@@ -122,6 +144,9 @@ export function Navbar() {
           <button
             type="button"
             onClick={() => openReleaseModal()}
+            onMouseEnter={() => prefetchReleaseModal()}
+            onFocus={() => prefetchReleaseModal()}
+            onTouchStart={() => prefetchReleaseModal()}
             className="inline-flex items-center gap-1.5 px-3 h-9 rounded-xl text-xs font-semibold text-foreground bg-muted/70 border border-border hover:border-editorial-amber/50 hover:bg-muted tactile-press cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring group"
             title="Explorar novedades de la versión 2.0.0"
           >
@@ -196,6 +221,8 @@ export function Navbar() {
               setOpen(false);
               openReleaseModal();
             }}
+            onFocus={() => prefetchReleaseModal()}
+            onTouchStart={() => prefetchReleaseModal()}
             className="w-full min-h-[44px] flex items-center justify-between text-left py-2.5 px-3.5 rounded-xl bg-muted border border-border text-foreground font-semibold text-sm tactile-press focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             <span className="flex items-center gap-2">

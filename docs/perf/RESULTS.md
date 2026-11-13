@@ -49,6 +49,8 @@ All Lighthouse runs use Mobile form factor (Moto G Power emulation), **CPU 4x sl
 | CP-11 | `perf-cp-11-scroll-raf` | rAF-throttled Navbar scroll listener | — | — | Pass (`tsc`+`lint`) | Single state transition per direction reversal + `ReleaseModal` prefetch |
 | CP-12 | `perf-cp-12-next-config` | `next.config.js` image & package opts | **229,682 B** | **315,080 B** | Pass (40/40) | AVIF/WebP + `optimizePackageImports` (-75,319 B Home / -75,239 B chunks) |
 | Audit 1 | `perf-cp-audit-1` | Full Lighthouse + payload comparison | **229,682 B** | **315,080 B** | Pass (40/40) | Median Score **99**, LCP **1102ms**, TBT **108ms**, CLS **0.0000** |
+| Fix 1 | `perf-cp-fix-1` | CSS pre-hydration icon rendering in `ThemeToggle` | **229,682 B** | **315,080 B** | Pass (40/40) | Eliminated blank box pre-hydration; verify run Score **98**, LCP **1286ms**, TBT **167ms**, CLS **0** |
+| QA Pass | `perf-cp-qa-pass` | Real Browser QA (320px/375px/430px/1280px, lite & full) | **229,682 B** | **315,080 B** | Pass | 0 console errors, 0 overflow, all interactions & light/dark parity verified |
 
 ---
 
@@ -61,6 +63,7 @@ All Lighthouse runs use Mobile form factor (Moto G Power emulation), **CPU 4x sl
 | `/` (Home) | 1 | 94 | 1070 | 1070 | 295 | 0.0000 | 1479 | 2377 | 837 |
 | `/` (Home) | 2 | **99** | **1102** | **1102** | **108** (med) | **0.0000** | **1224** | **1562** | **584** |
 | `/` (Home) | 3 | **99** (med) | 1107 | 1107 | 96 | 0.0000 | 1434 | 1625 | 588 |
+| `/` (Home post-`fix-1`) | verify | **98** | 1286 | 1286 | 167 | 0.0000 | 1490 | — | — |
 | `/?perf=lite` | 1 | **99** | 1110 | 1110 | 125 | 0.0000 | 1110 | 1727 | 597 |
 | `/funciones` | 1 | **100** | 909 | 909 | 72 | 0.0000 | 909 | 1485 | 652 |
 | `/blog/fondo-de-emergencia` | 1 | **99** | 924 | 924 | 136 | 0.0000 | 924 | 1485 | 621 |
@@ -80,3 +83,16 @@ All Lighthouse runs use Mobile form factor (Moto G Power emulation), **CPU 4x sl
 | Home App-Specific JS (Gzip) | ~102,471 B | **27,152 B** | **-75,319 B (-73.5%)** | — | **-73.5%** |
 
 *\*Bundle note:* Shared Next.js 16 + React 19 App Router framework runtime chunks loaded across all routes (including 100-score `/funciones`) account for `202,530 B` gzip (`66.4%` of baseline `305,001 B`). Subtracting shared framework overhead, page-specific application JS on `/` dropped from `102,471 B` to `27,152 B` gzip (**-73.5%**), and `ReleaseModal` + Radix Dialog (`447oz-qwl02si.js`) was moved out of initial load into on-demand dynamic chunk loading.
+
+---
+
+## Phase 3 & 4 Real Browser QA Matrix (`perf-cp-qa-pass`)
+
+| Check Area | Viewports & Tiers | Key Verifications | Result |
+|---|---|---|---|
+| Console, Hydration & Fonts | `http://localhost:3000` | 0 console errors, 0 hydration warnings, 0 failed `_next/static`/`.woff2` requests; Fraunces, Plus Jakarta Sans & JetBrains Mono loaded | **PASS** |
+| Mobile Default Tier | `375x812` (`?perf=full`) | `data-perf="full"`, `scrollWidth` 360 <= 375, Hero H1 & body `opacity: 1` immediately, ThemeToggle Light/Dark, Drawer open/Esc, Smart Sticky Navbar, ScrollReveal all reach `opacity: 1`, 3D Gallery arrows/flanks, ReleaseModal lazy load + tabs, Banner dismiss persists on reload without flicker | **PASS** |
+| Low-End Mobile Tier | `320x568` & `375x812` (`?perf=lite`) | `data-perf="lite"`, `scrollWidth` 305 <= 320, `.glass-panel` blur disabled (`none`), ambient blob animations paused, 2.5D Gallery glide functional | **PASS** |
+| Large Mobile & Desktop | `430x932` & `1280x800` | 0px overflow (`414 <= 430`), 1-line Desktop nav, Hero balance tabs, CookieBanner dismiss, Forms validation/focus, Light & Dark visual parity | **PASS** |
+| Secondary Routes | `375x812` (`/funciones`, `/blog/fondo-de-emergencia`) | HTTP 200, 0px overflow (`360 <= 375`), readable typography and cards | **PASS** |
+| Pre-hydration Polish Fix | `375x812` & `320x568` (`perf-cp-fix-1`) | Replaced empty mounted placeholder in `ThemeToggle` with CSS `dark:` variant icons rendered from Frame 0 | **PASS** |

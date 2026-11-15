@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { APP_VERSION } from "@/lib/release";
 
 export const alt =
   "Finance Pal — App de Finanzas Personales Gratis, Privada y Sin Conexión";
@@ -70,7 +71,7 @@ export default function OpenGraphImage() {
                   textTransform: "uppercase",
                 }}
               >
-                Edición v2.0.0 · Warm Editorial Wealth
+                Edición v{APP_VERSION} · Warm Editorial Wealth
               </span>
             </div>
           </div>

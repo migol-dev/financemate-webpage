@@ -1,16 +1,17 @@
 import React from "react";
 import {
   Palette,
-  FolderKanban,
-  Tags,
+  Layers,
   Zap,
-  BarChart3,
+  Receipt,
+  PieChart,
+  FolderKanban,
   ShieldCheck,
   RefreshCw,
-  Sparkles,
   type LucideIcon,
 } from "lucide-react";
 import { EditorialHighlight, ScrollReveal } from "@/components/editorial-motion";
+import { APP_VERSION } from "@/lib/release";
 
 interface FeatureItem {
   coordinate: string;
@@ -26,64 +27,64 @@ const FEATURES: FeatureItem[] = [
     coordinate: "01 / ATMÓSFERA",
     icon: Palette,
     title: "Warm Editorial Wealth",
-    desc: "Atmósfera de cuaderno patrimonial con tríada tipográfica Fraunces, Plus Jakarta Sans y JetBrains Mono, superficies en alabastro u obsidiana y microfísica a 120 FPS.",
-    tag: "Atmósfera v2.0",
+    desc: "Atmósfera de cuaderno patrimonial con tríada tipográfica Fraunces, Plus Jakarta Sans y JetBrains Mono, superficies en alabastro u obsidiana y arranque Zero-Flash sin parpadeo.",
+    tag: `Edición v${APP_VERSION}`,
     accentColor: "text-editorial-amber",
   },
   {
-    coordinate: "02 / METAS",
-    icon: FolderKanban,
-    title: "Metas con Drag & Drop",
-    desc: "Organización jerárquica con subcarpetas multinivel y reordenamiento fluido táctil con dnd-kit. Proyección predictiva de ritmo diario y semanal.",
-    tag: "Carpetas dnd-kit",
+    coordinate: "02 / ICONOGRAFÍA",
+    icon: Layers,
+    title: "99 Iconos Vectoriales SVG",
+    desc: "Interfaz V2 completamente libre de emojis: sistema tipado de 99 iconos SVG adaptativos vía currentColor con 4 glifos financieros propios y traducción automática de íconos previos.",
+    tag: "Cero Emojis · SVG",
     accentColor: "text-editorial-emerald",
   },
   {
-    coordinate: "03 / TAXONOMÍA",
-    icon: Tags,
-    title: "15 Categorías + Custom",
-    desc: "15 categorías universales curadas para consumo cotidiano y creador inline de categorías ilimitadas con selector dinámico de emojis (máx. 20 caracteres).",
-    tag: "15 + Ilimitadas",
+    coordinate: "03 / REGISTRO",
+    icon: Zap,
+    title: "Registro Rápido Inteligente",
+    desc: "QuickTransactionSheet contextual que filtra métodos de pago según la cuenta (efectivo automático, tarjeta o transferencia CLABE) y adjunta comprobantes al instante.",
+    tag: "Quick Sheet · CLABE",
     accentColor: "text-editorial-cobalt",
   },
   {
-    coordinate: "04 / RENDIMIENTO",
-    icon: Zap,
-    title: "Zero-Flash Boot",
-    desc: "Detección síncrona en el head del documento de fp-theme-pref antes del primer render de React para erradicar el parpadeo blanco. Selector en login/registro.",
-    tag: "0.00 ms Flash",
+    coordinate: "04 / COMPROBANTES",
+    icon: Receipt,
+    title: "Recibos Privados 5 MB",
+    desc: "Validación local de magic bytes (JPEG, PNG y WebP), compresión automática en cliente hasta 5 MB y referencias lógicas seguras sb:receipts resueltas bajo demanda.",
+    tag: "Magic Bytes · 5 MB",
     accentColor: "text-primary",
   },
   {
     coordinate: "05 / INTELIGENCIA",
-    icon: BarChart3,
-    title: "Resumen Macroeconómico",
-    desc: "Balance anual en 4 columnas (General, Categorías, Métodos, Metas), desglose porcentual ponderado y detección visual de anomalías de consumo.",
-    tag: "4 Columnas Macro",
+    icon: PieChart,
+    title: "DonutChart SVG y Anual",
+    desc: "Gráficos circulares interactivos adaptativos con porcentajes que suman exactamente 100.0%, desglose de efectivo por denominación y balance anual en 4 columnas.",
+    tag: "DonutChart 100.0%",
     accentColor: "text-editorial-amber",
   },
   {
-    coordinate: "06 / CRIPTOGRAFÍA",
-    icon: ShieldCheck,
-    title: "WebCrypto AES-256",
-    desc: "Criptografía simétrica nativa en cliente con WebCrypto AES-GCM 256-bit, KDF PBKDF2 de 100,000 rondas, 2FA TOTP y auditoría k-Anonymity HaveIBeenPwned.",
-    tag: "Local-First Militar",
+    coordinate: "06 / NAVEGACIÓN",
+    icon: FolderKanban,
+    title: "Deudas en Barra Principal",
+    desc: "Barra inferior renovada (Inicio, Movimientos, +, Metas y Deudas) con metas jerárquicas dnd-kit, deslizamiento fluido y menú compacto superior para Anual, Historial y Ajustes.",
+    tag: "BottomNav · dnd-kit",
     accentColor: "text-editorial-emerald",
   },
   {
-    coordinate: "07 / SOBERANÍA",
-    icon: RefreshCw,
-    title: "Sync Zero-Knowledge",
-    desc: "Sincronización multi-dispositivo cifrada en cliente con Supabase. Los datos viajan y residen cifrados sin que la nube pueda leer montos ni conceptos.",
-    tag: "Zero-Knowledge",
+    coordinate: "07 / CRIPTOGRAFÍA",
+    icon: ShieldCheck,
+    title: "AES-256 y SECURITY.md",
+    desc: "Cifrado simétrico WebCrypto AES-GCM 256-bit, PBKDF2 de 100,000 rondas, 2FA TOTP, auditoría k-Anonymity, sincronización Zero-Knowledge y política de seguridad publicada.",
+    tag: "Zero-Knowledge · 2FA",
     accentColor: "text-editorial-cobalt",
   },
   {
-    coordinate: "08 / ACCESIBILIDAD",
-    icon: Sparkles,
-    title: "Accesibilidad WCAG AAA",
-    desc: "Isotipo oficial en escudo esmeralda con sendero ascendente, contraste certificado WCAG AAA (8.5:1), blancos táctiles accesibles y soporte para dislexia y daltonismo.",
-    tag: "WCAG AAA 8.5:1",
+    coordinate: "08 / NATIVO & QA",
+    icon: RefreshCw,
+    title: "Auto-Update y 382 Tests",
+    desc: "Detección in-app de lanzamientos en GitHub Releases para Android con verificación de host confiable, contraste WCAG AAA (8.5:1) y 52 suites con 382 pruebas automatizadas.",
+    tag: "52 Suites · 382 Tests",
     accentColor: "text-editorial-terracotta",
   },
 ];
@@ -108,8 +109,8 @@ export function Features() {
           </div>
           <div className="lg:col-span-5">
             <p className="text-muted-foreground editorial-text-hover text-sm sm:text-base leading-relaxed text-pretty">
-              Cero acumulación de tarjetas pesadas (*De-Boxing*). Los 8 módulos nucleares de la{" "}
-              <EditorialHighlight>edición v2.0.0</EditorialHighlight> se articulan mediante filetes
+              Cero acumulación de tarjetas pesadas (De-Boxing). Los 8 módulos nucleares de la{" "}
+              <EditorialHighlight>edición v{APP_VERSION}</EditorialHighlight> se articulan mediante filetes
               de 1px y jerarquía tipográfica limpia.
             </p>
           </div>

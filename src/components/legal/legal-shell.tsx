@@ -6,6 +6,7 @@ import { ArrowLeft, Shield, FileText, Cookie, AlertTriangle, Printer } from "luc
 import React from "react";
 import { BrandLogo } from "@/components/brand-logo";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { APP_SHORT_VERSION } from "@/lib/release";
 
 interface LegalShellProps {
   title: string;
@@ -44,8 +45,8 @@ export function LegalShell({
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-18 py-2.5 sm:py-3 flex items-center justify-between gap-2 sm:gap-4">
           <div className="flex items-center gap-3 sm:gap-6 min-w-0">
             <Link href="/" className="shrink-0">
-              <BrandLogo size="sm" versionText="v2.0" className="sm:hidden" />
-              <BrandLogo size="md" versionText="v2.0" className="hidden sm:inline-flex" />
+              <BrandLogo size="sm" versionText={APP_SHORT_VERSION} className="sm:hidden" />
+              <BrandLogo size="md" versionText={APP_SHORT_VERSION} className="hidden sm:inline-flex" />
             </Link>
 
             <Link

@@ -29,24 +29,24 @@ export const revalidate = 3600;
 const FALLBACK_GALLERY: GalleryImage[] = [
   {
     id: "fallback-1",
-    title: "Panel de control de presupuesto personal y tasa de ahorro",
-    description: "Balance neto del mes, ingresos, gastos y ahorro de un vistazo.",
+    title: "Panel de control de presupuesto personal y gráficos SVG DonutChart",
+    description: "Balance neto del mes, distribución por cuentas y tasa de ahorro de un vistazo.",
     image_url: "/gallery/placeholder-dashboard.svg",
     sort_order: 0,
     created_at: "",
   },
   {
     id: "fallback-2",
-    title: "Control de gastos e ingresos en 15 categorías",
-    description: "Filtra tus gastos e ingresos por fecha, categoría o método.",
+    title: "Registro rápido inteligente y comprobantes verificados en 15 categorías",
+    description: "99 iconos vectoriales SVG sin emojis, filtros instantáneos y recibos comprimidos.",
     image_url: "/gallery/placeholder-movements.svg",
     sort_order: 1,
     created_at: "",
   },
   {
     id: "fallback-3",
-    title: "Metas de ahorro jerárquicas Drag & Drop",
-    description: "Define un objetivo y da seguimiento visual a tu progreso.",
+    title: "Metas jerárquicas Drag & Drop y Deudas en barra principal",
+    description: "Navegación móvil refinada con acceso directo a metas y control de préstamos.",
     image_url: "/gallery/placeholder-goals.svg",
     sort_order: 2,
     created_at: "",
@@ -90,7 +90,7 @@ export default async function Home() {
   const release: ReleaseInfo = {
     version: APP_VERSION,
     url: APK_DOWNLOAD_URL,
-    publishedAt: "2026-11-02T00:00:00.000Z",
+    publishedAt: "2026-11-15T01:53:29.000Z",
   };
 
   const reviewCount = reviews.length;

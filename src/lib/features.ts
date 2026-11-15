@@ -43,9 +43,9 @@ export const FEATURES_DATA: FeaturePageData[] = [
     title: "App para Controlar Gastos e Ingresos Diarios sin Fricción",
     metaTitle: "App para Controlar Gastos e Ingresos Gratis y Offline",
     metaDescription:
-      "Registra y clasifica tus gastos diarios e ingresos en segundos con Finance Pal. 15 categorías universales, filtros inteligentes y cero conexión bancaria.",
+      "Registra y clasifica tus gastos diarios e ingresos en segundos con Finance Pal. QuickTransactionSheet contextual, 99 iconos SVG sin emojis y recibos privados de 5 MB.",
     heroSubtitle:
-      "Un libro mayor personal diseñado para registrar cada movimiento en menos de cinco segundos, detectar gastos hormiga y visualizar hacia dónde fluye tu dinero cada mes.",
+      "Un libro mayor personal diseñado para registrar cada movimiento en menos de cinco segundos, filtrar métodos de pago según cuenta y adjuntar comprobantes privados sin conexión bancaria.",
     keywords: [
       "app para controlar gastos",
       "control de gastos personales",
@@ -54,30 +54,30 @@ export const FEATURES_DATA: FeaturePageData[] = [
       "gestor de gastos e ingresos",
       "gastos hormiga",
     ],
-    updatedAt: "2026-11-02",
+    updatedAt: "2026-11-14",
     keyMetrics: [
       {
-        label: "Taxonomía Universal",
-        value: "15",
-        detail: "Categorías limpias sin submenús infinitos",
+        label: "Iconografía SVG",
+        value: "99",
+        detail: "Iconos adaptativos sin emojis + 15 rubros clave",
       },
       {
-        label: "Tiempo de Registro",
+        label: "QuickSheet",
         value: "< 5 s",
-        detail: "Captura táctil inmediata offline",
+        detail: "Métodos filtrados por cuenta y captura CLABE",
       },
       {
-        label: "Latencia de Consulta",
-        value: "0 ms",
-        detail: "Búsqueda instantánea en memoria local",
+        label: "Recibos Privados",
+        value: "≤ 5 MB",
+        detail: "Validación magic bytes y refs sb:receipts",
       },
     ],
     problemStatement: {
       heading: "Por qué fracasan las hojas de cálculo y las apps bancarias tradicionales",
       paragraphs: [
-        "La mayoría de las personas abandona el registro de gastos durante la segunda semana porque las aplicaciones convencionales exigen clasificar cada café en docenas de subcategorías confusas, muestran publicidad invasiva o requieren sincronización en la nube con tiempos de carga lentos.",
+        "La mayoría de las personas abandona el registro de gastos durante la segunda semana porque las aplicaciones convencionales exigen clasificar cada café en submenús confusos, muestran publicidad invasiva o requieren sincronización en la nube con tiempos de carga lentos.",
         "Por otro lado, depender únicamente del estado de cuenta bancario impide ver los pagos en efectivo, mezcla transferencias propias con gastos reales y entrega tu historial de consumo a intermediarios comerciales.",
-        "Finance Pal resuelve esta fricción aplicando la estética y precisión de un cuaderno contable de alta dirección: una taxonomía cerrada de 15 categorías universales, filtros combinados por fecha, método o tipo de flujo, y almacenamiento 100% Local-First.",
+        "Finance Pal resuelve esta fricción con QuickTransactionSheet: filtra automáticamente los métodos de pago permitidos (Efectivo automático para cuentas de caja; Tarjeta y Transferencia con CLABE limpia para banco), reemplaza los emojis por 99 iconos SVG adaptativos y comprime tus recibos localmente antes de guardarlos en tu bóveda.",
       ],
     },
     architectureSteps: [
@@ -152,11 +152,11 @@ export const FEATURES_DATA: FeaturePageData[] = [
     category: "Visión Macroeconómica",
     shortTitle: "Presupuesto Personal",
     title: "App de Presupuesto Personal y Balance Patrimonial Mensual",
-    metaTitle: "App de Presupuesto Personal Gratis | Balance y Tasa de Ahorro",
+    metaTitle: "App de Presupuesto Personal Gratis | Balance, DonutChart y Tasa de Ahorro",
     metaDescription:
-      "Organiza tu presupuesto personal mensual, calcula tu tasa de ahorro real y aplica la regla 50/30/20 con el panel macroeconómico de Finance Pal.",
+      "Organiza tu presupuesto mensual con gráficos DonutChart SVG al 100.0% exacto, arqueo de efectivo por denominación, tasa de ahorro y visibilidad completa de cuentas.",
     heroSubtitle:
-      "Transforma ingresos y gastos aislados en un diagnóstico financiero claro: balance neto mensual, tasa de ahorro porcentual y distribución real de tu presupuesto.",
+      "Transforma ingresos y gastos aislados en un diagnóstico financiero claro: balance neto mensual, DonutChart SVG exacto de cuentas y arqueo por denominación.",
     keywords: [
       "app de presupuesto personal",
       "presupuesto mensual app",
@@ -165,7 +165,7 @@ export const FEATURES_DATA: FeaturePageData[] = [
       "regla 50 30 20 app",
       "flujo de caja personal",
     ],
-    updatedAt: "2026-11-02",
+    updatedAt: "2026-11-14",
     keyMetrics: [
       {
         label: "Métricas Clave",
@@ -173,9 +173,9 @@ export const FEATURES_DATA: FeaturePageData[] = [
         detail: "Balance neto, ingresos, gastos y tasa de ahorro",
       },
       {
-        label: "Precisión Numérica",
-        value: "Tabular",
-        detail: "Cifras alineadas en tipografía monoespaciada",
+        label: "DonutChart SVG",
+        value: "100.0%",
+        detail: "Distribución exacta de cuentas y efectivo",
       },
       {
         label: "Modo Discreto",
@@ -186,8 +186,8 @@ export const FEATURES_DATA: FeaturePageData[] = [
     problemStatement: {
       heading: "Un presupuesto útil no es una cárcel de restricciones, sino un mapa de decisiones",
       paragraphs: [
-        "La razón principal por la que los presupuestos tradicionales fallan es la falta de visibilidad inmediata sobre el margen de maniobra real del mes. Si no sabes de un vistazo cuánto has ingresado, cuánto has comprometido y cuál es tu tasa de ahorro neta, cualquier imprevisto desordena tu planificación.",
-        "El panel principal de Finance Pal consolida tu actividad en un resumen macroeconómico limpio. En lugar de saturar la pantalla con gráficas decorativas, presenta tus cuatro indicadores patrimoniales fundamentales con semántica de color editorial: esmeralda para ingresos, terracota para egresos y cobalto para ahorro e inversión.",
+        "La razón principal por la que los presupuestos tradicionales fallan es la falta de visibilidad inmediata sobre el margen de maniobra real del mes y el saldo real repartido entre tus distintas cuentas bancarias y efectivo físico.",
+        "El panel de Finance Pal consolida tu actividad en un resumen macroeconómico en 4 columnas con gráficos DonutChart SVG interactivos que garantizan suma exacta al 100.0%, desglose de efectivo por billetes y monedas, y visibilidad total de saldos en móvil.",
       ],
     },
     architectureSteps: [
@@ -269,12 +269,12 @@ export const FEATURES_DATA: FeaturePageData[] = [
       "calculadora de ahorro diario",
       "fondo de emergencia app",
     ],
-    updatedAt: "2026-11-02",
+    updatedAt: "2026-11-14",
     keyMetrics: [
       {
         label: "Estructura",
         value: "Jerárquica",
-        detail: "Metas principales y sub-objetivos reordenables",
+        detail: "Carpetas e iconos SVG adaptativos sin emojis",
       },
       {
         label: "Interacción",
@@ -291,7 +291,7 @@ export const FEATURES_DATA: FeaturePageData[] = [
       heading: "Ahorrar sin un objetivo estructurado suele terminar en gasto diferido",
       paragraphs: [
         "Guardar «lo que sobre a fin de mes» rara vez funciona. Cuando el dinero ahorrado no tiene nombre, prioridad ni fecha objetivo, cualquier compra impulsiva parece justificada.",
-        "En Finance Pal v2.0.0 rediseñamos por completo el módulo de metas de ahorro: ahora puedes estructurar objetivos compuestos (por ejemplo, «Equipamiento de Trabajo» dividido en computadora, monitor y respaldo), reordenar su prioridad mediante Drag & Drop y conocer exactamente cuánto necesitas apartar por día o por mes para llegar a la fecha meta.",
+        "En Finance Pal v2.1 refinamos el módulo de metas con iconos vectoriales SVG adaptativos al tema, ordenamiento Drag & Drop dentro de la navegación fluida Inicio -> Movimientos -> Metas -> Deudas y cálculo exacto del ahorro diario o semanal necesario para cumplir tu fecha límite.",
       ],
     },
     architectureSteps: [
@@ -373,12 +373,12 @@ export const FEATURES_DATA: FeaturePageData[] = [
       "metodo bola de nieve deudas",
       "registro de abonos",
     ],
-    updatedAt: "2026-11-02",
+    updatedAt: "2026-11-14",
     keyMetrics: [
       {
-        label: "Doble Libro",
-        value: "2 Vistas",
-        detail: "Lo que debes (pasivos) y lo que te deben (cuentas por cobrar)",
+        label: "Acceso Directo",
+        value: "Barra V2.1",
+        detail: "Promovida a BottomNavV2 para apertura en 1 toque",
       },
       {
         label: "Amortización",
@@ -395,7 +395,7 @@ export const FEATURES_DATA: FeaturePageData[] = [
       heading: "La incertidumbre sobre tus deudas genera más estrés que la deuda misma",
       paragraphs: [
         "Cuando tienes varios compromisos abiertos —una tarjeta de crédito, un préstamo familiar o dinero que prestaste a un amigo— llevar la cuenta de memoria o en notas sueltas provoca olvidos, cargos moratorios y malentendidos personales.",
-        "El módulo de Deudas de Finance Pal separa con rigor contable las cuentas por pagar (lo que debes) de las cuentas por cobrar (lo que te deben), permitiéndote registrar abonos parciales y ver en tiempo real cuánto falta por liquidar.",
+        "Por eso en v2.1 promovimos Deudas directamente a la barra inferior principal de Finance Pal: separa con rigor contable tus pasivos por pagar y tus préstamos por cobrar, registra abonos parciales y audita cuánto falta por liquidar sin submenús.",
       ],
     },
     architectureSteps: [
@@ -477,29 +477,29 @@ export const FEATURES_DATA: FeaturePageData[] = [
       "app de finanzas codigo abierto",
       "cifrado aes gcm 256 finanzas",
     ],
-    updatedAt: "2026-11-02",
+    updatedAt: "2026-11-14",
     keyMetrics: [
       {
         label: "Cifrado de Respaldo",
         value: "AES-256",
-        detail: "Estándar WebCrypto AES-GCM autenticado",
+        detail: "WebCrypto AES-GCM + PBKDF2 100,000 rondas",
       },
       {
-        label: "Derivación de Clave",
-        value: "100,000",
-        detail: "Iteraciones PBKDF2-SHA256 con sal aleatoria",
+        label: "Recibos Privados",
+        value: "≤ 5 MB",
+        detail: "Magic bytes reales + refs sb:receipts endurecidas",
       },
       {
-        label: "Telemetría Financiera",
-        value: "0 Bytes",
-        detail: "Ningún dato contable se envía a servidores",
+        label: "Calidad & SECURITY",
+        value: "382 Tests",
+        detail: "52 suites verificadas y política SECURITY.md",
       },
     ],
     problemStatement: {
       heading: "Tu patrimonio personal no debería ser el producto de una empresa de datos",
       paragraphs: [
         "La mayoría de las aplicaciones financieras «gratuitas» monetizan tus datos: exigen crear una cuenta en sus servidores, almacenan tu historial de ingresos y gastos en texto plano en la nube y comparten perfiles de consumo con redes publicitarias o brókers de crédito.",
-        "Finance Pal adopta una postura radicalmente distinta: arquitectura 100% Local-First y código abierto bajo licencia MIT. No existe base de datos centralizada de usuarios financieros; la aplicación se ejecuta íntegra en tu teléfono Android o navegador web.",
+        "Finance Pal adopta arquitectura 100% Local-First bajo licencia MIT y política pública SECURITY.md: cifrado WebCrypto AES-256 en cliente, comprobantes validados por magic bytes con bucket privado endurecido (receipts_hardening), actualizador Android verificado contra GitHub Releases y 382 pruebas automatizadas.",
       ],
     },
     architectureSteps: [

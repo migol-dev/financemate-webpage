@@ -6,6 +6,7 @@ import { Menu, X, Sparkles, Download, ArrowUpRight } from "lucide-react";
 import { openReleaseModal, prefetchReleaseModal } from "@/components/release-announcement";
 import { BrandLogo } from "@/components/brand-logo";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { APP_SHORT_VERSION, APP_VERSION, REPO_URL } from "@/lib/release";
 
 const LINKS = [
   { href: "/#plataformas", label: "Plataformas" },
@@ -15,12 +16,7 @@ const LINKS = [
   { href: "/#resenas", label: "Comunidad" },
 ];
 
-const GITHUB_URL =
-  process.env.NEXT_PUBLIC_GITHUB_REPO_URL &&
-  !process.env.NEXT_PUBLIC_GITHUB_REPO_URL.includes("financemate-webpage") &&
-  !process.env.NEXT_PUBLIC_GITHUB_REPO_URL.includes("finance-mate")
-    ? process.env.NEXT_PUBLIC_GITHUB_REPO_URL
-    : "https://github.com/migol-dev/finance-pal";
+const GITHUB_URL = REPO_URL;
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -118,7 +114,7 @@ export function Navbar() {
           href="/"
           className="shrink-0 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring min-w-0"
         >
-          <BrandLogo versionText="v2.0" />
+          <BrandLogo versionText={APP_SHORT_VERSION} />
         </Link>
 
         {/* Desktop Nav: Dock Pill elegante de una sola línea */}
@@ -148,7 +144,7 @@ export function Navbar() {
             onFocus={() => prefetchReleaseModal()}
             onTouchStart={() => prefetchReleaseModal()}
             className="inline-flex items-center gap-1.5 px-3 h-9 rounded-xl text-xs font-semibold text-foreground bg-muted/70 border border-border hover:border-editorial-amber/50 hover:bg-muted tactile-press cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring group"
-            title="Explorar novedades de la versión 2.0.0"
+            title={`Explorar novedades de la versión ${APP_VERSION}`}
           >
             <Sparkles
               className="w-3.5 h-3.5 text-editorial-amber transition-transform duration-200 ease-out group-hover:rotate-12"
@@ -227,7 +223,7 @@ export function Navbar() {
           >
             <span className="flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-editorial-amber shrink-0" strokeWidth={2} />
-              <span>Explorar Novedades v2.0.0</span>
+              <span>Explorar Novedades v{APP_VERSION}</span>
             </span>
             <span className="text-[10px] font-mono uppercase bg-background px-2 py-0.5 rounded border border-border text-muted-foreground shrink-0">
               Novedades
@@ -255,7 +251,7 @@ export function Navbar() {
               onClick={() => setOpen(false)}
               className="btn-primary w-full min-h-[44px] justify-center text-sm font-semibold"
             >
-              <span>Descargar APK v2.0.0</span>
+              <span>Descargar APK v{APP_VERSION}</span>
               <Download className="w-4 h-4" strokeWidth={2} />
             </Link>
             <a

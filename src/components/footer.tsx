@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { Shield, FileText, Cookie, AlertTriangle, ExternalLink, Mail } from "lucide-react";
+import { Shield, FileText, Cookie, AlertTriangle, ExternalLink, Mail, ShieldCheck } from "lucide-react";
 import { BrandLogo } from "@/components/brand-logo";
+import { APP_VERSION } from "@/lib/release";
 
 export function Footer({ repoUrl }: { repoUrl: string }) {
   const currentYear = new Date().getFullYear();
@@ -12,7 +13,7 @@ export function Footer({ repoUrl }: { repoUrl: string }) {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 lg:gap-12 pb-10 sm:pb-12 border-b border-border">
           {/* Identity & Mission */}
           <div className="md:col-span-5 space-y-4">
-            <BrandLogo size="sm" versionText="v2.0.0" />
+            <BrandLogo size="sm" versionText={`v${APP_VERSION}`} />
 
             <p className="text-muted-foreground text-xs leading-relaxed max-w-sm">
               Cuaderno de gestión patrimonial personal construido bajo la filosofía{" "}
@@ -142,6 +143,17 @@ export function Footer({ repoUrl }: { repoUrl: string }) {
                   <AlertTriangle className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
                   <span className="break-words">Aviso Legal y Deslinde</span>
                 </Link>
+              </li>
+              <li>
+                <a
+                  href={`${repoUrl}/blob/main/SECURITY.md`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-foreground transition-colors inline-flex items-center gap-2 group break-words"
+                >
+                  <ShieldCheck className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
+                  <span className="break-words">Política de Seguridad (SECURITY.md)</span>
+                </a>
               </li>
             </ul>
           </div>

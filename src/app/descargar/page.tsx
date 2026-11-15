@@ -17,6 +17,7 @@ import {
   APP_URL,
   APP_VERSION,
 } from "@/lib/seo";
+import { APK_SIZE_LABEL, APK_SHA256_SHORT, SECURITY_POLICY_URL } from "@/lib/release";
 import {
   JsonLd,
   buildBreadcrumbSchema,
@@ -26,7 +27,7 @@ import {
 export const metadata: Metadata = {
   title: `Descargar Finance Pal v${APP_VERSION} (APK Oficial Android y Web PWA)`,
   description:
-    "Descarga gratis el instalador oficial APK de Finance Pal v2.0.0 para Android o accede a la versión Web PWA sin conexión desde iOS, Windows, macOS y Linux.",
+    `Descarga gratis el instalador oficial APK de Finance Pal v${APP_VERSION} (${APK_SIZE_LABEL}) para Android o accede a la versión Web PWA sin conexión desde iOS, Windows, macOS y Linux.`,
   keywords: [
     "descargar finance pal",
     "finance pal apk",
@@ -51,7 +52,7 @@ const ANDROID_STEPS = [
     step: "01",
     title: "Descarga el archivo APK oficial",
     detail:
-      "Pulsa el botón «Descargar APK v2.0.0» para obtener el binario compilado directamente desde el repositorio oficial de GitHub Releases.",
+      `Pulsa el botón «Descargar APK Oficial (v${APP_VERSION})» para obtener financemate.apk (${APK_SIZE_LABEL}) compilado directamente desde el repositorio oficial de GitHub Releases.`,
   },
   {
     step: "02",
@@ -61,9 +62,9 @@ const ANDROID_STEPS = [
   },
   {
     step: "03",
-    title: "Inicia sin cuenta ni conexión",
+    title: "Inicia sin cuenta y actualiza in-app",
     detail:
-      "Abre Finance Pal y comienza a registrar tus ingresos, gastos, metas y deudas al instante. Tus datos quedan guardados en tu teléfono.",
+      "Abre Finance Pal y registra gastos, metas y deudas sin internet. Desde v2.1.0 la app comprueba nuevas versiones de Android automáticamente contra GitHub Releases.",
   },
 ];
 
@@ -170,20 +171,25 @@ export default function DescargarPage() {
                   <div className="py-3.5 flex flex-col min-[400px]:flex-row min-[400px]:items-baseline justify-between gap-1 min-[400px]:gap-4">
                     <span className="text-muted-foreground">Versión estable</span>
                     <span className="font-mono-tabular font-bold text-foreground break-words">
-                      v{APP_VERSION} (Warm Editorial Wealth)
+                      v{APP_VERSION} · {APK_SIZE_LABEL} (SHA {APK_SHA256_SHORT}...)
                     </span>
                   </div>
                   <div className="py-3.5 flex flex-col min-[400px]:flex-row min-[400px]:items-baseline justify-between gap-1 min-[400px]:gap-4">
                     <span className="text-muted-foreground">Requisitos Android</span>
                     <span className="font-mono-tabular font-semibold text-foreground break-words">
-                      Android 8.0+ (Oreo o superior)
+                      Android 8.0+ · Auto-Update In-App
                     </span>
                   </div>
                   <div className="py-3.5 flex flex-col min-[400px]:flex-row min-[400px]:items-baseline justify-between gap-1 min-[400px]:gap-4">
-                    <span className="text-muted-foreground">Cifrado de respaldos</span>
-                    <span className="font-mono-tabular font-semibold text-primary break-words">
-                      WebCrypto AES-GCM 256
-                    </span>
+                    <span className="text-muted-foreground">Cifrado y Seguridad</span>
+                    <a
+                      href={SECURITY_POLICY_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-mono-tabular font-semibold text-primary hover:underline break-words"
+                    >
+                      AES-GCM 256 · SECURITY.md ↗
+                    </a>
                   </div>
                   <div className="py-3.5 flex flex-col min-[400px]:flex-row min-[400px]:items-baseline justify-between gap-1 min-[400px]:gap-4">
                     <span className="text-muted-foreground">Licencia y Costo</span>

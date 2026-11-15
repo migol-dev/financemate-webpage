@@ -1,5 +1,6 @@
 import { ArrowUpRight, Smartphone } from "lucide-react";
 import type { ReleaseInfo } from "@/lib/types";
+import { APK_SHA256_SHORT, APK_SIZE_LABEL } from "@/lib/release";
 import { EditorialHighlight, ScrollReveal } from "@/components/editorial-motion";
 import { DownloadCta } from "@/components/download-cta";
 
@@ -78,7 +79,7 @@ export function DownloadSection({ release, repoUrl }: DownloadSectionProps) {
                   {/* Specs grid */}
                   <div className="grid grid-cols-1 min-[420px]:grid-cols-3 gap-2.5 sm:gap-3 text-xs font-mono-tabular">
                     {[
-                      { label: "Edición", value: `v${release.version}` },
+                      { label: "Edición", value: `v${release.version} · ${APK_SIZE_LABEL}` },
                       { label: "Plataforma", value: "Android 8.0+" },
                       { label: "Licencia", value: "MIT Auditable" },
                     ].map((item) => (
@@ -102,7 +103,7 @@ export function DownloadSection({ release, repoUrl }: DownloadSectionProps) {
                   />
 
                   <div className="text-[11px] text-muted-foreground pt-2 border-t border-border font-mono-tabular">
-                    ✓ Integridad SHA-256 verificada · Binario oficial: financemate.apk (v{release.version})
+                    ✓ SHA-256 ({APK_SHA256_SHORT}...) verificado · Binario oficial: financemate.apk (v{release.version})
                   </div>
                 </div>
 
@@ -126,7 +127,7 @@ export function DownloadSection({ release, repoUrl }: DownloadSectionProps) {
                     {[
                       "Descarga el archivo financemate.apk en tu teléfono Android.",
                       'Autoriza la instalación desde tu navegador cuando el sistema lo solicite.',
-                      "Inicia tu cuaderno patrimonial sin crear cuentas ni conectarte a internet.",
+                      "Opera sin cuentas obligatorias; desde v2.1 el actualizador in-app verifica lanzamientos directo en GitHub.",
                     ].map((step, i) => (
                       <li key={i} className="py-3 flex items-start gap-3">
                         <span className="w-5 h-5 rounded-md bg-card text-primary border border-border flex items-center justify-center font-mono-tabular font-bold text-[11px] shrink-0">

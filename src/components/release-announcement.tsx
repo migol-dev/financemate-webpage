@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import dynamic from "next/dynamic";
 import { Sparkles, X } from "lucide-react";
+import { APP_SHORT_VERSION, APP_VERSION } from "@/lib/release";
 
 const ReleaseModal = dynamic(
   () => import("./release-modal").then((m) => m.ReleaseModal),
@@ -24,7 +25,7 @@ export function prefetchReleaseModal() {
   }
 }
 
-const DISMISS_STORAGE_KEY = "financepal_v2_announcement_dismissed";
+const DISMISS_STORAGE_KEY = "financepal_v2_1_0_announcement_dismissed";
 
 export function ReleaseAnnouncement() {
   const [isOpen, setIsOpen] = useState(false);
@@ -88,13 +89,14 @@ export function ReleaseAnnouncement() {
               <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] sm:text-[11px] font-mono font-bold bg-muted text-primary border border-border shrink-0">
                 <span className="w-1.5 h-1.5 rounded-full bg-primary" />
                 <span>
-                  v2.0<span className="hidden sm:inline">.0 Oficial</span>
+                  {APP_SHORT_VERSION}
+                  <span className="hidden sm:inline">.0 Oficial</span>
                 </span>
               </span>
               <p className="text-foreground text-left text-xs sm:text-sm truncate leading-tight font-sans">
-                <span className="font-semibold">Finance Pal v2.0 disponible</span>
+                <span className="font-semibold">Finance Pal v{APP_VERSION} disponible</span>
                 <span className="hidden md:inline text-muted-foreground">
-                  : Estética Warm Editorial Wealth, metas jerárquicas Drag &amp; Drop, 15 categorías y cifrado WebCrypto AES-256.
+                  : Actualizador APK en Android, 99 iconos SVG sin emojis, registro rápido inteligente, comprobantes seguros y DonutChart.
                 </span>
               </p>
             </div>

@@ -1,4 +1,5 @@
 import { ArrowDownRight, ArrowUpRight, Smartphone, Monitor, Check } from "lucide-react";
+import { APP_VERSION, APK_SIZE_LABEL } from "@/lib/release";
 import { EditorialHighlight, ScrollReveal } from "@/components/editorial-motion";
 
 export function PlatformsSection() {
@@ -73,15 +74,15 @@ export function PlatformsSection() {
                   <p className="text-sm text-muted-foreground editorial-text-hover leading-relaxed max-w-[65ch]">
                     Instala el binario oficial compilado con Capacitor o fija la PWA en tu pantalla
                     de inicio. Opera con motor{" "}
-                    <EditorialHighlight>SQLite de latencia cero</EditorialHighlight>, arranque
-                    síncrono sin destellos blancos y reordenamiento táctil de metas a 120 FPS.
+                    <EditorialHighlight>SQLite de latencia cero</EditorialHighlight>, verificador
+                    in-app contra GitHub Releases y 99 iconos SVG adaptativos sin emojis.
                   </p>
 
                   <ul className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-2 text-xs text-foreground">
                     {[
-                      "Base SQLite local cifrada",
-                      "Cero consumo en segundo plano",
-                      "Sin permisos invasivos",
+                      "Auto-Update GitHub Releases",
+                      "Cajón táctil Android fluido",
+                      "Icono nativo v2 sin rastreo",
                     ].map((item) => (
                       <li
                         key={item}
@@ -96,13 +97,13 @@ export function PlatformsSection() {
 
                 <div className="pt-4 border-t border-border flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <span className="text-xs font-mono-tabular text-muted-foreground">
-                    Binario verificado · financemate.apk
+                    Binario verificado · financemate.apk ({APK_SIZE_LABEL})
                   </span>
                   <a
                     href="#descarga"
                     className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline underline-offset-4 tactile-press group"
                   >
-                    <span>Descargar instalador APK v2.0.0</span>
+                    <span>Descargar instalador APK v{APP_VERSION}</span>
                     <ArrowDownRight
                       className="w-4 h-4 transition-transform duration-150 ease-out group-hover:translate-x-0.5 group-hover:translate-y-0.5"
                       strokeWidth={2}

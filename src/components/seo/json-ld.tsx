@@ -110,12 +110,15 @@ export function buildSoftwareApplicationSchema(options?: {
       availability: "https://schema.org/InStock",
     },
     featureList: [
-      "Control de ingresos y gastos en 15 categorías universales",
+      "Control de ingresos y gastos con registro rápido inteligente y 99 iconos SVG sin emojis",
       "Almacenamiento 100% Local-First sin servidores externos",
       "Metas de ahorro jerárquicas con reordenamiento Drag & Drop",
-      "Control de deudas a favor y en contra con barra de amortización",
+      "Control de deudas en barra principal móvil con historial de abonos parciales",
+      "Gráficos SVG DonutChart interactivos de distribución por cuentas y denominaciones",
+      "Comprobantes seguros validados por firma binaria y compresión en cliente (máx. 5 MB)",
+      "Actualización automática in-app en Android nativo desde GitHub Releases",
       "Cifrado criptográfico WebCrypto AES-GCM de 256 bits (PBKDF2)",
-      "Modo discreto anti-espías (Privacy Blur)",
+      "Modo discreto anti-espías (Privacy Blur) y accesibilidad WCAG AAA",
       "Funcionamiento 100% offline en Android APK y Web PWA",
     ],
     ...(hasValidReviews

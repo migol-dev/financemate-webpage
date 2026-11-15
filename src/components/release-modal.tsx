@@ -8,171 +8,200 @@ import {
   ExternalLink,
   ShieldCheck,
   Zap,
-  FolderKanban,
-  Tags,
-  BarChart3,
+  Layers,
+  Receipt,
+  PieChart,
+  Compass,
   RefreshCw,
-  Palette,
   Check,
   Lock,
-  Sun,
-  Moon,
   Plus,
   ChevronLeft,
   ChevronRight,
+  Utensils,
+  Home,
+  Landmark,
+  Wallet,
+  CreditCard,
+  Coins,
+  MoreHorizontal,
+  Smartphone,
 } from "lucide-react";
 import * as Dialog from "@radix-ui/react-dialog";
+import {
+  APP_VERSION,
+  APP_SHORT_VERSION,
+  APK_DOWNLOAD_URL,
+  APK_SIZE_LABEL,
+  APK_SHA256_SHORT,
+  RELEASE_TAG_URL,
+  SECURITY_POLICY_URL,
+} from "@/lib/release";
 
 interface ReleaseFeature {
   id: string;
   icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
   shortTitle: string;
   badge: string;
-  badgeColor: string;
   title: string;
   subtitle: string;
   description: string;
   bullets: string[];
   metricLabel: string;
   metricValue: string;
-  previewType: "design" | "goals" | "categories" | "boot" | "macro" | "security" | "sync";
+  previewType: "update" | "icons" | "quicktx" | "receipts" | "charts" | "nav" | "security";
 }
 
 const RELEASE_FEATURES: ReleaseFeature[] = [
   {
-    id: "design",
-    icon: Palette,
-    shortTitle: "Warm Editorial",
-    badge: "Nueva Atmósfera",
-    badgeColor: "text-amber-400 bg-amber-950/80 border-amber-500/30",
-    title: "Warm Editorial Wealth",
-    subtitle: "Diseño de alta costura financiera inspirado en el minimalismo editorial suizo",
+    id: "update",
+    icon: RefreshCw,
+    shortTitle: "Auto-Update APK",
+    badge: `Nativo Android ${APP_SHORT_VERSION}`,
+    title: "Actualizador In-App contra GitHub Releases",
+    subtitle: "Detección inteligente exclusiva en Android sin falsos positivos en Web",
     description:
-      "La versión 2.0.0 abandona los clichés de interfaces financieras genéricas. Introduce contrastes tipográficos profundos, superficies de carbón templado con iluminación especular milimétrica y microfísica elástica a 120fps en cada interacción.",
+      "Finance Pal ahora comprueba automáticamente nuevas versiones directamente en GitHub Releases únicamente cuando corre en Android nativo. En Web/PWA solo informa la edición instalada para mantener la experiencia limpia.",
     bullets: [
-      "Tipografía refinada con jerarquía óptica y números tabulares en métricas.",
-      "Luminancia escalonada en modo oscuro con bordes táctiles de 1px.",
-      "Transiciones cinéticas con cubic-beziers de resorte suave y cero lag.",
+      "Comparación SemVer estricta (incluye pre-releases) con descarte de borradores, caché de 6h y re-comprobación al volver a primer plano.",
+      "Respeta la versión pospuesta ('Luego') hasta una edición superior y valida hosts confiables HTTPS de GitHub/CDN.",
+      "Nuevo banner editorial discreto y verificación manual 'Buscar actualización' en Ajustes -> Seguridad y Sistema.",
     ],
-    metricLabel: "Fluidez táctil",
-    metricValue: "120 FPS",
-    previewType: "design",
+    metricLabel: "Binario oficial",
+    metricValue: `${APK_SIZE_LABEL} · APK`,
+    previewType: "update",
   },
   {
-    id: "goals",
-    icon: FolderKanban,
-    shortTitle: "Metas Drag & Drop",
-    badge: "Gestión Multinivel",
-    badgeColor: "text-emerald-400 bg-emerald-950/80 border-emerald-500/30",
-    title: "Metas con Carpetas & Drag/Drop",
-    subtitle: "Organización jerárquica con reordenamiento intuitivo por arrastre",
+    id: "icons",
+    icon: Layers,
+    shortTitle: "99 Iconos SVG",
+    badge: "Cero Emojis V2",
+    title: "Sistema Vectorial de 99 Iconos Adaptativos",
+    subtitle: "Iconografía SVG tipada por currentColor en toda la interfaz V2",
     description:
-      "Ahora puedes agrupar tus metas en carpetas temáticas personalizables ('Fondo de Emergencia', 'Viajes', 'Biker', 'Inversión') y reordenarlas con arrastre fluido tanto en dispositivos táctiles como en escritorio.",
+      "Eliminamos los emojis de la interfaz V2, el selector de iconos, el registro rápido y las notificaciones. Ahora todo el sistema opera sobre 99 IDs vectoriales (95 de Lucide + 4 glifos financieros propios) protegidos por test anti-emoji.",
     bullets: [
-      "Arquitectura de carpetas multinivel con colapso y resumen consolidado.",
-      "Reordenamiento intuitivo mediante @dnd-kit con soporte háptico nativo.",
-      "Algoritmo predictivo de ritmo: calcula la cuota diaria y semanal para cumplir tu meta a tiempo.",
+      "4 iconos financieros exclusivos: Billete, Pila de monedas, Banco/CLABE y Sello de recibo adaptativos vía currentColor.",
+      "Traducción transparente en tiempo de ejecución de categorías o metas heredadas con iconos antiguos.",
+      "Suite automática no-emoji-guard.test.ts garantizando coherencia editorial en todas las vistas V2.",
     ],
-    metricLabel: "Respuesta táctil",
-    metricValue: "< 8 ms",
-    previewType: "goals",
+    metricLabel: "Catálogo SVG",
+    metricValue: "99 SVG · 0 Emojis",
+    previewType: "icons",
   },
   {
-    id: "categories",
-    icon: Tags,
-    shortTitle: "15 Categorías",
-    badge: "Taxonomía v2",
-    badgeColor: "text-cyan-400 bg-cyan-950/80 border-cyan-500/30",
-    title: "15 Categorías Universales + Custom",
-    subtitle: "Clasificación integral de gastos con selector dinámico de emojis",
-    description:
-      "Una estructura de categorización rediseñada desde cero para adaptarse al consumo moderno. Incluye 15 categorías universales curadas y la posibilidad de crear categorías ilimitadas con iconos emoji personalizados al vuelo.",
-    bullets: [
-      "15 categorías cotidianas preconfiguradas con paleta cromática balanceada.",
-      "Creador inline de categorías personalizadas con búsqueda instantánea de emojis.",
-      "Filtros cruzados inmediatos en la bitácora contable y reportes.",
-    ],
-    metricLabel: "Flexibilidad",
-    metricValue: "15 + ∞",
-    previewType: "categories",
-  },
-  {
-    id: "boot",
+    id: "quicktx",
     icon: Zap,
-    shortTitle: "Zero-Flash Boot",
-    badge: "Rendimiento",
-    badgeColor: "text-sky-400 bg-sky-950/80 border-sky-500/30",
-    title: "Arranque Estricto & Zero-Flash",
-    subtitle: "Detección síncrona de tema de sistema para eliminar destellos blancos",
+    shortTitle: "Registro Rápido",
+    badge: "Quick Sheet",
+    title: "QuickTransactionSheet Contextual por Cuenta",
+    subtitle: "Métodos de pago filtrados y captura limpia de CLABE / últimos 4 dígitos",
     description:
-      "Se erradicó por completo el 'flash' blanco al abrir la aplicación en modo oscuro. Un script síncrono ultra-ligero lee la preferencia del sistema operativo y los ajustes guardados antes del primer renderizado de la interfaz.",
+      "Al capturar un movimiento desde cualquier vista, el formulario adapta automáticamente las opciones de pago según el tipo de cuenta origen para eliminar pasos innecesarios.",
     bullets: [
-      "Cero parpadeos en arranque en frío en Android, navegadores y PWA instalada.",
-      "Selector de tema integrado directamente en pantallas de login y registro.",
-      "Persistencia de estado en almacenamiento local de lectura síncrona.",
+      "Cuentas en efectivo fijan 'Efectivo · Automático'; cuentas bancarias filtran solo Tarjeta y Transferencia.",
+      "Detalles de transferencia colapsables más limpios (destinatario, banco y últimos 4 dígitos o CLABE de 18 dígitos).",
+      "Adjunto y previsualización inmediata de comprobantes dentro de la misma hoja rápida.",
     ],
-    metricLabel: "Latencia visual",
-    metricValue: "0 ms Flash",
-    previewType: "boot",
+    metricLabel: "Validación bancaria",
+    metricValue: "CLABE 18 dígitos",
+    previewType: "quicktx",
   },
   {
-    id: "macro",
-    icon: BarChart3,
-    shortTitle: "Macro Anual",
-    badge: "Inteligencia",
-    badgeColor: "text-amber-400 bg-amber-950/80 border-amber-500/30",
-    title: "Resumen Anual Macroeconómico",
-    subtitle: "Visión panorámica de 4 columnas, ratios de ahorro y detección de anomalías",
+    id: "receipts",
+    icon: Receipt,
+    shortTitle: "Recibos 5 MB",
+    badge: "Storage Endurecido",
+    title: "Comprobantes Privados y Magic Bytes",
+    subtitle: "Compresión local automática <= 5 MB y referencias lógicas sb:receipts",
     description:
-      "Comprende tu salud financiera en perspectiva de largo plazo. El nuevo módulo anual analiza 12 meses consecutivos con un panel de 4 columnas comparativas, desglose porcentual ponderado y alertas de anomalías de flujo.",
+      "El pipeline de comprobantes valida encabezados binarios reales (magic bytes) en cliente, comprime la imagen antes de salir del dispositivo y guarda referencias no expirables en un bucket privado endurecido.",
     bullets: [
-      "4 columnas macro: Ingresos brutos, Gastos reales, Ahorro neto y Tasa de retención.",
-      "Desglose porcentual ponderado por cada categoría de gasto anual.",
-      "Detección visual de meses atípicos para prevenir desbalances estacionales.",
+      "Acepta únicamente JPEG, PNG y WebP auténticos (entrada hasta 10 MB) con compresión en cliente a máximo 5 MB.",
+      "Persistencia con refs lógicas sb:receipts/<userId>/... resueltas a URLs firmadas frescas con caché (useReceiptUrl).",
+      "Migración receipts_hardening en Supabase Storage bloqueando tipos MIME no autorizados.",
     ],
-    metricLabel: "Profundidad",
-    metricValue: "12 Meses",
-    previewType: "macro",
+    metricLabel: "Política de adjunto",
+    metricValue: "<= 5 MB · Privado",
+    previewType: "receipts",
+  },
+  {
+    id: "charts",
+    icon: PieChart,
+    shortTitle: "DonutChart SVG",
+    badge: "Visualización Exacta",
+    title: "Gráficos DonutChart SVG & Visibilidad de Cuentas",
+    subtitle: "Porcentajes redondeados al 100.0% exacto y arqueo de efectivo",
+    description:
+      "Nuevo componente DonutChart vectorial adaptativo a temas claro y oscuro con selección interactiva de segmentos. Además, los saldos de cuentas en móvil ahora muestran desglose visual de balances y denominaciones de efectivo.",
+    bullets: [
+      "Algoritmo de distribución garantizando suma exacta al 100.0% en cada anillo interactivo.",
+      "Corregida la visibilidad de cuentas en móvil (Ajustes -> Cuentas) con gráfica de saldos positivos.",
+      "Desglose de arqueo de efectivo por billetes y monedas integrado junto al Balance Anual en 4 columnas.",
+    ],
+    metricLabel: "Precisión porcentual",
+    metricValue: "100.0% Exacto",
+    previewType: "charts",
+  },
+  {
+    id: "nav",
+    icon: Compass,
+    shortTitle: "Navegación V2.1",
+    badge: "UX Móvil Fluida",
+    title: "Deudas en Barra Principal y Menú Compacto",
+    subtitle: "Orden unificado de vistas, Drawer táctil nativo e icono de app v2",
+    description:
+      "Promovimos Deudas directamente a la barra inferior principal y limpiamos el encabezado móvil agrupando vistas secundarias en un menú contextual sin truncamientos.",
+    bullets: [
+      "Barra inferior: Inicio, Movimientos, (+), Metas (con Carpetas dnd-kit) y Deudas con swipe unificado.",
+      "Nuevo menú compacto HeaderMoreButton para Anual, Historial y Ajustes sin recortar títulos móviles.",
+      "Corregido el desplazamiento táctil del cajón en WebView Android más nuevo launcher icon v2 en adaptativo.",
+    ],
+    metricLabel: "Arquitectura UI",
+    metricValue: "4 Vistas + (+)",
+    previewType: "nav",
   },
   {
     id: "security",
     icon: ShieldCheck,
-    shortTitle: "WebCrypto AES",
-    badge: "Local-First Militar",
-    badgeColor: "text-emerald-400 bg-emerald-950/80 border-emerald-500/30",
-    title: "WebCrypto AES-GCM 256 Bits",
-    subtitle: "Criptografía simétrica local con PBKDF2 y auditoría k-anonymity",
+    shortTitle: "Seguridad & QA",
+    badge: "382 Tests Pass",
+    title: "WebCrypto AES-256, SECURITY.md y Suite Completa",
+    subtitle: "Cifrado local comprobable, divulgación responsable y 52 suites verdes",
     description:
-      "Tus datos financieros jamás se almacenan en texto plano. La v2.0.0 implementa criptografía nativa de navegador (WebCrypto API) con AES-GCM de 256 bits, derivación de clave PBKDF2 de 100,000 iteraciones y 2FA TOTP integrado.",
+      "Criptografía simétrica WebCrypto AES-GCM 256-bit (PBKDF2 100,000 rondas), 2FA TOTP, Zero-Knowledge sync y publicación oficial de SECURITY.md respaldado por una batería integral de pruebas.",
     bullets: [
-      "Cifrado simétrico AES-GCM 256 bits con vector de inicialización único por registro.",
-      "Autenticación en dos pasos (2FA TOTP) con códigos de recuperación de emergencia.",
-      "Verificación de contraseñas vulneradas mediante k-anonymity sin exponer credenciales.",
+      "Cifrado local en cliente antes de persistir en SQLite o IndexedDB + auditoría k-Anonymity HIBP.",
+      "Política de divulgación responsable SECURITY.md publicada en el repositorio oficial.",
+      "52 archivos de prueba y 382 tests unitarios e integrados pasando al 100%, TypeScript estricto y Vite 8.",
     ],
-    metricLabel: "Seguridad",
-    metricValue: "256-bit",
+    metricLabel: "Cobertura verificada",
+    metricValue: "52 Suites · 382 Tests",
     previewType: "security",
   },
-  {
-    id: "sync",
-    icon: RefreshCw,
-    shortTitle: "Sync & Accesibilidad",
-    badge: "Sincronización",
-    badgeColor: "text-cyan-400 bg-cyan-950/80 border-cyan-500/30",
-    title: "Sync Cifrada & WCAG AAA",
-    subtitle: "Sincronización multi-dispositivo sin intermediarios y nuevo isotipo",
-    description:
-      "Sincroniza tus registros entre el teléfono Android (SQLite) y tu computadora (IndexedDB) con cifrado en el cliente ('zero-knowledge'). Además, la v2.0.0 estrena un nuevo isotipo vectorial continuo y cumple los estándares de contraste WCAG AAA.",
-    bullets: [
-      "Cero conocimiento en nube: los datos viajan y residen en Supabase 100% cifrados.",
-      "Nuevo isotipo vectorial continuo estilizado y tarjeta OpenGraph 1200x630.",
-      "Navegación completa por teclado y contrastes ópticos de nivel WCAG AAA.",
-    ],
-    metricLabel: "Privacidad",
-    metricValue: "Zero-Knowledge",
-    previewType: "sync",
-  },
 ];
+
+const CUSTOM_ICON_CHOICES = [
+  { id: "utensils", label: "Comida", icon: Utensils },
+  { id: "home", label: "Hogar", icon: Home },
+  { id: "zap", label: "Energía", icon: Zap },
+  { id: "landmark", label: "Banco", icon: Landmark },
+  { id: "receipt", label: "Recibo", icon: Receipt },
+  { id: "coins", label: "Efectivo", icon: Coins },
+] as const;
+
+const CHART_SLICES_BY_MODE = {
+  accounts: [
+    { id: "bbva", label: "Banco Principal", pct: 54.5, value: "$67,900", stroke: "#34D399" },
+    { id: "cetes", label: "Reserva Inversiones", pct: 32.0, value: "$39,870", stroke: "#60A5FA" },
+    { id: "cash", label: "Efectivo Bóveda", pct: 13.5, value: "$16,820", stroke: "#F59E0B" },
+  ],
+  cash: [
+    { id: "b500", label: "Billetes $500", pct: 60.0, value: "$10,000", stroke: "#34D399" },
+    { id: "b200", label: "Billetes $200", pct: 28.5, value: "$4,800", stroke: "#F59E0B" },
+    { id: "coins", label: "Monedas / Cambio", pct: 11.5, value: "$2,020", stroke: "#E07A5F" },
+  ],
+} as const;
 
 export interface ReleaseModalProps {
   open: boolean;
@@ -180,38 +209,45 @@ export interface ReleaseModalProps {
 }
 
 export function ReleaseModal({ open, onOpenChange }: ReleaseModalProps) {
-  const [activeTab, setActiveTab] = useState<string>("design");
+  const [activeTab, setActiveTab] = useState<string>("update");
 
-  // ── Interactive Preview States ─────────────────────────────────────────
-  // Design tab
-  const [previewTheme, setPreviewTheme] = useState<"dark" | "light">("dark");
-  const [previewStyle, setPreviewStyle] = useState<"v2" | "classic">("v2");
+  // 1. Update check stage state
+  const [platformMode, setPlatformMode] = useState<"android" | "web">("android");
+  const [updateCheckStatus, setUpdateCheckStatus] = useState<"ready" | "dismissed">("ready");
 
-  // Goals tab
-  const [activeFolder, setActiveFolder] = useState<"Biker 2026" | "Viajes" | "Emergencias">("Biker 2026");
-  const [goalExtra, setGoalExtra] = useState(0);
-
-  // Categories tab
-  const [categoriesList, setCategoriesList] = useState<Array<{ emoji: string; name: string }>>([
-    { emoji: "🍔", name: "Alimentación" },
-    { emoji: "🏠", name: "Vivienda" },
-    { emoji: "⚡", name: "Servicios" },
-    { emoji: "🚴", name: "Transporte" },
+  // 2. Icons (99 SVG, 0 emoji) stage state
+  const [svgCategories, setSvgCategories] = useState<Array<{ iconId: string; name: string }>>([
+    { iconId: "utensils", name: "Alimentación" },
+    { iconId: "home", name: "Vivienda" },
+    { iconId: "landmark", name: "Transferencias" },
+    { iconId: "coins", name: "Arqueo Caja" },
   ]);
+  const [selectedIconId, setSelectedIconId] = useState<string>("receipt");
   const [newCatName, setNewCatName] = useState("");
 
-  // Boot tab
-  const [bootStatus, setBootStatus] = useState<string | null>(null);
+  // 3. QuickTransactionSheet stage state
+  const [accountType, setAccountType] = useState<"cash" | "bank" | "other">("bank");
+  const [payMethod, setPayMethod] = useState<"Efectivo" | "Tarjeta" | "Transferencia" | "Otro">(
+    "Transferencia"
+  );
 
-  // Macro tab
-  const [macroPillar, setMacroPillar] = useState<"general" | "categories" | "methods" | "goals">("general");
+  // 4. Receipts magic bytes + compression stage state
+  const [sampleReceipt, setSampleReceipt] = useState<"jpg" | "webp" | "exe">("jpg");
 
-  // Security tab
-  const [cryptoPlaintext, setCryptoPlaintext] = useState("$45,000.00 MXN Balance");
+  // 5. DonutChart stage state
+  const [chartMode, setChartMode] = useState<"accounts" | "cash">("accounts");
+  const [activeSliceIdx, setActiveSliceIdx] = useState(0);
+
+  // 6. Navigation V2.1 stage state
+  const [navTab, setNavTab] = useState<"Inicio" | "Movimientos" | "Metas" | "Deudas">("Deudas");
+  const [moreOpen, setMoreOpen] = useState(false);
+
+  // 7. Security live WebCrypto AES-GCM state
+  const [cryptoPlaintext, setCryptoPlaintext] = useState(`FinancePal v${APP_VERSION}`);
   const [cryptoOutput, setCryptoOutput] = useState<string | null>(null);
   const [isEncrypting, setIsEncrypting] = useState(false);
 
-  // ── Tabs horizontal scrolling controls ────────────────────────────────
+  // Horizontal tabs scroll controls
   const tabsRef = React.useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
@@ -250,7 +286,25 @@ export function ReleaseModal({ open, onOpenChange }: ReleaseModalProps) {
     setTimeout(checkTabsScroll, 250);
   };
 
-  // WebCrypto AES-GCM simulation
+  const handleSelectAccountType = (type: "cash" | "bank" | "other") => {
+    setAccountType(type);
+    if (type === "cash") setPayMethod("Efectivo");
+    else if (type === "bank") setPayMethod("Transferencia");
+    else setPayMethod("Tarjeta");
+  };
+
+  const handleAddSvgCategory = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      if (!newCatName.trim()) return;
+      const name = newCatName.trim().slice(0, 20);
+      setSvgCategories((prev) => [...prev, { iconId: selectedIconId, name }]);
+      setNewCatName("");
+    },
+    [newCatName, selectedIconId]
+  );
+
+  // WebCrypto AES-GCM live encryption test
   const handleRunEncryption = useCallback(async () => {
     if (typeof window === "undefined" || !window.crypto?.subtle) {
       setCryptoOutput("Cifrado AES-GCM 256 simulado exitosamente");
@@ -259,7 +313,7 @@ export function ReleaseModal({ open, onOpenChange }: ReleaseModalProps) {
     setIsEncrypting(true);
     try {
       const enc = new TextEncoder();
-      const rawKey = enc.encode("financepal_v2_local_key_pbkdf2_derivation");
+      const rawKey = enc.encode("financepal_v2_1_local_key_pbkdf2_derivation");
       const keyHash = await window.crypto.subtle.digest("SHA-256", rawKey);
       const key = await window.crypto.subtle.importKey(
         "raw",
@@ -272,7 +326,7 @@ export function ReleaseModal({ open, onOpenChange }: ReleaseModalProps) {
       const encrypted = await window.crypto.subtle.encrypt(
         { name: "AES-GCM", iv },
         key,
-        enc.encode(cryptoPlaintext || "FinancePal v2.0")
+        enc.encode(cryptoPlaintext || `FinancePal v${APP_VERSION}`)
       );
       const ivHex = Array.from(iv).map((b) => b.toString(16).padStart(2, "0")).join("");
       const cipherHex = Array.from(new Uint8Array(encrypted).slice(0, 10))
@@ -286,33 +340,18 @@ export function ReleaseModal({ open, onOpenChange }: ReleaseModalProps) {
     }
   }, [cryptoPlaintext]);
 
-  const handleAddCategory = useCallback(
-    (e: React.FormEvent) => {
-      e.preventDefault();
-      if (!newCatName.trim()) return;
-      const name = newCatName.trim().slice(0, 20);
-      const sampleEmojis = ["🎯", "✨", "☕", "💻", "📚", "🏖️"];
-      const emoji = sampleEmojis[Math.floor(Math.random() * sampleEmojis.length)];
-      setCategoriesList((prev) => [...prev, { emoji, name }]);
-      setNewCatName("");
-    },
-    [newCatName]
-  );
-
-  const handleSimulateBoot = useCallback(() => {
-    const t0 = performance.now();
-    try {
-      const rawPref = localStorage.getItem("fp-theme-pref");
-      const pref = rawPref ? JSON.parse(rawPref) : { theme: "system" };
-      const elapsed = Math.max(0, performance.now() - t0).toFixed(2);
-      setBootStatus(`✓ Detección en ${elapsed} ms [${pref.theme || "system"}] — 0.00 ms flash`);
-    } catch {
-      setBootStatus("✓ Detección síncrona en 0.00 ms — 0 ms flash");
-    }
-  }, []);
-
   const selectedFeature =
     RELEASE_FEATURES.find((f) => f.id === activeTab) || RELEASE_FEATURES[0];
+
+  const chartSlices = CHART_SLICES_BY_MODE[chartMode];
+  const currentSlice = chartSlices[activeSliceIdx] ?? chartSlices[0];
+
+  const allowedMethods: Array<"Efectivo" | "Tarjeta" | "Transferencia" | "Otro"> =
+    accountType === "cash"
+      ? ["Efectivo"]
+      : accountType === "bank"
+      ? ["Tarjeta", "Transferencia"]
+      : ["Tarjeta", "Transferencia", "Otro"];
 
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
@@ -323,15 +362,16 @@ export function ReleaseModal({ open, onOpenChange }: ReleaseModalProps) {
           <div className="flex items-start justify-between gap-4 pb-6 border-b border-border">
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted text-primary border border-border text-xs font-mono font-semibold uppercase tracking-wider mb-2">
-                <Sparkles className="w-3.5 h-3.5 text-editorial-amber" />
-                <span>Dossier de Lanzamiento v2.0.0</span>
+                <Sparkles className="w-3.5 h-3.5 text-editorial-amber" strokeWidth={1.75} />
+                <span>Dossier de Lanzamiento v{APP_VERSION}</span>
               </div>
               <Dialog.Title className="font-display-v2 font-bold text-2xl sm:text-3xl text-foreground">
-                Arquitectura <span className="italic font-semibold text-primary">Finance Pal</span> v2.0.0
+                Arquitectura{" "}
+                <span className="italic font-semibold text-primary">Finance Pal</span> v{APP_VERSION}
               </Dialog.Title>
               <Dialog.Description className="text-muted-foreground text-xs sm:text-sm mt-1 max-w-xl font-sans">
-                Una evolución generacional en estética financiera, organización patrimonial local-first
-                y criptografía en tu propio dispositivo.
+                Actualizador nativo en Android, sistema completo de 99 iconos SVG sin emojis,
+                comprobantes endurecidos, DonutChart SVG y suite verificada de 382 tests.
               </Dialog.Description>
             </div>
 
@@ -341,7 +381,7 @@ export function ReleaseModal({ open, onOpenChange }: ReleaseModalProps) {
                 aria-label="Cerrar modal de novedades"
                 className="p-2 sm:p-2.5 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted tactile-press cursor-pointer shrink-0"
               >
-                <X className="w-5 h-5" strokeWidth={2} />
+                <X className="w-5 h-5" strokeWidth={1.75} />
               </button>
             </Dialog.Close>
           </div>
@@ -361,7 +401,7 @@ export function ReleaseModal({ open, onOpenChange }: ReleaseModalProps) {
                     : "opacity-25 pointer-events-none cursor-not-allowed"
                 }`}
               >
-                <ChevronLeft className="w-4 h-4" strokeWidth={2} />
+                <ChevronLeft className="w-4 h-4" strokeWidth={1.75} />
               </button>
 
               <div
@@ -376,16 +416,14 @@ export function ReleaseModal({ open, onOpenChange }: ReleaseModalProps) {
                     <button
                       key={item.id}
                       type="button"
-                      onClick={() => {
-                        setActiveTab(item.id);
-                      }}
+                      onClick={() => setActiveTab(item.id)}
                       className={`inline-flex items-center gap-2 px-3 sm:px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap shrink-0 snap-start tactile-press cursor-pointer transition-all ${
                         isActive
                           ? "bg-primary text-primary-foreground font-bold shadow-sm"
                           : "bg-muted/80 text-muted-foreground hover:text-foreground hover:bg-muted border border-border"
                       }`}
                     >
-                      <Icon className="w-3.5 h-3.5 shrink-0" strokeWidth={isActive ? 2.2 : 1.75} />
+                      <Icon className="w-3.5 h-3.5 shrink-0" strokeWidth={isActive ? 2 : 1.5} />
                       <span>{item.shortTitle}</span>
                     </button>
                   );
@@ -404,7 +442,7 @@ export function ReleaseModal({ open, onOpenChange }: ReleaseModalProps) {
                     : "opacity-25 pointer-events-none cursor-not-allowed"
                 }`}
               >
-                <ChevronRight className="w-4 h-4" strokeWidth={2} />
+                <ChevronRight className="w-4 h-4" strokeWidth={1.75} />
               </button>
             </div>
           </div>
@@ -418,7 +456,9 @@ export function ReleaseModal({ open, onOpenChange }: ReleaseModalProps) {
                   <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full border border-border bg-muted text-primary uppercase tracking-wider font-semibold">
                     {selectedFeature.badge}
                   </span>
-                  <span className="text-xs text-muted-foreground font-mono">Pilar v2.0.0</span>
+                  <span className="text-xs text-muted-foreground font-mono">
+                    Pilar v{APP_VERSION}
+                  </span>
                 </div>
 
                 <h3 className="font-display font-bold text-xl sm:text-2xl text-foreground tracking-tight">
@@ -435,7 +475,7 @@ export function ReleaseModal({ open, onOpenChange }: ReleaseModalProps) {
                   {selectedFeature.bullets.map((bullet, idx) => (
                     <li key={idx} className="flex items-start gap-2.5">
                       <span className="w-4 h-4 rounded-full bg-muted border border-border text-primary flex items-center justify-center shrink-0 mt-0.5">
-                        <Check className="w-2.5 h-2.5" strokeWidth={3} />
+                        <Check className="w-2.5 h-2.5" strokeWidth={2.5} />
                       </span>
                       <span>{bullet}</span>
                     </li>
@@ -453,14 +493,14 @@ export function ReleaseModal({ open, onOpenChange }: ReleaseModalProps) {
                   </span>
                 </div>
                 <span className="text-xs text-muted-foreground flex items-center gap-1 font-mono">
-                  <ShieldCheck className="w-3.5 h-3.5 text-primary" />
-                  <span>Verificado v2.0.0</span>
+                  <ShieldCheck className="w-3.5 h-3.5 text-primary" strokeWidth={1.75} />
+                  <span>Verificado v{APP_VERSION}</span>
                 </span>
               </div>
             </div>
 
-            {/* Right interactive visual stage */}
-            <div className="lg:col-span-5 rounded-2xl bg-[#141413] text-[#EDEDED] border border-border p-5 flex flex-col justify-between">
+            {/* Right interactive visual stage — Obsidian Carbon (#141413 / #0C0C0B) */}
+            <div className="lg:col-span-5 rounded-2xl bg-[#141413] text-[#EDEDED] border border-white/10 border-t-white/15 p-5 flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-[10px] font-mono uppercase tracking-wider text-[#B0ADA7] block">
@@ -471,245 +511,417 @@ export function ReleaseModal({ open, onOpenChange }: ReleaseModalProps) {
                   </span>
                 </div>
 
-                {/* 1. Design Live Stage */}
-                {selectedFeature.previewType === "design" && (
-                  <div className="space-y-3">
-                    <div className="grid grid-cols-2 gap-1.5 p-1 rounded-xl bg-slate-900 border border-slate-800 text-[11px] font-mono">
+                {/* 1. Android In-App Update Stage */}
+                {selectedFeature.previewType === "update" && (
+                  <div className="space-y-2.5 text-xs font-mono">
+                    <div className="grid grid-cols-2 gap-1 p-1 rounded-xl bg-[#0C0C0B] border border-white/10 text-[11px]">
                       <button
                         type="button"
-                        onClick={() => setPreviewTheme(previewTheme === "dark" ? "light" : "dark")}
-                        className="flex items-center justify-center gap-1.5 py-1 px-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 active:scale-[0.98] transition-all cursor-pointer"
-                      >
-                        {previewTheme === "dark" ? (
-                          <Moon className="w-3 h-3 text-cyan-300" />
-                        ) : (
-                          <Sun className="w-3 h-3 text-amber-400" />
-                        )}
-                        <span>{previewTheme === "dark" ? "Obsidiana" : "Alabastro"}</span>
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setPreviewStyle(previewStyle === "v2" ? "classic" : "v2")}
-                        className="flex items-center justify-center gap-1.5 py-1 px-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 active:scale-[0.98] transition-all cursor-pointer"
-                      >
-                        <span>{previewStyle === "v2" ? "V2 Editorial" : "V1 Clásico"}</span>
-                      </button>
-                    </div>
-
-                    <div
-                      className={`p-4 rounded-xl border transition-all duration-300 ${
-                        previewTheme === "dark"
-                          ? "bg-[#0C0C0B] border-white/10 text-white"
-                          : "bg-[#FAF8F5] border-[#E4E0D8] text-[#191918]"
-                      }`}
-                    >
-                      <div className="flex items-center justify-between text-[11px] mb-2 font-mono">
-                        <span className={previewTheme === "dark" ? "text-slate-400" : "text-[#6E6A63]"}>
-                          Balance Total
-                        </span>
-                        <span className="text-amber-500 font-bold tabular-nums">120 FPS</span>
-                      </div>
-                      <div
-                        className={`text-2xl font-bold tabular-nums mb-1 tracking-tight ${
-                          previewStyle === "v2" ? "font-serif italic font-normal text-amber-400" : "font-sans"
+                        onClick={() => setPlatformMode("android")}
+                        className={`flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg transition-colors cursor-pointer ${
+                          platformMode === "android"
+                            ? "bg-[#1C1C1A] text-[#34D399] font-semibold border border-white/10"
+                            : "text-[#B0ADA7] hover:text-[#EDEDED]"
                         }`}
                       >
-                        $124,590.00 MXN
-                      </div>
-                      <div className="text-[10px] font-mono text-emerald-500 flex items-center gap-1">
-                        <span>↑ +14.2%</span>
-                        <span className={previewTheme === "dark" ? "text-slate-500" : "text-stone-400"}>
-                          vs mes anterior
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* 2. Goals Live Stage */}
-                {selectedFeature.previewType === "goals" && (
-                  <div className="space-y-2.5">
-                    <div className="flex flex-wrap items-center gap-1 text-[11px] font-mono">
-                      {(["Biker 2026", "Viajes", "Emergencias"] as const).map((folder) => (
-                        <button
-                          key={folder}
-                          type="button"
-                          onClick={() => setActiveFolder(folder)}
-                          className={`px-2.5 py-1 rounded-lg border text-[10px] active:scale-[0.98] transition-all cursor-pointer ${
-                            activeFolder === folder
-                              ? "bg-sky-950 text-sky-300 border-sky-700 font-bold"
-                              : "bg-slate-900 text-slate-400 border-slate-800"
-                          }`}
-                        >
-                          📁 {folder}
-                        </button>
-                      ))}
+                        <Smartphone className="w-3 h-3" strokeWidth={1.75} />
+                        <span>Android APK</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setPlatformMode("web")}
+                        className={`flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg transition-colors cursor-pointer ${
+                          platformMode === "web"
+                            ? "bg-[#1C1C1A] text-[#EDEDED] font-semibold border border-white/10"
+                            : "text-[#B0ADA7] hover:text-[#EDEDED]"
+                        }`}
+                      >
+                        <span>Web / PWA</span>
+                      </button>
                     </div>
 
-                    <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-2 text-xs">
-                      <div className="flex justify-between items-center text-[11px]">
-                        <span className="text-slate-200 font-medium">
-                          {activeFolder === "Biker 2026"
-                            ? "Casco Carbon AGV"
-                            : activeFolder === "Viajes"
-                            ? "Vuelo a Tokio"
-                            : "Fondo 3 Meses"}
-                        </span>
-                        <span className="text-emerald-400 font-mono font-bold tabular-nums">
-                          {Math.min(100, 75 + goalExtra)}%
-                        </span>
-                      </div>
-                      <div className="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
-                        <div
-                          className="h-full bg-emerald-400 transition-all duration-300"
-                          style={{ width: `${Math.min(100, 75 + goalExtra)}%` }}
-                        />
-                      </div>
-                      <div className="flex items-center justify-between text-[10px] font-mono text-slate-400">
-                        <span>Ritmo: $250 / sem</span>
-                        <button
-                          type="button"
-                          onClick={() => setGoalExtra((prev) => (prev >= 25 ? 0 : prev + 5))}
-                          className="text-cyan-400 hover:text-cyan-300 underline active:scale-[0.98] cursor-pointer"
-                        >
-                          + Aportar cuota
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* 3. Categories Live Stage */}
-                {selectedFeature.previewType === "categories" && (
-                  <div className="space-y-2 text-xs">
-                    <div className="grid grid-cols-2 gap-1.5 max-h-32 overflow-y-auto">
-                      {categoriesList.map((c) => (
-                        <div
-                          key={c.name}
-                          className="p-2 rounded-xl bg-slate-900 border border-slate-800 flex items-center gap-2"
-                        >
-                          <span className="text-sm">{c.emoji}</span>
-                          <span className="text-slate-200 text-[11px] font-medium truncate">{c.name}</span>
+                    {platformMode === "android" ? (
+                      <div className="p-3 rounded-xl bg-[#0C0C0B] border border-white/10 space-y-2">
+                        <div className="flex items-center justify-between text-[11px]">
+                          <span className="text-[#34D399] font-semibold">
+                            Nueva versión v{APP_VERSION}
+                          </span>
+                          <span className="text-[#B0ADA7] tabular-nums">{APK_SIZE_LABEL}</span>
                         </div>
-                      ))}
+                        <p className="text-[11px] font-sans text-[#B0ADA7] leading-relaxed">
+                          Host confiable verificado (<code className="text-[#EDEDED]">github.com</code>).
+                          SHA-256: <span className="tabular-nums text-[#EDEDED]">{APK_SHA256_SHORT}...</span>
+                        </p>
+                        <div className="flex items-center gap-2 pt-1">
+                          <button
+                            type="button"
+                            onClick={() => setUpdateCheckStatus("dismissed")}
+                            className="px-2.5 py-1 rounded-lg bg-[#1C1C1A] border border-white/10 text-[10px] text-[#B0ADA7] hover:text-[#EDEDED] cursor-pointer"
+                          >
+                            {updateCheckStatus === "dismissed" ? "Pospuesto (Caché 6h)" : "Luego"}
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setUpdateCheckStatus("ready")}
+                            className="px-2.5 py-1 rounded-lg bg-[#34D399] text-[#0C0C0B] font-bold text-[10px] cursor-pointer"
+                          >
+                            Descargar APK
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="p-3 rounded-xl bg-[#0C0C0B] border border-white/10 space-y-1.5">
+                        <div className="flex justify-between text-[11px]">
+                          <span className="text-[#B0ADA7]">Versión Web instalada:</span>
+                          <span className="text-[#34D399] font-bold">v{APP_VERSION}</span>
+                        </div>
+                        <p className="text-[11px] font-sans text-[#B0ADA7]">
+                          Sin avisos falsos de descarga APK: las actualizaciones web se aplican automáticamente vía PWA.
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* 2. 99 SVG Icons (Zero Emojis) Stage */}
+                {selectedFeature.previewType === "icons" && (
+                  <div className="space-y-2.5 text-xs">
+                    <div className="grid grid-cols-2 gap-1.5 max-h-28 overflow-y-auto">
+                      {svgCategories.map((c) => {
+                        const match =
+                          CUSTOM_ICON_CHOICES.find((item) => item.id === c.iconId) ??
+                          CUSTOM_ICON_CHOICES[0];
+                        const CatIcon = match.icon;
+                        return (
+                          <div
+                            key={`${c.name}-${c.iconId}`}
+                            className="p-2 rounded-xl bg-[#0C0C0B] border border-white/10 flex items-center gap-2"
+                          >
+                            <CatIcon className="w-3.5 h-3.5 text-[#34D399] shrink-0" strokeWidth={1.75} />
+                            <span className="text-[#EDEDED] text-[11px] font-medium truncate">
+                              {c.name}
+                            </span>
+                          </div>
+                        );
+                      })}
                     </div>
 
-                    <form onSubmit={handleAddCategory} className="flex gap-1.5 pt-1">
+                    <div className="flex items-center gap-1 justify-between p-1.5 rounded-xl bg-[#0C0C0B] border border-white/10">
+                      {CUSTOM_ICON_CHOICES.map((choice) => {
+                        const Icon = choice.icon;
+                        const selected = selectedIconId === choice.id;
+                        return (
+                          <button
+                            key={choice.id}
+                            type="button"
+                            onClick={() => setSelectedIconId(choice.id)}
+                            title={choice.label}
+                            className={`p-1.5 rounded-lg transition-colors cursor-pointer ${
+                              selected
+                                ? "bg-[#34D399]/20 text-[#34D399] border border-[#34D399]/40"
+                                : "text-[#B0ADA7] hover:text-[#EDEDED]"
+                            }`}
+                          >
+                            <Icon className="w-3.5 h-3.5" strokeWidth={1.75} />
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <form onSubmit={handleAddSvgCategory} className="flex gap-1.5">
                       <input
                         type="text"
                         maxLength={20}
-                        placeholder="Nueva categoría (máx 20)"
+                        placeholder="Categoría SVG (máx 20)"
                         value={newCatName}
                         onChange={(e) => setNewCatName(e.target.value)}
-                        className="flex-1 min-w-0 px-2.5 py-1 text-[11px] rounded-lg bg-slate-900 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"
+                        className="flex-1 min-w-0 px-2.5 py-1 text-[11px] rounded-lg bg-[#0C0C0B] border border-white/15 text-[#EDEDED] placeholder-[#B0ADA7]/60 focus:outline-none focus:border-[#34D399]"
                       />
                       <button
                         type="submit"
-                        className="px-2.5 py-1 rounded-lg bg-cyan-400 text-slate-950 font-bold text-[11px] flex items-center gap-1 active:scale-[0.98] cursor-pointer shrink-0"
+                        className="px-2.5 py-1 rounded-lg bg-[#34D399] text-[#0C0C0B] font-bold text-[11px] flex items-center gap-1 active:scale-[0.98] cursor-pointer shrink-0"
                       >
-                        <Plus className="w-3 h-3" />
+                        <Plus className="w-3 h-3" strokeWidth={2} />
                         <span>Crear</span>
                       </button>
                     </form>
                   </div>
                 )}
 
-                {/* 4. Boot Live Stage */}
-                {selectedFeature.previewType === "boot" && (
-                  <div className="space-y-2.5 text-xs">
-                    <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1.5 font-mono text-[11px]">
-                      <div className="flex justify-between">
-                        <span className="text-slate-400">Motor de Tema:</span>
-                        <span className="text-emerald-400 font-bold">Synchronous &lt;head&gt;</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-slate-400">Latencia de Flash:</span>
-                        <span className="text-cyan-300 font-bold tabular-nums">0.00 ms (Zero Flash)</span>
-                      </div>
+                {/* 3. QuickTransactionSheet Contextual Stage */}
+                {selectedFeature.previewType === "quicktx" && (
+                  <div className="space-y-2.5 text-xs font-mono">
+                    <div className="grid grid-cols-3 gap-1 p-1 rounded-xl bg-[#0C0C0B] border border-white/10 text-[10px]">
+                      {(
+                        [
+                          { id: "cash", label: "Efectivo", icon: Coins },
+                          { id: "bank", label: "Banco", icon: Landmark },
+                          { id: "other", label: "Otra", icon: Wallet },
+                        ] as const
+                      ).map((acc) => {
+                        const Icon = acc.icon;
+                        const active = accountType === acc.id;
+                        return (
+                          <button
+                            key={acc.id}
+                            type="button"
+                            onClick={() => handleSelectAccountType(acc.id)}
+                            className={`flex items-center justify-center gap-1 py-1.5 px-1.5 rounded-lg cursor-pointer transition-colors ${
+                              active
+                                ? "bg-[#1C1C1A] text-[#34D399] border border-white/10 font-bold"
+                                : "text-[#B0ADA7] hover:text-[#EDEDED]"
+                            }`}
+                          >
+                            <Icon className="w-3 h-3 shrink-0" strokeWidth={1.75} />
+                            <span>{acc.label}</span>
+                          </button>
+                        );
+                      })}
                     </div>
 
-                    <button
-                      type="button"
-                      onClick={handleSimulateBoot}
-                      className="w-full py-2 px-3 rounded-xl bg-sky-950/80 border border-sky-800/60 text-sky-300 font-mono text-[11px] font-semibold hover:bg-sky-900/60 active:scale-[0.98] transition-all cursor-pointer text-center"
-                    >
-                      ⚡ Simular Lectura Síncrona en Arranque
-                    </button>
-
-                    {bootStatus && (
-                      <div className="p-2 rounded-lg bg-emerald-950/40 border border-emerald-800/40 text-[10px] font-mono text-emerald-300 text-center animate-in fade-in">
-                        {bootStatus}
+                    <div className="p-3 rounded-xl bg-[#0C0C0B] border border-white/10 space-y-2">
+                      <span className="text-[10px] text-[#B0ADA7] block">
+                        MÉTODOS PERMITIDOS ({accountType.toUpperCase()}):
+                      </span>
+                      <div className="flex flex-wrap gap-1.5">
+                        {allowedMethods.map((method) => (
+                          <button
+                            key={method}
+                            type="button"
+                            onClick={() => setPayMethod(method)}
+                            className={`inline-flex items-center gap-1 px-2 py-1 rounded-lg border text-[10px] cursor-pointer ${
+                              payMethod === method
+                                ? "bg-[#34D399]/15 border-[#34D399]/50 text-[#34D399] font-semibold"
+                                : "bg-[#1C1C1A] border-white/10 text-[#B0ADA7]"
+                            }`}
+                          >
+                            {method === "Tarjeta" && <CreditCard className="w-3 h-3" strokeWidth={1.75} />}
+                            <span>{accountType === "cash" ? "Efectivo · Automático" : method}</span>
+                          </button>
+                        ))}
                       </div>
-                    )}
+                      {payMethod === "Transferencia" && accountType !== "cash" && (
+                        <div className="pt-2 border-t border-white/10 text-[10px] text-[#B0ADA7] space-y-0.5 tabular-nums">
+                          <div className="flex justify-between">
+                            <span>Destino:</span>
+                            <span className="text-[#EDEDED]">BBVA México</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>CLABE / Term.:</span>
+                            <span className="text-[#34D399]">012180 •••• 9421 (18d)</span>
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 )}
 
-                {/* 5. Macro Live Stage */}
-                {selectedFeature.previewType === "macro" && (
-                  <div className="space-y-2 text-xs">
-                    <div className="grid grid-cols-2 min-[420px]:grid-cols-4 gap-1 text-center font-mono text-[10px]">
+                {/* 4. Receipts Hardening Live Stage */}
+                {selectedFeature.previewType === "receipts" && (
+                  <div className="space-y-2.5 text-xs font-mono">
+                    <div className="grid grid-cols-3 gap-1 text-[10px]">
                       {[
-                        { id: "general", label: "GENERAL", val: "57%" },
-                        { id: "categories", label: "RUBROS", val: "15" },
-                        { id: "methods", label: "MÉTODOS", val: "2" },
-                        { id: "goals", label: "METAS", val: "92%" },
-                      ].map((col) => (
+                        { id: "jpg", label: "ticket.jpg" },
+                        { id: "webp", label: "nota.webp" },
+                        { id: "exe", label: "archivo.exe" },
+                      ].map((item) => (
                         <button
-                          key={col.id}
+                          key={item.id}
                           type="button"
-                          onClick={() => setMacroPillar(col.id as typeof macroPillar)}
-                          className={`p-1.5 rounded-lg border transition-all cursor-pointer ${
-                            macroPillar === col.id
-                              ? "bg-amber-950/80 border-amber-500/60 text-amber-300 font-bold"
-                              : "bg-slate-900 border-slate-800 text-slate-400 hover:text-white"
+                          onClick={() => setSampleReceipt(item.id as "jpg" | "webp" | "exe")}
+                          className={`py-1.5 px-2 rounded-lg border cursor-pointer truncate ${
+                            sampleReceipt === item.id
+                              ? "bg-[#1C1C1A] border-[#34D399]/50 text-[#EDEDED] font-semibold"
+                              : "bg-[#0C0C0B] border-white/10 text-[#B0ADA7]"
                           }`}
                         >
-                          <span className="block text-[9px]">{col.label}</span>
-                          <span className="font-bold tabular-nums">{col.val}</span>
+                          {item.label}
                         </button>
                       ))}
                     </div>
 
-                    <div className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-[11px] font-mono space-y-1">
-                      {macroPillar === "general" && (
-                        <div className="flex justify-between text-slate-300">
-                          <span>
-                            Ingresos: <strong className="text-emerald-400 tabular-nums">$98,400</strong>
-                          </span>
-                          <span>
-                            Gastos: <strong className="text-rose-400 tabular-nums">$42,200</strong>
-                          </span>
-                        </div>
-                      )}
-                      {macroPillar === "categories" && (
-                        <div className="space-y-1 text-slate-300">
-                          <div className="flex justify-between">
-                            <span>Alimentación</span>
-                            <span className="text-cyan-300">32%</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span>Vivienda &amp; Renta</span>
-                            <span className="text-cyan-300">28%</span>
-                          </div>
-                        </div>
-                      )}
-                      {macroPillar === "methods" && (
-                        <div className="flex justify-between text-slate-300">
-                          <span>Efectivo: 25%</span>
-                          <span>Cuentas Digitales: 75%</span>
-                        </div>
-                      )}
-                      {macroPillar === "goals" && (
-                        <div className="flex justify-between text-slate-300">
-                          <span>Fondo Emergencia</span>
-                          <span className="text-emerald-400 font-bold">En ritmo (92%)</span>
-                        </div>
-                      )}
+                    <div className="p-3 rounded-xl bg-[#0C0C0B] border border-white/10 space-y-1.5 text-[10px] tabular-nums">
+                      <div className="flex justify-between">
+                        <span className="text-[#B0ADA7]">Magic Bytes:</span>
+                        <span
+                          className={
+                            sampleReceipt === "exe"
+                              ? "text-[#E07A5F] font-bold"
+                              : "text-[#34D399] font-bold"
+                          }
+                        >
+                          {sampleReceipt === "jpg"
+                            ? "FF D8 FF (JPEG Válido)"
+                            : sampleReceipt === "webp"
+                            ? "RIFF WEBP (Válido)"
+                            : "4D 5A (MZ Rechazado)"}
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-[#B0ADA7]">Tamaño Optimizado:</span>
+                        <span className="text-[#EDEDED]">
+                          {sampleReceipt === "exe" ? "Bloqueado antes de subir" : "6.8 MB -> 840 KB (≤ 5 MB)"}
+                        </span>
+                      </div>
+                      <div className="pt-1 border-t border-white/10 text-[#B0ADA7] truncate">
+                        Ref:{" "}
+                        <span className="text-[#EDEDED]">
+                          {sampleReceipt === "exe"
+                            ? "null"
+                            : `sb:receipts/uid/2026-11.${sampleReceipt}`}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 )}
 
-                {/* 6. Security Live Stage (Real WebCrypto AES-GCM) */}
+                {/* 5. DonutChart SVG Live Stage */}
+                {selectedFeature.previewType === "charts" && (
+                  <div className="space-y-2.5 text-xs">
+                    <div className="grid grid-cols-2 gap-1 p-1 rounded-xl bg-[#0C0C0B] border border-white/10 text-[10px] font-mono">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setChartMode("accounts");
+                          setActiveSliceIdx(0);
+                        }}
+                        className={`py-1 rounded-lg cursor-pointer ${
+                          chartMode === "accounts"
+                            ? "bg-[#1C1C1A] text-[#34D399] font-bold"
+                            : "text-[#B0ADA7]"
+                        }`}
+                      >
+                        Saldos Cuentas
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setChartMode("cash");
+                          setActiveSliceIdx(0);
+                        }}
+                        className={`py-1 rounded-lg cursor-pointer ${
+                          chartMode === "cash"
+                            ? "bg-[#1C1C1A] text-[#F59E0B] font-bold"
+                            : "text-[#B0ADA7]"
+                        }`}
+                      >
+                        Arqueo Efectivo
+                      </button>
+                    </div>
+
+                    <div className="p-3 rounded-xl bg-[#0C0C0B] border border-white/10 flex items-center gap-3">
+                      <div className="relative w-20 h-20 shrink-0">
+                        <svg viewBox="0 0 100 100" className="w-full h-full -rotate-90">
+                          {chartSlices.reduce<{ els: React.ReactNode[]; offset: number }>(
+                            (acc, s, i) => {
+                              const dash = Math.max(s.pct - 1.5, 1);
+                              acc.els.push(
+                                <circle
+                                  key={s.id}
+                                  cx="50"
+                                  cy="50"
+                                  r="36"
+                                  fill="none"
+                                  pathLength={100}
+                                  stroke={s.stroke}
+                                  strokeWidth={activeSliceIdx === i ? 14 : 10}
+                                  strokeDasharray={`${dash} ${100 - dash}`}
+                                  strokeDashoffset={-acc.offset}
+                                  opacity={activeSliceIdx === i ? 1 : 0.6}
+                                  onClick={() => setActiveSliceIdx(i)}
+                                  className="cursor-pointer transition-all"
+                                />
+                              );
+                              return { els: acc.els, offset: acc.offset + s.pct };
+                            },
+                            { els: [], offset: 0 }
+                          ).els}
+                        </svg>
+                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none font-mono text-[11px] font-bold tabular-nums">
+                          {currentSlice.pct.toFixed(1)}%
+                        </div>
+                      </div>
+
+                      <div className="flex-1 min-w-0 space-y-1">
+                        {chartSlices.map((s, idx) => (
+                          <button
+                            key={s.id}
+                            type="button"
+                            onClick={() => setActiveSliceIdx(idx)}
+                            className={`w-full flex items-center justify-between text-[10px] font-mono py-0.5 px-1 rounded cursor-pointer ${
+                              activeSliceIdx === idx ? "bg-[#1C1C1A] text-[#EDEDED]" : "text-[#B0ADA7]"
+                            }`}
+                          >
+                            <span className="truncate">{s.label}</span>
+                            <span className="tabular-nums font-bold shrink-0">{s.value}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* 6. Navigation V2.1 Live Stage */}
+                {selectedFeature.previewType === "nav" && (
+                  <div className="space-y-2.5 text-xs font-mono">
+                    <div className="p-2.5 rounded-xl bg-[#0C0C0B] border border-white/10 space-y-2">
+                      <div className="flex items-center justify-between border-b border-white/10 pb-2 relative">
+                        <span className="text-[11px] font-semibold text-[#EDEDED]">{navTab}</span>
+                        <button
+                          type="button"
+                          onClick={() => setMoreOpen((p) => !p)}
+                          aria-label="Abrir HeaderMoreButton"
+                          className="p-1 rounded-lg bg-[#1C1C1A] border border-white/10 text-[#B0ADA7] hover:text-[#EDEDED] cursor-pointer"
+                        >
+                          <MoreHorizontal className="w-3.5 h-3.5" strokeWidth={1.75} />
+                        </button>
+                        {moreOpen && (
+                          <div className="absolute right-0 top-7 z-10 w-28 p-1 rounded-lg bg-[#1C1C1A] border border-white/15 shadow-lg text-[10px] space-y-0.5">
+                            <div className="px-2 py-1 text-[#EDEDED] rounded hover:bg-white/5">Anual</div>
+                            <div className="px-2 py-1 text-[#EDEDED] rounded hover:bg-white/5">Historial</div>
+                            <div className="px-2 py-1 text-[#34D399] rounded hover:bg-white/5">Ajustes</div>
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="text-[10px] text-[#B0ADA7] font-sans py-1">
+                        Vista activa en swipe: <strong className="text-[#34D399]">{navTab}</strong>
+                      </div>
+
+                      <div className="grid grid-cols-5 gap-1 pt-1.5 border-t border-white/10 text-[9px] text-center items-center">
+                        {(["Inicio", "Movimientos"] as const).map((t) => (
+                          <button
+                            key={t}
+                            type="button"
+                            onClick={() => setNavTab(t)}
+                            className={`py-1 rounded cursor-pointer truncate ${
+                              navTab === t ? "text-[#34D399] font-bold" : "text-[#B0ADA7]"
+                            }`}
+                          >
+                            {t === "Movimientos" ? "Movs" : t}
+                          </button>
+                        ))}
+                        <span className="mx-auto w-6 h-6 rounded-full bg-[#34D399] text-[#0C0C0B] flex items-center justify-center font-bold">
+                          <Plus className="w-3.5 h-3.5" strokeWidth={2.5} />
+                        </span>
+                        {(["Metas", "Deudas"] as const).map((t) => (
+                          <button
+                            key={t}
+                            type="button"
+                            onClick={() => setNavTab(t)}
+                            className={`py-1 rounded cursor-pointer truncate ${
+                              navTab === t ? "text-[#34D399] font-bold" : "text-[#B0ADA7]"
+                            }`}
+                          >
+                            {t}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* 7. Security Live Stage (Real WebCrypto AES-GCM + QA metrics) */}
                 {selectedFeature.previewType === "security" && (
                   <div className="space-y-2 text-xs font-mono">
                     <div className="flex gap-1.5">
@@ -718,38 +930,36 @@ export function ReleaseModal({ open, onOpenChange }: ReleaseModalProps) {
                         value={cryptoPlaintext}
                         onChange={(e) => setCryptoPlaintext(e.target.value)}
                         placeholder="Dato a cifrar"
-                        className="flex-1 min-w-0 px-2.5 py-1 text-[11px] rounded-lg bg-slate-900 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400"
+                        className="flex-1 min-w-0 px-2.5 py-1 text-[11px] rounded-lg bg-[#0C0C0B] border border-white/15 text-[#EDEDED] placeholder-[#B0ADA7]/60 focus:outline-none focus:border-[#34D399]"
                       />
                       <button
                         type="button"
                         onClick={handleRunEncryption}
                         disabled={isEncrypting}
-                        className="px-2.5 py-1 rounded-lg bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-bold text-[11px] flex items-center gap-1 active:scale-[0.98] transition-all cursor-pointer disabled:opacity-50 shrink-0"
+                        className="px-2.5 py-1 rounded-lg bg-[#34D399] hover:brightness-105 text-[#0C0C0B] font-bold text-[11px] flex items-center gap-1 active:scale-[0.98] transition-all cursor-pointer disabled:opacity-50 shrink-0"
                       >
-                        <Lock className="w-3 h-3" />
+                        <Lock className="w-3 h-3" strokeWidth={2} />
                         <span>Cifrar</span>
                       </button>
                     </div>
 
-                    <div className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-[10px] space-y-1">
-                      <span className="text-slate-500 block text-[9px]">PAYLOAD CIFRADO LOCAL:</span>
-                      <div className="text-emerald-300 break-all tabular-nums font-mono">
+                    <div className="p-2.5 rounded-xl bg-[#0C0C0B] border border-white/10 text-[10px] space-y-1">
+                      <span className="text-[#B0ADA7] block text-[9px]">PAYLOAD CIFRADO LOCAL:</span>
+                      <div className="text-[#34D399] break-all tabular-nums font-mono">
                         {cryptoOutput || "Haz clic en 'Cifrar' para generar AES-GCM 256 bits en vivo."}
                       </div>
                     </div>
-                  </div>
-                )}
 
-                {/* 7. Sync Live Stage */}
-                {selectedFeature.previewType === "sync" && (
-                  <div className="space-y-2 text-xs font-mono">
-                    <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between text-[11px]">
-                      <span className="text-slate-300">Payload Supabase:</span>
-                      <span className="text-cyan-300 font-bold">aes256_enc_payload</span>
-                    </div>
-                    <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between text-[11px]">
-                      <span className="text-slate-300">Contraste Certificado:</span>
-                      <span className="text-emerald-400 font-bold tabular-nums">Ratio 7.5:1 (WCAG AAA)</span>
+                    <div className="flex items-center justify-between text-[10px] pt-1 text-[#B0ADA7]">
+                      <span>52 suites · 382 tests PASS</span>
+                      <a
+                        href={SECURITY_POLICY_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#34D399] hover:underline"
+                      >
+                        SECURITY.md ↗
+                      </a>
                     </div>
                   </div>
                 )}
@@ -762,8 +972,8 @@ export function ReleaseModal({ open, onOpenChange }: ReleaseModalProps) {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 text-xs text-[#34D399] hover:underline underline-offset-4 transition-colors font-sans"
                 >
-                  <span>Probar este módulo en vivo en la Web App</span>
-                  <ExternalLink className="w-3 h-3" />
+                  <span>Probar esta edición en vivo en la Web App</span>
+                  <ExternalLink className="w-3 h-3" strokeWidth={1.75} />
                 </a>
               </div>
             </div>
@@ -771,8 +981,20 @@ export function ReleaseModal({ open, onOpenChange }: ReleaseModalProps) {
 
           {/* Footer CTAs */}
           <div className="mt-6 pt-5 border-t border-border flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-            <div className="text-xs text-muted-foreground font-mono">
-              Actualización pública: tag <span className="text-foreground font-bold">v2.0.0</span>
+            <div className="text-xs text-muted-foreground font-mono flex items-center gap-2 flex-wrap">
+              <span>
+                Lanzamiento público:{" "}
+                <a
+                  href={RELEASE_TAG_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-foreground font-bold hover:underline"
+                >
+                  v{APP_VERSION}
+                </a>
+              </span>
+              <span>·</span>
+              <span className="tabular-nums">{APK_SIZE_LABEL}</span>
             </div>
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
@@ -782,17 +1004,17 @@ export function ReleaseModal({ open, onOpenChange }: ReleaseModalProps) {
                 rel="noopener noreferrer"
                 className="btn-ghost px-4 py-2.5 text-xs sm:text-sm"
               >
-                <ExternalLink className="w-4 h-4 text-primary" />
+                <ExternalLink className="w-4 h-4 text-primary" strokeWidth={1.75} />
                 <span>Abrir Web App</span>
               </a>
               <a
-                href="https://github.com/migol-dev/finance-pal/releases/download/v2.0.0/financemate.apk"
+                href={APK_DOWNLOAD_URL}
                 target="_blank"
                 rel="noreferrer"
                 className="btn-primary px-5 py-2.5 text-xs sm:text-sm"
               >
-                <Download className="w-4 h-4" />
-                <span>Descargar APK v2.0.0</span>
+                <Download className="w-4 h-4" strokeWidth={2} />
+                <span>Descargar APK v{APP_VERSION}</span>
               </a>
             </div>
           </div>

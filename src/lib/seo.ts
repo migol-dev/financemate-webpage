@@ -1,3 +1,18 @@
+import {
+  APP_VERSION,
+  APP_SHORT_VERSION,
+  RELEASE_DATE,
+  RELEASE_PUBLISHED_AT,
+  APK_SIZE_BYTES,
+  APK_SIZE_LABEL,
+  APK_SHA256,
+  APK_SHA256_SHORT,
+  REPO_URL,
+  APK_DOWNLOAD_URL,
+  RELEASE_TAG_URL,
+  SECURITY_POLICY_URL,
+} from "@/lib/release";
+
 const rawSiteUrl =
   process.env.NEXT_PUBLIC_SITE_URL &&
   !process.env.NEXT_PUBLIC_SITE_URL.includes("financepal-web.vercel.app")
@@ -14,15 +29,20 @@ export const GOOGLE_VERIFICATION_CODE =
 export const SITE_URL = rawSiteUrl.replace(/\/$/, "");
 export const APP_URL = "https://financepal-web.vercel.app";
 export const BRAND = "Finance Pal";
-export const APP_VERSION = "2.0.0";
-export const REPO_URL =
-  process.env.NEXT_PUBLIC_GITHUB_REPO_URL &&
-  !process.env.NEXT_PUBLIC_GITHUB_REPO_URL.includes("financemate-webpage") &&
-  !process.env.NEXT_PUBLIC_GITHUB_REPO_URL.includes("finance-mate")
-    ? process.env.NEXT_PUBLIC_GITHUB_REPO_URL
-    : "https://github.com/migol-dev/finance-pal";
-
-export const APK_DOWNLOAD_URL = `${REPO_URL}/releases/download/v${APP_VERSION}/financemate.apk`;
+export {
+  APP_VERSION,
+  APP_SHORT_VERSION,
+  RELEASE_DATE,
+  RELEASE_PUBLISHED_AT,
+  APK_SIZE_BYTES,
+  APK_SIZE_LABEL,
+  APK_SHA256,
+  APK_SHA256_SHORT,
+  REPO_URL,
+  APK_DOWNLOAD_URL,
+  RELEASE_TAG_URL,
+  SECURITY_POLICY_URL,
+};
 
 export const AUTHOR = {
   name: "Miguel (migol-dev)",
@@ -92,13 +112,13 @@ export const HOME_FAQS: FaqItem[] = [
     category: "Plataformas y Descarga",
     question: "¿En qué dispositivos puedo usar Finance Pal?",
     answer:
-      "Puedes instalar el archivo oficial APK directamente en cualquier teléfono o tablet con Android 8.0 o superior, o abrir la versión Web/PWA desde iOS (iPhone/iPad), Windows, macOS o Linux sin depender de tiendas intermediarias.",
+      "Puedes instalar el archivo oficial APK directamente en cualquier teléfono o tablet con Android 8.0 o superior —con detector automático de nuevas versiones en GitHub Releases dentro de la app— o abrir la versión Web/PWA desde iOS (iPhone/iPad), Windows, macOS o Linux sin depender de tiendas intermediarias.",
   },
   {
     category: "Respaldo y Cifrado",
     question: "¿Cómo protejo o transfiero mis datos si cambio de teléfono?",
     answer:
-      "Finance Pal integra un motor criptográfico WebCrypto AES-GCM de 256 bits con derivación PBKDF2 (100,000 iteraciones). Puedes exportar una copia de seguridad cifrada (.fpal) protegida con tu propia clave y restaurarla en segundos en otro dispositivo o en la versión web.",
+      "Finance Pal integra un motor criptográfico WebCrypto AES-GCM de 256 bits con derivación PBKDF2 (100,000 iteraciones). Puedes exportar copias de seguridad cifradas y restaurarlas en segundos, o activar la sincronización opcional con almacenamiento endurecido para comprobantes JPEG, PNG y WebP.",
   },
   {
     category: "Alcance Regulatorio",

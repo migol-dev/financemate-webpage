@@ -4,11 +4,12 @@ import { useState } from "react";
 import Link from "next/link";
 import { Loader2, CheckCircle2, Lightbulb, Bug, ArrowRight, Lock, Check } from "lucide-react";
 import type { ReportType } from "@/lib/types";
+import { APP_VERSION } from "@/lib/release";
 import { EditorialHighlight, ScrollReveal } from "@/components/editorial-motion";
 
 function ReportForm({ type }: { type: ReportType }) {
   const [name, setName] = useState("");
-  const [version, setVersion] = useState("v2.0.0");
+  const [version, setVersion] = useState(`v${APP_VERSION}`);
   const [email, setEmail] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -93,8 +94,9 @@ function ReportForm({ type }: { type: ReportType }) {
             value={version}
             onChange={(e) => setVersion(e.target.value)}
           >
-            <option value="v2.0.0">v2.0.0 (Versión actual estable)</option>
-            <option value="v1.21.0">v1.21.0 (Anterior)</option>
+            <option value={`v${APP_VERSION}`}>{`v${APP_VERSION} (Versión actual estable)`}</option>
+            <option value="v2.0.0">v2.0.0 (Anterior)</option>
+            <option value="v1.21.0">v1.21.0</option>
             <option value="v1.20.2">v1.20.2</option>
             <option value="pwa-web">PWA / Web App Vercel</option>
           </select>
@@ -205,7 +207,7 @@ export function SuggestionsSection() {
               y auditoría.
             </h2>
             <p className="text-muted-foreground editorial-text-hover text-sm sm:text-base leading-relaxed max-w-[58ch] text-pretty">
-              ¿Detectaste una anomalía en la versión v2.0.0 o propones un nuevo indicador
+              ¿Detectaste una anomalía en la versión v{APP_VERSION} o propones un nuevo indicador
               patrimonial? Cada entrada es revisada directamente por el autor del proyecto.
             </p>
 

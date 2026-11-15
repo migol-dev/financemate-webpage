@@ -1,4 +1,5 @@
 import { Lock, Database, ShieldCheck, ArrowUpRight, GitBranch, Tag, Star } from "lucide-react";
+import { SECURITY_POLICY_URL } from "@/lib/release";
 import { EditorialHighlight, ScrollReveal } from "@/components/editorial-motion";
 
 const SECURITY_LAYERS = [
@@ -16,15 +17,15 @@ const SECURITY_LAYERS = [
     accentClass: "text-editorial-cobalt",
     title: "100% Local-First (SQLite & IndexedDB)",
     desc: "La base de datos reside físicamente en tu dispositivo. La aplicación opera de por vida sin conexión a internet ni dependencia de servidores externos.",
-    spec: "Latencia de lectura < 1 ms · Autonomía perpetua",
+    spec: "Latencia de lectura < 1 ms · Autonomía perpetua · 52 suites / 382 tests",
   },
   {
-    code: "CAPA 03 · NUBE OPCIONAL DE CONOCIMIENTO CERO",
+    code: "CAPA 03 · STORAGE ENDURECIDO & RLS",
     icon: ShieldCheck,
     accentClass: "text-editorial-amber",
-    title: "Sincronización Opcional Supabase (RLS)",
-    desc: "Si decides vincular múltiples dispositivos, cada registro viaja cifrado de extremo a extremo y aislado mediante políticas Row Level Security por UID.",
-    spec: "100% opcional · Cero perfilamiento crediticio",
+    title: "Sincronización Zero-Knowledge & Recibos 5 MB",
+    desc: "Cada registro viaja cifrado de extremo a extremo con Row Level Security por UID. Los comprobantes validan magic bytes locales (≤ 5 MB) sobre el bucket privado sb:receipts.",
+    spec: "Migración receipts_hardening · Política pública SECURITY.md",
   },
 ];
 
@@ -104,6 +105,15 @@ export function GithubSection({ repoUrl }: { repoUrl: string }) {
                 >
                   <GitBranch className="w-3.5 h-3.5 text-muted-foreground" strokeWidth={1.75} />
                   <span>Ver ramas activas</span>
+                </a>
+                <a
+                  href={SECURITY_POLICY_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-ghost px-4 py-2.5 text-xs justify-center"
+                >
+                  <ShieldCheck className="w-3.5 h-3.5 text-editorial-emerald" strokeWidth={1.75} />
+                  <span>SECURITY.md</span>
                 </a>
               </div>
 

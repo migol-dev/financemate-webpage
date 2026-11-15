@@ -2,7 +2,13 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Plus,
+  MoreHorizontal,
+  GripVertical,
+} from "lucide-react";
 import type { GalleryImage } from "@/lib/types";
 import { EditorialHighlight, ScrollParallaxStage, ScrollReveal } from "@/components/editorial-motion";
 
@@ -15,36 +21,36 @@ const SLIDE_INFO = [
     shortLabel: "01 · Balance",
     badge: "Slide 1 de 5 · Módulo Principal",
     title: "Panel de Control & Balance General",
-    desc: "Muestra el balance acumulado neto, la división clara entre Efectivo en mano vs Cuentas bancarias, tasa de ahorro mensual y switch para modo privado.",
+    desc: "Balance acumulado neto con iconos vectoriales SVG sin emojis, división clara entre Efectivo Físico vs Cuentas Bancarias, menú HeaderMoreButton y modo privado instantáneo.",
   },
   {
-    shortLabel: "02 · Bitácora",
-    badge: "Slide 2 de 5 · Transacciones",
-    title: "Movimientos, Filtros y Recibos",
-    desc: "Bitácora completa con búsqueda en vivo, 4 tipos de operación (Ingreso, Gasto, Ahorro, Traspaso) y adjuntos fotográficos de comprobantes de pago.",
+    shortLabel: "02 · Movimientos",
+    badge: "Slide 2 de 5 · QuickSheet & Recibos",
+    title: "Movimientos, QuickSheet y Recibos 5 MB",
+    desc: "Bitácora con 15 rubros SVG, QuickTransactionSheet que filtra métodos de pago según cuenta, captura CLABE limpia y comprobantes privados comprimidos en cliente (sb:receipts).",
   },
   {
-    shortLabel: "03 · Préstamos",
-    badge: "Slide 3 de 5 · Préstamos",
-    title: "Control 'Quién Me Debe' y Abonos",
-    desc: "Seguimiento riguroso de préstamos por persona: Total Prestado, Cobrado y Pendiente con registro de abonos parciales y liquidación progresiva.",
-  },
-  {
-    shortLabel: "04 · Metas v2",
-    badge: "Slide 4 de 5 · Planificación",
+    shortLabel: "03 · Metas",
+    badge: "Slide 3 de 5 · Planificación Swipe",
     title: "Metas de Ahorro con Carpetas & Drag/Drop",
-    desc: 'Agrupación visual jerárquica con reordenamiento intuitivo por arrastre y cálculo predictivo del ritmo de ahorro semanal necesario para cumplir tu fecha objetivo.',
+    desc: "Integrada en el orden de deslizamiento Inicio -> Movimientos -> Metas -> Deudas. Agrupación en carpetas táctiles dnd-kit con cálculo predictivo de cuota semanal.",
   },
   {
-    shortLabel: "05 · Vencimientos",
-    badge: "Slide 5 de 5 · Automatización",
-    title: "Conceptos Fijos & Cuenta Regresiva",
-    desc: "Alertas automáticas de próximos vencimientos (en 3d, en 4d, en 8d) para evitar cortes de servicio sin duplicar registros contables.",
+    shortLabel: "04 · Deudas",
+    badge: "Slide 4 de 5 · Barra Principal",
+    title: "Deudas Promovidas a Barra Inferior",
+    desc: "Acceso directo desde BottomNavV2 para auditar préstamos por persona (Prestado, Cobrado y Pendiente) con abonos parciales e historial completo.",
+  },
+  {
+    shortLabel: "05 · Cuentas & Donut",
+    badge: "Slide 5 de 5 · DonutChart SVG",
+    title: "Cuentas, Arqueo & DonutChart Exacto",
+    desc: "Gráficos DonutChart SVG adaptativos con porcentajes redondeados al 100.0% exacto, visibilidad móvil de saldos positivos en Ajustes -> Cuentas y arqueo de efectivo.",
   },
 ];
 
 // ──────────────────────────────────────────────
-// Phone frames (Warm Editorial Wealth — Obsidian Carbon v2.0)
+// Phone frames (Warm Editorial Wealth — Obsidian Carbon v2.1)
 // ──────────────────────────────────────────────
 function PhoneFrame({ children }: { children: React.ReactNode }) {
   return (
@@ -66,19 +72,35 @@ function PhoneFrame({ children }: { children: React.ReactNode }) {
 }
 
 function BottomBar({ active }: { active: number }) {
-  const tabs = ["Inicio", "Movs", "Deudas", "Metas", "Pagos"];
+  // Mirrors BottomNavV2: Inicio (0), Movs (1), Quick + (2), Metas (3), Deudas (4)
+  const items = ["Inicio", "Movs", "__PLUS__", "Metas", "Deudas"];
   return (
-    <div className="h-12 px-4 bg-[#141413] border-t border-white/10 flex items-center justify-around text-[#B0ADA7] shrink-0 text-[10px] font-mono">
-      {tabs.map((t, i) => (
-        <span key={t} className={i === active ? "text-[#34D399] font-bold" : ""}>
-          {i === active ? `● ${t}` : t}
-        </span>
-      ))}
+    <div className="h-12 px-3 bg-[#141413] border-t border-white/10 grid grid-cols-5 items-center text-center text-[#B0ADA7] shrink-0 text-[10px] font-mono">
+      {items.map((t, i) => {
+        if (t === "__PLUS__") {
+          return (
+            <span
+              key="quick-plus"
+              className="mx-auto w-7 h-7 rounded-full bg-[#1F7A5A] border border-[#34D399]/40 text-[#FAF8F5] flex items-center justify-center"
+            >
+              <Plus className="w-3.5 h-3.5" strokeWidth={2.5} />
+            </span>
+          );
+        }
+        return (
+          <span
+            key={t}
+            className={i === active ? "text-[#34D399] font-bold truncate" : "truncate"}
+          >
+            {i === active ? `● ${t}` : t}
+          </span>
+        );
+      })}
     </div>
   );
 }
 
-// Screen 0 — Dashboard (Warm Editorial Wealth)
+// Screen 0 — Dashboard (Warm Editorial Wealth v2.1)
 function Screen0() {
   return (
     <PhoneFrame>
@@ -89,15 +111,20 @@ function Screen0() {
               FP
             </div>
             <div>
-              <div className="text-[9px] sm:text-[10px] font-mono text-[#B0ADA7]">CUADERNO V2.0</div>
+              <div className="text-[9px] sm:text-[10px] font-mono text-[#B0ADA7]">CUADERNO V2.1</div>
               <div className="text-[12px] sm:text-[13px] font-serif font-bold text-[#EDEDED] flex items-center gap-1.5">
                 Patrimonio Neto <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />
               </div>
             </div>
           </div>
-          <span className="px-2 py-0.5 rounded bg-[#1C1C1A] border border-white/10 text-[9px] sm:text-[10px] font-mono text-[#B0ADA7]">
-            NOV 2026
-          </span>
+          <div className="flex items-center gap-1.5">
+            <span className="px-2 py-0.5 rounded bg-[#1C1C1A] border border-white/10 text-[9px] sm:text-[10px] font-mono text-[#B0ADA7]">
+              NOV 2026
+            </span>
+            <span className="p-1 rounded bg-[#1C1C1A] border border-white/10 text-[#B0ADA7]">
+              <MoreHorizontal className="w-3 h-3" strokeWidth={1.75} />
+            </span>
+          </div>
         </div>
 
         {/* Balance De-Boxed con tipografía Fraunces y cifras tabulares */}
@@ -147,7 +174,7 @@ function Screen0() {
         {/* De-Boxed Ledger list with 1px hairlines */}
         <div className="divide-y divide-white/10 border-t border-white/10">
           <div className="py-1.5 sm:py-2 flex justify-between items-center text-[9px] sm:text-[10px] font-mono text-[#B0ADA7]">
-            <span>BITÁCORA RECIENTE</span>
+            <span>BITÁCORA RECIENTE (SVG)</span>
             <span className="text-[#34D399]">AUDITAR →</span>
           </div>
           <div className="py-2 sm:py-2.5 flex items-center justify-between text-[11px] sm:text-[12px]">
@@ -160,7 +187,7 @@ function Screen0() {
           <div className="py-2 sm:py-2.5 flex items-center justify-between text-[11px] sm:text-[12px]">
             <div>
               <div className="font-semibold text-[#EDEDED]">Honorarios Quincena</div>
-              <div className="text-[9px] sm:text-[10px] text-[#B0ADA7]">Ingreso · Transferencia</div>
+              <div className="text-[9px] sm:text-[10px] text-[#B0ADA7]">Ingreso · CLABE 18d</div>
             </div>
             <span className="text-[#10B981] font-bold font-mono-tabular">+$6,000.00</span>
           </div>
@@ -171,7 +198,7 @@ function Screen0() {
   );
 }
 
-// Screen 1 — Movimientos
+// Screen 1 — Movimientos, QuickSheet & Recibos 5 MB
 function Screen1() {
   return (
     <PhoneFrame>
@@ -179,14 +206,15 @@ function Screen1() {
         <div className="flex items-center justify-between pb-2 border-b border-white/10">
           <div>
             <h4 className="font-serif font-bold text-sm text-[#EDEDED]">Bitácora Contable</h4>
-            <span className="text-[10px] font-mono text-[#B0ADA7]">15 Rubros Universales</span>
+            <span className="text-[10px] font-mono text-[#B0ADA7]">99 SVG · QuickSheet CLABE</span>
           </div>
           <span className="px-2.5 py-1 rounded-lg bg-[#1F7A5A] text-[#FAF8F5] font-semibold text-[10px]">
-            + Registrar
+            + Rápido
           </span>
         </div>
-        <div className="px-3 py-1.5 sm:py-2 rounded-xl bg-[#141413] border border-white/10 text-[10px] sm:text-[11px] text-[#B0ADA7] flex items-center gap-2">
-          <span className="truncate">Filtrar por concepto o recibo...</span>
+        <div className="px-3 py-1.5 sm:py-2 rounded-xl bg-[#141413] border border-white/10 text-[10px] sm:text-[11px] text-[#B0ADA7] flex items-center justify-between gap-2">
+          <span className="truncate">Filtrar por concepto o sb:receipts...</span>
+          <span className="text-[9px] font-mono text-[#34D399] shrink-0">≤ 5 MB</span>
         </div>
         <div className="flex items-center gap-1.5 text-[10px] font-mono">
           <span className="px-2.5 py-1 rounded-lg bg-[#34D399] text-[#0C0C0B] font-bold">Todos</span>
@@ -195,10 +223,10 @@ function Screen1() {
         </div>
         <div className="divide-y divide-white/10 pt-1 text-[11px] sm:text-[12px]">
           {[
-            { name: "Despensa Mensual", sub: "Alimentación · Tarjeta", amount: "-$850.00", extra: "Recibo" },
-            { name: "Suministro Eléctrico", sub: "Servicios · Domiciliado", amount: "-$350.00", extra: "PDF" },
-            { name: "Combustible", sub: "Transporte · Efectivo", amount: "-$500.00", extra: "" },
-            { name: "Rendimiento Cetes", sub: "Inversión · Cobalto", amount: "+$1,120.00", positive: true, extra: "2FA" },
+            { name: "Despensa Mensual", sub: "Alimentación · Tarjeta", amount: "-$850.00", extra: "sb:receipts" },
+            { name: "Suministro Eléctrico", sub: "Servicios · Transferencia", amount: "-$350.00", extra: "WebP 620KB" },
+            { name: "Combustible", sub: "Transporte · Efectivo · Auto", amount: "-$500.00", extra: "" },
+            { name: "Rendimiento Cetes", sub: "Inversión · CLABE •••412", amount: "+$1,120.00", positive: true, extra: "AES-256" },
           ].map((item) => (
             <div key={item.name} className="py-2.5 sm:py-3 flex items-center justify-between">
               <div>
@@ -228,8 +256,70 @@ function Screen1() {
   );
 }
 
-// Screen 2 — Deudas
+// Screen 2 — Metas (3ra vista en orden swipe Inicio -> Movs -> Metas -> Deudas)
 function Screen2() {
+  return (
+    <PhoneFrame>
+      <div className="flex-1 p-3.5 sm:p-4 space-y-2.5 sm:space-y-3.5 overflow-hidden">
+        <div className="flex items-center justify-between pb-2 border-b border-white/10">
+          <div>
+            <h4 className="font-serif font-bold text-sm text-[#EDEDED]">Metas Patrimoniales</h4>
+            <span className="text-[10px] font-mono text-[#B0ADA7]">Carpetas Drag &amp; Drop</span>
+          </div>
+          <span className="px-2.5 py-1 rounded-lg bg-[#1F7A5A] text-[#FAF8F5] font-semibold text-[10px]">
+            + Carpeta
+          </span>
+        </div>
+        <div className="p-2 sm:p-2.5 rounded-xl bg-[#1C1C1A] border border-white/10 text-[#EDEDED] flex items-center justify-between text-[10px] sm:text-[11px] font-semibold">
+          <span>Carpeta: RESERVA &amp; LIQUIDEZ</span>
+          <span className="inline-flex items-center gap-1 text-[9px] bg-[#0C0C0B] px-2 py-0.5 rounded font-mono text-[#34D399]">
+            <GripVertical className="w-2.5 h-2.5" strokeWidth={1.75} />
+            <span>Drag</span>
+          </span>
+        </div>
+        <div className="p-3 sm:p-3.5 rounded-2xl bg-[#141413] border border-white/10 space-y-2 sm:space-y-2.5">
+          <div className="flex items-center justify-between">
+            <div>
+              <h5 className="text-[11px] sm:text-[12px] font-bold text-[#EDEDED]">Fondo de Emergencia</h5>
+              <span className="text-[9px] text-[#B0ADA7]">6 meses de gastos fijos</span>
+            </div>
+            <span className="text-[9px] font-mono text-[#10B981] bg-[#1C1C1A] px-2 py-0.5 rounded border border-white/10">
+              En ritmo
+            </span>
+          </div>
+          <div className="flex justify-between items-baseline pt-1 font-mono-tabular">
+            <div>
+              <span className="text-[9px] text-[#B0ADA7] block">Acumulado</span>
+              <span className="text-base sm:text-lg font-serif font-bold text-[#EDEDED]">$2,500</span>
+            </div>
+            <div className="text-right">
+              <span className="text-[9px] text-[#B0ADA7] block">Objetivo</span>
+              <span className="text-[11px] sm:text-[12px] font-bold text-[#34D399]">$10,000</span>
+            </div>
+          </div>
+          <div className="w-full bg-[#1C1C1A] h-1.5 rounded-full overflow-hidden">
+            <div className="bg-[#10B981] h-full w-[25%] rounded-full" />
+          </div>
+          <div className="flex justify-between text-[9px] font-mono-tabular text-[#B0ADA7]">
+            <span>Restante: $7,500</span>
+            <span>Cuota: $250/sem</span>
+          </div>
+        </div>
+        <div className="p-2.5 sm:p-3 rounded-xl bg-[#141413] border border-white/10 flex items-center justify-between text-[11px] sm:text-[12px]">
+          <div>
+            <div className="font-semibold text-[#EDEDED] text-[10px] sm:text-[11px]">Portafolio Inversión</div>
+            <div className="text-[9px] text-[#B0ADA7] font-mono-tabular">Meta: $50,000</div>
+          </div>
+          <span className="text-[10px] font-mono-tabular font-bold text-[#60A5FA]">64%</span>
+        </div>
+      </div>
+      <BottomBar active={3} />
+    </PhoneFrame>
+  );
+}
+
+// Screen 3 — Deudas (promovida al slot principal de BottomNavV2)
+function Screen3() {
   return (
     <PhoneFrame>
       <div className="flex-1 p-3.5 sm:p-4 space-y-2.5 sm:space-y-3.5 overflow-hidden">
@@ -287,110 +377,108 @@ function Screen2() {
           </div>
         </div>
       </div>
-      <BottomBar active={2} />
+      <BottomBar active={4} />
     </PhoneFrame>
   );
 }
 
-// Screen 3 — Metas
-function Screen3() {
-  return (
-    <PhoneFrame>
-      <div className="flex-1 p-3.5 sm:p-4 space-y-2.5 sm:space-y-3.5 overflow-hidden">
-        <div className="flex items-center justify-between pb-2 border-b border-white/10">
-          <div>
-            <h4 className="font-serif font-bold text-sm text-[#EDEDED]">Metas Patrimoniales</h4>
-            <span className="text-[10px] font-mono text-[#B0ADA7]">Carpetas Drag &amp; Drop</span>
-          </div>
-          <span className="px-2.5 py-1 rounded-lg bg-[#1F7A5A] text-[#FAF8F5] font-semibold text-[10px]">
-            + Carpeta
-          </span>
-        </div>
-        <div className="p-2 sm:p-2.5 rounded-xl bg-[#1C1C1A] border border-white/10 text-[#EDEDED] flex items-center justify-between text-[10px] sm:text-[11px] font-semibold">
-          <span>Carpeta: RESERVA &amp; LIQUIDEZ</span>
-          <span className="text-[9px] bg-[#0C0C0B] px-2 py-0.5 rounded font-mono text-[#34D399]">
-            ⠿ Drag
-          </span>
-        </div>
-        <div className="p-3 sm:p-3.5 rounded-2xl bg-[#141413] border border-white/10 space-y-2 sm:space-y-2.5">
-          <div className="flex items-center justify-between">
-            <div>
-              <h5 className="text-[11px] sm:text-[12px] font-bold text-[#EDEDED]">Fondo de Emergencia</h5>
-              <span className="text-[9px] text-[#B0ADA7]">6 meses de gastos fijos</span>
-            </div>
-            <span className="text-[9px] font-mono text-[#10B981] bg-[#1C1C1A] px-2 py-0.5 rounded border border-white/10">
-              En ritmo
-            </span>
-          </div>
-          <div className="flex justify-between items-baseline pt-1 font-mono-tabular">
-            <div>
-              <span className="text-[9px] text-[#B0ADA7] block">Acumulado</span>
-              <span className="text-base sm:text-lg font-serif font-bold text-[#EDEDED]">$2,500</span>
-            </div>
-            <div className="text-right">
-              <span className="text-[9px] text-[#B0ADA7] block">Objetivo</span>
-              <span className="text-[11px] sm:text-[12px] font-bold text-[#34D399]">$10,000</span>
-            </div>
-          </div>
-          <div className="w-full bg-[#1C1C1A] h-1.5 rounded-full overflow-hidden">
-            <div className="bg-[#10B981] h-full w-[25%] rounded-full" />
-          </div>
-          <div className="flex justify-between text-[9px] font-mono-tabular text-[#B0ADA7]">
-            <span>Restante: $7,500</span>
-            <span>Cuota: $250/sem</span>
-          </div>
-        </div>
-        <div className="p-2.5 sm:p-3 rounded-xl bg-[#141413] border border-white/10 flex items-center justify-between text-[11px] sm:text-[12px]">
-          <div>
-            <div className="font-semibold text-[#EDEDED] text-[10px] sm:text-[11px]">Portafolio Inversión</div>
-            <div className="text-[9px] text-[#B0ADA7] font-mono-tabular">Meta: $50,000</div>
-          </div>
-          <span className="text-[10px] font-mono-tabular font-bold text-[#60A5FA]">64%</span>
-        </div>
-      </div>
-      <BottomBar active={3} />
-    </PhoneFrame>
-  );
-}
-
-// Screen 4 — Conceptos Fijos
+// Screen 4 — Cuentas, DonutChart SVG & Arqueo de Efectivo (HeaderMoreButton / Ajustes)
 function Screen4() {
   return (
     <PhoneFrame>
-      <div className="flex-1 p-3.5 sm:p-4 space-y-2.5 sm:space-y-3.5 overflow-hidden">
+      <div className="flex-1 p-3.5 sm:p-4 space-y-2.5 sm:space-y-3 overflow-hidden">
         <div className="flex items-center justify-between pb-2 border-b border-white/10">
           <div>
-            <h4 className="font-serif font-bold text-sm text-[#EDEDED]">Calendario de Pasivos</h4>
-            <span className="text-[10px] font-mono text-[#B0ADA7]">Alertas de Vencimiento</span>
+            <h4 className="font-serif font-bold text-sm text-[#EDEDED]">Cuentas &amp; DonutChart</h4>
+            <span className="text-[10px] font-mono text-[#B0ADA7]">Ajustes › Distribución 100%</span>
           </div>
-          <span className="text-[10px] font-mono text-[#F59E0B]">Noviembre</span>
+          <span className="px-2 py-1 rounded-lg bg-[#34D399]/15 border border-[#34D399]/40 text-[#34D399] inline-flex items-center gap-1 text-[9px] font-mono">
+            <MoreHorizontal className="w-3 h-3" strokeWidth={2} />
+            <span>Menú</span>
+          </span>
         </div>
-        <div className="divide-y divide-white/10 pt-1 text-[11px] sm:text-[12px]">
+
+        {/* SVG DonutChart Stage */}
+        <div className="p-3 rounded-2xl bg-[#141413] border border-white/10 flex items-center gap-3">
+          <div className="relative w-20 h-20 shrink-0">
+            <svg viewBox="0 0 100 100" className="w-full h-full -rotate-90" aria-hidden="true">
+              <circle
+                cx="50"
+                cy="50"
+                r="36"
+                fill="none"
+                pathLength={100}
+                stroke="#34D399"
+                strokeWidth="12"
+                strokeDasharray="53 47"
+                strokeDashoffset="0"
+              />
+              <circle
+                cx="50"
+                cy="50"
+                r="36"
+                fill="none"
+                pathLength={100}
+                stroke="#60A5FA"
+                strokeWidth="12"
+                strokeDasharray="30.5 69.5"
+                strokeDashoffset="-54.5"
+              />
+              <circle
+                cx="50"
+                cy="50"
+                r="36"
+                fill="none"
+                pathLength={100}
+                stroke="#F59E0B"
+                strokeWidth="12"
+                strokeDasharray="12 88"
+                strokeDashoffset="-86.5"
+              />
+            </svg>
+            <div className="absolute inset-0 flex flex-col items-center justify-center font-mono-tabular">
+              <span className="text-[11px] font-bold text-[#EDEDED]">100.0%</span>
+            </div>
+          </div>
+
+          <div className="flex-1 min-w-0 space-y-1 text-[10px] font-mono-tabular">
+            <div className="flex items-center justify-between gap-1">
+              <span className="text-[#34D399] truncate">● Banco BBVA</span>
+              <span className="text-[#EDEDED] font-bold shrink-0">54.5%</span>
+            </div>
+            <div className="flex items-center justify-between gap-1">
+              <span className="text-[#60A5FA] truncate">● Cetes 28d</span>
+              <span className="text-[#EDEDED] font-bold shrink-0">32.0%</span>
+            </div>
+            <div className="flex items-center justify-between gap-1">
+              <span className="text-[#F59E0B] truncate">● Efectivo</span>
+              <span className="text-[#EDEDED] font-bold shrink-0">13.5%</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Arqueo por denominación */}
+        <div className="divide-y divide-white/10 text-[10px] sm:text-[11px] font-mono-tabular">
+          <div className="py-1.5 flex justify-between text-[#B0ADA7] text-[9px]">
+            <span>ARQUEO DE EFECTIVO FÍSICO</span>
+            <span className="text-[#F59E0B]">$1,520.00</span>
+          </div>
           {[
-            { name: "Suscripción Editorial", sub: "Día 5 de cada mes", amount: "$150.00", countdown: "en 3d", warn: true },
-            { name: "Fibra Óptica Simétrica", sub: "Día 6 de cada mes", amount: "$450.00", countdown: "en 4d", warn: true },
-            { name: "Arrendamiento Estudio", sub: "Día 10 de cada mes", amount: "$4,500.00", countdown: "en 8d", warn: false },
-          ].map((item) => (
-            <div key={item.name} className="py-2.5 sm:py-3 flex items-center justify-between">
+            { denom: "Billetes $500", qty: "× 2 piezas", sum: "$1,000.00" },
+            { denom: "Billetes $200", qty: "× 2 piezas", sum: "$400.00" },
+            { denom: "Monedas / Cambio", qty: "Múltiples", sum: "$120.00" },
+          ].map((row) => (
+            <div key={row.denom} className="py-2 flex items-center justify-between">
               <div>
-                <div className="font-semibold text-[#EDEDED] text-[10px] sm:text-[11px]">{item.name}</div>
-                <div className="text-[9px] text-[#B0ADA7]">{item.sub}</div>
+                <div className="text-[#EDEDED] font-semibold font-sans">{row.denom}</div>
+                <div className="text-[9px] text-[#B0ADA7]">{row.qty}</div>
               </div>
-              <div className="text-right font-mono-tabular">
-                <div className="text-[#EDEDED] font-bold text-[11px] sm:text-[12px]">{item.amount}</div>
-                <span
-                  className={`text-[9px] font-semibold ${
-                    item.warn ? "text-[#F59E0B]" : "text-[#34D399]"
-                  }`}
-                >
-                  {item.countdown}
-                </span>
-              </div>
+              <span className="font-bold text-[#EDEDED]">{row.sum}</span>
             </div>
           ))}
         </div>
       </div>
-      <BottomBar active={4} />
+      <BottomBar active={-1} />
     </PhoneFrame>
   );
 }

@@ -11,15 +11,60 @@ import {
   EyeOff,
   Check,
   Lock,
+  GripVertical,
+  PieChart,
+  Landmark,
+  Wallet,
+  Coins,
 } from "lucide-react";
 import { EditorialHighlight, ScrollParallaxStage } from "@/components/editorial-motion";
 import { openReleaseModal } from "@/components/release-announcement";
 
-type LedgerMode = "patrimonio" | "metas" | "cifrado";
+type LedgerMode = "patrimonio" | "cuentas" | "metas" | "cifrado";
+
+const ACCOUNT_SLICES = [
+  {
+    id: "banco",
+    label: "Banco Principal",
+    rule: "Tarjeta · Transferencia CLABE",
+    amount: "$62,400.00",
+    pct: 50.1,
+    colorVar: "var(--editorial-emerald)",
+    dotClass: "bg-editorial-emerald",
+    textClass: "text-editorial-emerald",
+    icon: Landmark,
+  },
+  {
+    id: "reserva",
+    label: "Reserva Digital",
+    rule: "Solo Transferencia / Otro",
+    amount: "$49,700.00",
+    pct: 39.9,
+    colorVar: "var(--editorial-cobalt)",
+    dotClass: "bg-editorial-cobalt",
+    textClass: "text-editorial-cobalt",
+    icon: Wallet,
+  },
+  {
+    id: "efectivo",
+    label: "Efectivo & Arqueo",
+    rule: "Efectivo · Automático",
+    amount: "$12,490.00",
+    pct: 10.0,
+    colorVar: "var(--editorial-amber)",
+    dotClass: "bg-editorial-amber",
+    textClass: "text-editorial-amber",
+    icon: Coins,
+  },
+] as const;
 
 export function Hero({ version, githubUrl }: { version: string; githubUrl: string }) {
   const [ledgerMode, setLedgerMode] = useState<LedgerMode>("patrimonio");
   const [privacyMask, setPrivacyMask] = useState(false);
+  const [activeSliceId, setActiveSliceId] = useState<string>("banco");
+
+  const activeSlice =
+    ACCOUNT_SLICES.find((slice) => slice.id === activeSliceId) ?? ACCOUNT_SLICES[0];
 
   return (
     <section id="top" className="relative pt-8 pb-16 lg:pt-14 lg:pb-24 border-b border-border">
@@ -49,8 +94,9 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
               La relación con tu dinero exige serenidad intelectual, no ruido visual. Finance Pal{" "}
               combina la disciplina de un{" "}
               <EditorialHighlight>cuaderno financiero de alta dirección</EditorialHighlight> con{" "}
-              almacenamiento <EditorialHighlight>100% Local-First</EditorialHighlight>, metas
-              jerárquicas Drag &amp; Drop y criptografía{" "}
+              almacenamiento <EditorialHighlight>100% Local-First</EditorialHighlight>,{" "}
+              <EditorialHighlight>99 iconos SVG adaptativos</EditorialHighlight> sin emojis, gráficos{" "}
+              <EditorialHighlight>DonutChart</EditorialHighlight> y criptografía{" "}
               <EditorialHighlight>WebCrypto AES-GCM de 256 bits</EditorialHighlight>.
             </p>
 
@@ -90,7 +136,7 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
                 className="inline-flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl text-xs sm:text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/70 tactile-press cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <Sparkles className="w-4 h-4 text-editorial-amber" strokeWidth={1.75} />
-                <span>Explorar dossier v2.0</span>
+                <span>Explorar dossier v{version}</span>
               </button>
             </div>
 
@@ -98,9 +144,9 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
             <div className="fp-hero-enter-delay-2 pt-6 mt-4 border-t border-border grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6">
               {[
                 { label: "Criptografía Local", value: "AES-256", sub: "PBKDF2 100k rondas" },
-                { label: "Motores de Base", value: "SQLite + IDB", sub: "100% Offline-First" },
+                { label: "Iconografía SVG", value: "99 Iconos", sub: "Cero emojis en UI V2" },
                 { label: "Arranque en Frío", value: "0.00 ms", sub: "Zero-Flash Theme" },
-                { label: "Contraste Óptico", value: "8.5 : 1", sub: "Certificado WCAG AAA" },
+                { label: "Suite Verificada", value: "382 Tests", sub: "52 archivos · WCAG AAA" },
               ].map((stat) => (
                 <div key={stat.label} className="space-y-1 group cursor-default">
                   <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-muted-foreground block truncate">
@@ -144,15 +190,16 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
                 </button>
               </div>
 
-              {/* Selector segmentado de vista (Radios armónicos: contenedor rounded-xl, pastilla rounded-lg) */}
+              {/* Selector segmentado de vista (4 módulos interactivos v2.1.0) */}
               <div
                 role="tablist"
                 aria-label="Vistas del cuaderno interactivo"
-                className="grid grid-cols-3 gap-1 p-1 rounded-xl bg-muted border border-border text-[11px] sm:text-xs font-medium"
+                className="grid grid-cols-4 gap-1 p-1 rounded-xl bg-muted border border-border text-[10px] sm:text-xs font-medium"
               >
                 {[
                   { id: "patrimonio", label: "Balance", icon: Sparkles },
-                  { id: "metas", label: "Metas v2", icon: FolderKanban },
+                  { id: "cuentas", label: "Cuentas", icon: PieChart },
+                  { id: "metas", label: "Metas", icon: FolderKanban },
                   { id: "cifrado", label: "AES-256", icon: ShieldCheck },
                 ].map((tab) => {
                   const Icon = tab.icon;
@@ -164,7 +211,7 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
                       role="tab"
                       aria-selected={active}
                       onClick={() => setLedgerMode(tab.id as LedgerMode)}
-                      className={`inline-flex items-center justify-center gap-1 sm:gap-1.5 py-1.5 sm:py-2 px-1 sm:px-2.5 rounded-lg tactile-press cursor-pointer min-w-0 ${
+                      className={`inline-flex items-center justify-center gap-1 sm:gap-1.5 py-1.5 sm:py-2 px-1 sm:px-2 rounded-lg tactile-press cursor-pointer min-w-0 ${
                         active
                           ? "bg-card text-foreground font-semibold shadow-sm border border-border"
                           : "text-muted-foreground hover:text-foreground"
@@ -208,7 +255,7 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
                     <div className="py-2.5 flex items-center justify-between gap-2 editorial-text-hover">
                       <div className="flex items-center gap-2 min-w-0">
                         <span className="w-2 h-2 rounded-full bg-editorial-terracotta shrink-0" />
-                        <span className="font-medium text-foreground truncate">Egresos Operativos (15 rubros)</span>
+                        <span className="font-medium text-foreground truncate">Egresos Operativos (15 SVG)</span>
                       </div>
                       <span className="font-mono-tabular font-semibold text-editorial-terracotta shrink-0 text-right">
                         {privacyMask ? "••••••" : "-$16,410.00"}
@@ -238,11 +285,116 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
                 </div>
               )}
 
+              {ledgerMode === "cuentas" && (
+                <div className="space-y-3 text-xs">
+                  <div className="flex items-center justify-between text-[11px] font-mono text-muted-foreground pb-1 border-b border-border">
+                    <span className="truncate">DONUTCHART SVG · DISTRIBUCIÓN</span>
+                    <span className="text-primary font-semibold tabular-nums shrink-0">100.0% exacto</span>
+                  </div>
+
+                  <div className="flex items-center gap-4 p-3 rounded-xl bg-muted/60 border border-border">
+                    <div className="relative w-24 h-24 shrink-0">
+                      <svg viewBox="0 0 100 100" className="w-full h-full -rotate-90" aria-label="Gráfico circular de cuentas">
+                        <circle
+                          cx="50"
+                          cy="50"
+                          r="36"
+                          fill="none"
+                          stroke="hsl(var(--border))"
+                          strokeWidth="10"
+                        />
+                        {ACCOUNT_SLICES.reduce<{ elements: React.ReactNode[]; offset: number }>(
+                          (acc, slice) => {
+                            const isActive = slice.id === activeSlice.id;
+                            const dashLen = Math.max(slice.pct - 1.5, 1);
+                            acc.elements.push(
+                              <circle
+                                key={slice.id}
+                                cx="50"
+                                cy="50"
+                                r="36"
+                                fill="none"
+                                pathLength={100}
+                                stroke={slice.colorVar}
+                                strokeWidth={isActive ? 13 : 10}
+                                strokeLinecap="butt"
+                                strokeDasharray={`${dashLen} ${100 - dashLen}`}
+                                strokeDashoffset={-acc.offset}
+                                onClick={() => setActiveSliceId(slice.id)}
+                                className="cursor-pointer transition-all duration-200"
+                                opacity={isActive ? 1 : 0.65}
+                              />
+                            );
+                            return { elements: acc.elements, offset: acc.offset + slice.pct };
+                          },
+                          { elements: [], offset: 0 }
+                        ).elements}
+                      </svg>
+                      <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none">
+                        <span className="font-mono-tabular font-bold text-sm text-foreground">
+                          {activeSlice.pct.toFixed(1)}%
+                        </span>
+                        <span className="text-[9px] font-mono text-muted-foreground uppercase">
+                          Cuota
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="flex-1 min-w-0 space-y-1">
+                      <span className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground block">
+                        Cuenta seleccionada
+                      </span>
+                      <div className={`font-semibold text-sm truncate ${activeSlice.textClass}`}>
+                        {activeSlice.label}
+                      </div>
+                      <div className="font-mono-tabular font-bold text-base text-foreground">
+                        {privacyMask ? "••••••" : activeSlice.amount}
+                      </div>
+                      <div className="text-[10px] font-mono text-muted-foreground truncate">
+                        Regla QuickSheet: {activeSlice.rule}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="divide-y divide-border">
+                    {ACCOUNT_SLICES.map((slice) => {
+                      const SliceIcon = slice.icon;
+                      const isActive = slice.id === activeSlice.id;
+                      return (
+                        <button
+                          key={slice.id}
+                          type="button"
+                          onClick={() => setActiveSliceId(slice.id)}
+                          className={`w-full py-2 px-1.5 flex items-center justify-between gap-2 text-left rounded-lg transition-colors cursor-pointer ${
+                            isActive ? "bg-muted/80" : "hover:bg-muted/40"
+                          }`}
+                        >
+                          <div className="flex items-center gap-2 min-w-0">
+                            <span className={`w-2 h-2 rounded-full shrink-0 ${slice.dotClass}`} />
+                            <SliceIcon className="w-3.5 h-3.5 text-muted-foreground shrink-0" strokeWidth={1.75} />
+                            <span className="font-medium text-foreground truncate">{slice.label}</span>
+                          </div>
+                          <div className="flex items-center gap-2.5 font-mono-tabular shrink-0">
+                            <span className="text-muted-foreground text-[11px]">{slice.pct.toFixed(1)}%</span>
+                            <span className="font-semibold text-foreground">
+                              {privacyMask ? "••••••" : slice.amount}
+                            </span>
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
               {ledgerMode === "metas" && (
                 <div className="space-y-3 text-xs">
                   <div className="flex items-center justify-between text-[11px] font-mono text-muted-foreground pb-1 border-b border-border">
                     <span className="truncate">CARPETA: PATRIMONIO &amp; LIQUIDEZ</span>
-                    <span className="text-primary font-semibold shrink-0">Drag &amp; Drop ⠿</span>
+                    <span className="inline-flex items-center gap-1 text-primary font-semibold shrink-0">
+                      <GripVertical className="w-3 h-3" strokeWidth={1.75} />
+                      <span>Drag &amp; Drop</span>
+                    </span>
                   </div>
                   {[
                     {
@@ -292,7 +444,7 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
                   <div className="p-3.5 rounded-xl bg-muted/60 border border-border space-y-2">
                     <div className="flex items-center justify-between gap-2 text-foreground font-semibold">
                       <span className="inline-flex items-center gap-1.5 truncate">
-                        <Lock className="w-3.5 h-3.5 text-primary shrink-0" strokeWidth={2} />
+                        <Lock className="w-3.5 h-3.5 text-primary shrink-0" strokeWidth={1.75} />
                         <span className="truncate">Bóveda Local WebCrypto</span>
                       </span>
                       <span className="text-[10px] px-2 py-0.5 rounded bg-card border border-border text-primary shrink-0">
@@ -300,8 +452,8 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
                       </span>
                     </div>
                     <p className="text-[11px] text-muted-foreground font-sans leading-relaxed">
-                      Cada registro contable se cifra en tu dispositivo con un vector IV único antes
-                      de escribirse en SQLite o IndexedDB.
+                      Cada registro se cifra en tu dispositivo antes de guardarse en SQLite o
+                      IndexedDB; los comprobantes se comprimen a 5 MB con refs privadas sb:receipts.
                     </p>
                     <div className="pt-2 border-t border-border space-y-1 text-[11px] tabular-nums">
                       <div className="flex justify-between gap-2">
@@ -313,8 +465,19 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
                         <span className="text-foreground">PBKDF2 · 100,000 iter.</span>
                       </div>
                       <div className="flex justify-between gap-2">
-                        <span className="text-muted-foreground">2FA Local:</span>
-                        <span className="text-editorial-emerald font-semibold">TOTP Activo</span>
+                        <span className="text-muted-foreground">Comprobantes:</span>
+                        <span className="text-foreground">Magic Bytes · ≤ 5 MB</span>
+                      </div>
+                      <div className="flex justify-between gap-2">
+                        <span className="text-muted-foreground">Divulgación:</span>
+                        <a
+                          href={`${githubUrl}/blob/main/SECURITY.md`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-editorial-emerald font-semibold hover:underline"
+                        >
+                          SECURITY.md ↗
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -324,10 +487,10 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
               {/* Pie del cuaderno */}
               <div className="pt-3 border-t border-border flex items-center justify-between text-[11px] font-mono text-muted-foreground">
                 <span className="inline-flex items-center gap-1.5">
-                  <Check className="w-3.5 h-3.5 text-primary" strokeWidth={2.2} />
-                  <span>Sin telemetría ni rastreo</span>
+                  <Check className="w-3.5 h-3.5 text-primary" strokeWidth={2} />
+                  <span>99 iconos SVG · 0 emojis</span>
                 </span>
-                <span>SQLite · IndexedDB</span>
+                <span>SQLite · IDB · v{version}</span>
               </div>
             </div>
           </ScrollParallaxStage>

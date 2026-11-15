@@ -4,7 +4,7 @@ import { FEATURES_DATA } from "@/lib/features";
 import { getAllBlogPosts } from "@/lib/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date("2026-11-02T12:00:00Z");
+  const now = new Date("2026-11-15T02:00:00Z");
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {

@@ -7,25 +7,28 @@ import {
   Download,
   ExternalLink,
   ShieldCheck,
-  Zap,
-  Layers,
-  Receipt,
+  Bot,
+  Trash2,
+  Filter,
+  Command,
   PieChart,
-  Compass,
   RefreshCw,
   Check,
   Lock,
   Plus,
   ChevronLeft,
   ChevronRight,
+  Power,
+  Eye,
+  KeyRound,
   Utensils,
   Home,
   Landmark,
   Wallet,
-  CreditCard,
   Coins,
-  MoreHorizontal,
+  CreditCard,
   Smartphone,
+  RotateCcw,
 } from "lucide-react";
 import * as Dialog from "@radix-ui/react-dialog";
 import {
@@ -49,151 +52,148 @@ interface ReleaseFeature {
   bullets: string[];
   metricLabel: string;
   metricValue: string;
-  previewType: "update" | "icons" | "quicktx" | "receipts" | "charts" | "nav" | "security";
+  previewType: "mcp" | "trash" | "smartfilter" | "cmdk" | "charts" | "update" | "security";
 }
 
 const RELEASE_FEATURES: ReleaseFeature[] = [
+  {
+    id: "mcp",
+    icon: Bot,
+    shortTitle: "Conector MCP",
+    badge: `Universal AI ${APP_SHORT_VERSION}`,
+    title: "Conector Universal MCP (Claude, ChatGPT y Gemini)",
+    subtitle: "Servidor remoto Model Context Protocol (2025-11-25) sobre OAuth 2.1 + PKCE",
+    description:
+      "Conecta tu asistente de IA favorito de forma 100% opcional y bajo tu control en /oauth/consent. Inicia en modo Solo Lectura por defecto con verificación 2FA (aal2), 18 herramientas, 4 recursos y 3 prompts en español.",
+    bullets: [
+      "Autenticación OAuth 2.1 + PKCE (S256) con descubrimiento automático RFC 8707/9728, Dynamic Client Registration (/oauth/register) y CIMD.",
+      "Selección granular de 11 permisos (6 mcp:read:*, 4 mcp:write:* y 1 opt-in mcp:delete:soft) con preservación de retorno tras iniciar sesión.",
+      "Protección estricta de lectura (máx. 90 días / 50 filas por consulta) mediante Gateway RPCs cero-PII en Supabase PostgreSQL 17.",
+    ],
+    metricLabel: "Capacidades MCP",
+    metricValue: "18 Tools · 4 Rec · 3 Prompts",
+    previewType: "mcp",
+  },
+  {
+    id: "trash",
+    icon: Trash2,
+    shortTitle: "Papelera 30d & Kill",
+    badge: "Gobernanza IA",
+    title: "Papelera de Recuperación (30 días) y Control de Conectores",
+    subtitle: "Ajustes > 10 · Conectores IA (MCP) con Kill Switch y borrado en 2 pasos",
+    description:
+      "Ninguna IA puede destruir registros de forma irreversible: cualquier eliminación solicita confirmación en 2 pasos (prepare_soft_delete con TTL de 120s + confirm_soft_delete) y envía el registro a la Papelera durante 30 días.",
+    bullets: [
+      "Kill Switch global por usuario y límite estricto de hasta 5 concesiones activas simultáneas.",
+      "Visor en tiempo real de auditoría de invocaciones MCP (mcp_audit_log) para detectar anomalías al instante.",
+      "Restauración en un toque o purga definitiva tras 30 días respaldada por tarea diaria pg_cron (mcp-cleanup-expired-daily).",
+    ],
+    metricLabel: "Ventana de resguardo",
+    metricValue: "30 Días · TTL 120s",
+    previewType: "trash",
+  },
+  {
+    id: "smartfilter",
+    icon: Filter,
+    shortTitle: "Filtro Cuentas",
+    badge: "UX Movimientos",
+    title: "Filtrado Inteligente de Cuentas por Método de Pago",
+    subtitle: "Menos errores al registrar ingresos o gastos en /movimientos",
+    description:
+      "En Nuevo Movimiento y Editar Movimiento, el selector de cuenta filtra dinámicamente solo las cuentas compatibles con el método elegido (excluye efectivo cuando seleccionas Tarjeta o Transferencia, y viceversa).",
+    bullets: [
+      "Cuentas de efectivo se vinculan automáticamente al elegir pago en Efectivo.",
+      "Si existen múltiples cuentas bancarias compatibles, evita autoseleccionar por error y muestra la guía «Selecciona una...».",
+      "Compatible con QuickTransactionSheet y captura limpia de CLABE de 18 dígitos.",
+    ],
+    metricLabel: "Precisión de captura",
+    metricValue: "0 Cruces Erróneos",
+    previewType: "smartfilter",
+  },
+  {
+    id: "cmdk",
+    icon: Command,
+    shortTitle: "Cmd+K Refinado",
+    badge: "Navegación Rápida",
+    title: "Rediseño de Command Palette (Cmd+K / Ctrl+K)",
+    subtitle: "Encabezado limpio con cierre ESC, atajos legibles y 99 iconos SVG",
+    description:
+      "Refinamos la paleta de comandos para escritorio y PWA eliminando botones superpuestos y anillos de foco duplicados, optimizando el contraste de atajos rápidos en tema claro y oscuro.",
+    bullets: [
+      "Nuevo encabezado con botón de cierre integrado (ESC) y alineación uniforme del botón lateral Buscar...",
+      "Atajos de teclado (+, T, Alt+D) calibrados para alto contraste en Warm Alabaster y Obsidian Carbon.",
+      "Integrado con los 99 iconos vectoriales SVG adaptativos vía currentColor sin ningún emoji en UI V2.",
+    ],
+    metricLabel: "Acceso por teclado",
+    metricValue: "Cmd+K · + / T / Alt+D",
+    previewType: "cmdk",
+  },
+  {
+    id: "charts",
+    icon: PieChart,
+    shortTitle: "DonutChart & 99 SVG",
+    badge: "Visualización Exacta",
+    title: "Gráficos DonutChart SVG y Catálogo Vectorial",
+    subtitle: "Porcentajes redondeados al 100.0% exacto y categorías sin emojis",
+    description:
+      "Mantiene los gráficos SVG adaptativos con distribución exacta al 100.0% para cuentas y arqueo de efectivo por denominación, junto al sistema tipado de 99 iconos vectoriales SVG.",
+    bullets: [
+      "95 iconos Lucide + 4 glifos financieros exclusivos (Billete, Monedas, CLABE, Recibo) adaptativos por currentColor.",
+      "Suma exacta garantizada al 100.0% en todos los segmentos seleccionables de DonutChart.",
+      "Visibilidad completa de saldos positivos por cuenta desde móvil y Balance Anual de 4 columnas.",
+    ],
+    metricLabel: "Exactitud visual",
+    metricValue: "99 SVG · 100.0%",
+    previewType: "charts",
+  },
   {
     id: "update",
     icon: RefreshCw,
     shortTitle: "Auto-Update APK",
     badge: `Nativo Android ${APP_SHORT_VERSION}`,
     title: "Actualizador In-App contra GitHub Releases",
-    subtitle: "Detección inteligente exclusiva en Android sin falsos positivos en Web",
+    subtitle: "Detección exclusiva en Android con hosts HTTPS verificados",
     description:
-      "Finance Pal ahora comprueba automáticamente nuevas versiones directamente en GitHub Releases únicamente cuando corre en Android nativo. En Web/PWA solo informa la edición instalada para mantener la experiencia limpia.",
+      "Verifica nuevas ediciones directamente contra GitHub Releases solo en plataforma nativa Android, evitando avisos innecesarios en Web/PWA y respetando versiones pospuestas.",
     bullets: [
-      "Comparación SemVer estricta (incluye pre-releases) con descarte de borradores, caché de 6h y re-comprobación al volver a primer plano.",
-      "Respeta la versión pospuesta ('Luego') hasta una edición superior y valida hosts confiables HTTPS de GitHub/CDN.",
-      "Nuevo banner editorial discreto y verificación manual 'Buscar actualización' en Ajustes -> Seguridad y Sistema.",
+      "Comparación SemVer estricta, caché de 6h, validación de hosts confiables GitHub/CDN y digest SHA-256 verificable.",
+      "Compatible con ESM nativo Node.js 24 en rutas /api, comprobantes privados ≤ 5 MB (sb:receipts) y magic bytes.",
+      "Verificación manual disponible en cualquier instante desde Ajustes -> Seguridad y Sistema.",
     ],
     metricLabel: "Binario oficial",
     metricValue: `${APK_SIZE_LABEL} · APK`,
     previewType: "update",
   },
   {
-    id: "icons",
-    icon: Layers,
-    shortTitle: "99 Iconos SVG",
-    badge: "Cero Emojis V2",
-    title: "Sistema Vectorial de 99 Iconos Adaptativos",
-    subtitle: "Iconografía SVG tipada por currentColor en toda la interfaz V2",
-    description:
-      "Eliminamos los emojis de la interfaz V2, el selector de iconos, el registro rápido y las notificaciones. Ahora todo el sistema opera sobre 99 IDs vectoriales (95 de Lucide + 4 glifos financieros propios) protegidos por test anti-emoji.",
-    bullets: [
-      "4 iconos financieros exclusivos: Billete, Pila de monedas, Banco/CLABE y Sello de recibo adaptativos vía currentColor.",
-      "Traducción transparente en tiempo de ejecución de categorías o metas heredadas con iconos antiguos.",
-      "Suite automática no-emoji-guard.test.ts garantizando coherencia editorial en todas las vistas V2.",
-    ],
-    metricLabel: "Catálogo SVG",
-    metricValue: "99 SVG · 0 Emojis",
-    previewType: "icons",
-  },
-  {
-    id: "quicktx",
-    icon: Zap,
-    shortTitle: "Registro Rápido",
-    badge: "Quick Sheet",
-    title: "QuickTransactionSheet Contextual por Cuenta",
-    subtitle: "Métodos de pago filtrados y captura limpia de CLABE / últimos 4 dígitos",
-    description:
-      "Al capturar un movimiento desde cualquier vista, el formulario adapta automáticamente las opciones de pago según el tipo de cuenta origen para eliminar pasos innecesarios.",
-    bullets: [
-      "Cuentas en efectivo fijan 'Efectivo · Automático'; cuentas bancarias filtran solo Tarjeta y Transferencia.",
-      "Detalles de transferencia colapsables más limpios (destinatario, banco y últimos 4 dígitos o CLABE de 18 dígitos).",
-      "Adjunto y previsualización inmediata de comprobantes dentro de la misma hoja rápida.",
-    ],
-    metricLabel: "Validación bancaria",
-    metricValue: "CLABE 18 dígitos",
-    previewType: "quicktx",
-  },
-  {
-    id: "receipts",
-    icon: Receipt,
-    shortTitle: "Recibos 5 MB",
-    badge: "Storage Endurecido",
-    title: "Comprobantes Privados y Magic Bytes",
-    subtitle: "Compresión local automática <= 5 MB y referencias lógicas sb:receipts",
-    description:
-      "El pipeline de comprobantes valida encabezados binarios reales (magic bytes) en cliente, comprime la imagen antes de salir del dispositivo y guarda referencias no expirables en un bucket privado endurecido.",
-    bullets: [
-      "Acepta únicamente JPEG, PNG y WebP auténticos (entrada hasta 10 MB) con compresión en cliente a máximo 5 MB.",
-      "Persistencia con refs lógicas sb:receipts/<userId>/... resueltas a URLs firmadas frescas con caché (useReceiptUrl).",
-      "Migración receipts_hardening en Supabase Storage bloqueando tipos MIME no autorizados.",
-    ],
-    metricLabel: "Política de adjunto",
-    metricValue: "<= 5 MB · Privado",
-    previewType: "receipts",
-  },
-  {
-    id: "charts",
-    icon: PieChart,
-    shortTitle: "DonutChart SVG",
-    badge: "Visualización Exacta",
-    title: "Gráficos DonutChart SVG & Visibilidad de Cuentas",
-    subtitle: "Porcentajes redondeados al 100.0% exacto y arqueo de efectivo",
-    description:
-      "Nuevo componente DonutChart vectorial adaptativo a temas claro y oscuro con selección interactiva de segmentos. Además, los saldos de cuentas en móvil ahora muestran desglose visual de balances y denominaciones de efectivo.",
-    bullets: [
-      "Algoritmo de distribución garantizando suma exacta al 100.0% en cada anillo interactivo.",
-      "Corregida la visibilidad de cuentas en móvil (Ajustes -> Cuentas) con gráfica de saldos positivos.",
-      "Desglose de arqueo de efectivo por billetes y monedas integrado junto al Balance Anual en 4 columnas.",
-    ],
-    metricLabel: "Precisión porcentual",
-    metricValue: "100.0% Exacto",
-    previewType: "charts",
-  },
-  {
-    id: "nav",
-    icon: Compass,
-    shortTitle: "Navegación V2.1",
-    badge: "UX Móvil Fluida",
-    title: "Deudas en Barra Principal y Menú Compacto",
-    subtitle: "Orden unificado de vistas, Drawer táctil nativo e icono de app v2",
-    description:
-      "Promovimos Deudas directamente a la barra inferior principal y limpiamos el encabezado móvil agrupando vistas secundarias en un menú contextual sin truncamientos.",
-    bullets: [
-      "Barra inferior: Inicio, Movimientos, (+), Metas (con Carpetas dnd-kit) y Deudas con swipe unificado.",
-      "Nuevo menú compacto HeaderMoreButton para Anual, Historial y Ajustes sin recortar títulos móviles.",
-      "Corregido el desplazamiento táctil del cajón en WebView Android más nuevo launcher icon v2 en adaptativo.",
-    ],
-    metricLabel: "Arquitectura UI",
-    metricValue: "4 Vistas + (+)",
-    previewType: "nav",
-  },
-  {
     id: "security",
     icon: ShieldCheck,
-    shortTitle: "Seguridad & QA",
-    badge: "382 Tests Pass",
-    title: "WebCrypto AES-256, SECURITY.md y Suite Completa",
-    subtitle: "Cifrado local comprobable, divulgación responsable y 52 suites verdes",
+    shortTitle: "Seguridad & 61 Suites",
+    badge: "61 Suites Verificadas",
+    title: "WebCrypto AES-256, Anti-Prompt-Injection y 61 Suites",
+    subtitle: "Endurecimiento extremo en servidor MCP, SQLite/IDB y políticas RLS",
     description:
-      "Criptografía simétrica WebCrypto AES-GCM 256-bit (PBKDF2 100,000 rondas), 2FA TOTP, Zero-Knowledge sync y publicación oficial de SECURITY.md respaldado por una batería integral de pruebas.",
+      "Combina el cifrado local AES-GCM de 256 bits con las salvaguardas específicas del servidor MCP: tokens de 15 min, rotación de refresh tokens con detección de reuso y aislamiento <untrusted_user_note>.",
     bullets: [
-      "Cifrado local en cliente antes de persistir en SQLite o IndexedDB + auditoría k-Anonymity HIBP.",
-      "Política de divulgación responsable SECURITY.md publicada en el repositorio oficial.",
-      "52 archivos de prueba y 382 tests unitarios e integrados pasando al 100%, TypeScript estricto y Vite 8.",
+      "Sanitización de campos de usuario contra prompt injection indirecto y limitación de tasa por usuario/IP.",
+      "Políticas RLS estrictas con deleted_at IS NULL, RPC hotfix de borrado suave y validación Zod en cada herramienta.",
+      "61 archivos de prueba automatizados cubriendo E2E MCP, OAuth 2.1, storage de recibos y no-emoji guard.",
     ],
-    metricLabel: "Cobertura verificada",
-    metricValue: "52 Suites · 382 Tests",
+    metricLabel: "Cobertura QA",
+    metricValue: "61 Suites · AES-256",
     previewType: "security",
   },
 ];
 
-const CUSTOM_ICON_CHOICES = [
-  { id: "utensils", label: "Comida", icon: Utensils },
-  { id: "home", label: "Hogar", icon: Home },
-  { id: "zap", label: "Energía", icon: Zap },
-  { id: "landmark", label: "Banco", icon: Landmark },
-  { id: "receipt", label: "Recibo", icon: Receipt },
-  { id: "coins", label: "Efectivo", icon: Coins },
+const ACCOUNT_OPTIONS = [
+  { id: "efectivo-caja", label: "Caja Efectivo ($1,520)", kind: "cash" as const },
+  { id: "bbva", label: "Banco BBVA ($62,400)", kind: "bank" as const },
+  { id: "nu", label: "Cuenta Digital Nu ($49,700)", kind: "bank" as const },
 ] as const;
 
 const CHART_SLICES_BY_MODE = {
   accounts: [
     { id: "bbva", label: "Banco Principal", pct: 54.5, value: "$67,900", stroke: "#34D399" },
-    { id: "cetes", label: "Reserva Inversiones", pct: 32.0, value: "$39,870", stroke: "#60A5FA" },
+    { id: "cetes", label: "Reserva Digital", pct: 32.0, value: "$39,870", stroke: "#60A5FA" },
     { id: "cash", label: "Efectivo Bóveda", pct: 13.5, value: "$16,820", stroke: "#F59E0B" },
   ],
   cash: [
@@ -203,47 +203,49 @@ const CHART_SLICES_BY_MODE = {
   ],
 } as const;
 
+const CMD_ITEMS = [
+  { key: "+", label: "Nuevo movimiento", section: "Acción", icon: Plus },
+  { key: "T", label: "Traspaso entre cuentas", section: "Acción", icon: Coins },
+  { key: "Alt+D", label: "Ir a Deudas", section: "Navegar", icon: Wallet },
+  { key: "MCP", label: "Ajustes > Conectores IA", section: "Ajustes", icon: Bot },
+] as const;
+
 export interface ReleaseModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
 
 export function ReleaseModal({ open, onOpenChange }: ReleaseModalProps) {
-  const [activeTab, setActiveTab] = useState<string>("update");
+  const [activeTab, setActiveTab] = useState<string>("mcp");
 
-  // 1. Update check stage state
-  const [platformMode, setPlatformMode] = useState<"android" | "web">("android");
-  const [updateCheckStatus, setUpdateCheckStatus] = useState<"ready" | "dismissed">("ready");
+  // 1. MCP Consent state
+  const [readOnlyMcp, setReadOnlyMcp] = useState(true);
+  const [softDeleteOptIn, setSoftDeleteOptIn] = useState(false);
 
-  // 2. Icons (99 SVG, 0 emoji) stage state
-  const [svgCategories, setSvgCategories] = useState<Array<{ iconId: string; name: string }>>([
-    { iconId: "utensils", name: "Alimentación" },
-    { iconId: "home", name: "Vivienda" },
-    { iconId: "landmark", name: "Transferencias" },
-    { iconId: "coins", name: "Arqueo Caja" },
-  ]);
-  const [selectedIconId, setSelectedIconId] = useState<string>("receipt");
-  const [newCatName, setNewCatName] = useState("");
+  // 2. Papelera 30d & Kill Switch state
+  const [killSwitchActive, setKillSwitchActive] = useState(true);
+  const [softDeleteStep, setSoftDeleteStep] = useState<"idle" | "prepared" | "trashed">("idle");
 
-  // 3. QuickTransactionSheet stage state
-  const [accountType, setAccountType] = useState<"cash" | "bank" | "other">("bank");
-  const [payMethod, setPayMethod] = useState<"Efectivo" | "Tarjeta" | "Transferencia" | "Otro">(
-    "Transferencia"
+  // 3. Smart Account Filter state
+  const [payMethodFilter, setPayMethodFilter] = useState<"Efectivo" | "Tarjeta" | "Transferencia">(
+    "Tarjeta"
   );
+  const [selectedAccountId, setSelectedAccountId] = useState<string>("");
 
-  // 4. Receipts magic bytes + compression stage state
-  const [sampleReceipt, setSampleReceipt] = useState<"jpg" | "webp" | "exe">("jpg");
+  // 4. Command Palette state
+  const [cmdQuery, setCmdQuery] = useState("");
+  const [cmdSelected, setCmdSelected] = useState<string>("+");
 
-  // 5. DonutChart stage state
+  // 5. DonutChart SVG state
   const [chartMode, setChartMode] = useState<"accounts" | "cash">("accounts");
   const [activeSliceIdx, setActiveSliceIdx] = useState(0);
 
-  // 6. Navigation V2.1 stage state
-  const [navTab, setNavTab] = useState<"Inicio" | "Movimientos" | "Metas" | "Deudas">("Deudas");
-  const [moreOpen, setMoreOpen] = useState(false);
+  // 6. Auto-Update state
+  const [platformMode, setPlatformMode] = useState<"android" | "web">("android");
+  const [updateCheckStatus, setUpdateCheckStatus] = useState<"ready" | "dismissed">("ready");
 
   // 7. Security live WebCrypto AES-GCM state
-  const [cryptoPlaintext, setCryptoPlaintext] = useState(`FinancePal v${APP_VERSION}`);
+  const [cryptoPlaintext, setCryptoPlaintext] = useState(`FinancePal v${APP_VERSION} MCP`);
   const [cryptoOutput, setCryptoOutput] = useState<string | null>(null);
   const [isEncrypting, setIsEncrypting] = useState(false);
 
@@ -286,25 +288,15 @@ export function ReleaseModal({ open, onOpenChange }: ReleaseModalProps) {
     setTimeout(checkTabsScroll, 250);
   };
 
-  const handleSelectAccountType = (type: "cash" | "bank" | "other") => {
-    setAccountType(type);
-    if (type === "cash") setPayMethod("Efectivo");
-    else if (type === "bank") setPayMethod("Transferencia");
-    else setPayMethod("Tarjeta");
+  const handlePaymentMethodChange = (method: "Efectivo" | "Tarjeta" | "Transferencia") => {
+    setPayMethodFilter(method);
+    if (method === "Efectivo") {
+      setSelectedAccountId("efectivo-caja");
+    } else {
+      setSelectedAccountId("");
+    }
   };
 
-  const handleAddSvgCategory = useCallback(
-    (e: React.FormEvent) => {
-      e.preventDefault();
-      if (!newCatName.trim()) return;
-      const name = newCatName.trim().slice(0, 20);
-      setSvgCategories((prev) => [...prev, { iconId: selectedIconId, name }]);
-      setNewCatName("");
-    },
-    [newCatName, selectedIconId]
-  );
-
-  // WebCrypto AES-GCM live encryption test
   const handleRunEncryption = useCallback(async () => {
     if (typeof window === "undefined" || !window.crypto?.subtle) {
       setCryptoOutput("Cifrado AES-GCM 256 simulado exitosamente");
@@ -313,7 +305,7 @@ export function ReleaseModal({ open, onOpenChange }: ReleaseModalProps) {
     setIsEncrypting(true);
     try {
       const enc = new TextEncoder();
-      const rawKey = enc.encode("financepal_v2_1_local_key_pbkdf2_derivation");
+      const rawKey = enc.encode("financepal_v2_2_local_key_pbkdf2_derivation");
       const keyHash = await window.crypto.subtle.digest("SHA-256", rawKey);
       const key = await window.crypto.subtle.importKey(
         "raw",
@@ -343,15 +335,16 @@ export function ReleaseModal({ open, onOpenChange }: ReleaseModalProps) {
   const selectedFeature =
     RELEASE_FEATURES.find((f) => f.id === activeTab) || RELEASE_FEATURES[0];
 
+  const compatibleAccounts = ACCOUNT_OPTIONS.filter((acc) =>
+    payMethodFilter === "Efectivo" ? acc.kind === "cash" : acc.kind === "bank"
+  );
+
+  const filteredCmds = CMD_ITEMS.filter((item) =>
+    `${item.label} ${item.section}`.toLowerCase().includes(cmdQuery.toLowerCase())
+  );
+
   const chartSlices = CHART_SLICES_BY_MODE[chartMode];
   const currentSlice = chartSlices[activeSliceIdx] ?? chartSlices[0];
-
-  const allowedMethods: Array<"Efectivo" | "Tarjeta" | "Transferencia" | "Otro"> =
-    accountType === "cash"
-      ? ["Efectivo"]
-      : accountType === "bank"
-      ? ["Tarjeta", "Transferencia"]
-      : ["Tarjeta", "Transferencia", "Otro"];
 
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
@@ -370,8 +363,8 @@ export function ReleaseModal({ open, onOpenChange }: ReleaseModalProps) {
                 <span className="italic font-semibold text-primary">Finance Pal</span> v{APP_VERSION}
               </Dialog.Title>
               <Dialog.Description className="text-muted-foreground text-xs sm:text-sm mt-1 max-w-xl font-sans">
-                Actualizador nativo en Android, sistema completo de 99 iconos SVG sin emojis,
-                comprobantes endurecidos, DonutChart SVG y suite verificada de 382 tests.
+                Conector Universal MCP para Claude, ChatGPT y Gemini sobre OAuth 2.1 + PKCE,
+                Papelera de 30 días, filtrado inteligente de cuentas y Command Palette Cmd+K.
               </Dialog.Description>
             </div>
 
@@ -511,271 +504,256 @@ export function ReleaseModal({ open, onOpenChange }: ReleaseModalProps) {
                   </span>
                 </div>
 
-                {/* 1. Android In-App Update Stage */}
-                {selectedFeature.previewType === "update" && (
+                {/* 1. MCP OAuth 2.1 Consent Live Stage */}
+                {selectedFeature.previewType === "mcp" && (
                   <div className="space-y-2.5 text-xs font-mono">
-                    <div className="grid grid-cols-2 gap-1 p-1 rounded-xl bg-[#0C0C0B] border border-white/10 text-[11px]">
-                      <button
-                        type="button"
-                        onClick={() => setPlatformMode("android")}
-                        className={`flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg transition-colors cursor-pointer ${
-                          platformMode === "android"
-                            ? "bg-[#1C1C1A] text-[#34D399] font-semibold border border-white/10"
-                            : "text-[#B0ADA7] hover:text-[#EDEDED]"
-                        }`}
-                      >
-                        <Smartphone className="w-3 h-3" strokeWidth={1.75} />
-                        <span>Android APK</span>
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setPlatformMode("web")}
-                        className={`flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg transition-colors cursor-pointer ${
-                          platformMode === "web"
-                            ? "bg-[#1C1C1A] text-[#EDEDED] font-semibold border border-white/10"
-                            : "text-[#B0ADA7] hover:text-[#EDEDED]"
-                        }`}
-                      >
-                        <span>Web / PWA</span>
-                      </button>
+                    <div className="p-3 rounded-xl bg-[#0C0C0B] border border-white/10 space-y-2">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#EDEDED]">
+                          {readOnlyMcp ? (
+                            <Eye className="w-3.5 h-3.5 text-[#34D399]" strokeWidth={1.75} />
+                          ) : (
+                            <Lock className="w-3.5 h-3.5 text-[#E07A5F]" strokeWidth={1.75} />
+                          )}
+                          <span>Modo Solo Lectura</span>
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const next = !readOnlyMcp;
+                            setReadOnlyMcp(next);
+                            if (next) setSoftDeleteOptIn(false);
+                          }}
+                          className={`px-2 py-0.5 rounded-md border text-[10px] font-bold cursor-pointer ${
+                            readOnlyMcp
+                              ? "bg-[#34D399]/15 border-[#34D399]/40 text-[#34D399]"
+                              : "bg-[#E07A5F]/15 border-[#E07A5F]/40 text-[#E07A5F]"
+                          }`}
+                        >
+                          {readOnlyMcp ? "ACTIVO" : "ESCRITURA"}
+                        </button>
+                      </div>
+
+                      <div className="flex items-center justify-between text-[10px] text-[#B0ADA7] pt-1 border-t border-white/10">
+                        <span className="inline-flex items-center gap-1">
+                          <KeyRound className="w-3 h-3 text-[#F59E0B]" strokeWidth={1.75} />
+                          Step-up 2FA (aal2)
+                        </span>
+                        <span className="text-[#34D399]">TOTP Verificado</span>
+                      </div>
                     </div>
 
-                    {platformMode === "android" ? (
-                      <div className="p-3 rounded-xl bg-[#0C0C0B] border border-white/10 space-y-2">
-                        <div className="flex items-center justify-between text-[11px]">
-                          <span className="text-[#34D399] font-semibold">
-                            Nueva versión v{APP_VERSION}
-                          </span>
-                          <span className="text-[#B0ADA7] tabular-nums">{APK_SIZE_LABEL}</span>
-                        </div>
-                        <p className="text-[11px] font-sans text-[#B0ADA7] leading-relaxed">
-                          Host confiable verificado (<code className="text-[#EDEDED]">github.com</code>).
-                          SHA-256: <span className="tabular-nums text-[#EDEDED]">{APK_SHA256_SHORT}...</span>
-                        </p>
-                        <div className="flex items-center gap-2 pt-1">
-                          <button
-                            type="button"
-                            onClick={() => setUpdateCheckStatus("dismissed")}
-                            className="px-2.5 py-1 rounded-lg bg-[#1C1C1A] border border-white/10 text-[10px] text-[#B0ADA7] hover:text-[#EDEDED] cursor-pointer"
-                          >
-                            {updateCheckStatus === "dismissed" ? "Pospuesto (Caché 6h)" : "Luego"}
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => setUpdateCheckStatus("ready")}
-                            className="px-2.5 py-1 rounded-lg bg-[#34D399] text-[#0C0C0B] font-bold text-[10px] cursor-pointer"
-                          >
-                            Descargar APK
-                          </button>
-                        </div>
+                    <div className="p-2.5 rounded-xl bg-[#0C0C0B] border border-white/10 space-y-1.5 text-[10px]">
+                      <div className="flex justify-between text-[#B0ADA7]">
+                        <span>Scopes concedidos:</span>
+                        <span className="text-[#EDEDED] tabular-nums">
+                          {readOnlyMcp
+                            ? "6 mcp:read:*"
+                            : softDeleteOptIn
+                            ? "11 scopes (incl. delete:soft)"
+                            : "10 scopes (read + write)"}
+                        </span>
                       </div>
-                    ) : (
-                      <div className="p-3 rounded-xl bg-[#0C0C0B] border border-white/10 space-y-1.5">
-                        <div className="flex justify-between text-[11px]">
-                          <span className="text-[#B0ADA7]">Versión Web instalada:</span>
-                          <span className="text-[#34D399] font-bold">v{APP_VERSION}</span>
-                        </div>
-                        <p className="text-[11px] font-sans text-[#B0ADA7]">
-                          Sin avisos falsos de descarga APK: las actualizaciones web se aplican automáticamente vía PWA.
-                        </p>
-                      </div>
-                    )}
+                      <button
+                        type="button"
+                        disabled={readOnlyMcp}
+                        onClick={() => setSoftDeleteOptIn((p) => !p)}
+                        className={`w-full py-1 px-2 rounded-lg border text-left transition-colors ${
+                          readOnlyMcp
+                            ? "bg-[#1C1C1A]/50 border-white/5 text-[#B0ADA7]/50 cursor-not-allowed"
+                            : softDeleteOptIn
+                            ? "bg-[#E07A5F]/15 border-[#E07A5F]/40 text-[#E07A5F] cursor-pointer"
+                            : "bg-[#1C1C1A] border-white/10 text-[#B0ADA7] cursor-pointer"
+                        }`}
+                      >
+                        mcp:delete:soft ({softDeleteOptIn ? "Opt-in activo" : "Opcional desactivado"})
+                      </button>
+                    </div>
                   </div>
                 )}
 
-                {/* 2. 99 SVG Icons (Zero Emojis) Stage */}
-                {selectedFeature.previewType === "icons" && (
-                  <div className="space-y-2.5 text-xs">
-                    <div className="grid grid-cols-2 gap-1.5 max-h-28 overflow-y-auto">
-                      {svgCategories.map((c) => {
-                        const match =
-                          CUSTOM_ICON_CHOICES.find((item) => item.id === c.iconId) ??
-                          CUSTOM_ICON_CHOICES[0];
-                        const CatIcon = match.icon;
-                        return (
-                          <div
-                            key={`${c.name}-${c.iconId}`}
-                            className="p-2 rounded-xl bg-[#0C0C0B] border border-white/10 flex items-center gap-2"
-                          >
-                            <CatIcon className="w-3.5 h-3.5 text-[#34D399] shrink-0" strokeWidth={1.75} />
-                            <span className="text-[#EDEDED] text-[11px] font-medium truncate">
-                              {c.name}
-                            </span>
-                          </div>
-                        );
-                      })}
-                    </div>
-
-                    <div className="flex items-center gap-1 justify-between p-1.5 rounded-xl bg-[#0C0C0B] border border-white/10">
-                      {CUSTOM_ICON_CHOICES.map((choice) => {
-                        const Icon = choice.icon;
-                        const selected = selectedIconId === choice.id;
-                        return (
-                          <button
-                            key={choice.id}
-                            type="button"
-                            onClick={() => setSelectedIconId(choice.id)}
-                            title={choice.label}
-                            className={`p-1.5 rounded-lg transition-colors cursor-pointer ${
-                              selected
-                                ? "bg-[#34D399]/20 text-[#34D399] border border-[#34D399]/40"
-                                : "text-[#B0ADA7] hover:text-[#EDEDED]"
-                            }`}
-                          >
-                            <Icon className="w-3.5 h-3.5" strokeWidth={1.75} />
-                          </button>
-                        );
-                      })}
-                    </div>
-
-                    <form onSubmit={handleAddSvgCategory} className="flex gap-1.5">
-                      <input
-                        type="text"
-                        maxLength={20}
-                        placeholder="Categoría SVG (máx 20)"
-                        value={newCatName}
-                        onChange={(e) => setNewCatName(e.target.value)}
-                        className="flex-1 min-w-0 px-2.5 py-1 text-[11px] rounded-lg bg-[#0C0C0B] border border-white/15 text-[#EDEDED] placeholder-[#B0ADA7]/60 focus:outline-none focus:border-[#34D399]"
-                      />
+                {/* 2. Trash 30d + Kill Switch Stage */}
+                {selectedFeature.previewType === "trash" && (
+                  <div className="space-y-2.5 text-xs font-mono">
+                    <div className="p-3 rounded-xl bg-[#0C0C0B] border border-white/10 flex items-center justify-between gap-2">
+                      <div>
+                        <span className="text-[11px] font-semibold text-[#EDEDED] block">
+                          Kill Switch Global MCP
+                        </span>
+                        <span className="text-[10px] text-[#B0ADA7] tabular-nums">
+                          2 / 5 concesiones activas
+                        </span>
+                      </div>
                       <button
-                        type="submit"
-                        className="px-2.5 py-1 rounded-lg bg-[#34D399] text-[#0C0C0B] font-bold text-[11px] flex items-center gap-1 active:scale-[0.98] cursor-pointer shrink-0"
+                        type="button"
+                        onClick={() => setKillSwitchActive((p) => !p)}
+                        className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-lg border text-[10px] font-bold cursor-pointer ${
+                          killSwitchActive
+                            ? "bg-[#34D399]/15 border-[#34D399]/40 text-[#34D399]"
+                            : "bg-[#E07A5F]/15 border-[#E07A5F]/40 text-[#E07A5F]"
+                        }`}
                       >
-                        <Plus className="w-3 h-3" strokeWidth={2} />
-                        <span>Crear</span>
+                        <Power className="w-3 h-3" strokeWidth={1.75} />
+                        <span>{killSwitchActive ? "Activo" : "Bloqueado"}</span>
                       </button>
-                    </form>
+                    </div>
+
+                    <div className="p-3 rounded-xl bg-[#0C0C0B] border border-white/10 space-y-2 text-[10px]">
+                      <div className="flex justify-between">
+                        <span className="text-[#EDEDED]">Café de especialidad (-$45)</span>
+                        <span className="text-[#F59E0B] tabular-nums">
+                          {softDeleteStep === "idle"
+                            ? "Activo"
+                            : softDeleteStep === "prepared"
+                            ? "TTL 120s"
+                            : "En papelera (30d)"}
+                        </span>
+                      </div>
+                      <div className="flex gap-1.5">
+                        {softDeleteStep === "idle" && (
+                          <button
+                            type="button"
+                            onClick={() => setSoftDeleteStep("prepared")}
+                            className="flex-1 py-1.5 px-2 rounded-lg bg-[#1C1C1A] border border-white/10 text-[#EDEDED] hover:border-[#F59E0B]/50 cursor-pointer"
+                          >
+                            1. prepare_soft_delete
+                          </button>
+                        )}
+                        {softDeleteStep === "prepared" && (
+                          <button
+                            type="button"
+                            onClick={() => setSoftDeleteStep("trashed")}
+                            className="flex-1 py-1.5 px-2 rounded-lg bg-[#E07A5F] text-[#0C0C0B] font-bold cursor-pointer"
+                          >
+                            2. confirm_soft_delete
+                          </button>
+                        )}
+                        {softDeleteStep === "trashed" && (
+                          <button
+                            type="button"
+                            onClick={() => setSoftDeleteStep("idle")}
+                            className="flex-1 py-1.5 px-2 rounded-lg bg-[#34D399] text-[#0C0C0B] font-bold inline-flex items-center justify-center gap-1 cursor-pointer"
+                          >
+                            <RotateCcw className="w-3 h-3" strokeWidth={2} />
+                            <span>Restaurar de Papelera</span>
+                          </button>
+                        )}
+                      </div>
+                    </div>
                   </div>
                 )}
 
-                {/* 3. QuickTransactionSheet Contextual Stage */}
-                {selectedFeature.previewType === "quicktx" && (
+                {/* 3. Smart Account Filter Stage */}
+                {selectedFeature.previewType === "smartfilter" && (
                   <div className="space-y-2.5 text-xs font-mono">
                     <div className="grid grid-cols-3 gap-1 p-1 rounded-xl bg-[#0C0C0B] border border-white/10 text-[10px]">
                       {(
                         [
-                          { id: "cash", label: "Efectivo", icon: Coins },
-                          { id: "bank", label: "Banco", icon: Landmark },
-                          { id: "other", label: "Otra", icon: Wallet },
+                          { id: "Efectivo", icon: Coins },
+                          { id: "Tarjeta", icon: CreditCard },
+                          { id: "Transferencia", icon: Landmark },
                         ] as const
-                      ).map((acc) => {
-                        const Icon = acc.icon;
-                        const active = accountType === acc.id;
+                      ).map((m) => {
+                        const Icon = m.icon;
+                        const active = payMethodFilter === m.id;
                         return (
                           <button
-                            key={acc.id}
+                            key={m.id}
                             type="button"
-                            onClick={() => handleSelectAccountType(acc.id)}
-                            className={`flex items-center justify-center gap-1 py-1.5 px-1.5 rounded-lg cursor-pointer transition-colors ${
+                            onClick={() => handlePaymentMethodChange(m.id)}
+                            className={`flex items-center justify-center gap-1 py-1.5 px-1 rounded-lg cursor-pointer ${
                               active
                                 ? "bg-[#1C1C1A] text-[#34D399] border border-white/10 font-bold"
                                 : "text-[#B0ADA7] hover:text-[#EDEDED]"
                             }`}
                           >
                             <Icon className="w-3 h-3 shrink-0" strokeWidth={1.75} />
-                            <span>{acc.label}</span>
+                            <span className="truncate">{m.id}</span>
                           </button>
                         );
                       })}
                     </div>
 
-                    <div className="p-3 rounded-xl bg-[#0C0C0B] border border-white/10 space-y-2">
+                    <div className="p-3 rounded-xl bg-[#0C0C0B] border border-white/10 space-y-1.5">
                       <span className="text-[10px] text-[#B0ADA7] block">
-                        MÉTODOS PERMITIDOS ({accountType.toUpperCase()}):
+                        CUENTAS COMPATIBLES ({compatibleAccounts.length}):
                       </span>
-                      <div className="flex flex-wrap gap-1.5">
-                        {allowedMethods.map((method) => (
+                      <div className="text-[10px] text-[#F59E0B] pb-1">
+                        {selectedAccountId
+                          ? `Seleccionada: ${compatibleAccounts.find((a) => a.id === selectedAccountId)?.label}`
+                          : "Placeholder: \"Selecciona una...\""}
+                      </div>
+                      <div className="space-y-1">
+                        {compatibleAccounts.map((acc) => (
                           <button
-                            key={method}
+                            key={acc.id}
                             type="button"
-                            onClick={() => setPayMethod(method)}
-                            className={`inline-flex items-center gap-1 px-2 py-1 rounded-lg border text-[10px] cursor-pointer ${
-                              payMethod === method
-                                ? "bg-[#34D399]/15 border-[#34D399]/50 text-[#34D399] font-semibold"
-                                : "bg-[#1C1C1A] border-white/10 text-[#B0ADA7]"
+                            onClick={() => setSelectedAccountId(acc.id)}
+                            className={`w-full text-left px-2.5 py-1.5 rounded-lg border text-[10px] cursor-pointer ${
+                              selectedAccountId === acc.id
+                                ? "bg-[#34D399]/15 border-[#34D399]/40 text-[#34D399] font-semibold"
+                                : "bg-[#1C1C1A] border-white/10 text-[#EDEDED]"
                             }`}
                           >
-                            {method === "Tarjeta" && <CreditCard className="w-3 h-3" strokeWidth={1.75} />}
-                            <span>{accountType === "cash" ? "Efectivo · Automático" : method}</span>
+                            {acc.label}
                           </button>
                         ))}
                       </div>
-                      {payMethod === "Transferencia" && accountType !== "cash" && (
-                        <div className="pt-2 border-t border-white/10 text-[10px] text-[#B0ADA7] space-y-0.5 tabular-nums">
-                          <div className="flex justify-between">
-                            <span>Destino:</span>
-                            <span className="text-[#EDEDED]">BBVA México</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span>CLABE / Term.:</span>
-                            <span className="text-[#34D399]">012180 •••• 9421 (18d)</span>
-                          </div>
-                        </div>
-                      )}
                     </div>
                   </div>
                 )}
 
-                {/* 4. Receipts Hardening Live Stage */}
-                {selectedFeature.previewType === "receipts" && (
-                  <div className="space-y-2.5 text-xs font-mono">
-                    <div className="grid grid-cols-3 gap-1 text-[10px]">
-                      {[
-                        { id: "jpg", label: "ticket.jpg" },
-                        { id: "webp", label: "nota.webp" },
-                        { id: "exe", label: "archivo.exe" },
-                      ].map((item) => (
+                {/* 4. Command Palette Cmd+K Stage */}
+                {selectedFeature.previewType === "cmdk" && (
+                  <div className="space-y-2 text-xs font-mono">
+                    <div className="p-2.5 rounded-xl bg-[#0C0C0B] border border-white/10 space-y-2">
+                      <div className="flex items-center justify-between gap-2 pb-2 border-b border-white/10">
+                        <input
+                          type="text"
+                          value={cmdQuery}
+                          onChange={(e) => setCmdQuery(e.target.value)}
+                          placeholder="Buscar acción o ruta..."
+                          className="flex-1 min-w-0 bg-transparent text-[11px] text-[#EDEDED] placeholder-[#B0ADA7]/60 focus:outline-none"
+                        />
                         <button
-                          key={item.id}
                           type="button"
-                          onClick={() => setSampleReceipt(item.id as "jpg" | "webp" | "exe")}
-                          className={`py-1.5 px-2 rounded-lg border cursor-pointer truncate ${
-                            sampleReceipt === item.id
-                              ? "bg-[#1C1C1A] border-[#34D399]/50 text-[#EDEDED] font-semibold"
-                              : "bg-[#0C0C0B] border-white/10 text-[#B0ADA7]"
-                          }`}
+                          onClick={() => setCmdQuery("")}
+                          className="px-1.5 py-0.5 rounded bg-[#1C1C1A] border border-white/15 text-[9px] text-[#EDEDED] cursor-pointer shrink-0"
                         >
-                          {item.label}
+                          ESC
                         </button>
-                      ))}
-                    </div>
-
-                    <div className="p-3 rounded-xl bg-[#0C0C0B] border border-white/10 space-y-1.5 text-[10px] tabular-nums">
-                      <div className="flex justify-between">
-                        <span className="text-[#B0ADA7]">Magic Bytes:</span>
-                        <span
-                          className={
-                            sampleReceipt === "exe"
-                              ? "text-[#E07A5F] font-bold"
-                              : "text-[#34D399] font-bold"
-                          }
-                        >
-                          {sampleReceipt === "jpg"
-                            ? "FF D8 FF (JPEG Válido)"
-                            : sampleReceipt === "webp"
-                            ? "RIFF WEBP (Válido)"
-                            : "4D 5A (MZ Rechazado)"}
-                        </span>
                       </div>
-                      <div className="flex justify-between">
-                        <span className="text-[#B0ADA7]">Tamaño Optimizado:</span>
-                        <span className="text-[#EDEDED]">
-                          {sampleReceipt === "exe" ? "Bloqueado antes de subir" : "6.8 MB -> 840 KB (≤ 5 MB)"}
-                        </span>
-                      </div>
-                      <div className="pt-1 border-t border-white/10 text-[#B0ADA7] truncate">
-                        Ref:{" "}
-                        <span className="text-[#EDEDED]">
-                          {sampleReceipt === "exe"
-                            ? "null"
-                            : `sb:receipts/uid/2026-11.${sampleReceipt}`}
-                        </span>
+                      <div className="space-y-1">
+                        {filteredCmds.map((item) => {
+                          const Icon = item.icon;
+                          const active = cmdSelected === item.key;
+                          return (
+                            <button
+                              key={item.key}
+                              type="button"
+                              onClick={() => setCmdSelected(item.key)}
+                              className={`w-full flex items-center justify-between px-2 py-1.5 rounded-lg text-[10px] cursor-pointer ${
+                                active
+                                  ? "bg-[#1C1C1A] text-[#34D399]"
+                                  : "text-[#B0ADA7] hover:text-[#EDEDED]"
+                              }`}
+                            >
+                              <span className="inline-flex items-center gap-2 truncate">
+                                <Icon className="w-3.5 h-3.5 shrink-0" strokeWidth={1.75} />
+                                <span className="truncate">{item.label}</span>
+                              </span>
+                              <kbd className="px-1.5 py-0.5 rounded bg-[#141413] border border-white/15 text-[9px] text-[#EDEDED] shrink-0">
+                                {item.key}
+                              </kbd>
+                            </button>
+                          );
+                        })}
                       </div>
                     </div>
                   </div>
                 )}
 
-                {/* 5. DonutChart SVG Live Stage */}
+                {/* 5. DonutChart SVG & 99 SVG Icons Stage */}
                 {selectedFeature.previewType === "charts" && (
                   <div className="space-y-2.5 text-xs">
                     <div className="grid grid-cols-2 gap-1 p-1 rounded-xl bg-[#0C0C0B] border border-white/10 text-[10px] font-mono">
@@ -858,70 +836,92 @@ export function ReleaseModal({ open, onOpenChange }: ReleaseModalProps) {
                         ))}
                       </div>
                     </div>
-                  </div>
-                )}
 
-                {/* 6. Navigation V2.1 Live Stage */}
-                {selectedFeature.previewType === "nav" && (
-                  <div className="space-y-2.5 text-xs font-mono">
-                    <div className="p-2.5 rounded-xl bg-[#0C0C0B] border border-white/10 space-y-2">
-                      <div className="flex items-center justify-between border-b border-white/10 pb-2 relative">
-                        <span className="text-[11px] font-semibold text-[#EDEDED]">{navTab}</span>
-                        <button
-                          type="button"
-                          onClick={() => setMoreOpen((p) => !p)}
-                          aria-label="Abrir HeaderMoreButton"
-                          className="p-1 rounded-lg bg-[#1C1C1A] border border-white/10 text-[#B0ADA7] hover:text-[#EDEDED] cursor-pointer"
-                        >
-                          <MoreHorizontal className="w-3.5 h-3.5" strokeWidth={1.75} />
-                        </button>
-                        {moreOpen && (
-                          <div className="absolute right-0 top-7 z-10 w-28 p-1 rounded-lg bg-[#1C1C1A] border border-white/15 shadow-lg text-[10px] space-y-0.5">
-                            <div className="px-2 py-1 text-[#EDEDED] rounded hover:bg-white/5">Anual</div>
-                            <div className="px-2 py-1 text-[#EDEDED] rounded hover:bg-white/5">Historial</div>
-                            <div className="px-2 py-1 text-[#34D399] rounded hover:bg-white/5">Ajustes</div>
-                          </div>
-                        )}
-                      </div>
-
-                      <div className="text-[10px] text-[#B0ADA7] font-sans py-1">
-                        Vista activa en swipe: <strong className="text-[#34D399]">{navTab}</strong>
-                      </div>
-
-                      <div className="grid grid-cols-5 gap-1 pt-1.5 border-t border-white/10 text-[9px] text-center items-center">
-                        {(["Inicio", "Movimientos"] as const).map((t) => (
-                          <button
-                            key={t}
-                            type="button"
-                            onClick={() => setNavTab(t)}
-                            className={`py-1 rounded cursor-pointer truncate ${
-                              navTab === t ? "text-[#34D399] font-bold" : "text-[#B0ADA7]"
-                            }`}
-                          >
-                            {t === "Movimientos" ? "Movs" : t}
-                          </button>
-                        ))}
-                        <span className="mx-auto w-6 h-6 rounded-full bg-[#34D399] text-[#0C0C0B] flex items-center justify-center font-bold">
-                          <Plus className="w-3.5 h-3.5" strokeWidth={2.5} />
-                        </span>
-                        {(["Metas", "Deudas"] as const).map((t) => (
-                          <button
-                            key={t}
-                            type="button"
-                            onClick={() => setNavTab(t)}
-                            className={`py-1 rounded cursor-pointer truncate ${
-                              navTab === t ? "text-[#34D399] font-bold" : "text-[#B0ADA7]"
-                            }`}
-                          >
-                            {t}
-                          </button>
-                        ))}
-                      </div>
+                    <div className="flex items-center justify-between px-2 py-1.5 rounded-lg bg-[#0C0C0B] border border-white/10 text-[10px] font-mono text-[#B0ADA7]">
+                      <span className="inline-flex items-center gap-1.5 text-[#34D399]">
+                        <Utensils className="w-3 h-3" strokeWidth={1.75} />
+                        <Home className="w-3 h-3" strokeWidth={1.75} />
+                        <Landmark className="w-3 h-3" strokeWidth={1.75} />
+                        <span>99 Iconos SVG</span>
+                      </span>
+                      <span>0 emojis</span>
                     </div>
                   </div>
                 )}
 
-                {/* 7. Security Live Stage (Real WebCrypto AES-GCM + QA metrics) */}
+                {/* 6. Android In-App Update Stage */}
+                {selectedFeature.previewType === "update" && (
+                  <div className="space-y-2.5 text-xs font-mono">
+                    <div className="grid grid-cols-2 gap-1 p-1 rounded-xl bg-[#0C0C0B] border border-white/10 text-[11px]">
+                      <button
+                        type="button"
+                        onClick={() => setPlatformMode("android")}
+                        className={`flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg transition-colors cursor-pointer ${
+                          platformMode === "android"
+                            ? "bg-[#1C1C1A] text-[#34D399] font-semibold border border-white/10"
+                            : "text-[#B0ADA7] hover:text-[#EDEDED]"
+                        }`}
+                      >
+                        <Smartphone className="w-3 h-3" strokeWidth={1.75} />
+                        <span>Android APK</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setPlatformMode("web")}
+                        className={`flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg transition-colors cursor-pointer ${
+                          platformMode === "web"
+                            ? "bg-[#1C1C1A] text-[#EDEDED] font-semibold border border-white/10"
+                            : "text-[#B0ADA7] hover:text-[#EDEDED]"
+                        }`}
+                      >
+                        <span>Web / PWA</span>
+                      </button>
+                    </div>
+
+                    {platformMode === "android" ? (
+                      <div className="p-3 rounded-xl bg-[#0C0C0B] border border-white/10 space-y-2">
+                        <div className="flex items-center justify-between text-[11px]">
+                          <span className="text-[#34D399] font-semibold">
+                            Nueva versión v{APP_VERSION}
+                          </span>
+                          <span className="text-[#B0ADA7] tabular-nums">{APK_SIZE_LABEL}</span>
+                        </div>
+                        <p className="text-[11px] font-sans text-[#B0ADA7] leading-relaxed">
+                          Host confiable verificado (<code className="text-[#EDEDED]">github.com</code>).
+                          SHA-256: <span className="tabular-nums text-[#EDEDED]">{APK_SHA256_SHORT}</span>
+                        </p>
+                        <div className="flex items-center gap-2 pt-1">
+                          <button
+                            type="button"
+                            onClick={() => setUpdateCheckStatus("dismissed")}
+                            className="px-2.5 py-1 rounded-lg bg-[#1C1C1A] border border-white/10 text-[10px] text-[#B0ADA7] hover:text-[#EDEDED] cursor-pointer"
+                          >
+                            {updateCheckStatus === "dismissed" ? "Pospuesto (Caché 6h)" : "Luego"}
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setUpdateCheckStatus("ready")}
+                            className="px-2.5 py-1 rounded-lg bg-[#34D399] text-[#0C0C0B] font-bold text-[10px] cursor-pointer"
+                          >
+                            Descargar APK
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="p-3 rounded-xl bg-[#0C0C0B] border border-white/10 space-y-1.5">
+                        <div className="flex justify-between text-[11px]">
+                          <span className="text-[#B0ADA7]">Versión Web instalada:</span>
+                          <span className="text-[#34D399] font-bold">v{APP_VERSION}</span>
+                        </div>
+                        <p className="text-[11px] font-sans text-[#B0ADA7]">
+                          Sin avisos falsos de descarga APK: la PWA aplica actualizaciones web de forma transparente.
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* 7. Security Live Stage (Real WebCrypto AES-GCM + Prompt Injection Guard + 61 suites) */}
                 {selectedFeature.previewType === "security" && (
                   <div className="space-y-2 text-xs font-mono">
                     <div className="flex gap-1.5">
@@ -950,8 +950,13 @@ export function ReleaseModal({ open, onOpenChange }: ReleaseModalProps) {
                       </div>
                     </div>
 
+                    <div className="p-2 rounded-lg bg-[#0C0C0B] border border-white/10 text-[10px] text-[#B0ADA7] flex justify-between">
+                      <span>Notas MCP aisladas:</span>
+                      <code className="text-[#F59E0B]">&lt;untrusted_user_note&gt;</code>
+                    </div>
+
                     <div className="flex items-center justify-between text-[10px] pt-1 text-[#B0ADA7]">
-                      <span>52 suites · 382 tests PASS</span>
+                      <span>61 suites verificadas</span>
                       <a
                         href={SECURITY_POLICY_URL}
                         target="_blank"

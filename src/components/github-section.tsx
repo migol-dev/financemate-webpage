@@ -17,15 +17,15 @@ const SECURITY_LAYERS = [
     accentClass: "text-editorial-cobalt",
     title: "100% Local-First (SQLite & IndexedDB)",
     desc: "La base de datos reside físicamente en tu dispositivo. La aplicación opera de por vida sin conexión a internet ni dependencia de servidores externos.",
-    spec: "Latencia de lectura < 1 ms · Autonomía perpetua · 52 suites / 382 tests",
+    spec: "Latencia de lectura < 1 ms · Autonomía perpetua · 61 suites verificadas",
   },
   {
-    code: "CAPA 03 · STORAGE ENDURECIDO & RLS",
+    code: "CAPA 03 · MCP OAUTH 2.1, RECIBOS & RLS",
     icon: ShieldCheck,
     accentClass: "text-editorial-amber",
-    title: "Sincronización Zero-Knowledge & Recibos 5 MB",
-    desc: "Cada registro viaja cifrado de extremo a extremo con Row Level Security por UID. Los comprobantes validan magic bytes locales (≤ 5 MB) sobre el bucket privado sb:receipts.",
-    spec: "Migración receipts_hardening · Política pública SECURITY.md",
+    title: "Conector IA MCP Seguro, Zero-Knowledge & Papelera 30d",
+    desc: "El conector MCP opera opcionalmente vía OAuth 2.1 + PKCE (S256) y 2FA aal2 en Solo Lectura por defecto, con Gateway RPCs cero-PII, aislamiento contra prompt injection, recibos ≤ 5 MB y Kill Switch.",
+    spec: "Migraciones MCP + receipts_hardening · Política pública SECURITY.md",
   },
 ];
 

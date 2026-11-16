@@ -5,14 +5,14 @@ import { LegalShell } from "@/components/legal/legal-shell";
 export const metadata: Metadata = {
   title: "Política de Cookies y Almacenamiento Local",
   description:
-    "Transparencia total sobre el uso de cookies técnicas y almacenamiento local (localStorage e IndexedDB) en Finance Pal.",
+    "Transparencia total sobre el uso de cookies técnicas, almacenamiento local (localStorage, sessionStorage e IndexedDB) y flujo OAuth 2.1 MCP en Finance Pal.",
   alternates: {
     canonical: "/cookies",
   },
   openGraph: {
     title: "Política de Cookies y Almacenamiento Local | Finance Pal",
     description:
-      "Transparencia total sobre el uso de cookies técnicas y almacenamiento local (localStorage e IndexedDB) en Finance Pal.",
+      "Transparencia total sobre cookies técnicas, almacenamiento local e IndexedDB y sesiones OAuth 2.1 MCP en Finance Pal.",
     url: "/cookies",
   },
 };
@@ -21,149 +21,189 @@ export default function CookiesPage() {
   return (
     <LegalShell
       title="Política de Cookies y Almacenamiento Local"
-      subtitle="Conoce con total claridad cómo utilizamos las tecnologías de almacenamiento web (Cookies, localStorage e IndexedDB) con fines técnicos y sin rastreo publicitario."
-      lastUpdated="9 de octubre de 2026"
-      readTime="5 min"
+      subtitle="Conoce con total claridad qué claves y tecnologías de almacenamiento (Cookies, localStorage, sessionStorage e IndexedDB) utiliza Finance Pal con fines estrictamente técnicos."
+      lastUpdated="16 de noviembre de 2026"
+      readTime="6 min"
     >
       <section className="space-y-4">
-        <h2 className="text-xl font-bold text-white flex items-center gap-2">
-          <span className="text-cyan-400 font-mono">1.</span> ¿Qué son las Cookies y el Almacenamiento Web?
+        <h2 className="text-xl font-bold text-foreground flex items-center gap-2 font-display">
+          <span className="text-primary font-mono-tabular">1.</span> ¿Qué son las Cookies y el Almacenamiento Web?
         </h2>
-        <p>
-          Las <strong className="text-white">Cookies</strong> son pequeños archivos de texto que los sitios web colocan
-          en tu dispositivo mientras navegas. El <strong className="text-white">Almacenamiento Local (localStorage e
-          IndexedDB)</strong> es una tecnología moderna del navegador web que permite guardar datos de manera persistente
-          directamente en tu dispositivo, sin enviarlos automáticamente en cada petición de red HTTP al servidor.
+        <p className="text-muted-foreground">
+          Las <strong className="text-foreground">Cookies</strong> son pequeños archivos colocados en el navegador durante
+          la navegación. El <strong className="text-foreground">Almacenamiento Web (localStorage, sessionStorage e
+          IndexedDB)</strong> permite conservar preferencias, bóvedas locales y estados temporales directamente en tu
+          dispositivo sin enviarlos automáticamente en cada petición de red.
         </p>
-        <div className="p-4 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-200 text-xs sm:text-sm">
-          <strong>COMPROMISO DE NO RASTREO:</strong> Finance Pal no utiliza cookies publicitarias, píxeles de seguimiento
-          de redes sociales (como Meta Pixel o TikTok Pixel) ni plataformas de publicidad comportamental (como Google
-          AdSense).
+        <div className="p-4 rounded-xl bg-muted/60 border border-border text-foreground text-xs sm:text-sm leading-relaxed">
+          <strong className="text-editorial-emerald font-mono uppercase tracking-wider mr-1.5">
+            COMPROMISO DE NO RASTREO:
+          </strong>
+          Finance Pal no utiliza cookies publicitarias, píxeles de seguimiento (Meta Pixel, TikTok Pixel), analítica de
+          terceros ni seguimiento entre sitios en flujos OAuth 2.1.
         </div>
       </section>
 
-      <section className="space-y-4 pt-6 border-t border-white/10">
-        <h2 className="text-xl font-bold text-white flex items-center gap-2">
-          <span className="text-cyan-400 font-mono">2.</span> Inventario de Almacenamiento en este Sitio Web
+      <section className="space-y-4 pt-6 border-t border-border">
+        <h2 className="text-xl font-bold text-foreground flex items-center gap-2 font-display">
+          <span className="text-primary font-mono-tabular">2.</span> Inventario de Almacenamiento en este Sitio Web Oficial
         </h2>
-        <p>
-          A continuación se detalla cada elemento de almacenamiento utilizado en el sitio web oficial y portal de descargas
-          de Finance Pal:
+        <p className="text-muted-foreground">
+          Detalle técnico de cada clave y cookie utilizada en el sitio web informativo y portal de descargas:
         </p>
 
-        <div className="overflow-x-auto mt-4">
+        <div className="overflow-x-auto mt-3 rounded-xl border border-border">
           <table className="w-full text-left text-xs sm:text-sm border-collapse">
             <thead>
-              <tr className="border-b border-slate-700 bg-slate-900/80 text-white font-mono">
+              <tr className="border-b border-border bg-muted/70 text-foreground font-mono">
                 <th className="p-3">Nombre / Clave</th>
-                <th className="p-3">Tipo</th>
+                <th className="p-3">Mecanismo</th>
                 <th className="p-3">Finalidad</th>
                 <th className="p-3">Duración</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800 text-slate-300">
+            <tbody className="divide-y divide-border text-muted-foreground bg-card font-sans">
               <tr>
-                <td className="p-3 font-mono text-cyan-300">fm_visitor_id</td>
-                <td className="p-3">localStorage</td>
+                <td className="p-3 font-mono text-primary font-medium break-all">fm_visitor_id</td>
+                <td className="p-3 font-mono text-xs">localStorage</td>
                 <td className="p-3">
-                  Identificador aleatorio (UUID v4) anónimo para contabilizar descargas únicas de la versión del APK en la base de datos sin duplicados.
+                  Identificador aleatorio UUID v4 anónimo para evitar duplicados al contabilizar descargas del APK.
                 </td>
-                <td className="p-3">Persistente (hasta limpieza manual)</td>
+                <td className="p-3 font-mono-tabular text-xs">Persistente (hasta limpieza manual)</td>
               </tr>
               <tr>
-                <td className="p-3 font-mono text-cyan-300">fm_has_downloaded</td>
-                <td className="p-3">localStorage</td>
+                <td className="p-3 font-mono text-primary font-medium break-all">fm_has_downloaded</td>
+                <td className="p-3 font-mono text-xs">localStorage</td>
                 <td className="p-3">
-                  Indicador booleano que recuerda si el navegador ya inició una descarga para reflejarlo en la sección de reseñas.
+                  Indicador booleano que registra si el navegador ya descargó el instalador para mostrarlo en reseñas verificadas.
                 </td>
-                <td className="p-3">Persistente (hasta limpieza manual)</td>
+                <td className="p-3 font-mono-tabular text-xs">Persistente (hasta limpieza manual)</td>
               </tr>
               <tr>
-                <td className="p-3 font-mono text-cyan-300">fp_cookie_consent_accepted</td>
-                <td className="p-3">localStorage</td>
+                <td className="p-3 font-mono text-primary font-medium break-all">fp_cookie_consent_accepted</td>
+                <td className="p-3 font-mono text-xs">localStorage</td>
                 <td className="p-3">
-                  Registra que el usuario leyó y aceptó el aviso informativo de almacenamiento local para no mostrar el banner repetidamente.
+                  Recuerda que el usuario cerró o aceptó el aviso de almacenamiento local técnico.
                 </td>
-                <td className="p-3">1 año</td>
+                <td className="p-3 font-mono-tabular text-xs">1 año (o hasta limpieza)</td>
               </tr>
               <tr>
-                <td className="p-3 font-mono text-cyan-300">next-auth.session-token</td>
-                <td className="p-3">Cookie HTTP (segura)</td>
-                <td className="p-3">
-                  Cookie de sesión estrictamente técnica requerida para autenticar al administrador en el panel interno de moderación (/admin).
+                <td className="p-3 font-mono text-primary font-medium break-all">
+                  financepal_v2_2_0_announcement_dismissed
                 </td>
-                <td className="p-3">Sesión (30 días)</td>
+                <td className="p-3 font-mono text-xs">localStorage</td>
+                <td className="p-3">
+                  Oculta el banner superior de novedades de la edición v2.2.0 una vez descartado por el visitante.
+                </td>
+                <td className="p-3 font-mono-tabular text-xs">Hasta nuevo lanzamiento mayor</td>
+              </tr>
+              <tr>
+                <td className="p-3 font-mono text-primary font-medium break-all">fp-perf-override</td>
+                <td className="p-3 font-mono text-xs">sessionStorage</td>
+                <td className="p-3">
+                  Conserva el modo de rendimiento visual seleccionado (<code className="font-mono">lite</code> /{" "}
+                  <code className="font-mono">full</code>) durante la sesión de pestaña actual.
+                </td>
+                <td className="p-3 font-mono-tabular text-xs">Sesión de pestaña</td>
+              </tr>
+              <tr>
+                <td className="p-3 font-mono text-primary font-medium break-all">next-auth.session-token</td>
+                <td className="p-3 font-mono text-xs">Cookie HTTP (segura)</td>
+                <td className="p-3">
+                  Cookie de sesión estrictamente técnica y cifrada para autenticar al administrador en <code className="font-mono">/admin</code>.
+                </td>
+                <td className="p-3 font-mono-tabular text-xs">Sesión (30 días máx.)</td>
               </tr>
             </tbody>
           </table>
         </div>
       </section>
 
-      <section className="space-y-4 pt-6 border-t border-white/10">
-        <h2 className="text-xl font-bold text-white flex items-center gap-2">
-          <span className="text-cyan-400 font-mono">3.</span> Almacenamiento en la Aplicación Web (PWA)
+      <section className="space-y-4 pt-6 border-t border-border">
+        <h2 className="text-xl font-bold text-foreground flex items-center gap-2 font-display">
+          <span className="text-primary font-mono-tabular">3.</span> Almacenamiento en la App Web (PWA) y Autorización OAuth 2.1 MCP
         </h2>
-        <p>
-          En la aplicación cliente (<span className="text-cyan-300 font-mono">financepal-web.vercel.app</span>), se
-          utiliza almacenamiento local masivo con fines funcionales esenciales:
+        <p className="text-muted-foreground">
+          En la aplicación cliente (<span className="text-primary font-mono">financepal-web.vercel.app</span> y dominio MCP
+          autorizado), se utilizan los siguientes almacenes técnicos sin fines publicitarios:
         </p>
-        <ul className="list-disc pl-6 space-y-2 text-slate-300">
+        <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
           <li>
-            <strong className="text-white">Base de datos local (IndexedDB / localStorage):</strong> Almacena todas tus
-            transacciones, balance neto, metas y configuración visual. Estos datos residen exclusivamente en tu navegador
-            y no se transmiten a servidores externos a menos que actives la sincronización en la nube.
+            <strong className="text-foreground">Bóveda Local y Caché (<code className="font-mono text-primary">finance-pal-query-cache</code> / IndexedDB):</strong>{" "}
+            Almacena tus cuentas, movimientos, metas y deudas cifrados en cliente con WebCrypto AES-GCM de 256 bits. No
+            se envía a ningún servidor salvo que actives sincronización opcional en la nube.
           </li>
           <li>
-            <strong className="text-white">Tokens de Autenticación Supabase (Opcional):</strong> Si inicias sesión para
-            sincronizar entre dispositivos, se guarda un token de acceso seguro para renovar la sesión criptográfica.
+            <strong className="text-foreground">Tema Visual Síncrono (<code className="font-mono text-primary">fp-theme-pref</code>):</strong>{" "}
+            Lectura instantánea antes del primer renderizado para evitar destellos blancos (<em>Zero-Flash Boot</em>).
+          </li>
+          <li>
+            <strong className="text-foreground">Retorno Seguro de Consentimiento MCP (<code className="font-mono text-primary">fp_oauth_return_to</code> en sessionStorage):</strong>{" "}
+            Si inicias una vinculación MCP desde Claude, ChatGPT o Gemini sin sesión abierta, se guarda temporalmente la
+            ruta <code className="font-mono">/oauth/consent?...</code> en almacenamiento efímero de pestaña para devolverte a
+            la pantalla de permisos tras iniciar sesión y se elimina automáticamente al completar el retorno.
+          </li>
+          <li>
+            <strong className="text-foreground">Tokens de Sesión y Concesiones OAuth 2.1 + PKCE (S256):</strong> Cuando
+            activas sincronización o apruebas un conector MCP, Supabase Auth conserva la sesión local y el servidor emite
+            access tokens JWT de corta duración (<span className="font-mono-tabular text-foreground font-semibold">15 minutos</span>)
+            vinculados al recurso <code className="font-mono">/mcp</code> más refresh tokens rotativos custodiados por el
+            cliente IA autorizado (revocables en cualquier momento mediante Kill Switch).
           </li>
         </ul>
       </section>
 
-      <section className="space-y-4 pt-6 border-t border-white/10">
-        <h2 className="text-xl font-bold text-white flex items-center gap-2">
-          <span className="text-cyan-400 font-mono">4.</span> ¿Cómo Eliminar o Bloquear el Almacenamiento Local?
+      <section className="space-y-4 pt-6 border-t border-border">
+        <h2 className="text-xl font-bold text-foreground flex items-center gap-2 font-display">
+          <span className="text-primary font-mono-tabular">4.</span> ¿Cómo Eliminar o Bloquear el Almacenamiento Local?
         </h2>
-        <p>
-          Usted tiene pleno control para eliminar en cualquier momento los datos almacenados o revocar el consentimiento
-          directamente desde la configuración de su navegador:
+        <p className="text-muted-foreground">
+          Puedes limpiar el almacenamiento local, borrar sesiones OAuth o revocar cookies técnicas en cualquier momento
+          desde la configuración de tu navegador:
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm">
-          <div className="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800">
-            <strong className="text-white block mb-1">Google Chrome / Brave:</strong>
-            Ajustes → Privacidad y seguridad → Borrar datos de navegación → Marcar &ldquo;Cookies y otros datos de sitios&rdquo;.
+          <div className="p-4 rounded-xl bg-muted/40 border border-border">
+            <strong className="text-foreground block mb-1">Google Chrome / Brave:</strong>
+            <span className="text-muted-foreground">
+              Ajustes → Privacidad y seguridad → Borrar datos de navegación → &ldquo;Cookies y otros datos de sitios&rdquo;.
+            </span>
           </div>
-          <div className="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800">
-            <strong className="text-white block mb-1">Mozilla Firefox:</strong>
-            Ajustes → Privacidad & Seguridad → Cookies y datos del sitio → Hacer clic en &ldquo;Limpiar datos&rdquo;.
+          <div className="p-4 rounded-xl bg-muted/40 border border-border">
+            <strong className="text-foreground block mb-1">Mozilla Firefox:</strong>
+            <span className="text-muted-foreground">
+              Ajustes → Privacidad y Seguridad → Cookies y datos del sitio → &ldquo;Limpiar datos&rdquo;.
+            </span>
           </div>
-          <div className="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800">
-            <strong className="text-white block mb-1">Apple Safari:</strong>
-            Preferencias → Privacidad → Gestionar datos de sitios web → Buscar el dominio y pulsar &ldquo;Eliminar&rdquo;.
+          <div className="p-4 rounded-xl bg-muted/40 border border-border">
+            <strong className="text-foreground block mb-1">Apple Safari:</strong>
+            <span className="text-muted-foreground">
+              Preferencias → Privacidad → Gestionar datos de sitios web → Buscar dominio y &ldquo;Eliminar&rdquo;.
+            </span>
           </div>
-          <div className="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800">
-            <strong className="text-white block mb-1">Microsoft Edge:</strong>
-            Configuración → Cookies y permisos del sitio → Administrar y eliminar cookies y datos de sitios.
+          <div className="p-4 rounded-xl bg-muted/40 border border-border">
+            <strong className="text-foreground block mb-1">Microsoft Edge:</strong>
+            <span className="text-muted-foreground">
+              Configuración → Cookies y permisos del sitio → Administrar y eliminar cookies y datos de sitios.
+            </span>
           </div>
         </div>
       </section>
 
-      <section className="space-y-4 pt-6 border-t border-white/10">
-        <h2 className="text-xl font-bold text-white flex items-center gap-2">
-          <span className="text-cyan-400 font-mono">5.</span> Consultas y Contacto
+      <section className="space-y-4 pt-6 border-t border-border">
+        <h2 className="text-xl font-bold text-foreground flex items-center gap-2 font-display">
+          <span className="text-primary font-mono-tabular">5.</span> Consultas y Contacto
         </h2>
-        <p>
-          Para cualquier duda sobre el funcionamiento de estas tecnologías en Finance Pal, puedes comunicarte con el
-          desarrollador a través de:{" "}
-          <a href="mailto:business.migol.gg@gmail.com" className="text-cyan-300 font-mono hover:underline">
+        <p className="text-muted-foreground">
+          Para cualquier duda sobre el almacenamiento web o las credenciales MCP en Finance Pal, escribe a{" "}
+          <a href="mailto:business.migol.gg@gmail.com" className="text-primary font-mono hover:underline underline-offset-4">
             business.migol.gg@gmail.com
           </a>
-          . Para conocer el marco legal integral y el tratamiento de tus datos, consulta nuestra{" "}
-          <Link href="/privacidad" className="text-cyan-400 hover:underline">
+          . Consulta también la{" "}
+          <Link href="/privacidad" className="text-primary hover:underline underline-offset-4">
             Política de Privacidad Integral
           </Link>{" "}
           y los{" "}
-          <Link href="/terminos" className="text-cyan-400 hover:underline">
+          <Link href="/terminos" className="text-primary hover:underline underline-offset-4">
             Términos y Condiciones de Uso
           </Link>
           .

@@ -2,7 +2,7 @@
 title: "Las mejores apps de finanzas personales gratis y privadas en 2026 (Comparativa)"
 description: "Analizamos qué debe tener una buena app de finanzas personales en español: privacidad Local-First, funcionamiento sin conexión, cero anuncios y control total."
 date: "2026-11-02"
-updated: "2026-11-14"
+updated: "2026-11-16"
 category: "Guías y Comparativas"
 featured: true
 relatedFeatureSlug: "privacidad-y-cifrado"
@@ -30,24 +30,25 @@ Antes de instalar cualquier aplicación donde anotarás cuánto ganas, cuánto g
 
 ## Comparativa por arquitectura de aplicaciones financieras
 
-| Característica | Apps con Conexión Bancaria en la Nube | Hojas de Cálculo (Excel / Sheets) | **Finance Pal v2.1 (Local-First)** |
+| Característica | Apps con Conexión Bancaria en la Nube | Hojas de Cálculo (Excel / Sheets) | **Finance Pal v2.2 (Local-First + MCP)** |
 |---|---|---|---|
 | **Precio real** | Suscripción mensual ($5–$12/mes) | Gratis | **100% Gratis siempre (MIT)** |
 | **Privacidad** | Baja (tus datos viven en servidores externos) | Media (alojado en nubes generales) | **Máxima (100% en tu dispositivo)** |
 | **Funciona sin internet** | No (requiere sincronización constante) | Limitado en móvil | **Sí, 100% Offline (APK y PWA)** |
+| **Asistentes IA (MCP)** | Opaco o sin control granular | Sin integración nativa segura | **OAuth 2.1 Solo Lectura + Kill Switch** |
 | **Respaldo cifrado** | Controlado por el proveedor | Sin cifrado dedicado por defecto | **WebCrypto AES-GCM 256 bits** |
 | **Publicidad / Rastreo** | Frecuente en planes gratuitos | No | **Cero anuncios y cero rastreadores** |
 | **Metas Drag & Drop y Deudas** | Limitado en versión gratuita | Requiere programar fórmulas manuales | **Incluido en barra principal (99 SVG)** |
 
 ## Por qué la arquitectura Local-First de Finance Pal es diferente
 
-Construimos **Finance Pal** como respuesta directa a la saturación de aplicaciones financieras llenas de ruido visual, telemetría invasiva y cobros recurrentes. Su diseño se apoya en cinco módulos integrados y verificados con 382 pruebas automatizadas:
+Construimos **Finance Pal** como respuesta directa a la saturación de aplicaciones financieras llenas de ruido visual, telemetría invasiva y cobros recurrentes. Su diseño se apoya en cinco módulos integrados y verificados con 61 suites de pruebas automatizadas:
 
-- **[Control de gastos e ingresos](/funciones/control-de-gastos):** 99 iconos vectoriales SVG sin emojis, QuickTransactionSheet con métodos de pago filtrados según cuenta y comprobantes privados comprimidos a ≤ 5 MB.
+- **[Control de gastos e ingresos](/funciones/control-de-gastos):** 99 iconos vectoriales SVG sin emojis, filtrado inteligente de cuentas según método de pago, Command Palette `Cmd+K` y comprobantes privados comprimidos a ≤ 5 MB.
 - **[Presupuesto personal y DonutChart SVG](/funciones/presupuesto-personal):** cálculo en tiempo real de tu balance neto mensual, distribución DonutChart al 100.0% exacto, arqueo de efectivo y modo de privacidad instantáneo (*Privacy Blur*).
 - **[Metas de ahorro jerárquicas](/funciones/metas-de-ahorro):** organiza objetivos con submódulos arrastrables (*Drag & Drop*) y conoce tu cuota de ahorro diaria necesaria.
-- **[Control de deudas y préstamos](/funciones/control-de-deudas):** accesible en un toque desde la barra inferior principal con barras de amortización por abonos parciales.
-- **[Seguridad, SECURITY.md y cifrado AES-GCM 256](/funciones/privacidad-y-cifrado):** exporta e importa copias protegidas criptográficamente con PBKDF2 (100,000 iteraciones) y verificación in-app contra GitHub Releases en Android.
+- **[Control de deudas y préstamos](/funciones/control-de-deudas):** accesible en un toque desde la barra inferior principal con barras de amortización y resguardo en Papelera de 30 días.
+- **[Seguridad, MCP OAuth 2.1 y cifrado AES-GCM 256](/funciones/privacidad-y-cifrado):** conector universal MCP para Claude, ChatGPT y Gemini en Solo Lectura por defecto con Kill Switch, PBKDF2 (100,000 iteraciones) y verificación in-app contra GitHub Releases en Android.
 
 > [!TIP]
 > Puedes probar Finance Pal ahora mismo sin crear cuentas ni entregar tu correo electrónico: instala el [archivo oficial APK para Android](/descargar) o abre directamente la versión Web PWA desde cualquier navegador.

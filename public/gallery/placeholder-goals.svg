@@ -2,7 +2,7 @@
   <rect width="360" height="720" rx="32" fill="#0C0C0B" />
   <rect x="20" y="28" width="320" height="54" rx="14" fill="#141413" stroke="#2A2A28" />
   <text x="38" y="54" font-family="Georgia,serif" font-size="16" font-weight="bold" fill="#EDEDED">Metas Patrimoniales</text>
-  <text x="38" y="70" font-family="monospace" font-size="9" fill="#B0ADA7">CARPETAS DND-KIT · v2.1</text>
+  <text x="38" y="70" font-family="monospace" font-size="9" fill="#B0ADA7">CARPETAS DND-KIT · MCP v2.2</text>
   <rect x="20" y="98" width="320" height="40" rx="12" fill="#1C1C1A" stroke="#2A2A28" />
   <text x="36" y="123" font-family="sans-serif" font-size="12" font-weight="bold" fill="#EDEDED">Carpeta: Reserva &amp; Liquidez</text>
   <text x="322" y="123" font-family="monospace" font-size="10" fill="#34D399" text-anchor="end">DRAG</text>

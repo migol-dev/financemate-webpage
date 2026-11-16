@@ -127,7 +127,7 @@ export function DownloadSection({ release, repoUrl }: DownloadSectionProps) {
                     {[
                       "Descarga el archivo financemate.apk en tu teléfono Android.",
                       'Autoriza la instalación desde tu navegador cuando el sistema lo solicite.',
-                      "Opera sin cuentas obligatorias; desde v2.1 el actualizador in-app verifica lanzamientos directo en GitHub.",
+                      "Opera sin cuentas obligatorias; desde v2.2 incluye actualizador in-app en GitHub y conectores MCP opcionales.",
                     ].map((step, i) => (
                       <li key={i} className="py-3 flex items-start gap-3">
                         <span className="w-5 h-5 rounded-md bg-card text-primary border border-border flex items-center justify-center font-mono-tabular font-bold text-[11px] shrink-0">

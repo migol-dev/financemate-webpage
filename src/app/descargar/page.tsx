@@ -64,7 +64,7 @@ const ANDROID_STEPS = [
     step: "03",
     title: "Inicia sin cuenta y actualiza in-app",
     detail:
-      "Abre Finance Pal y registra gastos, metas y deudas sin internet. Desde v2.1.0 la app comprueba nuevas versiones de Android automáticamente contra GitHub Releases.",
+      "Abre Finance Pal y registra gastos, metas y deudas sin internet. Desde v2.2.0 incluye detector automático contra GitHub Releases y soporte opcional para Conectores MCP OAuth 2.1.",
   },
 ];
 

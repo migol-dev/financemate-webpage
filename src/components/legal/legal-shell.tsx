@@ -124,7 +124,7 @@ export function LegalShell({
             <span>·</span>
             <span>Tiempo estimado de lectura: {readTime}</span>
             <span>·</span>
-            <span>Aplica a: Web Oficial, PWA y App Android (APK)</span>
+            <span>Aplica a: Web Oficial, PWA, App Android (APK) y Servidor MCP (/mcp)</span>
           </div>
         </div>
 

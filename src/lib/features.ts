@@ -43,9 +43,9 @@ export const FEATURES_DATA: FeaturePageData[] = [
     title: "App para Controlar Gastos e Ingresos Diarios sin Fricción",
     metaTitle: "App para Controlar Gastos e Ingresos Gratis y Offline",
     metaDescription:
-      "Registra y clasifica tus gastos diarios e ingresos en segundos con Finance Pal. QuickTransactionSheet contextual, 99 iconos SVG sin emojis y recibos privados de 5 MB.",
+      "Registra y clasifica tus gastos diarios e ingresos en segundos con Finance Pal. Filtrado inteligente de cuentas, Command Palette Cmd+K, 99 iconos SVG y recibos privados de 5 MB.",
     heroSubtitle:
-      "Un libro mayor personal diseñado para registrar cada movimiento en menos de cinco segundos, filtrar métodos de pago según cuenta y adjuntar comprobantes privados sin conexión bancaria.",
+      "Un libro mayor personal diseñado para registrar cada movimiento en menos de cinco segundos, filtrar cuentas compatibles según método de pago, usar atajos Cmd+K y adjuntar comprobantes privados.",
     keywords: [
       "app para controlar gastos",
       "control de gastos personales",
@@ -54,17 +54,17 @@ export const FEATURES_DATA: FeaturePageData[] = [
       "gestor de gastos e ingresos",
       "gastos hormiga",
     ],
-    updatedAt: "2026-11-14",
+    updatedAt: "2026-11-16",
     keyMetrics: [
       {
-        label: "Iconografía SVG",
-        value: "99",
-        detail: "Iconos adaptativos sin emojis + 15 rubros clave",
+        label: "Iconografía & Cmd+K",
+        value: "99 SVG",
+        detail: "Atajos (+, T, Alt+D) sin emojis en toda la UI V2",
       },
       {
-        label: "QuickSheet",
-        value: "< 5 s",
-        detail: "Métodos filtrados por cuenta y captura CLABE",
+        label: "Filtro Contextual",
+        value: "0 Cruces",
+        detail: "Cuentas compatibles por método + QuickSheet CLABE",
       },
       {
         label: "Recibos Privados",
@@ -77,7 +77,7 @@ export const FEATURES_DATA: FeaturePageData[] = [
       paragraphs: [
         "La mayoría de las personas abandona el registro de gastos durante la segunda semana porque las aplicaciones convencionales exigen clasificar cada café en submenús confusos, muestran publicidad invasiva o requieren sincronización en la nube con tiempos de carga lentos.",
         "Por otro lado, depender únicamente del estado de cuenta bancario impide ver los pagos en efectivo, mezcla transferencias propias con gastos reales y entrega tu historial de consumo a intermediarios comerciales.",
-        "Finance Pal resuelve esta fricción con QuickTransactionSheet: filtra automáticamente los métodos de pago permitidos (Efectivo automático para cuentas de caja; Tarjeta y Transferencia con CLABE limpia para banco), reemplaza los emojis por 99 iconos SVG adaptativos y comprime tus recibos localmente antes de guardarlos en tu bóveda.",
+        "Finance Pal resuelve esta fricción con filtrado inteligente de cuentas en /movimientos y QuickTransactionSheet: al elegir Efectivo muestra solo caja; al elegir Tarjeta o Transferencia filtra únicamente cuentas bancarias compatibles (mostrando 'Selecciona una...' si tienes varias), junto a 99 iconos SVG, Command Palette Cmd+K y recibos comprimidos localmente.",
       ],
     },
     architectureSteps: [
@@ -165,12 +165,12 @@ export const FEATURES_DATA: FeaturePageData[] = [
       "regla 50 30 20 app",
       "flujo de caja personal",
     ],
-    updatedAt: "2026-11-14",
+    updatedAt: "2026-11-16",
     keyMetrics: [
       {
         label: "Métricas Clave",
         value: "4 KPI",
-        detail: "Balance neto, ingresos, gastos y tasa de ahorro",
+        detail: "Balance neto, ingresos, gastos y consulta MCP Solo Lectura",
       },
       {
         label: "DonutChart SVG",
@@ -187,7 +187,7 @@ export const FEATURES_DATA: FeaturePageData[] = [
       heading: "Un presupuesto útil no es una cárcel de restricciones, sino un mapa de decisiones",
       paragraphs: [
         "La razón principal por la que los presupuestos tradicionales fallan es la falta de visibilidad inmediata sobre el margen de maniobra real del mes y el saldo real repartido entre tus distintas cuentas bancarias y efectivo físico.",
-        "El panel de Finance Pal consolida tu actividad en un resumen macroeconómico en 4 columnas con gráficos DonutChart SVG interactivos que garantizan suma exacta al 100.0%, desglose de efectivo por billetes y monedas, y visibilidad total de saldos en móvil.",
+        "El panel de Finance Pal consolida tu actividad en un resumen macroeconómico en 4 columnas con gráficos DonutChart SVG interactivos que garantizan suma exacta al 100.0%, desglose de efectivo por billetes y monedas, y análisis opcional mediante el Conector Universal MCP en Solo Lectura.",
       ],
     },
     architectureSteps: [
@@ -269,7 +269,7 @@ export const FEATURES_DATA: FeaturePageData[] = [
       "calculadora de ahorro diario",
       "fondo de emergencia app",
     ],
-    updatedAt: "2026-11-14",
+    updatedAt: "2026-11-16",
     keyMetrics: [
       {
         label: "Estructura",
@@ -282,16 +282,16 @@ export const FEATURES_DATA: FeaturePageData[] = [
         detail: "Prioriza objetivos arrastrando con física táctil",
       },
       {
-        label: "Proyección",
-        value: "Cuota Diaria",
-        detail: "Cálculo automático según fecha límite",
+        label: "Resguardo IA",
+        value: "30 Días",
+        detail: "Cuota diaria + Papelera de recuperación MCP",
       },
     ],
     problemStatement: {
       heading: "Ahorrar sin un objetivo estructurado suele terminar en gasto diferido",
       paragraphs: [
         "Guardar «lo que sobre a fin de mes» rara vez funciona. Cuando el dinero ahorrado no tiene nombre, prioridad ni fecha objetivo, cualquier compra impulsiva parece justificada.",
-        "En Finance Pal v2.1 refinamos el módulo de metas con iconos vectoriales SVG adaptativos al tema, ordenamiento Drag & Drop dentro de la navegación fluida Inicio -> Movimientos -> Metas -> Deudas y cálculo exacto del ahorro diario o semanal necesario para cumplir tu fecha límite.",
+        "En Finance Pal v2.2 evolucionamos el módulo de metas con iconos vectoriales SVG adaptativos al tema, ordenamiento Drag & Drop dentro de la navegación fluida Inicio -> Movimientos -> Metas -> Deudas, seguimiento opcional desde asistentes IA vía MCP y cálculo exacto del ahorro diario o semanal necesario.",
       ],
     },
     architectureSteps: [
@@ -373,12 +373,12 @@ export const FEATURES_DATA: FeaturePageData[] = [
       "metodo bola de nieve deudas",
       "registro de abonos",
     ],
-    updatedAt: "2026-11-14",
+    updatedAt: "2026-11-16",
     keyMetrics: [
       {
         label: "Acceso Directo",
-        value: "Barra V2.1",
-        detail: "Promovida a BottomNavV2 para apertura en 1 toque",
+        value: "Barra V2.2",
+        detail: "Promovida a BottomNavV2 y atajo rápido Alt+D",
       },
       {
         label: "Amortización",
@@ -386,16 +386,16 @@ export const FEATURES_DATA: FeaturePageData[] = [
         detail: "Seguimiento de cada abono hasta liquidar el 100%",
       },
       {
-        label: "Estrategias",
-        value: "2 Métodos",
-        detail: "Ideal para Bola de Nieve o Avalancha",
+        label: "Protección",
+        value: "Papelera 30d",
+        detail: "Borrado suave en 2 pasos (120s) + Bola de Nieve / Avalancha",
       },
     ],
     problemStatement: {
       heading: "La incertidumbre sobre tus deudas genera más estrés que la deuda misma",
       paragraphs: [
         "Cuando tienes varios compromisos abiertos —una tarjeta de crédito, un préstamo familiar o dinero que prestaste a un amigo— llevar la cuenta de memoria o en notas sueltas provoca olvidos, cargos moratorios y malentendidos personales.",
-        "Por eso en v2.1 promovimos Deudas directamente a la barra inferior principal de Finance Pal: separa con rigor contable tus pasivos por pagar y tus préstamos por cobrar, registra abonos parciales y audita cuánto falta por liquidar sin submenús.",
+        "Por eso Deudas vive directamente en la barra inferior principal de Finance Pal (con atajo rápido Alt+D en Command Palette): separa con rigor contable tus pasivos por pagar y tus préstamos por cobrar, registra abonos parciales y resguarda cualquier baja mediante Papelera de Recuperación de 30 días.",
       ],
     },
     architectureSteps: [
@@ -477,7 +477,7 @@ export const FEATURES_DATA: FeaturePageData[] = [
       "app de finanzas codigo abierto",
       "cifrado aes gcm 256 finanzas",
     ],
-    updatedAt: "2026-11-14",
+    updatedAt: "2026-11-16",
     keyMetrics: [
       {
         label: "Cifrado de Respaldo",
@@ -485,21 +485,21 @@ export const FEATURES_DATA: FeaturePageData[] = [
         detail: "WebCrypto AES-GCM + PBKDF2 100,000 rondas",
       },
       {
-        label: "Recibos Privados",
-        value: "≤ 5 MB",
-        detail: "Magic bytes reales + refs sb:receipts endurecidas",
+        label: "Conectores IA",
+        value: "OAuth 2.1",
+        detail: "PKCE S256 · Solo Lectura · 2FA aal2 · Kill Switch",
       },
       {
         label: "Calidad & SECURITY",
-        value: "382 Tests",
-        detail: "52 suites verificadas y política SECURITY.md",
+        value: "61 Suites",
+        detail: "Tests E2E MCP, OAuth, recibos 5 MB y SECURITY.md",
       },
     ],
     problemStatement: {
       heading: "Tu patrimonio personal no debería ser el producto de una empresa de datos",
       paragraphs: [
         "La mayoría de las aplicaciones financieras «gratuitas» monetizan tus datos: exigen crear una cuenta en sus servidores, almacenan tu historial de ingresos y gastos en texto plano en la nube y comparten perfiles de consumo con redes publicitarias o brókers de crédito.",
-        "Finance Pal adopta arquitectura 100% Local-First bajo licencia MIT y política pública SECURITY.md: cifrado WebCrypto AES-256 en cliente, comprobantes validados por magic bytes con bucket privado endurecido (receipts_hardening), actualizador Android verificado contra GitHub Releases y 382 pruebas automatizadas.",
+        "Finance Pal adopta arquitectura 100% Local-First bajo licencia MIT y política pública SECURITY.md: cifrado WebCrypto AES-256 en cliente, comprobantes privados validados por magic bytes (receipts_hardening) y un Conector Universal MCP opcional protegido por OAuth 2.1 + PKCE, verificación 2FA (aal2), modo Solo Lectura por defecto, borrado suave en 2 pasos (120s), Papelera de 30 días y Kill Switch instantáneo.",
       ],
     },
     architectureSteps: [

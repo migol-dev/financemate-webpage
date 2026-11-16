@@ -5,14 +5,14 @@ import { LegalShell } from "@/components/legal/legal-shell";
 export const metadata: Metadata = {
   title: "Términos y Condiciones de Uso",
   description:
-    "Términos y condiciones legales que regulan el uso de la web oficial, PWA y aplicación móvil de Finance Pal.",
+    "Términos y condiciones legales que regulan el uso de la web oficial, PWA, aplicación Android y conectores MCP OAuth 2.1 de Finance Pal.",
   alternates: {
     canonical: "/terminos",
   },
   openGraph: {
     title: "Términos y Condiciones de Uso | Finance Pal",
     description:
-      "Términos y condiciones legales que regulan el uso de la web oficial, PWA y aplicación móvil de Finance Pal.",
+      "Términos y condiciones legales que regulan el uso de la web oficial, PWA, aplicación Android y servidor MCP de Finance Pal.",
     url: "/terminos",
   },
 };
@@ -21,193 +21,215 @@ export default function TerminosPage() {
   return (
     <LegalShell
       title="Términos y Condiciones de Uso"
-      subtitle="Condiciones generales que regulan el acceso, descarga y utilización del ecosistema de software Finance Pal (Sitio Web, Web App y Aplicación Android)."
-      lastUpdated="9 de octubre de 2026"
-      readTime="6 min"
+      subtitle="Condiciones generales que regulan el acceso, descarga y utilización del ecosistema Finance Pal (Sitio Web, PWA, App Android y Servidor MCP)."
+      lastUpdated="16 de noviembre de 2026"
+      readTime="8 min"
     >
       <section className="space-y-4">
-        <h2 className="text-xl font-bold text-white flex items-center gap-2">
-          <span className="text-cyan-400 font-mono">1.</span> Identificación del Titular y Alcance
+        <h2 className="text-xl font-bold text-foreground flex items-center gap-2 font-display">
+          <span className="text-primary font-mono-tabular">1.</span> Identificación del Titular y Alcance
         </h2>
-        <p>
+        <p className="text-muted-foreground">
           El presente documento establece los Términos y Condiciones de Uso (en adelante, los &ldquo;Términos&rdquo;) que
-          rigen el acceso, navegación, descarga y uso de la plataforma digital y aplicaciones de{" "}
-          <strong className="text-white">Finance Pal</strong>, incluyendo:
+          rigen el acceso, navegación, descarga y uso del ecosistema de software{" "}
+          <strong className="text-foreground">Finance Pal</strong>, incluyendo:
         </p>
-        <ul className="list-disc pl-6 space-y-1.5 text-slate-300">
+        <ul className="list-disc pl-6 space-y-1.5 text-muted-foreground">
           <li>El sitio web oficial y portal de descargas accesible vía internet.</li>
           <li>
-            La aplicación web (PWA) desplegada y accesible en{" "}
-            <span className="text-cyan-300 font-mono">financepal-web.vercel.app</span>.
+            La aplicación web (PWA) desplegada en{" "}
+            <span className="text-primary font-mono">financepal-web.vercel.app</span>.
           </li>
           <li>
-            La aplicación móvil nativa para Android distribuida en formato instalable (APK) o canales oficiales.
+            La aplicación móvil nativa para Android distribuida en formato APK oficial en GitHub Releases.
+          </li>
+          <li>
+            El servidor remoto Model Context Protocol (<code className="text-primary font-mono">/mcp</code>), los
+            endpoints de descubrimiento OAuth (<code className="font-mono">/.well-known/*</code>) y el flujo de autorización{" "}
+            <code className="font-mono">/oauth/*</code> destinados a conectores de IA autorizados por el Usuario.
           </li>
         </ul>
-        <p>
+        <p className="text-muted-foreground">
           El titular, creador y mantenedor de este software es un{" "}
-          <strong className="text-white">desarrollador independiente (persona física)</strong> que opera públicamente bajo
-          el alias de desarrollo <strong className="text-cyan-400 font-mono">migol-dev</strong> (en adelante, &ldquo;el
-          Desarrollador&rdquo; o &ldquo;el Titular&rdquo;), con canal de contacto oficial en{" "}
-          <span className="text-cyan-300 font-mono">business.migol.gg@gmail.com</span>. Finance Pal es un proyecto de
-          software independiente y no constituye una sociedad mercantil, consorcio ni entidad corporativa constituida.
+          <strong className="text-foreground">desarrollador independiente (persona física)</strong> que opera públicamente bajo
+          el alias de desarrollo <strong className="text-primary font-mono">migol-dev</strong> (en adelante, &ldquo;el
+          Desarrollador&rdquo; o &ldquo;el Titular&rdquo;), con contacto oficial en{" "}
+          <a href="mailto:business.migol.gg@gmail.com" className="text-primary font-mono hover:underline underline-offset-4">
+            business.migol.gg@gmail.com
+          </a>
+          . Finance Pal no constituye una sociedad mercantil, institución bancaria ni entidad financiera regulada.
         </p>
       </section>
 
-      <section className="space-y-4 pt-6 border-t border-white/10">
-        <h2 className="text-xl font-bold text-white flex items-center gap-2">
-          <span className="text-cyan-400 font-mono">2.</span> Aceptación de los Términos y Capacidad Legal
+      <section className="space-y-4 pt-6 border-t border-border">
+        <h2 className="text-xl font-bold text-foreground flex items-center gap-2 font-display">
+          <span className="text-primary font-mono-tabular">2.</span> Aceptación de los Términos y Capacidad Legal
         </h2>
-        <p>
-          Al acceder a este sitio web, descargar el archivo APK, utilizar la versión web o interactuar con cualquiera
-          de sus formularios o funciones, usted (en adelante, el &ldquo;Usuario&rdquo;) declara haber leído, comprendido
-          y aceptado en su totalidad estos Términos, así como nuestra{" "}
-          <Link href="/privacidad" className="text-cyan-400 hover:underline">
+        <p className="text-muted-foreground">
+          Al acceder al sitio web, descargar el APK, utilizar la PWA o autorizar un conector IA en{" "}
+          <code className="font-mono">/oauth/consent</code>, usted (en adelante, el &ldquo;Usuario&rdquo;) acepta
+          íntegramente estos Términos, nuestra{" "}
+          <Link href="/privacidad" className="text-primary hover:underline underline-offset-4">
             Política de Privacidad
           </Link>{" "}
           y nuestra{" "}
-          <Link href="/cookies" className="text-cyan-400 hover:underline">
+          <Link href="/cookies" className="text-primary hover:underline underline-offset-4">
             Política de Cookies y Almacenamiento Local
           </Link>
           .
         </p>
-        <p>
-          Para utilizar este servicio, el Usuario debe ser mayor de edad conforme a la legislación de su país de
-          residencia (generalmente 18 años) o contar con la autorización y supervisión expresa de su padre, madre o
-          tutor legal. Si usted no está de acuerdo con alguna cláusula de estos Términos, debe abstenerse de usar el sitio
-          web y desinstalar la aplicación.
+        <p className="text-muted-foreground">
+          Para utilizar este servicio o autorizar conectores MCP, el Usuario debe ser mayor de edad conforme a las leyes
+          de su jurisdicción (generalmente 18 años) o contar con autorización de su padre, madre o tutor legal.
         </p>
       </section>
 
-      <section className="space-y-4 pt-6 border-t border-white/10">
-        <h2 className="text-xl font-bold text-white flex items-center gap-2">
-          <span className="text-cyan-400 font-mono">3.</span> Naturaleza del Servicio y Deslinde Financiero
+      <section className="space-y-4 pt-6 border-t border-border">
+        <h2 className="text-xl font-bold text-foreground flex items-center gap-2 font-display">
+          <span className="text-primary font-mono-tabular">3.</span> Naturaleza del Servicio y Deslinde Financiero
         </h2>
-        <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-xs sm:text-sm">
-          <strong>AVISO CRÍTICO:</strong> Finance Pal es una herramienta estrictamente informática de organización
-          personal y registro doméstico de datos financieros. Para consultar el detalle normativo completo, revise nuestro{" "}
-          <Link href="/aviso-legal" className="text-cyan-300 underline font-medium hover:text-cyan-200">
+        <div className="p-4 rounded-xl bg-muted/60 border border-border text-foreground text-xs sm:text-sm leading-relaxed">
+          <strong className="text-editorial-amber font-mono uppercase tracking-wider mr-1.5">
+            AVISO CRÍTICO:
+          </strong>
+          Finance Pal es una herramienta estrictamente informática de organización personal. Revisa el alcance completo en nuestro{" "}
+          <Link href="/aviso-legal" className="text-primary underline underline-offset-4 font-medium">
             Aviso Legal y Deslinde Financiero
           </Link>
           .
         </div>
-        <p>
-          El Usuario reconoce y acepta de manera expresa e irrevocable lo siguiente:
-        </p>
-        <ol className="list-decimal pl-6 space-y-2 text-slate-300">
+        <ol className="list-decimal pl-6 space-y-2 text-muted-foreground">
           <li>
-            <strong className="text-white">No es una entidad financiera ni bancaria:</strong> Finance Pal NO es un banco,
-            ni una Institución de Fondos de Pago Electrónico (IFPE), ni una Institución de Financiamiento Colectivo (IFC),
-            ni una entidad Fintech regulada por la CNBV, CONDUSEF, SEC u organismos análogos. No capta recursos del
-            público ni realiza transferencias reales de dinero.
+            <strong className="text-foreground">No es entidad financiera ni bancaria:</strong> Finance Pal NO es banco,
+            IFPE, IFC ni Fintech supervisada por CNBV, CONDUSEF, SEC o equivalentes. No capta fondos ni ejecuta
+            transferencias reales de dinero.
           </li>
           <li>
-            <strong className="text-white">Sin asesoramiento financiero o tributario:</strong> Ninguna métrica, gráfico,
-            tasa de ahorro o proyección provista por Finance Pal constituye asesoría de inversión, contable, tributaria o
-            financiera. Toda decisión económica es responsabilidad exclusiva del Usuario.
+            <strong className="text-foreground">Sin asesoría financiera ni fiscal:</strong> Ninguna métrica, gráfica o
+            proyección constituye recomendación de inversión, contable ni tributaria.
           </li>
           <li>
-            <strong className="text-white">Registros autogestionados:</strong> Conceptos como &ldquo;Cuentas&rdquo;,
-            &ldquo;CLABE&rdquo;, &ldquo;Deudas&rdquo; y &ldquo;Efectivo&rdquo; son etiquetas digitales organizativas creadas
-            manualmente por el Usuario. La aplicación no se conecta a pasarelas bancarias automatizadas ni tiene acceso a
-            fondos reales.
+            <strong className="text-foreground">Registros autogestionados:</strong> &ldquo;Cuentas&rdquo;, &ldquo;CLABE&rdquo;,
+            &ldquo;Deudas&rdquo; y &ldquo;Efectivo&rdquo; son etiquetas digitales organizativas capturadas manualmente por el
+            Usuario sin conexión a banca electrónica.
+          </li>
+          <li>
+            <strong className="text-foreground">Asistentes de IA y Conectores MCP:</strong> Las explicaciones, análisis,
+            resúmenes o sugerencias elaboradas por modelos externos (como Claude, ChatGPT o Gemini) conectados mediante MCP
+            dependen exclusivamente de dichos modelos de terceros y del Usuario; nunca deben tomarse como dictamen
+            financiero, fiscal ni jurídico.
           </li>
         </ol>
       </section>
 
-      <section className="space-y-4 pt-6 border-t border-white/10">
-        <h2 className="text-xl font-bold text-white flex items-center gap-2">
-          <span className="text-cyan-400 font-mono">4.</span> Licencia de Software y Propiedad Intelectual
+      <section className="space-y-4 pt-6 border-t border-border">
+        <h2 className="text-xl font-bold text-foreground flex items-center gap-2 font-display">
+          <span className="text-primary font-mono-tabular">4.</span> Regulación de Conectores de Inteligencia Artificial (MCP y OAuth 2.1)
         </h2>
-        <p>
-          El código fuente del software Finance Pal se distribuye públicamente bajo la{" "}
-          <strong className="text-white">Licencia MIT</strong>, permitiendo su inspección, estudio y uso conforme a los
-          términos de dicha licencia abierta.
+        <p className="text-muted-foreground">
+          El Usuario que decida conectar asistentes externos mediante el protocolo{" "}
+          <strong className="text-foreground">Model Context Protocol (MCP)</strong> acepta expresamente las siguientes
+          reglas operativas y de responsabilidad:
         </p>
-        <p>
-          No obstante, los logotipos, identidad visual, diseños de interfaz gráfica, tipografías asociadas, nombres de
-          dominio y la denominación distintiva <strong className="text-white">&ldquo;Finance Pal&rdquo;</strong> son de
-          autoría y propiedad exclusiva del Desarrollador. Queda prohibida la apropiación engañosa de la marca para
-          hacerse pasar por el software oficial o para cometer actos de suplantación de identidad (phishing).
-        </p>
-      </section>
-
-      <section className="space-y-4 pt-6 border-t border-white/10">
-        <h2 className="text-xl font-bold text-white flex items-center gap-2">
-          <span className="text-cyan-400 font-mono">5.</span> Reglas de Uso Aceptable
-        </h2>
-        <p>Al utilizar el sitio web y sus servicios relacionados, el Usuario se compromete a:</p>
-        <ul className="list-disc pl-6 space-y-1.5 text-slate-300">
-          <li>No enviar contenido ofensivo, fraudulento, difamatorio o ilegal en los buzones de reseñas y sugerencias.</li>
-          <li>No utilizar bots automatizados ni ejecutar ataques de denegación de servicio (DoS/DDoS) contra los servidores de la web o el backend en Supabase.</li>
-          <li>No manipular los encabezados HTTP ni explotar vulnerabilidades de seguridad en las APIs de reseñas, descargas o reportes.</li>
-          <li>No utilizar la plataforma para fines ilícitos o de lavado de dinero ficticio que infrinjan leyes locales o internacionales.</li>
-        </ul>
-        <p>
-          El Desarrollador se reserva el derecho de rechazar, moderar o eliminar reseñas fraudulentas o reportes que
-          infrinjan estas normas, sin previo aviso.
-        </p>
-      </section>
-
-      <section className="space-y-4 pt-6 border-t border-white/10">
-        <h2 className="text-xl font-bold text-white flex items-center gap-2">
-          <span className="text-cyan-400 font-mono">6.</span> Exclusión de Garantías (&ldquo;TAL CUAL / AS IS&rdquo;)
-        </h2>
-        <p className="font-mono text-xs sm:text-sm bg-slate-950 p-4 rounded-xl border border-slate-800 text-slate-300">
-          EL SOFTWARE, EL SITIO WEB Y LOS SERVICIOS DE SINCRONIZACIÓN SE PROPORCIONAN &ldquo;TAL CUAL&rdquo; (&ldquo;AS
-          IS&rdquo;) Y &ldquo;SEGÚN DISPONIBILIDAD&rdquo;, SIN GARANTÍAS DE NINGÚN TIPO, YA SEAN EXPRESAS O IMPLÍCITAS,
-          INCLUYENDO, PERO SIN LIMITARSE A, GARANTÍAS DE COMERCIABILIDAD, ADECUACIÓN PARA UN PROPÓSITO PARTICULAR O NO
-          INFRACCIÓN.
-        </p>
-        <p>
-          El Desarrollador no garantiza que el software esté libre de errores, que su funcionamiento sea ininterrumpido,
-          que los cálculos matemáticos reflejen situaciones fiscales particulares, o que las copias de seguridad en la
-          nube estén disponibles en caso de caídas de proveedores de infraestructura (Vercel, Supabase, GitHub). El
-          Usuario es el único responsable de realizar copias de seguridad locales (exportaciones JSON/CSV) de sus datos.
-        </p>
-      </section>
-
-      <section className="space-y-4 pt-6 border-t border-white/10">
-        <h2 className="text-xl font-bold text-white flex items-center gap-2">
-          <span className="text-cyan-400 font-mono">7.</span> Limitación Extrema de Responsabilidad
-        </h2>
-        <p>
-          En la máxima medida permitida por la ley aplicable, en ningún caso el Desarrollador (migol-dev) será responsable
-          ante el Usuario ni ante terceros por:
-        </p>
-        <ul className="list-disc pl-6 space-y-1.5 text-slate-300">
-          <li>Pérdida de beneficios, ingresos, ahorros anticipados o datos financieros.</li>
-          <li>Decisiones personales de endeudamiento, ahorro, gasto o inversión tomadas con base en la aplicación.</li>
-          <li>Pérdida de comprobantes o tickets almacenados en el dispositivo.</li>
-          <li>Discrepancias entre los saldos ingresados manualmente y los saldos reales de cuentas bancarias.</li>
-          <li>Interrupciones del servicio, fallos de conectividad, ciberataques o corrupción del almacenamiento local.</li>
+        <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
+          <li>
+            <strong className="text-foreground">Autorización Voluntaria OAuth 2.1 + PKCE y 2FA:</strong> Cada cliente
+            externo requiere aprobación explícita en <code className="font-mono">/oauth/consent</code> (con verificación{" "}
+            <code className="font-mono">aal2</code> cuando exista 2FA activo), bajo un límite de hasta{" "}
+            <span className="font-mono-tabular text-foreground font-semibold">5 concesiones activas</span> simultáneas.
+          </li>
+          <li>
+            <strong className="text-foreground">Alcances Solo Lectura vs. Escritura y Borrado Suave:</strong> El conector
+            se inicializa en <strong className="text-foreground">Modo Solo Lectura</strong> por seguridad. Si el Usuario
+            decide desactivar manualmente Solo Lectura u otorgar permisos <code className="font-mono">mcp:write:*</code>{" "}
+            o <code className="font-mono">mcp:delete:soft</code>, asume total responsabilidad por las altas, ediciones o
+            envíos a papelera que el asistente ejecute en su nombre mediante tokens de confirmación temporal (TTL de{" "}
+            <span className="font-mono-tabular">120 s</span>).
+          </li>
+          <li>
+            <strong className="text-foreground">Kill Switch y Papelera de Recuperación (30 días):</strong> Finance Pal
+            provee un interruptor maestro en <em>Ajustes &gt; 10 · Conectores IA (MCP)</em> para suspender el servicio al
+            instante, y resguarda los registros marcados como eliminados por MCP durante{" "}
+            <span className="font-mono-tabular text-foreground font-semibold">30 días</span> antes de su purga automática
+            definitiva e irreversible.
+          </li>
         </ul>
       </section>
 
-      <section className="space-y-4 pt-6 border-t border-white/10">
-        <h2 className="text-xl font-bold text-white flex items-center gap-2">
-          <span className="text-cyan-400 font-mono">8.</span> Modificaciones a los Términos
+      <section className="space-y-4 pt-6 border-t border-border">
+        <h2 className="text-xl font-bold text-foreground flex items-center gap-2 font-display">
+          <span className="text-primary font-mono-tabular">5.</span> Licencia de Software y Propiedad Intelectual
         </h2>
-        <p>
-          El Desarrollador se reserva el derecho de actualizar o modificar estos Términos en cualquier momento para
-          reflejar cambios legislativos, mejoras técnicas o nuevas funcionalidades. Las modificaciones entrarán en
-          vigor inmediatamente después de su publicación en esta página web, indicando la fecha de última actualización.
+        <p className="text-muted-foreground">
+          El código fuente de Finance Pal se distribuye bajo la <strong className="text-foreground">Licencia MIT</strong>.
+          No obstante, las marcas, logotipos, interfaces editoriales, tipografías y la denominación{" "}
+          <strong className="text-foreground">&ldquo;Finance Pal&rdquo;</strong> pertenecen al Desarrollador; queda prohibida
+          su suplantación (phishing) o uso engañoso.
         </p>
       </section>
 
-      <section className="space-y-4 pt-6 border-t border-white/10">
-        <h2 className="text-xl font-bold text-white flex items-center gap-2">
-          <span className="text-cyan-400 font-mono">9.</span> Ley Aplicable y Jurisdicción
+      <section className="space-y-4 pt-6 border-t border-border">
+        <h2 className="text-xl font-bold text-foreground flex items-center gap-2 font-display">
+          <span className="text-primary font-mono-tabular">6.</span> Reglas de Uso Aceptable
         </h2>
-        <p>
-          Para la interpretación, cumplimiento y resolución de cualquier controversia derivada de estos Términos, se
-          aplicará la legislación federal de los{" "}
-          <strong className="text-white">Estados Unidos Mexicanos</strong> (incluyendo el Código Civil Federal, Código de
-          Comercio y Ley Federal de Protección al Consumidor en lo conducente).
+        <p className="text-muted-foreground">El Usuario se compromete a abstenerse de:</p>
+        <ul className="list-disc pl-6 space-y-1.5 text-muted-foreground">
+          <li>Enviar contenido difamatorio, fraudulento o ilegal en los formularios de reseñas o sugerencias.</li>
+          <li>Ejecutar ataques DoS/DDoS, scraping abusivo o eludir los límites de tasa por usuario/IP en web, Supabase o <code className="font-mono">/mcp</code>.</li>
+          <li>Intentar evadir verificaciones PKCE (<code className="font-mono">S256</code>), abusar de Dynamic Client Registration (<code className="font-mono">/oauth/register</code>) o inyectar instrucciones maliciosas (<em>prompt injection</em>).</li>
+          <li>Utilizar la plataforma con fines ilícitos conforme a las leyes aplicables.</li>
+        </ul>
+      </section>
+
+      <section className="space-y-4 pt-6 border-t border-border">
+        <h2 className="text-xl font-bold text-foreground flex items-center gap-2 font-display">
+          <span className="text-primary font-mono-tabular">7.</span> Exclusión de Garantías (&ldquo;TAL CUAL / AS IS&rdquo;)
+        </h2>
+        <p className="font-mono text-xs sm:text-sm bg-muted/60 p-4 rounded-xl border border-border text-foreground leading-relaxed">
+          EL SOFTWARE, EL SITIO WEB, LOS SERVICIOS DE SINCRONIZACIÓN Y LOS ENDPOINTS MCP SE PROPORCIONAN &ldquo;TAL
+          CUAL&rdquo; (&ldquo;AS IS&rdquo;) Y &ldquo;SEGÚN DISPONIBILIDAD&rdquo;, SIN GARANTÍAS EXPRESAS NI IMPLÍCITAS DE
+          COMERCIABILIDAD, ADECUACIÓN A UN FIN PARTICULAR, DISPONIBILIDAD CONTINUA NI AUSENCIA DE FALLOS.
         </p>
-        <p>
-          Las partes se someten a la competencia de los tribunales competentes de México, renunciando expresamente a
-          cualquier otro fuero que pudiera corresponderles por razón de sus domicilios presentes o futuros.
+        <p className="text-muted-foreground">
+          El Desarrollador no garantiza disponibilidad ininterrumpida de proveedores externos (Vercel, Supabase, GitHub o
+          clientes de IA terceros). El Usuario es responsable de conservar respaldos propios mediante exportación JSON/CSV.
+        </p>
+      </section>
+
+      <section className="space-y-4 pt-6 border-t border-border">
+        <h2 className="text-xl font-bold text-foreground flex items-center gap-2 font-display">
+          <span className="text-primary font-mono-tabular">8.</span> Limitación Extrema de Responsabilidad
+        </h2>
+        <p className="text-muted-foreground">
+          En la máxima medida permitida por la ley, <strong className="text-foreground">migol-dev</strong> no será responsable
+          frente al Usuario ni terceros por:
+        </p>
+        <ul className="list-disc pl-6 space-y-1.5 text-muted-foreground">
+          <li>Pérdida de beneficios, datos locales, comprobantes o discrepancias frente a cuentas bancarias reales.</li>
+          <li>Decisiones económicas tomadas con base en métricas locales o en respuestas generadas por agentes IA conectados por MCP.</li>
+          <li>Alucinaciones, interpretaciones erróneas o mutaciones ejecutadas por asistentes externos dentro de los alcances aprobados por el Usuario.</li>
+          <li>Purgas definitivas de registros que excedieron el plazo de 30 días en la Papelera de Recuperación o fallos de hardware/conectividad.</li>
+        </ul>
+      </section>
+
+      <section className="space-y-4 pt-6 border-t border-border">
+        <h2 className="text-xl font-bold text-foreground flex items-center gap-2 font-display">
+          <span className="text-primary font-mono-tabular">9.</span> Modificaciones a los Términos
+        </h2>
+        <p className="text-muted-foreground">
+          El Desarrollador puede actualizar estos Términos para reflejar cambios normativos o nuevas capacidades técnicas,
+          entrando en vigor desde su publicación con fecha actualizada en este portal.
+        </p>
+      </section>
+
+      <section className="space-y-4 pt-6 border-t border-border">
+        <h2 className="text-xl font-bold text-foreground flex items-center gap-2 font-display">
+          <span className="text-primary font-mono-tabular">10.</span> Ley Aplicable y Jurisdicción
+        </h2>
+        <p className="text-muted-foreground">
+          Para la interpretación y cumplimiento de estos Términos se aplicará la legislación federal de los{" "}
+          <strong className="text-foreground">Estados Unidos Mexicanos</strong>, sometiéndose las partes a los tribunales
+          competentes de México y renunciando a cualquier otro fuero por razón de domicilio presente o futuro.
         </p>
       </section>
     </LegalShell>

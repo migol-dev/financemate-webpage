@@ -79,6 +79,8 @@ export const KEYWORDS = [
   "app de finanzas offline",
   "app de finanzas privada",
   "finanzas personales codigo abierto",
+  "finanzas personales mcp",
+  "conector claude chatgpt gemini finanzas",
   "regla 50 30 20",
   "fondo de emergencia",
 ];
@@ -101,6 +103,12 @@ export const HOME_FAQS: FaqItem[] = [
     question: "¿Dónde se guardan mis datos financieros y bancarios?",
     answer:
       "Todos tus ingresos, gastos, metas y deudas se almacenan exclusivamente en la memoria interna de tu propio dispositivo (arquitectura 100% Local-First). Finance Pal no envía tus registros financieros a servidores externos ni pide contraseñas bancarias.",
+  },
+  {
+    category: "Conectores IA (MCP)",
+    question: "¿Cómo funciona el Conector Universal MCP para Claude, ChatGPT y Gemini?",
+    answer:
+      "El conector MCP remoto es 100% opcional y requiere tu autorización explícita mediante OAuth 2.1 + PKCE (S256) y verificación 2FA cuando está activa. Abre en modo Solo Lectura por defecto, aplica borrado suave en 2 pasos (120 s) con Papelera de 30 días e incluye un Kill Switch global para revocar el acceso al instante.",
   },
   {
     category: "Funcionamiento Offline",

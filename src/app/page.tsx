@@ -14,6 +14,7 @@ import { createPublicClient } from "@/lib/supabase/public";
 import {
   REPO_URL,
   APP_VERSION,
+  RELEASE_PUBLISHED_AT,
   APK_DOWNLOAD_URL,
   HOME_FAQS,
 } from "@/lib/seo";
@@ -29,24 +30,24 @@ export const revalidate = 3600;
 const FALLBACK_GALLERY: GalleryImage[] = [
   {
     id: "fallback-1",
-    title: "Panel de control de presupuesto personal y gráficos SVG DonutChart",
-    description: "Balance neto del mes, distribución por cuentas y tasa de ahorro de un vistazo.",
+    title: "Panel de control patrimonial, Command Palette Cmd+K y gráficos SVG DonutChart",
+    description: "Balance neto del mes, distribución por cuentas, accesos rápidos de teclado y tasa de ahorro de un vistazo.",
     image_url: "/gallery/placeholder-dashboard.svg",
     sort_order: 0,
     created_at: "",
   },
   {
     id: "fallback-2",
-    title: "Registro rápido inteligente y comprobantes verificados en 15 categorías",
-    description: "99 iconos vectoriales SVG sin emojis, filtros instantáneos y recibos comprimidos.",
+    title: "Filtrado inteligente de cuentas, registro rápido y comprobantes privados",
+    description: "Selector contextual que filtra cuentas por método de pago, 99 iconos SVG sin emojis y recibos comprimidos.",
     image_url: "/gallery/placeholder-movements.svg",
     sort_order: 1,
     created_at: "",
   },
   {
     id: "fallback-3",
-    title: "Metas jerárquicas Drag & Drop y Deudas en barra principal",
-    description: "Navegación móvil refinada con acceso directo a metas y control de préstamos.",
+    title: "Conectores IA (MCP) OAuth 2.1, Papelera de 30 días, Metas y Deudas",
+    description: "Conector universal para Claude, ChatGPT y Gemini en Solo Lectura con Kill Switch, metas Drag & Drop y deudas.",
     image_url: "/gallery/placeholder-goals.svg",
     sort_order: 2,
     created_at: "",
@@ -90,7 +91,7 @@ export default async function Home() {
   const release: ReleaseInfo = {
     version: APP_VERSION,
     url: APK_DOWNLOAD_URL,
-    publishedAt: "2026-11-15T01:53:29.000Z",
+    publishedAt: RELEASE_PUBLISHED_AT,
   };
 
   const reviewCount = reviews.length;

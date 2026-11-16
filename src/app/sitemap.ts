@@ -4,7 +4,7 @@ import { FEATURES_DATA } from "@/lib/features";
 import { getAllBlogPosts } from "@/lib/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date("2026-11-15T02:00:00Z");
+  const now = new Date("2026-11-16T20:35:00Z");
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {
@@ -39,25 +39,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${SITE_URL}/privacidad`,
-      lastModified: new Date("2026-10-09T12:00:00Z"),
+      lastModified: now,
       changeFrequency: "yearly",
       priority: 0.4,
     },
     {
       url: `${SITE_URL}/terminos`,
-      lastModified: new Date("2026-10-09T12:00:00Z"),
+      lastModified: now,
       changeFrequency: "yearly",
       priority: 0.4,
     },
     {
       url: `${SITE_URL}/cookies`,
-      lastModified: new Date("2026-10-09T12:00:00Z"),
+      lastModified: now,
       changeFrequency: "yearly",
       priority: 0.4,
     },
     {
       url: `${SITE_URL}/aviso-legal`,
-      lastModified: new Date("2026-10-09T12:00:00Z"),
+      lastModified: now,
       changeFrequency: "yearly",
       priority: 0.4,
     },

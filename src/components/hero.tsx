@@ -5,22 +5,23 @@ import {
   Download,
   ArrowUpRight,
   ShieldCheck,
-  FolderKanban,
   Sparkles,
   Eye,
   EyeOff,
   Check,
   Lock,
-  GripVertical,
   PieChart,
   Landmark,
   Wallet,
   Coins,
+  Bot,
+  Power,
+  Trash2,
 } from "lucide-react";
 import { EditorialHighlight, ScrollParallaxStage } from "@/components/editorial-motion";
 import { openReleaseModal } from "@/components/release-announcement";
 
-type LedgerMode = "patrimonio" | "cuentas" | "metas" | "cifrado";
+type LedgerMode = "patrimonio" | "mcp" | "cuentas" | "cifrado";
 
 const ACCOUNT_SLICES = [
   {
@@ -29,7 +30,7 @@ const ACCOUNT_SLICES = [
     rule: "Tarjeta · Transferencia CLABE",
     amount: "$62,400.00",
     pct: 50.1,
-    colorVar: "var(--editorial-emerald)",
+    colorVar: "hsl(var(--semantic-income))",
     dotClass: "bg-editorial-emerald",
     textClass: "text-editorial-emerald",
     icon: Landmark,
@@ -40,7 +41,7 @@ const ACCOUNT_SLICES = [
     rule: "Solo Transferencia / Otro",
     amount: "$49,700.00",
     pct: 39.9,
-    colorVar: "var(--editorial-cobalt)",
+    colorVar: "hsl(var(--semantic-invest))",
     dotClass: "bg-editorial-cobalt",
     textClass: "text-editorial-cobalt",
     icon: Wallet,
@@ -51,7 +52,7 @@ const ACCOUNT_SLICES = [
     rule: "Efectivo · Automático",
     amount: "$12,490.00",
     pct: 10.0,
-    colorVar: "var(--editorial-amber)",
+    colorVar: "hsl(var(--semantic-warning))",
     dotClass: "bg-editorial-amber",
     textClass: "text-editorial-amber",
     icon: Coins,
@@ -62,6 +63,9 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
   const [ledgerMode, setLedgerMode] = useState<LedgerMode>("patrimonio");
   const [privacyMask, setPrivacyMask] = useState(false);
   const [activeSliceId, setActiveSliceId] = useState<string>("banco");
+  const [mcpReadOnly, setMcpReadOnly] = useState(true);
+  const [mcpKillSwitch, setMcpKillSwitch] = useState(true);
+  const [activeMcpClient, setActiveMcpClient] = useState<"Claude" | "ChatGPT" | "Gemini">("Claude");
 
   const activeSlice =
     ACCOUNT_SLICES.find((slice) => slice.id === activeSliceId) ?? ACCOUNT_SLICES[0];
@@ -95,8 +99,9 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
               combina la disciplina de un{" "}
               <EditorialHighlight>cuaderno financiero de alta dirección</EditorialHighlight> con{" "}
               almacenamiento <EditorialHighlight>100% Local-First</EditorialHighlight>,{" "}
-              <EditorialHighlight>99 iconos SVG adaptativos</EditorialHighlight> sin emojis, gráficos{" "}
-              <EditorialHighlight>DonutChart</EditorialHighlight> y criptografía{" "}
+              <EditorialHighlight>Conector Universal MCP</EditorialHighlight> (Claude, ChatGPT y
+              Gemini) en Solo Lectura con OAuth 2.1,{" "}
+              <EditorialHighlight>99 iconos SVG adaptativos</EditorialHighlight> y criptografía{" "}
               <EditorialHighlight>WebCrypto AES-GCM de 256 bits</EditorialHighlight>.
             </p>
 
@@ -144,9 +149,9 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
             <div className="fp-hero-enter-delay-2 pt-6 mt-4 border-t border-border grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6">
               {[
                 { label: "Criptografía Local", value: "AES-256", sub: "PBKDF2 100k rondas" },
+                { label: "Protocolo IA Seguro", value: "MCP OAuth 2.1", sub: "Solo Lectura · 2FA aal2" },
                 { label: "Iconografía SVG", value: "99 Iconos", sub: "Cero emojis en UI V2" },
-                { label: "Arranque en Frío", value: "0.00 ms", sub: "Zero-Flash Theme" },
-                { label: "Suite Verificada", value: "382 Tests", sub: "52 archivos · WCAG AAA" },
+                { label: "Suite Verificada", value: "61 Suites", sub: "Vitest + E2E · WCAG AAA" },
               ].map((stat) => (
                 <div key={stat.label} className="space-y-1 group cursor-default">
                   <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-muted-foreground block truncate">
@@ -190,7 +195,7 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
                 </button>
               </div>
 
-              {/* Selector segmentado de vista (4 módulos interactivos v2.1.0) */}
+              {/* Selector segmentado de vista (4 módulos interactivos v2.2.0) */}
               <div
                 role="tablist"
                 aria-label="Vistas del cuaderno interactivo"
@@ -198,8 +203,8 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
               >
                 {[
                   { id: "patrimonio", label: "Balance", icon: Sparkles },
+                  { id: "mcp", label: "MCP IA", icon: Bot },
                   { id: "cuentas", label: "Cuentas", icon: PieChart },
-                  { id: "metas", label: "Metas", icon: FolderKanban },
                   { id: "cifrado", label: "AES-256", icon: ShieldCheck },
                 ].map((tab) => {
                   const Icon = tab.icon;
@@ -387,55 +392,86 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
                 </div>
               )}
 
-              {ledgerMode === "metas" && (
+              {ledgerMode === "mcp" && (
                 <div className="space-y-3 text-xs">
                   <div className="flex items-center justify-between text-[11px] font-mono text-muted-foreground pb-1 border-b border-border">
-                    <span className="truncate">CARPETA: PATRIMONIO &amp; LIQUIDEZ</span>
-                    <span className="inline-flex items-center gap-1 text-primary font-semibold shrink-0">
-                      <GripVertical className="w-3 h-3" strokeWidth={1.75} />
-                      <span>Drag &amp; Drop</span>
-                    </span>
-                  </div>
-                  {[
-                    {
-                      name: "Fondo de Reserva (6 Meses)",
-                      saved: "$78,000",
-                      target: "$90,000",
-                      pct: 86,
-                      pace: "$1,500 / sem",
-                    },
-                    {
-                      name: "Equipamiento & Estudio",
-                      saved: "$24,500",
-                      target: "$35,000",
-                      pct: 70,
-                      pace: "$850 / sem",
-                    },
-                  ].map((goal) => (
-                    <div
-                      key={goal.name}
-                      className="p-3.5 rounded-xl bg-muted/60 border border-border space-y-2"
+                    <span className="truncate">CONECTOR MCP · OAUTH 2.1 + PKCE</span>
+                    <button
+                      type="button"
+                      onClick={() => setMcpKillSwitch((prev) => !prev)}
+                      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md border text-[10px] font-semibold cursor-pointer tactile-press shrink-0 ${
+                        mcpKillSwitch
+                          ? "bg-muted border-border text-editorial-emerald"
+                          : "bg-muted border-border text-editorial-terracotta"
+                      }`}
                     >
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="font-semibold text-foreground truncate">{goal.name}</span>
-                        <span className="font-mono-tabular text-primary font-bold shrink-0">
-                          {goal.pct}%
+                      <Power className="w-3 h-3" strokeWidth={1.75} />
+                      <span>{mcpKillSwitch ? "Kill Switch: ON" : "Kill Switch: OFF"}</span>
+                    </button>
+                  </div>
+
+                  {/* Clientes IA autorizados */}
+                  <div className="grid grid-cols-3 gap-1.5 font-mono text-[11px]">
+                    {(["Claude", "ChatGPT", "Gemini"] as const).map((client) => (
+                      <button
+                        key={client}
+                        type="button"
+                        onClick={() => setActiveMcpClient(client)}
+                        className={`py-1.5 px-2 rounded-lg border text-center cursor-pointer tactile-press truncate ${
+                          activeMcpClient === client
+                            ? "bg-card text-foreground border-primary font-semibold"
+                            : "bg-muted/60 text-muted-foreground border-border hover:text-foreground"
+                        }`}
+                      >
+                        {client}
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Controles de seguridad Solo Lectura */}
+                  <div className="p-3.5 rounded-xl bg-muted/60 border border-border space-y-2.5">
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="min-w-0">
+                        <span className="font-semibold text-foreground block truncate">
+                          Modo Solo Lectura ({activeMcpClient})
+                        </span>
+                        <span className="text-[11px] text-muted-foreground block">
+                          {mcpKillSwitch
+                            ? mcpReadOnly
+                              ? "6 scopes mcp:read:* activos (2FA aal2)"
+                              : "Lectura + Escritura y borrado TTL 120s"
+                            : "Acceso MCP suspendido inmediatamente"}
                         </span>
                       </div>
-                      <div className="h-1.5 w-full rounded-full bg-background overflow-hidden">
-                        <div
-                          className="h-full rounded-full bg-primary spring-bar"
-                          style={{ width: `${goal.pct}%` }}
-                        />
-                      </div>
-                      <div className="flex justify-between gap-2 text-[11px] font-mono-tabular text-muted-foreground">
-                        <span className="truncate">
-                          {privacyMask ? "••••" : goal.saved} / {privacyMask ? "••••" : goal.target}
+                      <button
+                        type="button"
+                        onClick={() => setMcpReadOnly((prev) => !prev)}
+                        className="px-2.5 py-1 rounded-lg bg-card border border-border text-[11px] font-mono font-semibold text-primary cursor-pointer tactile-press shrink-0"
+                      >
+                        {mcpReadOnly ? "Solo Lectura" : "Escritura"}
+                      </button>
+                    </div>
+
+                    <div className="pt-2 border-t border-border grid grid-cols-3 gap-2 text-[10px] font-mono-tabular text-center">
+                      <div className="p-1.5 rounded-lg bg-card border border-border">
+                        <span className="text-muted-foreground block">HERRAMIENTAS</span>
+                        <span className="font-bold text-foreground">
+                          {privacyMask ? "••" : mcpReadOnly ? "8 read" : "18 total"}
                         </span>
-                        <span className="shrink-0">Ritmo: {goal.pace}</span>
+                      </div>
+                      <div className="p-1.5 rounded-lg bg-card border border-border">
+                        <span className="text-muted-foreground block">CONCESIONES</span>
+                        <span className="font-bold text-foreground">3 / 5 máx</span>
+                      </div>
+                      <div className="p-1.5 rounded-lg bg-card border border-border flex flex-col items-center justify-center">
+                        <span className="text-muted-foreground inline-flex items-center gap-1">
+                          <Trash2 className="w-2.5 h-2.5" strokeWidth={1.75} />
+                          PAPELERA
+                        </span>
+                        <span className="font-bold text-editorial-amber">30 días</span>
                       </div>
                     </div>
-                  ))}
+                  </div>
                 </div>
               )}
 
@@ -488,7 +524,7 @@ export function Hero({ version, githubUrl }: { version: string; githubUrl: strin
               <div className="pt-3 border-t border-border flex items-center justify-between text-[11px] font-mono text-muted-foreground">
                 <span className="inline-flex items-center gap-1.5">
                   <Check className="w-3.5 h-3.5 text-primary" strokeWidth={2} />
-                  <span>99 iconos SVG · 0 emojis</span>
+                  <span>MCP OAuth 2.1 · 99 SVG</span>
                 </span>
                 <span>SQLite · IDB · v{version}</span>
               </div>

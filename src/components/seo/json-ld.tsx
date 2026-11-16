@@ -110,6 +110,9 @@ export function buildSoftwareApplicationSchema(options?: {
       availability: "https://schema.org/InStock",
     },
     featureList: [
+      "Conector Universal MCP (Model Context Protocol) para Claude, ChatGPT y Gemini con OAuth 2.1 + PKCE y modo Solo Lectura por defecto",
+      "Papelera de recuperación de 30 días, borrado seguro en 2 pasos (TTL 120s) y Kill Switch global de conectores IA",
+      "Command Palette (Cmd+K / Ctrl+K) rediseñado y filtrado inteligente de cuentas por método de pago",
       "Control de ingresos y gastos con registro rápido inteligente y 99 iconos SVG sin emojis",
       "Almacenamiento 100% Local-First sin servidores externos",
       "Metas de ahorro jerárquicas con reordenamiento Drag & Drop",

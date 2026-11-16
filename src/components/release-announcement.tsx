@@ -25,7 +25,7 @@ export function prefetchReleaseModal() {
   }
 }
 
-const DISMISS_STORAGE_KEY = "financepal_v2_1_0_announcement_dismissed";
+const DISMISS_STORAGE_KEY = "financepal_v2_2_0_announcement_dismissed";
 
 export function ReleaseAnnouncement() {
   const [isOpen, setIsOpen] = useState(false);
@@ -96,7 +96,7 @@ export function ReleaseAnnouncement() {
               <p className="text-foreground text-left text-xs sm:text-sm truncate leading-tight font-sans">
                 <span className="font-semibold">Finance Pal v{APP_VERSION} disponible</span>
                 <span className="hidden md:inline text-muted-foreground">
-                  : Actualizador APK en Android, 99 iconos SVG sin emojis, registro rápido inteligente, comprobantes seguros y DonutChart.
+                  : Conector Universal MCP (Claude, ChatGPT y Gemini) con OAuth 2.1, Papelera 30 días, Command Palette Cmd+K y filtro inteligente de cuentas.
                 </span>
               </p>
             </div>

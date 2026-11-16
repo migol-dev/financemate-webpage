@@ -9,17 +9,17 @@ interface BrandLogoProps {
 }
 
 /**
- * El Monograma FinancePal (v2.1.0 — Warm Editorial Wealth)
+ * El Monograma FinancePal (v2.2.0 — Warm Editorial Wealth + Conector MCP)
  * - Isotipo: Escudo geométrico con base en esmeralda profundo, cortado por un
  *   sendero ascendente en arco que simboliza crecimiento patrimonial continuo,
  *   coronado por un punto focal en oro cálido.
- * - Tipografía: "FinancePal" en Fraunces corte editorial + pastilla de alambre 1px "v2.1".
+ * - Tipografía: "FinancePal" en Fraunces corte editorial + pastilla de alambre 1px "v2.2".
  */
 export function BrandLogo({
   className,
   size = "md",
   showVersion = true,
-  versionText = "v2.1",
+  versionText = "v2.2",
 }: BrandLogoProps) {
   const iconSize =
     size === "sm"

@@ -138,14 +138,15 @@ export function PlatformsSection() {
 
                   <p className="text-sm text-muted-foreground editorial-text-hover leading-relaxed max-w-[65ch]">
                     Ejecuta Finance Pal directamente desde tu navegador de escritorio para sesiones
-                    de auditoría anual, conciliación de presupuestos en 4 columnas macro y{" "}
+                    de auditoría anual con <EditorialHighlight>Command Palette Cmd+K</EditorialHighlight>,
+                    conector opcional MCP para Claude, ChatGPT y Gemini, y{" "}
                     <EditorialHighlight>exportación inmediata a CSV o JSON</EditorialHighlight>.
                   </p>
 
                   <ul className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-2 text-xs text-foreground">
                     {[
-                      "Acceso instantáneo sin instalar",
-                      "Bóveda aislada en el navegador",
+                      "Command Palette Cmd+K y atajos",
+                      "Conector MCP OAuth 2.1 opcional",
                       "Sincronización E2E opcional",
                     ].map((item) => (
                       <li

@@ -19,15 +19,15 @@ import { EditorialHighlight, ScrollParallaxStage, ScrollReveal } from "@/compone
 const SLIDE_INFO = [
   {
     shortLabel: "01 · Balance",
-    badge: "Slide 1 de 5 · Módulo Principal",
-    title: "Panel de Control & Balance General",
-    desc: "Balance acumulado neto con iconos vectoriales SVG sin emojis, división clara entre Efectivo Físico vs Cuentas Bancarias, menú HeaderMoreButton y modo privado instantáneo.",
+    badge: "Slide 1 de 5 · Panel & Cmd+K",
+    title: "Panel de Control, Command Palette y Balance",
+    desc: "Balance acumulado neto con iconos vectoriales SVG sin emojis, nuevo buscador Command Palette (Cmd+K / Ctrl+K) con cierre ESC y atajos de alto contraste, menú HeaderMoreButton y modo privado.",
   },
   {
     shortLabel: "02 · Movimientos",
-    badge: "Slide 2 de 5 · QuickSheet & Recibos",
-    title: "Movimientos, QuickSheet y Recibos 5 MB",
-    desc: "Bitácora con 15 rubros SVG, QuickTransactionSheet que filtra métodos de pago según cuenta, captura CLABE limpia y comprobantes privados comprimidos en cliente (sb:receipts).",
+    badge: "Slide 2 de 5 · Filtro Cuentas & Recibos",
+    title: "Filtrado Inteligente de Cuentas y Recibos 5 MB",
+    desc: "En /movimientos el selector muestra solo cuentas compatibles con el método elegido (o 'Selecciona una...' ante múltiples cuentas), junto a QuickTransactionSheet CLABE y recibos sb:receipts.",
   },
   {
     shortLabel: "03 · Metas",
@@ -39,18 +39,18 @@ const SLIDE_INFO = [
     shortLabel: "04 · Deudas",
     badge: "Slide 4 de 5 · Barra Principal",
     title: "Deudas Promovidas a Barra Inferior",
-    desc: "Acceso directo desde BottomNavV2 para auditar préstamos por persona (Prestado, Cobrado y Pendiente) con abonos parciales e historial completo.",
+    desc: "Acceso directo desde BottomNavV2 para auditar préstamos por persona (Prestado, Cobrado y Pendiente) con abonos parciales, historial y resguardo en Papelera de 30 días.",
   },
   {
-    shortLabel: "05 · Cuentas & Donut",
-    badge: "Slide 5 de 5 · DonutChart SVG",
-    title: "Cuentas, Arqueo & DonutChart Exacto",
-    desc: "Gráficos DonutChart SVG adaptativos con porcentajes redondeados al 100.0% exacto, visibilidad móvil de saldos positivos en Ajustes -> Cuentas y arqueo de efectivo.",
+    shortLabel: "05 · Cuentas & MCP",
+    badge: "Slide 5 de 5 · MCP OAuth 2.1 & Donut",
+    title: "Conectores IA (MCP), DonutChart y Cuentas",
+    desc: "Ajustes > Conectores IA (MCP) para Claude, ChatGPT y Gemini en Solo Lectura con Kill Switch y Papelera de 30 días, además de DonutChart SVG al 100.0% exacto.",
   },
 ];
 
 // ──────────────────────────────────────────────
-// Phone frames (Warm Editorial Wealth — Obsidian Carbon v2.1)
+// Phone frames (Warm Editorial Wealth — Obsidian Carbon v2.2)
 // ──────────────────────────────────────────────
 function PhoneFrame({ children }: { children: React.ReactNode }) {
   return (
@@ -100,7 +100,7 @@ function BottomBar({ active }: { active: number }) {
   );
 }
 
-// Screen 0 — Dashboard (Warm Editorial Wealth v2.1)
+// Screen 0 — Dashboard (Warm Editorial Wealth v2.2)
 function Screen0() {
   return (
     <PhoneFrame>
@@ -111,15 +111,15 @@ function Screen0() {
               FP
             </div>
             <div>
-              <div className="text-[9px] sm:text-[10px] font-mono text-[#B0ADA7]">CUADERNO V2.1</div>
+              <div className="text-[9px] sm:text-[10px] font-mono text-[#B0ADA7]">CUADERNO V2.2</div>
               <div className="text-[12px] sm:text-[13px] font-serif font-bold text-[#EDEDED] flex items-center gap-1.5">
                 Patrimonio Neto <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />
               </div>
             </div>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="px-2 py-0.5 rounded bg-[#1C1C1A] border border-white/10 text-[9px] sm:text-[10px] font-mono text-[#B0ADA7]">
-              NOV 2026
+            <span className="px-1.5 py-0.5 rounded bg-[#1C1C1A] border border-white/10 text-[9px] font-mono text-[#34D399]">
+              Cmd+K
             </span>
             <span className="p-1 rounded bg-[#1C1C1A] border border-white/10 text-[#B0ADA7]">
               <MoreHorizontal className="w-3 h-3" strokeWidth={1.75} />
@@ -198,7 +198,7 @@ function Screen0() {
   );
 }
 
-// Screen 1 — Movimientos, QuickSheet & Recibos 5 MB
+// Screen 1 — Movimientos, Filtro Cuentas & Recibos 5 MB
 function Screen1() {
   return (
     <PhoneFrame>
@@ -206,14 +206,14 @@ function Screen1() {
         <div className="flex items-center justify-between pb-2 border-b border-white/10">
           <div>
             <h4 className="font-serif font-bold text-sm text-[#EDEDED]">Bitácora Contable</h4>
-            <span className="text-[10px] font-mono text-[#B0ADA7]">99 SVG · QuickSheet CLABE</span>
+            <span className="text-[10px] font-mono text-[#B0ADA7]">Filtro Cuentas · CLABE · 99 SVG</span>
           </div>
           <span className="px-2.5 py-1 rounded-lg bg-[#1F7A5A] text-[#FAF8F5] font-semibold text-[10px]">
             + Rápido
           </span>
         </div>
         <div className="px-3 py-1.5 sm:py-2 rounded-xl bg-[#141413] border border-white/10 text-[10px] sm:text-[11px] text-[#B0ADA7] flex items-center justify-between gap-2">
-          <span className="truncate">Filtrar por concepto o sb:receipts...</span>
+          <span className="truncate">Tarjeta › Selecciona cuenta compatible...</span>
           <span className="text-[9px] font-mono text-[#34D399] shrink-0">≤ 5 MB</span>
         </div>
         <div className="flex items-center gap-1.5 text-[10px] font-mono">
@@ -382,20 +382,25 @@ function Screen3() {
   );
 }
 
-// Screen 4 — Cuentas, DonutChart SVG & Arqueo de Efectivo (HeaderMoreButton / Ajustes)
+// Screen 4 — Conectores IA (MCP), DonutChart SVG & Arqueo (Ajustes > 10)
 function Screen4() {
   return (
     <PhoneFrame>
       <div className="flex-1 p-3.5 sm:p-4 space-y-2.5 sm:space-y-3 overflow-hidden">
         <div className="flex items-center justify-between pb-2 border-b border-white/10">
           <div>
-            <h4 className="font-serif font-bold text-sm text-[#EDEDED]">Cuentas &amp; DonutChart</h4>
-            <span className="text-[10px] font-mono text-[#B0ADA7]">Ajustes › Distribución 100%</span>
+            <h4 className="font-serif font-bold text-sm text-[#EDEDED]">Conectores MCP &amp; Donut</h4>
+            <span className="text-[10px] font-mono text-[#B0ADA7]">Ajustes › 10 · OAuth 2.1 + PKCE</span>
           </div>
           <span className="px-2 py-1 rounded-lg bg-[#34D399]/15 border border-[#34D399]/40 text-[#34D399] inline-flex items-center gap-1 text-[9px] font-mono">
-            <MoreHorizontal className="w-3 h-3" strokeWidth={2} />
-            <span>Menú</span>
+            <span>Kill: ON</span>
           </span>
+        </div>
+
+        {/* Estado MCP Solo Lectura */}
+        <div className="px-3 py-2 rounded-xl bg-[#1C1C1A] border border-white/10 flex items-center justify-between text-[10px] font-mono">
+          <span className="text-[#EDEDED] truncate">Claude · ChatGPT · Gemini</span>
+          <span className="text-[#34D399] font-bold shrink-0">Solo Lectura</span>
         </div>
 
         {/* SVG DonutChart Stage */}

@@ -95,10 +95,10 @@ function ReportForm({ type }: { type: ReportType }) {
             onChange={(e) => setVersion(e.target.value)}
           >
             <option value={`v${APP_VERSION}`}>{`v${APP_VERSION} (Versión actual estable)`}</option>
-            <option value="v2.0.0">v2.0.0 (Anterior)</option>
+            <option value="v2.1.0">v2.1.0 (Anterior)</option>
+            <option value="v2.0.0">v2.0.0</option>
             <option value="v1.21.0">v1.21.0</option>
-            <option value="v1.20.2">v1.20.2</option>
-            <option value="pwa-web">PWA / Web App Vercel</option>
+            <option value="pwa-web">PWA / Web App / Conector MCP</option>
           </select>
         </div>
       </div>
